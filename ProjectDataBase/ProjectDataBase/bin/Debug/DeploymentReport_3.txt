@@ -1,0 +1,58 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       unnamed constraint on [dbo].[Hall] (Foreign Key)
+       unnamed constraint on [dbo].[HallScheme] (Foreign Key)
+       unnamed constraint on [dbo].[Place] (Foreign Key)
+       unnamed constraint on [dbo].[Place] (Foreign Key)
+       unnamed constraint on [dbo].[Price] (Foreign Key)
+       unnamed constraint on [dbo].[Price] (Foreign Key)
+       unnamed constraint on [dbo].[Session] (Foreign Key)
+       unnamed constraint on [dbo].[Session] (Foreign Key)
+       unnamed constraint on [dbo].[Ticket] (Foreign Key)
+       unnamed constraint on [dbo].[Ticket] (Foreign Key)
+       unnamed constraint on [dbo].[Ticket] (Foreign Key)
+       unnamed constraint on [dbo].[TicketService] (Foreign Key)
+       unnamed constraint on [dbo].[TicketService] (Foreign Key)
+       unnamed constraint on [dbo].[User] (Foreign Key)
+     Alter
+       [dbo].[Cinema] (Table)
+       [dbo].[Film] (Table)
+       [dbo].[Hall] (Table)
+       [dbo].[HallScheme] (Table)
+       [dbo].[Place] (Table)
+       [dbo].[PlaceType] (Table)
+       [dbo].[Price] (Table)
+       [dbo].[Service] (Table)
+       [dbo].[Session] (Table)
+       [dbo].[Status] (Table)
+       [dbo].[Ticket] (Table)
+       [dbo].[TicketService] (Table)
+       [dbo].[User] (Table)
+       [dbo].[UserRole] (Table)
+
+** Supporting actions
+     Create
+       Foreign Key: unnamed constraint on [dbo].[Hall] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[HallScheme] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Place] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Place] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Price] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Price] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Session] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Session] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Ticket] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Ticket] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Ticket] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[TicketService] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[TicketService] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[User] (Foreign Key)

@@ -1,0 +1,5 @@
+C:\Users\a.kreidzich\source\repos\ProjectDataBase\ProjectDataBase\bin\Debug\ProjectDataBase.dacpac
+C:\Users\a.kreidzich\source\repos\ProjectDataBase\ProjectDataBase\bin\Debug\ProjectDataBase.dll
+C:\Users\a.kreidzich\source\repos\ProjectDataBase\ProjectDataBase\bin\Debug\ProjectDataBase.pdb
+C:\Users\a.kreidzich\source\repos\ProjectDataBase\ProjectDataBase\obj\Debug\ProjectDataBase.dll
+C:\Users\a.kreidzich\source\repos\ProjectDataBase\ProjectDataBase\obj\Debug\ProjectDataBase.pdb
