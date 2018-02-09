@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Cinema]
+(
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY,
+    [Name] VARCHAR(MAX) NOT NULL,
+    [City] VARCHAR(MAX) NOT NULL,
+    [HallsNumber] INT NOT NULL
+)
