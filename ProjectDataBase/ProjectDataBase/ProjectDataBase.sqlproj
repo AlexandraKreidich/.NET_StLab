@@ -58,30 +58,30 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Snapshots" />
+    <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="ProjectDataBase.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="Cinema.sql" />
-    <Build Include="Hall.sql" />
-    <Build Include="HallScheme.sql" />
-    <Build Include="Session.sql" />
-    <Build Include="Film.sql" />
-    <Build Include="Place.sql" />
-    <Build Include="Price.sql" />
-    <Build Include="PlaceType.sql" />
-    <Build Include="Ticket.sql" />
-    <Build Include="User.sql" />
-    <Build Include="UserRole.sql" />
-    <Build Include="Service.sql" />
-    <Build Include="Status.sql" />
-    <Build Include="TicketService.sql" />
+    <Build Include="Tables\Cinema.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ProjectDataBase_20180208_18-30-55.dacpac" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Film.sql" />
+    <Build Include="Tables\Hall.sql" />
+    <Build Include="Tables\HallScheme.sql" />
+    <Build Include="Tables\Place.sql" />
+    <Build Include="Tables\PlaceType.sql" />
+    <Build Include="Tables\Price.sql" />
+    <Build Include="Tables\Service.sql" />
+    <Build Include="Tables\Session.sql" />
+    <Build Include="Tables\Status.sql" />
+    <Build Include="Tables\Ticket.sql" />
+    <Build Include="Tables\TicketService.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\UserRole.sql" />
   </ItemGroup>
 </Project>

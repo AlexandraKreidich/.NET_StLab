@@ -1,57 +1,53 @@
 ﻿/*
-Post-Deployment Script Template							
+Post-Deployment Script Template
 --------------------------------------------------------------------------------------
- This file contains SQL statements that will be appended to the build script.		
- Use SQLCMD syntax to include a file in the post-deployment script.			
- Example:      :r .\myfile.sql								
- Use SQLCMD syntax to reference a variable in the post-deployment script.		
- Example:      :setvar TableName MyTable							
-               SELECT * FROM [$(TableName)]					
+ This file contains SQL statements that will be appended to the build script.
+ Use SQLCMD syntax to include a file in the post-deployment script.
+ Example:      :r .\myfile.sql
+ Use SQLCMD syntax to reference a variable in the post-deployment script.
+ Example:      :setvar TableName MyTable
+               SELECT * FROM [$(TableName)]
 --------------------------------------------------------------------------------------
 */
 
 BEGIN TRY
-	IF NOT EXISTS (SELECT 1 FROM dbo.Cinema WHERE id = 1)
 
+	IF NOT EXISTS (SELECT 1 FROM dbo.Cinema WHERE Id = 1)
 
-	BEGIN TRANSACTION 
+	BEGIN TRANSACTION
 
 	PRINT 'Inserting seed data for Cinema table'
 
-	INSERT INTO dbo.Cinema (name, city, hallsNumber)
-	VALUES 
+	INSERT INTO dbo.Cinema ([Name], City, HallsNumber)
+	VALUES
 		('Silver Screen', 'Minsk', 3),
 		('Red star', 'Grodno', 2),
 		('Belarus', 'Minsk', 3),
 		('October', 'Grodno', 2)
 
-	PRINT 'Inserting seed data for Cinema table END'
-
 	PRINT 'Inserting seed data for Hall table'
 
-	INSERT INTO dbo.Hall (cinemaId, [name])
-		VALUES 
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'A'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'B'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'C'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'A'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'B'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'A'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'B'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'C'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='October'), 'A'),
-		((SELECT id FROM dbo.Cinema WHERE Cinema.name='October'), 'B')
-
-	PRINT 'Inserting seed data for Hall table END'
+	INSERT INTO dbo.Hall (CinemaId, [Name])
+		VALUES
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'A'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'B'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'C'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'A'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'B'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'A'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'B'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'C'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'A'),
+		((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'B')
 
 	PRINT 'Inserting seed data for HallScheme table'
 
-	INSERT INTO dbo.HallScheme (rowNumber, placesCount, hallId)
+	INSERT INTO dbo.HallScheme (RowNumber, PlacesCount, HallId)
 	VALUES
 		(1, 20, 1),
 		(2, 20, 1),
 		(3, 20, 1),
-        (4, 20, 1),
+		(4, 20, 1),
 		(5, 20, 1),
 		(6, 20, 1),
 		(7, 20, 1),
@@ -61,7 +57,7 @@ BEGIN TRY
 		(1, 17, 2),
 		(2, 18, 2),
 		(3, 19, 2),
-        (4, 20, 2),
+		(4, 20, 2),
 		(5, 20, 2),
 		(6, 20, 2),
 		(7, 20, 2),
@@ -71,7 +67,7 @@ BEGIN TRY
 		(1, 11, 3),
 		(2, 12, 3),
 		(3, 13, 3),
-        (4, 14, 3),
+		(4, 14, 3),
 		(5, 15, 3),
 		(6, 16, 3),
 		(7, 17, 3),
@@ -81,7 +77,7 @@ BEGIN TRY
 		(1, 17, 4),
 		(2, 18, 4),
 		(3, 19, 4),
-        (4, 20, 4),
+		(4, 20, 4),
 		(1, 20, 5),
 		(2, 20, 5),
 		(3, 20, 5),
@@ -91,7 +87,7 @@ BEGIN TRY
 		(1, 20, 6),
 		(2, 20, 6),
 		(3, 20, 6),
-        (4, 20, 6),
+		(4, 20, 6),
 		(5, 20, 6),
 		(6, 20, 6),
 		(7, 20, 6),
@@ -101,7 +97,7 @@ BEGIN TRY
 		(1, 20, 7),
 		(2, 20, 7),
 		(3, 20, 7),
-        (4, 20, 7),
+		(4, 20, 7),
 		(5, 20, 7),
 		(6, 20, 7),
 		(7, 20, 7),
@@ -111,7 +107,7 @@ BEGIN TRY
 		(1, 10, 8),
 		(2, 14, 8),
 		(3, 18, 8),
-        (4, 20, 8),
+		(4, 20, 8),
 		(5, 22, 8),
 		(6, 24, 8),
 		(1, 20, 9),
@@ -121,19 +117,17 @@ BEGIN TRY
 		(1, 20, 10),
 		(2, 20, 10),
 		(3, 20, 10),
-        (4, 20, 10),
+		(4, 20, 10),
 		(5, 20, 10),
 		(6, 20, 10),
 		(7, 20, 10),
 		(8, 20, 10),
 		(9, 20, 10)
 
-	PRINT 'Inserting seed data for HallScheme table END'
-
 	PRINT 'Inserting seed data for Film table'
 
-	INSERT INTO dbo.Film(startShowDate, endShowDate, [name], [description])
-	VALUES 
+	INSERT INTO dbo.Film(StartShowDate, EndShowDate, [Name], [Description])
+	VALUES
 		(convert(DATE, '20170601'), convert(DATE, '20170606'), 'Delirium', 'description'),
 		(convert(DATE, '20170601'), convert(DATE, '20170606'), 'Star Wars', 'description'),
 		(convert(DATE, '20170601'), convert(DATE, '20170606'), 'Tor', 'description'),
@@ -145,12 +139,10 @@ BEGIN TRY
 		(convert(DATE, '20170601'), convert(DATE, '20170606'), 'Madagaskar', 'description'),
 		(convert(DATE, '20170601'), convert(DATE, '20170606'), 'Number one', 'description')
 
-	PRINT 'Inserting seed data for Film table END'
-
 	PRINT 'Inserting seed data for Session table'
 
-	INSERT INTO dbo.Session (filmId, hallId, [date], [time])
-	VALUES 
+	INSERT INTO dbo.Session (FilmId, HallId, [Date], [Time])
+	VALUES
 		(1, 1, convert(DATE, '20171008'), cast('12:15:00' as time)),
 		(2, 1, convert(DATE, '20171007'), cast('12:15:00' as time)),
 		(3, 1, convert(DATE, '20171006'), cast('12:15:00' as time)),
@@ -182,22 +174,18 @@ BEGIN TRY
 		(9, 10, convert(DATE, '20171007'), cast('12:15:00' as time)),
 		(10, 10, convert(DATE, '20171006'), cast('12:15:00' as time))
 
-	PRINT 'Inserting seed data for Session table END'
-
 	PRINT 'Inserting seed data for PlaceType table'
 
-	INSERT INTO dbo.PlaceType([name])
-	VALUES 
+	INSERT INTO dbo.PlaceType([Name])
+	VALUES
 		('double'),
 		('standart'),
 		('VIP')
 
-	PRINT 'Inserting seed data for PlaceType table END'
-
 	PRINT 'Inserting seed data for Price table'
 
-	INSERT INTO dbo.Price(placeTypeId, sessionId, price)
-	VALUES 
+	INSERT INTO dbo.Price(PlaceTypeId, SessionId, Price)
+	VALUES
 		(1, 1, 8),
 		(2, 1, 6),
 		(3, 1, 10),
@@ -205,12 +193,10 @@ BEGIN TRY
 		(2, 2, 6),
 		(3, 2, 10)
 
-	PRINT 'Inserting seed data for Price table END'
-
 	PRINT 'Inserting seed data for Place table'
 
-	INSERT INTO dbo.Place(rowNumber, placeNumber, priceId, hallId)
-	VALUES 
+	INSERT INTO dbo.Place(RowNumber, PlaceNumber, PriceId, HallId)
+	VALUES
 		(1, 1, 1, 1),
 		(2, 1, 2, 1),
 		(3, 1, 3, 1),
@@ -218,51 +204,43 @@ BEGIN TRY
 		(2, 2, 2, 1),
 		(3, 2, 3, 1)
 
-	PRINT 'Inserting seed data for Place table END'
-
 	PRINT 'Inserting seed data for UserRole table'
 
-	INSERT INTO dbo.UserRole([name])
-	VALUES 
+	INSERT INTO dbo.UserRole([Name])
+	VALUES
 		('administrator'),
 		('user')
 
-	PRINT 'Inserting seed data for UserRole table END'
-
 	PRINT 'Inserting seed data for User table'
 
-	INSERT INTO dbo.[User]([login], [password], firstName, lastName, email, userRoleId)
-	VALUES 
+	INSERT INTO dbo.[User]([Login], [Password], FirstName, LastName, Email, UserRoleId)
+	VALUES
 		('vladK', '12345', 'Vladislav', 'Krasnitskiy', 'v.krasnitskiy@gmail.com', 2),
 		('alex', '12345', 'Alexandr', 'Dimidov', 'a.Dimidov@gmail.com', 2),
 		('maria', '12345', 'Maria', 'Kuharchuk', 'm.kuharchuk@gmail.com', 2),
 		('sasha', '12345', 'Alexandra', 'Kreidich', 'a.kreidich@gmail.com', 2),
 		('admin', '123456789', 'Ivan', 'Ivanov', 'i.ivanov@gmail.com', 1)
 
-	PRINT 'Inserting seed data for User table END'
-
 	PRINT 'Inserting seed data for Service table'
 
-	INSERT INTO dbo.[Service]([name], price)
-	VALUES 
+	INSERT INTO dbo.[Service]([Name], Price)
+	VALUES
 		('popcorn', 5),
 		('sweets', 3),
 		('drink', 3)
 
-	PRINT 'Inserting seed data for Service table END'
-
 	PRINT 'Inserting seed data for Status table'
 
-	INSERT INTO dbo.[Status]([statusName])
-	VALUES 
+	INSERT INTO dbo.[Status]([StatusName])
+	VALUES
 		('ok'),
 		('error'),
 		('inProcess')
 
 	PRINT 'Inserting seed data for Ticket table'
 
-	INSERT INTO dbo.Ticket(placeId, userId, statusId) 
-	VALUES 
+	INSERT INTO dbo.Ticket(PlaceId, UserId, StatusId)
+	VALUES
 		(1, 1, 1),
 		(2, 2, 1),
 		(3, 3, 1),
@@ -272,8 +250,8 @@ BEGIN TRY
 
 	PRINT 'Inserting seed data for TicketService table'
 
-	INSERT INTO dbo.TicketService(ticketId, serviceId) 
-	VALUES 
+	INSERT INTO dbo.TicketService(TicketId, ServiceId)
+	VALUES
 		(1, 1),
 		(1, 2),
 		(2, 2),
@@ -288,7 +266,3 @@ BEGIN CATCH
 	ROLLBACK TRANSACTION
 	PRINT ERROR_MESSAGE();
 END catch
-
-
-
-
