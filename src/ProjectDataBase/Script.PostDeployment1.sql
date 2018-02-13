@@ -231,7 +231,7 @@ BEGIN TRY
 
     PRINT 'Inserting seed data for Status table'
 
-    INSERT INTO dbo.[Status]([StatusName])
+    INSERT INTO dbo.[TicketStatus]([StatusName])
     VALUES
         ('ok'),
         ('error'),

@@ -5,6 +5,8 @@
     [PlaceNumber] INT NOT NULL,
     [PriceId] INT NOT NULL,
     [HallId] INT NOT NULL,
+    [PalceStatusId] INT NOT NULL,
     FOREIGN KEY (PriceId) REFERENCES [dbo].[Price](Id),
-    FOREIGN KEY (HallId) REFERENCES [dbo].[Hall](Id)
+    FOREIGN KEY (HallId) REFERENCES [dbo].[Hall](Id),
+    FOREIGN KEY (PalceStatusId) REFERENCES [dbo].[PlaceStatus](Id)
 )

@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[TicketStatus]
+(
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY,
+    [StatusName] NVARCHAR(50) NOT NULL
+)

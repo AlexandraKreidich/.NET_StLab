@@ -2,6 +2,6 @@
 (
     [Id] INT NOT NULL PRIMARY KEY IDENTITY,
     [CinemaId] INT NOT NULL,
-    [Name] VARCHAR(MAX) NOT NULL,
+    [Name] NVARCHAR(50) NOT NULL,
     FOREIGN KEY (CinemaId) REFERENCES [dbo].[Cinema](Id)
 )
