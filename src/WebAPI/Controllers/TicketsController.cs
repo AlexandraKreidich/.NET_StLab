@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,20 +15,42 @@ namespace WebAPI.Controllers
     [Authorize(Roles = "User")]
     public class TicketsController : Controller
     {
-        // POST /tickets/add
-        [HttpPost]
-        public IActionResult Post([FromBody]TicketModelRequest ticket)
-        {
-            return null;
-        }
-
-        /*
-        // GET /tickets/{id}
-        [HttpPost("{id:int}")]
-        public IEnumerable<TicketModelResponse> GetTicketsForUserId([FromBody]int id)
+        // GET /tickets
+        [HttpGet]
+        public IEnumerable<TicketModelResponse> Get()
         {
             List<TicketModelResponse> tickets = new List<TicketModelResponse>();
             return tickets;
-        } -> user */
+        }
+
+        // GET /tickets/{id}
+        [HttpGet("{id:int}")]
+        public IEnumerable<TicketModelResponse> GetById(int id)
+        {
+            List<TicketModelResponse> tickets = new List<TicketModelResponse>();
+            return tickets;
+        }
+
+        // PUT /tickets
+        [HttpPut]
+        public IActionResult Put([FromQuery]int plaseId)
+        {
+            return StatusCode((int)HttpStatusCode.Created);
+        }
+
+        // POST /tickets/{id}/pay
+        [HttpPost]
+        [Route("{id:int}/pay")]
+        public IActionResult Pay(int id)
+        {
+            return StatusCode((int)HttpStatusCode.NoContent); //Правильный ли код ответа?
+        }
+
+        // DELETE /tickets/{id}
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            return StatusCode((int)HttpStatusCode.Accepted);
+        }
     }
 }

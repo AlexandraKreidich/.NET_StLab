@@ -11,8 +11,11 @@ namespace WebAPI.Controllers
     [Route("api/Sessions")]
     public class SessionsController : Controller
     {
-        // POST /sessions/{film-id}
+
+
         // GET /sessions
+
+
         // DELETE /sessions/{session-id}
         // POST /sessions/add
         // PUT /sessions/update

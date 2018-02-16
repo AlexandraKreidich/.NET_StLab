@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,54 +10,72 @@ using WebAPI.Models;
 namespace WebAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/films")]
+    [Route("api/[controller]")]
     public class FilmsController : Controller
     {
         // GET /films/now-playing
         [HttpGet]
         [Route("now-playing")]
-        public IEnumerable<FilmModel> NowPlayingFilms()
+        public IEnumerable<FilmModelResponse> GetNowPlayingFilms()
         {
-            List<FilmModel> nowPlayingFilms = new List<FilmModel>();
+            List<FilmModelResponse> nowPlayingFilms = new List<FilmModelResponse>();
             return nowPlayingFilms;
         }
 
         // GET /films
         [HttpGet]
         [Route("")]
-        public IEnumerable<FilmModel> AllFilms()
+        public IEnumerable<FilmModelResponse> GetAllFilms()
         {
-            List<FilmModel> nowPlayingFilms = new List<FilmModel>();
-            return nowPlayingFilms;
+            List<FilmModelResponse> Films = new List<FilmModelResponse>();
+            return Films;
         }
 
-        // POST /films/{name}
-        [HttpPost("{name:string}")]
-        public IEnumerable<FilmModel> FilmsByName([FromBody]string name)
+        // GET /films/{name}
+        [HttpGet("{name:string}")]
+        public IEnumerable<FilmModelResponse> GetFilmsByName([FromQuery]string name)
         {
-            List<FilmModel> nowPlayingFilms = new List<FilmModel>();
-            return nowPlayingFilms;
+            List<FilmModelResponse> FilmsByName = new List<FilmModelResponse>();
+            return FilmsByName;
         }
 
-        // POST /films/add
-        [HttpPost("add")]
-        public IActionResult AddFilm([FromBody]FilmModel filmToAdd)
+        // GET /films/{id}
+        [HttpGet("{id:int}")]
+        public FilmModelResponse GetFilm(int id)
         {
-            return null;
+            FilmModelResponse film = new FilmModelResponse();
+            return film;
         }
 
-        // PUT /films/update
-        [HttpPut("update")]
-        public IActionResult UpdateFilm([FromBody]FilmModel filmToUpdate)
+        // GET /films/{id}/sessions
+        [HttpGet("{id:int}/sessions")]
+        public IEnumerable<SessionModelResponse> GetSessions(int id)
         {
-            return null;
+            List<SessionModelResponse> sessions = new List<SessionModelResponse>();
+            return sessions;
+        }
+
+        // POST /films/search-films
+        [HttpPost]
+        [Route("search-films")]
+        public IEnumerable<FilmModelResponse> SearchFilms([FromBody]FilmFilterModelRequest request)
+        {
+            List<FilmModelResponse> responseFilms = new List<FilmModelResponse>();
+            return responseFilms;
+        }
+
+        // PUT /films
+        [HttpPut]
+        public IActionResult Put([FromBody]FilmModelRequest filmToAdd)
+        {
+            return StatusCode((int)HttpStatusCode.Created);
         }
 
         // DELETE /films/{id}
         [HttpDelete("{id:int}")]
-        public IActionResult DeleteFilm([FromBody]int id)
+        public IActionResult Delete([FromQuery]int id)
         {
-            return null;
+            return StatusCode((int)HttpStatusCode.Accepted);
         }
     }
 }
