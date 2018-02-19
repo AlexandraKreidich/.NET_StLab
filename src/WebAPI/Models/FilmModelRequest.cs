@@ -5,11 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class FilmModelRequest
+    public class FilmModelRequest : FilmModelBase
     {
-        protected string Name { get; set; }
-        protected string Description { get; set; }
-        protected string StartShowDate { get; set; }
-        protected string EndShowDate { get; set; }
     }
 }

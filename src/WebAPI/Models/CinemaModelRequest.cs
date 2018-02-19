@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class CinemaModelRequest
+    public class CinemaModelRequest : CinemaModelBase
     {
-        protected string Name { get; set; }
-        protected string City { get; set; }
-        protected int HallsNumber { get; set; }
     }
 }

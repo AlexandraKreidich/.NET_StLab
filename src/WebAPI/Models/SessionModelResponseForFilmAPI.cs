@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class SessionModelResponse
+    public class SessionModelResponseForFilmAPI
     {
         public int SessionId { get; set; }
         public string CinemaName { get; set; }

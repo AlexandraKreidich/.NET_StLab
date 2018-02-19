@@ -31,14 +31,23 @@ namespace WebAPI.Controllers
             return tickets;
         }
 
-        // PUT /tickets
+        // GET /tickets/new-ticket -> get ticket that has been created
+        [HttpGet]
+        [Route("/new-ticket")]
+        public TicketModelResponse GetNewTicket(TicketModelRequest ticket)
+        {
+            TicketModelResponse newTicket = new TicketModelResponse();
+            return newTicket;
+        }
+
+        // PUT /tickets -> creating the ticket with status in process
         [HttpPut]
-        public IActionResult Put([FromQuery]int plaseId)
+        public IActionResult Put(TicketModelRequest ticket)
         {
             return StatusCode((int)HttpStatusCode.Created);
         }
 
-        // POST /tickets/{id}/pay
+        // POST /tickets/{id}/pay -> pay for ticket
         [HttpPost]
         [Route("{id:int}/pay")]
         public IActionResult Pay(int id)

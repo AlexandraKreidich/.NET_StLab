@@ -49,9 +49,9 @@ namespace WebAPI.Controllers
 
         // GET /films/{id}/sessions
         [HttpGet("{id:int}/sessions")]
-        public IEnumerable<SessionModelResponse> GetSessions(int id)
+        public IEnumerable<SessionModelResponseForFilmAPI> GetSessions(int id)
         {
-            List<SessionModelResponse> sessions = new List<SessionModelResponse>();
+            List<SessionModelResponseForFilmAPI> sessions = new List<SessionModelResponseForFilmAPI>();
             return sessions;
         }
 
@@ -73,7 +73,7 @@ namespace WebAPI.Controllers
 
         // DELETE /films/{id}
         [HttpDelete("{id:int}")]
-        public IActionResult Delete([FromQuery]int id)
+        public IActionResult Delete(int id)
         {
             return StatusCode((int)HttpStatusCode.Accepted);
         }

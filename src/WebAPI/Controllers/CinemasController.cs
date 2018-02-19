@@ -21,6 +21,14 @@ namespace WebAPI.Controllers
             return cinemas;
         }
 
+        // GET /cinemas/{id}
+        [HttpGet("{id:int}")]
+        public CinemaModelResponse GetCinema(int id)
+        {
+            var cinema = new CinemaModelResponse();
+            return cinema;
+        }
+
         // GET /cinemas/{id}/halls
         [HttpGet]
         public IEnumerable<HallModel> GetHalls(){
@@ -30,7 +38,7 @@ namespace WebAPI.Controllers
 
         // PUT /cinemas
         [HttpPut]
-        public IActionResult Put([FromBody]CinemaModelRequest filmToAdd)
+        public IActionResult Put([FromBody]CinemaModelRequest cinema)
         {
             return StatusCode((int)HttpStatusCode.Created);
         }
@@ -44,8 +52,8 @@ namespace WebAPI.Controllers
         }
 
         // GET /cinemas/{id}/sessions
-        [HttpGet]
+        /*[HttpGet]
         [Route("{id:int}/sessions")]
-        public [-]
+        public [-]*/
     }
 }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class HallModel
+    public class HallSchemeModel
     {
-        public int CinemaId { get; set; }
-        public string Name { get; set; }
+        public int RowNumber { get; set; }
+        public int PlacesCount { get; set; }
     }
 }

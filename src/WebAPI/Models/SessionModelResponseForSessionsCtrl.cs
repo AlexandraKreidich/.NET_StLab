@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class SessionModel
+    public class SessionModelResponseForSessionsCtrl
     {
         public int SessionId { get; set; }
         public string CityName { get; set; }

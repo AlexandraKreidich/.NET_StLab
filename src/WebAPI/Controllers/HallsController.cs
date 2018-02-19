@@ -1,21 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Halls")]
+    [Route("api/[controller]")]
     public class HallsController : Controller
     {
-        // GET /halls/hall-scheme/{session-id}
-        // GET /halls/places/{session-id}
+        // GET /halls/{id}/scheme
+        [HttpGet]
+        [Route("{id:int}/scheme")]
+        public IEnumerable<HallSchemeModel> GetScheme(int id)
+        {
+            List<HallSchemeModel> scheme = new List<HallSchemeModel>();
+            return scheme;
+        }
 
-        
-        // DELETE /halls/{hall-id}
-        // PUT /halls/add
+        // GET /halls/{id}/places/?session-id= !!!!!!!!!!!
+        [HttpGet]
+        [Route("{id:int}/places/?session-id={id:int}")]
+        public IEnumerable<PlaceModelResponse> GetPlaces([FromQuery]int id)
+        {
+            List<PlaceModelResponse> places = new List<PlaceModelResponse>();
+            return places;
+        }
+
+        // PUT /halls
+        [HttpPut]
+        public IActionResult Put([FromBody]HallModel hall)
+        {
+            return StatusCode((int)HttpStatusCode.Created);
+        }
+
+        // DELETE /halls/{id}
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            return StatusCode((int)HttpStatusCode.Accepted);
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class CinemaModelResponse : CinemaModelRequest
+    public class CinemaModelResponse : CinemaModelBase
     {
         public int Id { get; set; }
     }
