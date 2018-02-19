@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
             return responseFilms;
         }
 
-        // PUT /films
+        // PUT /films --> add new film, if refresh(names should be equal)
         [HttpPut]
         public IActionResult Put([FromBody]FilmModelRequest filmToAdd)
         {

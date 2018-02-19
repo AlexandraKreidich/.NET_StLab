@@ -11,11 +11,11 @@ namespace WebAPI.Controllers
     [Route("api/Halls")]
     public class HallsController : Controller
     {
-        // POST /halls/{session-id}/hall-scheme
-        // POST /halls/{session-id}/places
-        // POST /halls/{cinema-id}
+        // GET /halls/hall-scheme/{session-id}
+        // GET /halls/places/{session-id}
+
+        
         // DELETE /halls/{hall-id}
-        // POST /halls/add
         // PUT /halls/add
     }
 }

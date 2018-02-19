@@ -12,12 +12,6 @@ namespace WebAPI.Controllers
     [Route("api/Services")]
     public class ServicesController : Controller
     {
-        // POST /services/{session-id}
-        [HttpPost("{id:int}")]
-        public IEnumerable<ServiceModel> GetServicesForSessionId([FromBody]int id)
-        {
-            List<ServiceModel> services = new List<ServiceModel>();
-            return services;
-        }
+
     }
 }
