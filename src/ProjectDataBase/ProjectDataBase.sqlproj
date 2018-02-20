@@ -62,7 +62,7 @@
   <ItemGroup>
     <Build Include="Tables\Cinema.sql" />
     <Build Include="Tables\SessionService.sql" />
-    <Build Include="Tables\PlaceStatus.sql" />
+    <Build Include="Tables\TicketService.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
