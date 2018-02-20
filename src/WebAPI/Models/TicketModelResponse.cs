@@ -7,7 +7,7 @@
         public int RowNumber { get; set; }
         public int PlaceNumber { get; set; }
         public string PlaceType { get; set; }
-        public float SumPrice { get; set; }
+        public decimal SumPrice { get; set; }
         public string Services { get; set; }
         public string Status { get; set; }
     }

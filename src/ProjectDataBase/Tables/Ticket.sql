@@ -5,8 +5,6 @@
     [UserId] INT NOT NULL,
     [TicketStatusId] INT NOT NULL,
     [CreatedAt] DATETIMEOFFSET NOT NULL,
-    [Price] DECIMAL(10,4) NOT NULL,
-    [Services] NVARCHAR(100) NULL ,
     FOREIGN KEY (UserId) REFERENCES [dbo].[User](Id),
     FOREIGN KEY (PlaceId) REFERENCES [dbo].[Place](Id),
     FOREIGN KEY (TicketStatusId) REFERENCES [dbo].[TicketStatus](Id)

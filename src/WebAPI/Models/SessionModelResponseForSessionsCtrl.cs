@@ -11,6 +11,6 @@ namespace WebAPI.Models
         public string FilmName { get; set; }
         public string FilmId { get; set; }
         public DateTimeOffset Time { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

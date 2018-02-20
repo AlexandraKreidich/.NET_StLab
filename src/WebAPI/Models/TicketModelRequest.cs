@@ -3,7 +3,6 @@
     public class TicketModelRequest
     {
         public int PlaceId { get; set; }
-        public int[] ServiceIds { get; set; }
-        public float ServicesPrice { get; set; }
+        public decimal ServicesPrice { get; set; }
     }
 }

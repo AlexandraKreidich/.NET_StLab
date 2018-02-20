@@ -10,6 +10,6 @@ namespace WebAPI.Models
         public int FilmId { get; set; }
         public int HallId { get; set; }
         public DateTimeOffset Time { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
