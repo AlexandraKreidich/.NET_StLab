@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [Produces("application/json")]
     [Route("api/[controller]")]
     public class FilmsController : Controller
     {
@@ -29,14 +24,6 @@ namespace WebAPI.Controllers
         {
             List<FilmModelResponse> Films = new List<FilmModelResponse>();
             return Films;
-        }
-
-        // GET /films/{name}
-        [HttpGet("{name:string}")]
-        public IEnumerable<FilmModelResponse> Get([FromQuery]string name)
-        {
-            List<FilmModelResponse> FilmsByName = new List<FilmModelResponse>();
-            return FilmsByName;
         }
 
         // GET /films/{id}

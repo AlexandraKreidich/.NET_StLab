@@ -9,7 +9,7 @@ namespace WebAPI.Models
     {
         public int FilmId { get; set; }
         public int HallId { get; set; }
-        public DateTime Time { get; set; }
+        public DateTimeOffset Time { get; set; }
         public float Price { get; set; }
     }
 }

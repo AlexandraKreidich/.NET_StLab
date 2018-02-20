@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
     public class FilmModelBase
     {
+        public int Id { get; set; }
         protected string Name { get; set; }
         protected string Description { get; set; }
-        protected string StartShowDate { get; set; }
-        protected string EndShowDate { get; set; }
+        protected DateTimeOffset StartRentDate { get; set; }
+        protected DateTimeOffset EndRentDate { get; set; }
     }
 }

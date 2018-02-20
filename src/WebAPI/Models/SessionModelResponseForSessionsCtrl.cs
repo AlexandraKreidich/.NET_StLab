@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
@@ -13,7 +10,7 @@ namespace WebAPI.Models
         public string HallName { get; set; }
         public string FilmName { get; set; }
         public string FilmId { get; set; }
-        public DateTime Time { get; set; }
+        public DateTimeOffset Time { get; set; }
         public float Price { get; set; }
     }
 }

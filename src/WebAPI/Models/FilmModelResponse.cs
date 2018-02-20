@@ -2,6 +2,5 @@
 {
     public class FilmModelResponse : FilmModelBase
     {
-        public int Id { get; set; }
     }
 }

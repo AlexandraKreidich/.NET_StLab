@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [Produces("application/json")]
     [Route("api/[controller]")]
     [Authorize(Roles = "User")]
     public class TicketsController : Controller
@@ -29,15 +24,6 @@ namespace WebAPI.Controllers
         {
             List<TicketModelResponse> tickets = new List<TicketModelResponse>();
             return tickets;
-        }
-
-        // GET /tickets/new-ticket/{place-id} -> get ticket that has been created
-        [HttpGet]
-        [Route("/new-ticket/{id:int}")]
-        public TicketModelResponse GetNewTicket(int placeId)
-        {
-            TicketModelResponse newTicket = new TicketModelResponse();
-            return newTicket;
         }
 
         // PUT /tickets

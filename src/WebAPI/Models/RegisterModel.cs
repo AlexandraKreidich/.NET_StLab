@@ -14,7 +14,7 @@ namespace WebAPI.Models
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        [MinLength(10)]
+        [MinLength(6)]
         public string Password { get; set; }
     }
 }
