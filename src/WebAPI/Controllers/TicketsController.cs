@@ -11,7 +11,7 @@ using WebAPI.Models;
 namespace WebAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Ticket")]
+    [Route("api/[controller]")]
     [Authorize(Roles = "User")]
     public class TicketsController : Controller
     {
@@ -31,18 +31,18 @@ namespace WebAPI.Controllers
             return tickets;
         }
 
-        // GET /tickets/new-ticket -> get ticket that has been created
+        // GET /tickets/new-ticket/{place-id} -> get ticket that has been created
         [HttpGet]
-        [Route("/new-ticket")]
-        public TicketModelResponse GetNewTicket(TicketModelRequest ticket)
+        [Route("/new-ticket/{id:int}")]
+        public TicketModelResponse GetNewTicket(int placeId)
         {
             TicketModelResponse newTicket = new TicketModelResponse();
             return newTicket;
         }
 
-        // PUT /tickets -> creating the ticket with status in process
+        // PUT /tickets
         [HttpPut]
-        public IActionResult Put(TicketModelRequest ticket)
+        public IActionResult Put([FromBody]TicketModelRequest ticket)
         {
             return StatusCode((int)HttpStatusCode.Created);
         }
@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
         [Route("{id:int}/pay")]
         public IActionResult Pay(int id)
         {
-            return StatusCode((int)HttpStatusCode.NoContent); //Правильный ли код ответа?
+            return StatusCode((int)HttpStatusCode.NoContent);
         }
 
         // DELETE /tickets/{id}

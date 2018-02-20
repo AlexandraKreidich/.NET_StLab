@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
 
         // GET /cinemas/{id}
         [HttpGet("{id:int}")]
-        public CinemaModelResponse GetCinema(int id)
+        public CinemaModelResponse Get(int id)
         {
             var cinema = new CinemaModelResponse();
             return cinema;
@@ -50,10 +50,5 @@ namespace WebAPI.Controllers
         {
             return StatusCode((int)HttpStatusCode.Accepted);
         }
-
-        // GET /cinemas/{id}/sessions
-        /*[HttpGet]
-        [Route("{id:int}/sessions")]
-        public [-]*/
     }
 }

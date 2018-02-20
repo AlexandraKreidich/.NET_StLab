@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         // GET /films
         [HttpGet]
         [Route("")]
-        public IEnumerable<FilmModelResponse> GetAllFilms()
+        public IEnumerable<FilmModelResponse> Get()
         {
             List<FilmModelResponse> Films = new List<FilmModelResponse>();
             return Films;
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
 
         // GET /films/{name}
         [HttpGet("{name:string}")]
-        public IEnumerable<FilmModelResponse> GetFilmsByName([FromQuery]string name)
+        public IEnumerable<FilmModelResponse> Get([FromQuery]string name)
         {
             List<FilmModelResponse> FilmsByName = new List<FilmModelResponse>();
             return FilmsByName;
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
 
         // GET /films/{id}
         [HttpGet("{id:int}")]
-        public FilmModelResponse GetFilm(int id)
+        public FilmModelResponse Get(int id)
         {
             FilmModelResponse film = new FilmModelResponse();
             return film;
@@ -62,6 +62,13 @@ namespace WebAPI.Controllers
         {
             List<FilmModelResponse> responseFilms = new List<FilmModelResponse>();
             return responseFilms;
+        }
+
+        //POST /films/{id}/add-service
+        [HttpPost]
+        [Route("{id:int}/add-service")]
+        public IActionResult AddService([FromBody] int serviceId){
+            return StatusCode((int)HttpStatusCode.Created);
         }
 
         // PUT /films --> add new film, if refresh(names should be equal)

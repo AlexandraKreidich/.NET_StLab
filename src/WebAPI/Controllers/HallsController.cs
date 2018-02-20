@@ -22,10 +22,10 @@ namespace WebAPI.Controllers
             return scheme;
         }
 
-        // GET /halls/{id}/places/?session-id= !!!!!!!!!!!
+        // GET /halls/{id}/places
         [HttpGet]
-        [Route("{id:int}/places/?session-id={id:int}")]
-        public IEnumerable<PlaceModelResponse> GetPlaces([FromQuery]int id)
+        [Route("{id:int}/places")]
+        public IEnumerable<PlaceModelResponse> Get(int id)
         {
             List<PlaceModelResponse> places = new List<PlaceModelResponse>();
             return places;

@@ -10,6 +10,5 @@
         public float Price { get; set; }
         public string Services { get; set; }
         public string Status { get; set; }
-
     }
 }
