@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="ed24dbed-57d2-4d74-aae6-3f83c36b712a" ChangeDateTime="02/13/2018 14:48:43">
+    <Property Name="ElementName" Value="[dbo].[SessionService].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SessionService]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ServiceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="981f469c-bb18-47bb-9f07-a3b5be7b0405" ChangeDateTime="02/13/2018 16:15:48">
+    <Property Name="ElementName" Value="[dbo].[Status]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[TicketStatus]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a2788895-ab5b-481c-8499-4d2dbdf03b61" ChangeDateTime="02/20/2018 12:52:31">
+    <Property Name="ElementName" Value="[dbo].[TicketStatus].[StatusName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TicketStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c999cf38-9020-4e2c-a102-9e1fb8d52fcb" ChangeDateTime="02/20/2018 14:16:54">
+    <Property Name="ElementName" Value="[dbo].[Film].[StartShowDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Film]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartRentDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="552ae8b9-0928-4b98-8885-db16e3c7c075" ChangeDateTime="02/20/2018 14:16:58">
+    <Property Name="ElementName" Value="[dbo].[Film].[EndShowDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Film]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EndRentDate" />
+  </Operation>
+</Operations>

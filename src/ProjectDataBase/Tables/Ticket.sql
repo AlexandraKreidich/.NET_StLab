@@ -1,10 +1,11 @@
 ﻿CREATE TABLE [dbo].[Ticket]
 (
-    [Id] INT NOT NULL PRIMARY KEY IDENTITY,
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     [PlaceId] INT NOT NULL,
     [UserId] INT NOT NULL,
-    [StatusId] INT NOT NULL,
+    [TicketStatusId] INT NOT NULL,
+    [CreatedAt] DATETIMEOFFSET NOT NULL,
     FOREIGN KEY (UserId) REFERENCES [dbo].[User](Id),
     FOREIGN KEY (PlaceId) REFERENCES [dbo].[Place](Id),
-    FOREIGN KEY (StatusId) REFERENCES [dbo].[Status](Id)
+    FOREIGN KEY (TicketStatusId) REFERENCES [dbo].[TicketStatus](Id)
 )

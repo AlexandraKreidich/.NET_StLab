@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Film]
 (
-    [Id] INT NOT NULL PRIMARY KEY IDENTITY,
-    [StartShowDate] DATE NOT NULL,
-    [EndShowDate] DATE NOT NULL,
-    [Name] TEXT NOT NULL,
-    [Description] TEXT NOT NULL
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    [StartRentDate] DATETIMEOFFSET NOT NULL,
+    [EndRentDate] DATETIMEOFFSET NOT NULL,
+    [Name] NVARCHAR(50) NOT NULL,
+    [Description] NVARCHAR(300) NOT NULL
 )

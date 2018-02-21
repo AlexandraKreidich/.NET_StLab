@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[Price]
 (
-    [Id] INT NOT NULL PRIMARY KEY IDENTITY,
-    [PlaceTypeId] INT NOT NULL,
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY (1,1),
     [SessionId] INT NOT NULL,
-    [Price] INT NOT NULL,
+    [PlaceId] INT NOT NULL,
+    [Price] MONEY NOT NULL,
     FOREIGN KEY (SessionId) REFERENCES [dbo].[Session](Id),
-    FOREIGN KEY (PlaceTypeId) REFERENCES [dbo].[PlaceType](Id)
+    FOREIGN KEY (PlaceId) REFERENCES [dbo].[Place](Id)
 )

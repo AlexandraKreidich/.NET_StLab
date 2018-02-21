@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[HallScheme]
 (
-    [Id] INT NOT NULL PRIMARY KEY IDENTITY,
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     [RowNumber] INT NOT NULL,
     [PlacesCount] INT NOT NULL,
     [HallId] INT NOT NULL,
