@@ -343,8 +343,8 @@ BEGIN TRY
 
     INSERT INTO dbo.UserRole([Name])
     VALUES
-        ('Administrator'),
-        ('User')
+        ('User'),
+        ('Admin')
 
     PRINT 'Inserting seed data for User table'
 
@@ -368,8 +368,7 @@ BEGIN TRY
 
     INSERT INTO dbo.[TicketStatus]([Name])
     VALUES
-        ('Ok'),
-        ('Error'),
+        ('Paid'),
         ('InProcess')
 
     PRINT 'Inserting seed data for Ticket table'

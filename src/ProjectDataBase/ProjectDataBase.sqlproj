@@ -58,11 +58,13 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Cinema.sql" />
     <Build Include="Tables\SessionService.sql" />
     <Build Include="Tables\TicketService.sql" />
+    <Build Include="Stored Procedures\GetUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
