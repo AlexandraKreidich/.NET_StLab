@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -6,14 +7,12 @@ namespace WebAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class AccountController : Controller
     {
-        //private readonly IUserService _userService;
+        private readonly IUserService _userService;
 
-
-        //public AccountController(IUserService userService)
-        //{
-        //    _userService = userService;
-        //}
-
+        public AccountController(IUserService userService)
+        {
+            _userService = userService;
+        }
 
         // POST /account/login
         [HttpPost]

@@ -8,6 +8,6 @@ namespace BusinessLayer.Contracts
 {
     public interface IUserService
     {
-        UserDto GetUser([NotNull] string email, [NotNull] string password);
+        UserDto Login([NotNull] string email, [NotNull] string password);
     }
 }

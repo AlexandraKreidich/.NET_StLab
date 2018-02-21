@@ -14,7 +14,7 @@ namespace BusinessLayer.Services
             _userRepository = userRepository;
         }
 
-        public UserDto GetUser([NotNull] string email, [NotNull] string password)
+        public UserDto Login([NotNull] string email, [NotNull] string password)
         {
             var user = _userRepository.GetUser(email);
             return user;
