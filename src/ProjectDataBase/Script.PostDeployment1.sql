@@ -18,12 +18,12 @@ BEGIN TRY
 
     PRINT 'Inserting seed data for Cinema table'
 
-    INSERT INTO dbo.Cinema ([Name], [City], [HallsNumber])
+    INSERT INTO dbo.Cinema ([Name], [City])
     VALUES
-        ('Silver Screen', 'Minsk', 3),
-        ('Red star', 'Grodno', 2),
-        ('Belarus', 'Minsk', 3),
-        ('October', 'Grodno', 2)
+        ('Silver Screen', 'Minsk'),
+        ('Red star', 'Grodno'),
+        ('Belarus', 'Minsk'),
+        ('October', 'Grodno')
 
     PRINT 'Inserting seed data for Hall table'
 
