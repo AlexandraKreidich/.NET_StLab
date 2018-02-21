@@ -2,6 +2,5 @@
 (
     [Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     [Name] NVARCHAR(50) NOT NULL,
-    [City] NVARCHAR(50) NOT NULL,
-    [HallsNumber] INT DEFAULT 0 NOT NULL
+    [City] NVARCHAR(50) NOT NULL
 )
