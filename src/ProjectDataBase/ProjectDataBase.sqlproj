@@ -65,6 +65,7 @@
     <Build Include="Tables\SessionService.sql" />
     <Build Include="Tables\TicketService.sql" />
     <Build Include="Stored Procedures\GetUser.sql" />
+    <Build Include="Stored Procedures\AddUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

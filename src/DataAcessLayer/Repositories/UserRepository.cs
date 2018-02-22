@@ -21,7 +21,7 @@ namespace DataAcessLayer.Repositories
         }
 
 
-        public UserDto GetUser([NotNull] string email)
+        public UserResp GetUser([NotNull] string email)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -30,7 +30,27 @@ namespace DataAcessLayer.Repositories
                     new { Email = email },
                     commandType: CommandType.StoredProcedure);
 
-                return Mapper.Map<UserDto>(user);
+                return Mapper.Map<UserResp>(user);
+            }
+        }
+
+        public int Register(UserReq userReq)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                int id = connection.ExecuteScalar<int>(
+                    "AddUser",
+                    new {
+                        Email = userReq.Email,
+                        FirstName = userReq.FirstName,
+                        LastName = userReq.LastName,
+                        UserRole = userReq.Role.ToString(),
+                        PasswordHash = userReq.PasswordHash,
+                        salt = userReq.Salt
+                    },
+                    commandType: CommandType.StoredProcedure);
+
+                return id;
             }
         }
     }

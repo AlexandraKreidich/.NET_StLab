@@ -1,6 +1,9 @@
-﻿using BusinessLayer.Contracts;
+﻿using System.Net;
+using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models;
+using LoginModel = WebAPI.Models.LoginModel;
+using RegisterModel = WebAPI.Models.RegisterModel;
 
 namespace WebAPI.Controllers
 {
@@ -16,17 +19,28 @@ namespace WebAPI.Controllers
 
         // POST /account/login
         [HttpPost]
-        public LoginModel Login([FromBody]LoginModel model)
+        public IActionResult Login([FromBody]LoginModel model)
         {
-           // UserDto userDto = _userService.GetUser(model.Login, model.Password);
-            return model;
+            HttpStatusCode code = _userService.Login(model.Email, model.Password);
+            return StatusCode((int) code);
         }
 
         // POST /account/register
         [HttpPost]
-        public RegisterModel Register([FromBody]RegisterModel model)
+        public UserModel Register([FromBody]RegisterModel model)
         {
-            return model;
+            BusinessLayer.Models.RegisterModel regModel = new BusinessLayer.Models.RegisterModel()
+            {
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Password = model.Password
+            };
+
+            UserModel newUser = _userService.Register(regModel);
+
+            // should return token
+            return newUser;
         }
     }
 }

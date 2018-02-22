@@ -5,6 +5,7 @@ namespace DataAcessLayer.Contracts
 {
     public interface IUserRepository
     {
-        UserDto GetUser([NotNull] string email);
+        int Register(UserReq userReq);
+        UserResp GetUser([NotNull] string email);
     }
 }

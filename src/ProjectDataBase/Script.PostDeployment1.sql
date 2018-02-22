@@ -350,11 +350,11 @@ BEGIN TRY
 
     INSERT INTO dbo.[User](PasswordHash, Salt, FirstName, LastName, Email, UserRoleId)
     VALUES
-        ('vladK', '12345', 'Vladislav', 'Krasnitskiy', 'v.krasnitskiy@gmail.com', 2),
-        ('alex', '12345', 'Alexandr', 'Dimidov', 'a.Dimidov@gmail.com', 2),
-        ('maria', '12345', 'Maria', 'Kuharchuk', 'm.kuharchuk@gmail.com', 2),
-        ('sasha', '12345', 'Alexandra', 'Kreidich', 'a.kreidich@gmail.com', 2),
-        ('admin', '123456789', 'Ivan', 'Ivanov', 'i.ivanov@gmail.com', 1)
+        (CONVERT(BINARY, 'vladK'), CONVERT(BINARY, '12345'), 'Vladislav', 'Krasnitskiy', 'v.krasnitskiy@gmail.com', 1),
+        (convert(BINARY, 'vladK'), CONVERT(BINARY, '12345'), 'Alexandr', 'Dimidov', 'a.Dimidov@gmail.com', 1),
+        (convert(BINARY, 'vladK'), CONVERT(BINARY, '12345'), 'Maria', 'Kuharchuk', 'm.kuharchuk@gmail.com', 1),
+        (convert(BINARY, 'vladK'), CONVERT(BINARY, '12345'), 'Alexandra', 'Kreidich', 'a.kreidich@gmail.com', 1),
+        (convert(BINARY, 'vladK'), CONVERT(BINARY, '12345'), 'Ivan', 'Ivanov', 'i.ivanov@gmail.com', 2)
 
     PRINT 'Inserting seed data for Service table'
 

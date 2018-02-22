@@ -13,7 +13,7 @@ namespace DataAcessLayer
         public static void Register([NotNull] IServiceCollection collection)
         {
             Mapper.Initialize(cfg => {
-                cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<User, UserResp>();
             });
 
             collection.AddSingleton<IUserRepository, UserRepository>();

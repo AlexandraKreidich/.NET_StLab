@@ -1,10 +1,9 @@
 ﻿using Common;
 
-namespace DataAcessLayer.Models.Entities
+namespace DataAcessLayer.Models.DataTransferObjects
 {
-    internal class User
+    public struct UserReq
     {
-        public int Id { get; set; }
         public UserRole Role { get; set; }
         public byte[] Salt { get; set; }
         public string FirstName { get; set; }

@@ -5,16 +5,23 @@ using System.Text;
 
 namespace BusinessLayer.Services
 {
+    internal struct PasswordObject
+    {
+        public byte[] PasswordHash { get; set; }
+        public byte[] Salt { get; set; }
+    }
+
     internal static class CryptoService
     {
-        public static byte[] ConcatBytes(byte[] a, byte[] b)
+        private static byte[] Combine(byte[] a, byte[] b)
         {
             byte[] c = new byte[a.Length + b.Length];
             System.Buffer.BlockCopy(a, 0, c, 0, a.Length);
             System.Buffer.BlockCopy(b, 0, c, a.Length, b.Length);
             return c;
         }
-        public static string GeneratePasswordHash(string userPassword)
+
+        private static byte[] GetSalt()
         {
             byte[] salt = new byte[50];
 
@@ -23,9 +30,19 @@ namespace BusinessLayer.Services
                 crypto.GetBytes(salt);
             }
 
-            var data = Encoding.UTF8.GetBytes(userPassword);
+            return salt;
+        }
 
-            var saltedPass = ConcatBytes(data, salt);
+        public static PasswordObject GetHash(string str, byte[] salt = null)
+        {
+            if (salt == null)
+            {
+                salt = GetSalt();
+            }
+
+            byte[] data = Encoding.UTF8.GetBytes(str);
+
+            byte[] saltedPass = Combine(data, salt);
 
             byte[] hashedInputBytes;
 
@@ -34,14 +51,12 @@ namespace BusinessLayer.Services
                 hashedInputBytes = shaM.ComputeHash(saltedPass);
             }
 
-            Console.WriteLine($"hashedInputBytes: {hashedInputBytes}");
-
-            var hashedInputStringBuilder = new System.Text.StringBuilder(hashedInputBytes.Length * 2);
-
-            foreach (var b in hashedInputBytes)
-                hashedInputStringBuilder.AppendFormat("{0:x2}", b);
-
-            return hashedInputStringBuilder.ToString();
+            return new PasswordObject()
+            {
+                PasswordHash = hashedInputBytes,
+                Salt = salt
+            };
         }
+
     }
 }
