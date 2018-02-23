@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,13 @@ namespace WebAPI.Controllers
 
         // POST /account/login
         [HttpPost]
-        public IActionResult Login([FromBody]LoginModel model)
+        public  IActionResult /*async Task<object>*/ Login([FromBody]LoginModel model)
         {
+
             HttpStatusCode code = _userService.Login(model.Email, model.Password);
-            return StatusCode((int) code);
+            return StatusCode((int)code);
+
+            // var result = await _userService.Login(model.Email, model.Password);
         }
 
         // POST /account/register

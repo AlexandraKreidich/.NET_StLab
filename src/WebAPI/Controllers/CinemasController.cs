@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 
@@ -12,6 +14,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IEnumerable<CinemaModelResponse> Get()
         {
+            //User.FindFirst(ClaimTypes.NameIdentifier);
             List<CinemaModelResponse> cinemas = new List<CinemaModelResponse>();
             return cinemas;
         }

@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
@@ -29,7 +32,9 @@ namespace BusinessLayer.Services
                 return HttpStatusCode.NotFound;
             }
 
-            if (CryptoService.GetHash(password, user.Salt).PasswordHash.Equals(user.PasswordHash))
+
+            byte[] passwordHash = CryptoService.GetHash(password, user.Salt).PasswordHash;
+            if (passwordHash.Select((b, i) => b == user.PasswordHash[i]).All(item => item))
             {
                 return HttpStatusCode.NoContent;
             }
