@@ -10,6 +10,7 @@ namespace BusinessLayer
         public static void Register([NotNull] IServiceCollection collection)
         {
             collection.AddSingleton<IUserService, UserService>();
+            collection.AddSingleton<IJWTService, JWTService>();
         }
     }
 }

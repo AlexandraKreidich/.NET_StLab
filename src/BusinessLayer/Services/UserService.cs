@@ -16,32 +16,43 @@ namespace BusinessLayer.Services
     public class UserService : IUserService
     {
         [NotNull] private readonly IUserRepository _userRepository;
+        [NotNull] private readonly IJWTService _jwtService;
 
-        public UserService([NotNull] IUserRepository userRepository)
+        public UserService([NotNull] IUserRepository userRepository, [NotNull] IJWTService jwtService)
         {
             _userRepository = userRepository;
+            _jwtService = jwtService;
         }
 
-        public HttpStatusCode Login([NotNull] string email, [NotNull] string password)
+        public string Login([NotNull] string email, [NotNull] string password)
         {
             UserResp user = _userRepository.GetUser(email);
 
             if (user == null)
             {
                 // no user with this email
-                return HttpStatusCode.NotFound;
+                return null;
             }
 
-
             byte[] passwordHash = CryptoService.GetHash(password, user.Salt).PasswordHash;
+
             if (passwordHash.Select((b, i) => b == user.PasswordHash[i]).All(item => item))
             {
-                return HttpStatusCode.NoContent;
+                UserModel userModel = new UserModel()
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    Id = user.Id,
+                    LastName = user.LastName,
+                    Role = user.Role
+                };
+
+                return _jwtService.GenerateJwtToken(userModel);
             }
             else
             {
                 // wrong password
-                return HttpStatusCode.Unauthorized;
+                return null;
             }
         }
 

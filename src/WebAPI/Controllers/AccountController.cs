@@ -20,13 +20,9 @@ namespace WebAPI.Controllers
 
         // POST /account/login
         [HttpPost]
-        public  IActionResult /*async Task<object>*/ Login([FromBody]LoginModel model)
+        public  string Login([FromBody]LoginModel model)
         {
-
-            HttpStatusCode code = _userService.Login(model.Email, model.Password);
-            return StatusCode((int)code);
-
-            // var result = await _userService.Login(model.Email, model.Password);
+            return _userService.Login(model.Email, model.Password);
         }
 
         // POST /account/register

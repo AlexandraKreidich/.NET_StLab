@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using BusinessLayer;
 using BusinessLayer.Contracts;
 using DataAcessLayer;
@@ -13,8 +10,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI;
 
@@ -32,9 +27,10 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Settings dalSettings = new Settings(Configuration);
+            Settings settings = new Settings(Configuration);
 
-            services.AddSingleton<IDalSettings>(dalSettings);
+            services.AddSingleton<IDalSettings>(settings);
+            services.AddSingleton<IBlSettings>(settings);
 
             DalModule.Register(services);
             BlModule.Register(services);

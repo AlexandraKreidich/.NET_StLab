@@ -9,5 +9,11 @@ namespace BusinessLayer.Contracts
     {
         [NotNull]
         string ConnectionString { get; }
+        [NotNull]
+        string JWTKey { get; }
+        [NotNull]
+        string JWTExpireDays { get; }
+        [NotNull] 
+        string JWTIssuer { get; }
     }
 }

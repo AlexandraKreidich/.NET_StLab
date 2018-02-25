@@ -10,7 +10,8 @@ namespace BusinessLayer.Contracts
 {
     public interface IUserService
     {
-        HttpStatusCode Login([NotNull] string email, [NotNull] string password);
+        string Login([NotNull] string email, [NotNull] string password);
+
         UserModel Register(RegisterModel user);
     }
 }

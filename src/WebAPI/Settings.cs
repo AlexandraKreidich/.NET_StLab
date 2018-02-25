@@ -9,7 +9,9 @@ namespace WebAPI
         private readonly IConfiguration _configuration;
 
         public string ConnectionString => _configuration[nameof(ConnectionString)];
-
+        public string JWTKey => _configuration[nameof(JWTKey)];
+        public string JWTExpireDays => _configuration[nameof(JWTExpireDays)];
+        public string JWTIssuer => _configuration[nameof(JWTIssuer)];
 
         public Settings(IConfiguration configuration)
         {
