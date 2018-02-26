@@ -56,7 +56,7 @@ namespace BusinessLayer.Services
             }
         }
 
-        public UserModel Register(RegisterModel regModel)
+        public string Register(RegisterModel regModel)
         {
             if (_userRepository.GetUser(regModel.Email) != null)
             {
@@ -87,7 +87,7 @@ namespace BusinessLayer.Services
                 Role = userToRegistrate.Role
             };
 
-            return newUser;
+            return _jwtService.GenerateJwtToken(newUser);
         }
 
     }

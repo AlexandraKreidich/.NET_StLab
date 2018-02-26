@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
@@ -20,14 +21,23 @@ namespace WebAPI.Controllers
 
         // POST /account/login
         [HttpPost]
-        public  string Login([FromBody]LoginModel model)
+        public string Login([FromBody]LoginModel model)
         {
-            return _userService.Login(model.Email, model.Password);
+            string tokenStr = _userService.Login(model.Email, model.Password);
+
+            if (tokenStr != null)
+            {
+                return tokenStr;
+            }
+            else
+            {
+                throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+            }
         }
 
         // POST /account/register
         [HttpPost]
-        public UserModel Register([FromBody]RegisterModel model)
+        public string Register([FromBody]RegisterModel model)
         {
             BusinessLayer.Models.RegisterModel regModel = new BusinessLayer.Models.RegisterModel()
             {
@@ -37,10 +47,16 @@ namespace WebAPI.Controllers
                 Password = model.Password
             };
 
-            UserModel newUser = _userService.Register(regModel);
+            string newUserToken = _userService.Register(regModel);
 
-            // should return token
-            return newUser;
+            if (newUserToken != null)
+            {
+                return newUserToken;
+            }
+            else
+            {
+                throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+            }
         }
     }
 }

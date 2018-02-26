@@ -12,6 +12,6 @@ namespace BusinessLayer.Contracts
     {
         string Login([NotNull] string email, [NotNull] string password);
 
-        UserModel Register(RegisterModel user);
+        string Register(RegisterModel user);
     }
 }
