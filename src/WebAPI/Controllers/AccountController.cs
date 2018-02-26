@@ -3,9 +3,10 @@ using System.Net;
 using System.Threading.Tasks;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
+using Common.Extensions;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using LoginModel = WebAPI.Models.LoginModel;
-using RegisterModel = WebAPI.Models.RegisterModel;
+using WebAPI.Models.User;
 
 namespace WebAPI.Controllers
 {
@@ -14,49 +15,78 @@ namespace WebAPI.Controllers
     {
         private readonly IUserService _userService;
 
-        public AccountController(IUserService userService)
+        private readonly IJWTService _jwtService;
+
+        public AccountController(IUserService userService, IJWTService jwtService)
         {
             _userService = userService;
+            _jwtService = jwtService;
         }
 
         // POST /account/login
         [HttpPost]
-        public string Login([FromBody]LoginModel model)
+        public ResponseModel Login([NotNull] [FromBody]LoginModel model)
         {
-            string tokenStr = _userService.Login(model.Email, model.Password);
+            if (!ModelState.IsValid)
+            {
+                throw new ApplicationException("INVALID_MODEL_STATE");
+            }
 
-            if (tokenStr != null)
+            UserModel user = _userService.Login(model.Email, model.Password);
+
+            string token = _jwtService.GenerateJwtToken(user);
+
+            if (token != null)
             {
-                return tokenStr;
+                return new ResponseModel()
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Id = user.Id,
+                    Role = user.Role,
+                    Token = token
+                };
             }
-            else
-            {
-                throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
-            }
+
+            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
         }
 
         // POST /account/register
         [HttpPost]
-        public string Register([FromBody]RegisterModel model)
+        public ResponseModel Register([NotNull] [FromBody] RegisterModel model)
         {
-            BusinessLayer.Models.RegisterModel regModel = new BusinessLayer.Models.RegisterModel()
+            if (!ModelState.IsValid)
             {
-                Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Password = model.Password
-            };
-
-            string newUserToken = _userService.Register(regModel);
-
-            if (newUserToken != null)
-            {
-                return newUserToken;
+                throw new ApplicationException("INVALID_MODEL_STATE");
             }
-            else
+
+            RegisterUserModel regModel = new RegisterUserModel
+            (
+                model.Email,
+                model.FirstName,
+                model.LastName,
+                model.Password
+            );
+
+            UserModel user = _userService.Register(regModel);
+
+            string token = _jwtService.GenerateJwtToken(user);
+
+            if (token != null)
             {
-                throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+                return new ResponseModel()
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Id = user.Id,
+                    Role = user.Role,
+                    Token = token
+                };
             }
+
+            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
         }
     }
 }

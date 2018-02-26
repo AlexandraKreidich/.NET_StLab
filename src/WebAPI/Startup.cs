@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI;
+using WebAPI.Contracts;
 
 namespace WebApplication1
 {
@@ -31,9 +32,11 @@ namespace WebApplication1
 
             services.AddSingleton<IDalSettings>(settings);
             services.AddSingleton<IBlSettings>(settings);
+            services.AddSingleton<IWebAPISettings>(settings);
 
             DalModule.Register(services);
             BlModule.Register(services);
+            WebAPIModule.Register(services);
 
             // ===== Add Jwt Authentication ========
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims

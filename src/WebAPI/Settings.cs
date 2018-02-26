@@ -1,10 +1,11 @@
 ﻿using BusinessLayer.Contracts;
 using DataAcessLayer.Contracts;
 using Microsoft.Extensions.Configuration;
+using WebAPI.Contracts;
 
 namespace WebAPI
 {
-    public class Settings : IDalSettings, IBlSettings
+    public class Settings : IDalSettings, IBlSettings, IWebAPISettings
     {
         private readonly IConfiguration _configuration;
 

@@ -6,6 +6,7 @@ using System.Text;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using Common;
+using Common.Extensions;
 using DataAcessLayer.Contracts;
 using DataAcessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
@@ -16,16 +17,17 @@ namespace BusinessLayer.Services
     public class UserService : IUserService
     {
         [NotNull] private readonly IUserRepository _userRepository;
-        [NotNull] private readonly IJWTService _jwtService;
 
-        public UserService([NotNull] IUserRepository userRepository, [NotNull] IJWTService jwtService)
+        public UserService([NotNull] IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _jwtService = jwtService;
         }
 
-        public string Login([NotNull] string email, [NotNull] string password)
+        public UserModel Login([NotNull] string email, [NotNull] string password)
         {
+            email = email ?? throw new ArgumentNullException(nameof(email));
+            password = password ?? throw new ArgumentNullException(nameof(password));
+
             UserResp user = _userRepository.GetUser(email);
 
             if (user == null)
@@ -36,6 +38,7 @@ namespace BusinessLayer.Services
 
             byte[] passwordHash = CryptoService.GetHash(password, user.Salt).PasswordHash;
 
+            // check if the password is right
             if (passwordHash.Select((b, i) => b == user.PasswordHash[i]).All(item => item))
             {
                 UserModel userModel = new UserModel()
@@ -47,17 +50,17 @@ namespace BusinessLayer.Services
                     Role = user.Role
                 };
 
-                return _jwtService.GenerateJwtToken(userModel);
+                return userModel;
             }
-            else
-            {
-                // wrong password
-                return null;
-            }
+
+            // wrong password
+            return null;
         }
 
-        public string Register(RegisterModel regModel)
+        public UserModel Register(RegisterUserModel regModel)
         {
+            regModel.EnsureObjectPropertiesNotNull();
+
             if (_userRepository.GetUser(regModel.Email) != null)
             {
                 // error, user with this email already exist
@@ -87,7 +90,7 @@ namespace BusinessLayer.Services
                 Role = userToRegistrate.Role
             };
 
-            return _jwtService.GenerateJwtToken(newUser);
+            return newUser;
         }
 
     }

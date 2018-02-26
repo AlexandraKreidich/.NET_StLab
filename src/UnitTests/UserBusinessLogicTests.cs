@@ -22,13 +22,7 @@ namespace UnitTests
 
             IUserService userService = new UserService(userRepositoryMock.Object);
 
-            RegisterModel registerModel = new RegisterModel()
-            {
-                Email = "test@mail.ru",
-                FirstName = "Alexandra",
-                LastName = "LastName",
-                Password = "password"
-            };
+            RegisterUserModel registerModel = new RegisterUserModel("test@mail.ru", "Alexandra", "LastName", "password");
 
             // Act
             UserModel result = userService.Register(registerModel);

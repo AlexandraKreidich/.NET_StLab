@@ -3,13 +3,13 @@ using BusinessLayer.Services;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BusinessLayer
+namespace WebAPI
 {
-    public static class BlModule
+    public static class WebAPIModule
     {
         public static void Register([NotNull] IServiceCollection collection)
         {
-            collection.AddSingleton<IUserService, UserService>();
+            collection.AddSingleton<IJWTService, JWTService>();
         }
     }
 }

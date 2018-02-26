@@ -7,8 +7,7 @@ using WebAPI.Models;
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize(Roles = "User")]
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class TicketsController : Controller
     {
         // GET /tickets

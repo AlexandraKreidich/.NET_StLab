@@ -5,29 +5,33 @@ using System.Security.Claims;
 using System.Text;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
+using Common;
 using DataAcessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.IdentityModel.Tokens;
+using WebAPI.Contracts;
 
 namespace BusinessLayer.Services
 {
     public class JWTService : IJWTService
     {
         [NotNull]
-        private readonly IBlSettings _settings;
-        
-        public JWTService([NotNull] IBlSettings settings)
+        private readonly IWebAPISettings _settings;
+
+        public JWTService([NotNull] IWebAPISettings settings)
         {
             _settings = settings;
         }
-        
+
         public string GenerateJwtToken(UserModel user)
         {
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Role, UserRole.User.ToString(), UserRole.Admin.ToString())
+
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.JWTKey));

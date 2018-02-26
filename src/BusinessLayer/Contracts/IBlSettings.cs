@@ -7,13 +7,6 @@ namespace BusinessLayer.Contracts
 {
     public interface IBlSettings
     {
-        [NotNull]
-        string ConnectionString { get; }
-        [NotNull]
-        string JWTKey { get; }
-        [NotNull]
-        string JWTExpireDays { get; }
-        [NotNull] 
-        string JWTIssuer { get; }
+
     }
 }
