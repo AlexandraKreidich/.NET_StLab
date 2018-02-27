@@ -46,7 +46,7 @@ namespace DataAcessLayer.Repositories
                         LastName = userReq.LastName,
                         UserRole = userReq.Role.ToString(),
                         PasswordHash = userReq.PasswordHash,
-                        salt = userReq.Salt
+                        Salt = userReq.Salt
                     },
                     commandType: CommandType.StoredProcedure);
 

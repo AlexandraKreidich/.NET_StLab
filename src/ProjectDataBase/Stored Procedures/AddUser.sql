@@ -8,11 +8,11 @@
 AS
     INSERT INTO [dbo].[User] (PasswordHash, Salt, FirstName, LastName, Email, UserRoleId)
     VALUES (
-    @PasswordHash,
-    @Salt,
-    @FirstName,
-    @LastName,
-    @Email,
-    (SELECT Id FROM [dbo].UserRole
-    WHERE [Name] = @UserRole))
+        @PasswordHash,
+        @Salt,
+        @FirstName,
+        @LastName,
+        @Email,
+        (SELECT Id FROM [dbo].UserRole
+        WHERE [Name] = @UserRole))
 SELECT SCOPE_IDENTITY()

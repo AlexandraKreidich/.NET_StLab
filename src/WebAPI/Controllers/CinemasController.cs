@@ -4,6 +4,8 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
+using WebAPI.Models.Cinema;
+using WebAPI.Models.Hall;
 
 namespace WebAPI.Controllers
 {

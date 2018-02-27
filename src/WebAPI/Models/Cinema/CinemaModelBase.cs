@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models
+﻿namespace WebAPI.Models.Cinema
 {
     public class CinemaModelBase
     {

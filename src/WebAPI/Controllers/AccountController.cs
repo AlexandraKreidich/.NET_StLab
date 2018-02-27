@@ -6,6 +6,7 @@ using BusinessLayer.Models;
 using Common.Extensions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Contracts;
 using WebAPI.Models.User;
 
 namespace WebAPI.Controllers
@@ -25,20 +26,18 @@ namespace WebAPI.Controllers
 
         // POST /account/login
         [HttpPost]
-        public ResponseModel Login([NotNull] [FromBody]LoginModel model)
+        public IActionResult Login([NotNull] [FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)
             {
-                throw new ApplicationException("INVALID_MODEL_STATE");
+                return BadRequest(ModelState);
             }
 
             UserModel user = _userService.Login(model.Email, model.Password);
 
             string token = _jwtService.GenerateJwtToken(user);
 
-            if (token != null)
-            {
-                return new ResponseModel()
+            return Ok(new ResponseModel()
                 {
                     Email = user.Email,
                     FirstName = user.FirstName,
@@ -46,10 +45,7 @@ namespace WebAPI.Controllers
                     Id = user.Id,
                     Role = user.Role,
                     Token = token
-                };
-            }
-
-            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+                });
         }
 
         // POST /account/register

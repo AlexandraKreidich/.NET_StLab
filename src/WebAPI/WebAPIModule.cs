@@ -2,6 +2,8 @@
 using BusinessLayer.Services;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using WebAPI.Contracts;
+using WebAPI.Services;
 
 namespace WebAPI
 {

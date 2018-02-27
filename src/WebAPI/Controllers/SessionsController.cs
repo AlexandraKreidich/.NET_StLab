@@ -2,6 +2,8 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
+using WebAPI.Models.Service;
+using WebAPI.Models.Session;
 
 namespace WebAPI.Controllers
 {

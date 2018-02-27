@@ -2,6 +2,8 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
+using WebAPI.Models.Hall;
+using WebAPI.Models.Place;
 
 namespace WebAPI.Controllers
 {

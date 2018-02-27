@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BusinessLayer.Models;
+﻿using BusinessLayer.Models;
 
-namespace BusinessLayer.Contracts
+namespace WebAPI.Contracts
 {
     public interface IJWTService
     {

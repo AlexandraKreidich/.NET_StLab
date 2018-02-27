@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebAPI.Models
+namespace WebAPI.Models.Session
 {
     public class SessionModelResponseForSessionsCtrl
     {
