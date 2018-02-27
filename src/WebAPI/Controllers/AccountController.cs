@@ -1,30 +1,30 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
-using Common.Extensions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Contracts;
-using WebAPI.Models.User;
+using WebApi.Contracts;
+using WebApi.Models.User;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     public class AccountController : Controller
     {
+        [NotNull]
         private readonly IUserService _userService;
 
-        private readonly IJWTService _jwtService;
+        [NotNull]
+        private readonly IJwtService _jwtService;
 
-        public AccountController(IUserService userService, IJWTService jwtService)
+        public AccountController([NotNull] IUserService userService, [NotNull] IJwtService jwtService)
         {
             _userService = userService;
             _jwtService = jwtService;
         }
 
         // POST /account/login
+        [NotNull]
         [HttpPost]
         public async Task<IActionResult> Login([NotNull] [FromBody]LoginModel model)
         {
@@ -49,12 +49,13 @@ namespace WebAPI.Controllers
         }
 
         // POST /account/register
+        [NotNull]
         [HttpPost]
-        public ResponseModel Register([NotNull] [FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([NotNull] [FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid)
             {
-                throw new ApplicationException("INVALID_MODEL_STATE");
+                return BadRequest(ModelState);
             }
 
             RegisterUserModel regModel = new RegisterUserModel
@@ -65,13 +66,11 @@ namespace WebAPI.Controllers
                 model.Password
             );
 
-            UserModel user = _userService.Register(regModel);
+            UserModel user = await _userService.Register(regModel);
 
             string token = _jwtService.GenerateJwtToken(user);
 
-            if (token != null)
-            {
-                return new ResponseModel()
+            return Ok(new ResponseModel()
                 {
                     Email = user.Email,
                     FirstName = user.FirstName,
@@ -79,10 +78,7 @@ namespace WebAPI.Controllers
                     Id = user.Id,
                     Role = user.Role,
                     Token = token
-                };
-            }
-
-            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+                });
         }
     }
 }

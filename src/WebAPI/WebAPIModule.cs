@@ -1,17 +1,15 @@
-﻿using BusinessLayer.Contracts;
-using BusinessLayer.Services;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
-using WebAPI.Contracts;
-using WebAPI.Services;
+using WebApi.Contracts;
+using WebApi.Services;
 
-namespace WebAPI
+namespace WebApi
 {
-    public static class WebAPIModule
+    public static class WebApiModule
     {
         public static void Register([NotNull] IServiceCollection collection)
         {
-            collection.AddSingleton<IJWTService, JWTService>();
+            collection.AddSingleton<IJwtService, JwtService>();
         }
     }
 }

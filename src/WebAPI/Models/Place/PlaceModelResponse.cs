@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models.Place
+﻿namespace WebApi.Models.Place
 {
     public class PlaceModelResponse
     {

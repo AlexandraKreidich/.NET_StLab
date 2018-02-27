@@ -1,14 +1,21 @@
-﻿using Common;
+﻿using System.ComponentModel.DataAnnotations;
+using Common;
+using JetBrains.Annotations;
 
-namespace DataAcessLayer.Models.DataTransferObjects
+namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public struct UserReq
+    public struct UserRequest
     {
         public UserRole Role { get; set; }
+        [NotNull]
         public byte[] Salt { get; set; }
+        [NotNull]
         public string FirstName { get; set; }
+        [NotNull]
         public string LastName { get; set; }
+        [NotNull]
         public string Email { get; set; }
+        [NotNull]
         public byte[] PasswordHash { get; set; }
     }
 }

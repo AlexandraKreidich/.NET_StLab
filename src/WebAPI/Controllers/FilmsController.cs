@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models;
-using WebAPI.Models.Film;
-using WebAPI.Models.Session;
+using WebApi.Models.Film;
+using WebApi.Models.Session;
 
 namespace WebAPI.Controllers
 {
@@ -24,8 +23,8 @@ namespace WebAPI.Controllers
         [Route("")]
         public IEnumerable<FilmModelResponse> Get()
         {
-            List<FilmModelResponse> Films = new List<FilmModelResponse>();
-            return Films;
+            List<FilmModelResponse> films = new List<FilmModelResponse>();
+            return films;
         }
 
         // GET /films/{id}
@@ -38,9 +37,9 @@ namespace WebAPI.Controllers
 
         // GET /films/{id}/sessions
         [HttpGet("{id:int}/sessions")]
-        public IEnumerable<SessionModelResponseForFilmAPI> GetSessions(int id)
+        public IEnumerable<SessionModelResponseForFilmApi> GetSessions(int id)
         {
-            List<SessionModelResponseForFilmAPI> sessions = new List<SessionModelResponseForFilmAPI>();
+            List<SessionModelResponseForFilmApi> sessions = new List<SessionModelResponseForFilmApi>();
             return sessions;
         }
 

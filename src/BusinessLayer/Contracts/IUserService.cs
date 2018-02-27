@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BusinessLayer.Models;
-using DataAcessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
 
 namespace BusinessLayer.Contracts
@@ -14,6 +9,6 @@ namespace BusinessLayer.Contracts
         [ItemNotNull]
         Task<UserModel> Login([NotNull] string email, [NotNull] string password);
 
-        UserModel Register(RegisterUserModel user);
+        Task<UserModel> Register(RegisterUserModel user);
     }
 }

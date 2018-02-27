@@ -1,6 +1,6 @@
 ﻿using Common;
 
-namespace WebAPI.Models.User
+namespace WebApi.Models.User
 {
     public class ResponseModel
     {

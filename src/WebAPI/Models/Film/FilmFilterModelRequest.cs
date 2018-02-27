@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebAPI.Models.Film
+namespace WebApi.Models.Film
 {
     public class FilmFilterModelRequest
     {

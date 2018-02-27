@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace WebAPI.Models.Session
+namespace WebApi.Models.Session
 {
-    public class SessionModelResponseForFilmAPI
+    public class SessionModelResponseForFilmApi
     {
         public int SessionId { get; set; }
         public string CinemaName { get; set; }

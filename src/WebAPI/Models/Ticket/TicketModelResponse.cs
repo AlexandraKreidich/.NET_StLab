@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models.Ticket
+﻿namespace WebApi.Models.Ticket
 {
     public class TicketModelResponse
     {

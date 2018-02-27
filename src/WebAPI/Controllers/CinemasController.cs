@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Net;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models;
-using WebAPI.Models.Cinema;
-using WebAPI.Models.Hall;
+using WebApi.Models.Cinema;
+using WebApi.Models.Hall;
 
 namespace WebAPI.Controllers
 {

@@ -16,7 +16,9 @@ namespace Common.Extensions
                 {
                     string value = (string)pi.GetValue(item);
 
-                    if (string.IsNullOrEmpty(value))
+                    Attribute attr = pi.GetCustomAttribute(typeof(NotNullAttribute));
+
+                    if (string.IsNullOrEmpty(value) && attr != null)
                     {
                         throw new ArgumentNullException(nameof(item));
                     }

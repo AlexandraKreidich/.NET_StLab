@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Common;
+﻿using Common;
+using JetBrains.Annotations;
 
-namespace DataAcessLayer.Models.DataTransferObjects
+namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public class UserResp
+    [UsedImplicitly]
+    public class UserResponse
     {
         public int Id { get; set; }
         public UserRole Role { get; set; }
         public byte[] Salt { get; set; }
+        [NotNull]
         public string FirstName { get; set; }
+        [NotNull]
         public string LastName { get; set; }
         public string Email { get; set; }
+        [NotNull]
         public byte[] PasswordHash { get; set; }
     }
 }

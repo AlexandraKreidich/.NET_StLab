@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models;
-using WebAPI.Models.Service;
-using WebAPI.Models.Session;
+using WebApi.Models.Service;
+using WebApi.Models.Session;
 
 namespace WebAPI.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models.Service
+﻿namespace WebApi.Models.Service
 {
     public class ServiceModelBase
     {

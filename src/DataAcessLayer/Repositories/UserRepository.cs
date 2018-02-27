@@ -3,12 +3,12 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
-using DataAcessLayer.Contracts;
-using DataAcessLayer.Models.DataTransferObjects;
-using DataAcessLayer.Models.Entities;
+using DataAccessLayer.Contracts;
+using DataAccessLayer.Models.DataTransferObjects;
+using DataAccessLayer.Models.Entities;
 using JetBrains.Annotations;
 
-namespace DataAcessLayer.Repositories
+namespace DataAccessLayer.Repositories
 {
     [UsedImplicitly]
     internal class UserRepository : IUserRepository
@@ -23,32 +23,32 @@ namespace DataAcessLayer.Repositories
         }
 
 
-        public Task<UserResp> GetUser([NotNull] string email)
+        public async Task<UserResponse> GetUser([NotNull] string email)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                User user = connection.QuerySingleOrDefault<User>(
+                User user = await connection.QuerySingleOrDefaultAsync<User>(
                     "GetUser",
                     new { Email = email },
                     commandType: CommandType.StoredProcedure);
 
-                return null; //Mapper.Map<UserResp>(user);
+                return Mapper.Map<UserResponse>(user);
             }
         }
 
-        public int Register(UserReq userReq)
+        public async Task<int> Register(UserRequest userRequest)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                int id = connection.ExecuteScalar<int>(
+                int id = await connection.ExecuteScalarAsync<int>(
                     "AddUser",
                     new {
-                        Email = userReq.Email,
-                        FirstName = userReq.FirstName,
-                        LastName = userReq.LastName,
-                        UserRole = userReq.Role.ToString(),
-                        PasswordHash = userReq.PasswordHash,
-                        Salt = userReq.Salt
+                        Email = userRequest.Email,
+                        FirstName = userRequest.FirstName,
+                        LastName = userRequest.LastName,
+                        UserRole = userRequest.Role.ToString(),
+                        PasswordHash = userRequest.PasswordHash,
+                        Salt = userRequest.Salt
                     },
                     commandType: CommandType.StoredProcedure);
 

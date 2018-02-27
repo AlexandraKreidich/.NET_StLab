@@ -1,8 +1,8 @@
 ﻿using BusinessLayer.Models;
 
-namespace WebAPI.Contracts
+namespace WebApi.Contracts
 {
-    public interface IJWTService
+    public interface IJwtService
     {
         string GenerateJwtToken(UserModel user);
     }

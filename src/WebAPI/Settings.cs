@@ -1,18 +1,17 @@
-﻿using BusinessLayer.Contracts;
-using DataAcessLayer.Contracts;
+﻿using DataAccessLayer.Contracts;
 using Microsoft.Extensions.Configuration;
-using WebAPI.Contracts;
+using WebApi.Contracts;
 
-namespace WebAPI
+namespace WebApi
 {
-    public class Settings : IDalSettings, IBlSettings, IWebAPISettings
+    public class Settings : IDalSettings, IWebApiSettings
     {
         private readonly IConfiguration _configuration;
 
         public string ConnectionString => _configuration[nameof(ConnectionString)];
-        public string JWTKey => _configuration[nameof(JWTKey)];
-        public string JWTExpireDays => _configuration[nameof(JWTExpireDays)];
-        public string JWTIssuer => _configuration[nameof(JWTIssuer)];
+        public string JwtKey => _configuration[nameof(JwtKey)];
+        public string JwtExpireDays => _configuration[nameof(JwtExpireDays)];
+        public string JwtIssuer => _configuration[nameof(JwtIssuer)];
 
         public Settings(IConfiguration configuration)
         {

@@ -2,9 +2,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using BusinessLayer;
-using BusinessLayer.Contracts;
-using DataAcessLayer;
-using DataAcessLayer.Contracts;
+using DataAccessLayer;
+using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,9 +11,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using WebAPI.Contracts;
+using WebApi.Contracts;
 
-namespace WebAPI
+namespace WebApi
 {
     [UsedImplicitly]
     public class Startup
@@ -33,12 +32,11 @@ namespace WebAPI
             Settings settings = new Settings(Configuration);
 
             services.AddSingleton<IDalSettings>(settings);
-            services.AddSingleton<IBlSettings>(settings);
-            services.AddSingleton<IWebAPISettings>(settings);
+            services.AddSingleton<IWebApiSettings>(settings);
 
             DalModule.Register(services);
             BlModule.Register(services);
-            WebAPIModule.Register(services);
+            WebApiModule.Register(services);
 
             // ===== Add Jwt Authentication ========
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
@@ -58,9 +56,9 @@ namespace WebAPI
 
                         cfg.TokenValidationParameters = new TokenValidationParameters
                             {
-                                ValidIssuer = settings.JWTIssuer,
-                                ValidAudience = settings.JWTIssuer,
-                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JWTKey)),
+                                ValidIssuer = settings.JwtIssuer,
+                                ValidAudience = settings.JwtIssuer,
+                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtKey)),
                                 ClockSkew = TimeSpan.Zero // remove delay of token when expire
                             };
                     });

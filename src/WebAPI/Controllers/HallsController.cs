@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models;
-using WebAPI.Models.Hall;
-using WebAPI.Models.Place;
+using WebApi.Models.Hall;
+using WebApi.Models.Place;
 
 namespace WebAPI.Controllers
 {

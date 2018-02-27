@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
-namespace WebAPI.Contracts
+namespace WebApi.Contracts
 {
-    public interface IWebAPISettings
+    public interface IWebApiSettings
     {
         [NotNull]
-        string JWTKey { get; }
+        string JwtKey { get; }
         [NotNull]
-        string JWTExpireDays { get; }
+        string JwtExpireDays { get; }
         [NotNull]
-        string JWTIssuer { get; }
+        string JwtIssuer { get; }
     }
 }

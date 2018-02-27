@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models.Hall
+﻿namespace WebApi.Models.Hall
 {
     public class HallSchemeModel
     {

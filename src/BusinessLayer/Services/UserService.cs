@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Net;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+using System.Threading.Tasks;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using Common;
 using Common.Extensions;
-using DataAcessLayer.Contracts;
-using DataAcessLayer.Models.DataTransferObjects;
+using DataAccessLayer.Contracts;
+using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
 
 namespace BusinessLayer.Services
@@ -23,12 +21,12 @@ namespace BusinessLayer.Services
             _userRepository = userRepository;
         }
 
-        public UserModel Login([NotNull] string email, [NotNull] string password)
+        public async Task<UserModel> Login([NotNull] string email, [NotNull] string password)
         {
             email = email ?? throw new ArgumentNullException(nameof(email));
             password = password ?? throw new ArgumentNullException(nameof(password));
 
-            UserResp user = _userRepository.GetUser(email);
+            UserResponse user = await _userRepository.GetUser(email);
 
             if (user == null)
             {
@@ -57,7 +55,7 @@ namespace BusinessLayer.Services
             return null;
         }
 
-        public UserModel Register(RegisterUserModel regModel)
+        public async Task<UserModel> Register(RegisterUserModel regModel)
         {
             regModel.EnsureObjectPropertiesNotNull();
 
@@ -69,7 +67,7 @@ namespace BusinessLayer.Services
 
             PasswordObject data = CryptoService.GetHash(regModel.Password);
 
-            UserReq userToRegistrate = new UserReq()
+            UserRequest userToRegister = new UserRequest()
             {
                 Email = regModel.Email,
                 FirstName = regModel.FirstName,
@@ -79,19 +77,18 @@ namespace BusinessLayer.Services
                 Salt = data.Salt
             };
 
-            int userId = _userRepository.Register(userToRegistrate);
+            int userId = await _userRepository.Register(userToRegister);
 
             UserModel newUser = new UserModel()
             {
-                Email = userToRegistrate.Email,
+                Email = userToRegister.Email,
                 Id = userId,
-                FirstName = userToRegistrate.FirstName,
-                LastName = userToRegistrate.LastName,
-                Role = userToRegistrate.Role
+                FirstName = userToRegister.FirstName,
+                LastName = userToRegister.LastName,
+                Role = userToRegister.Role
             };
 
             return newUser;
         }
-
     }
 }

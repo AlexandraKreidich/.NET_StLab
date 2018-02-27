@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace DataAcessLayer.Contracts
+namespace DataAccessLayer.Contracts
 {
     public interface IDalSettings
     {
