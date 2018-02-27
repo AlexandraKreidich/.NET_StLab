@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebAPI\WebApi.csp
 		{17121717-7BB0-4B7F-85F8-82CD14B32915} = {17121717-7BB0-4B7F-85F8-82CD14B32915}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAcessLayer", "DataAcessLayer\DataAcessLayer.csproj", "{4DCBB8D1-E31D-480A-B4A0-597CB6B28842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{4DCBB8D1-E31D-480A-B4A0-597CB6B28842}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{17121717-7BB0-4B7F-85F8-82CD14B32915}"
 EndProject
