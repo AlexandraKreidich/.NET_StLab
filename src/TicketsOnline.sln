@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProjectDataBase", "ProjectDataBase\ProjectDataBase.sqlproj", "{6ABB3796-5096-412A-A717-783274CFA332}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{4370FC5A-D2C7-4849-AD57-2B58CAFD1C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebAPI\WebApi.csproj", "{4370FC5A-D2C7-4849-AD57-2B58CAFD1C72}"
 	ProjectSection(ProjectDependencies) = postProject
 		{17121717-7BB0-4B7F-85F8-82CD14B32915} = {17121717-7BB0-4B7F-85F8-82CD14B32915}
 	EndProjectSection
