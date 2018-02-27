@@ -8,7 +8,7 @@ namespace BusinessLayer.Contracts
     {
         [ItemNotNull]
         Task<UserModel> Login([NotNull] string email, [NotNull] string password);
-
+        [ItemNotNull]
         Task<UserModel> Register(RegisterUserModel user);
     }
 }

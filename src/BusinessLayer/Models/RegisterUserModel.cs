@@ -5,16 +5,16 @@ namespace BusinessLayer.Models
     public class RegisterUserModel
     {
         [NotNull]
-        public string Email { get; set; }
+        public string Email { get;}
 
         [NotNull]
-        public string FirstName { get; set; }
+        public string FirstName { get;}
 
         [NotNull]
-        public string LastName { get; set; }
+        public string LastName { get;}
 
         [NotNull]
-        public string Password { get; set; }
+        public string Password { get;}
 
 
         public RegisterUserModel(

@@ -21,7 +21,7 @@ namespace BusinessLayer.Services
             _userRepository = userRepository;
         }
 
-        public async Task<UserModel> Login([NotNull] string email, [NotNull] string password)
+        public async Task<UserModel> Login(string email, string password)
         {
             email = email ?? throw new ArgumentNullException(nameof(email));
             password = password ?? throw new ArgumentNullException(nameof(password));
@@ -39,14 +39,14 @@ namespace BusinessLayer.Services
             // check if the password is right
             if (passwordHash.Select((b, i) => b == user.PasswordHash[i]).All(item => item))
             {
-                UserModel userModel = new UserModel()
-                {
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    Id = user.Id,
-                    LastName = user.LastName,
-                    Role = user.Role
-                };
+                UserModel userModel = new UserModel
+                (
+                    user.Id,
+                    user.Role,
+                    user.FirstName,
+                    user.LastName,
+                    user.Email
+                 );
 
                 return userModel;
             }
@@ -79,16 +79,16 @@ namespace BusinessLayer.Services
 
             int userId = await _userRepository.Register(userToRegister);
 
-            UserModel newUser = new UserModel()
-            {
-                Email = userToRegister.Email,
-                Id = userId,
-                FirstName = userToRegister.FirstName,
-                LastName = userToRegister.LastName,
-                Role = userToRegister.Role
-            };
+            UserModel userModel = new UserModel
+            (
+                userId,
+                userToRegister.Role,
+                userToRegister.FirstName,
+                userToRegister.LastName,
+                userToRegister.Email
+            );
 
-            return newUser;
+            return userModel;
         }
     }
 }

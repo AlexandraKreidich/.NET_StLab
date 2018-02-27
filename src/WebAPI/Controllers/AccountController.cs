@@ -37,15 +37,15 @@ namespace WebAPI.Controllers
 
             string token = _jwtService.GenerateJwtToken(user);
 
-            return Ok(new ResponseModel()
-                {
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Id = user.Id,
-                    Role = user.Role,
-                    Token = token
-                });
+            return Ok(new ResponseModel
+            (
+                user.Id,
+                user.Role,
+                user.FirstName,
+                user.LastName,
+                user.Email,
+                token
+            ));
         }
 
         // POST /account/register
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            RegisterUserModel regModel = new RegisterUserModel
+            RegisterUserModel registerUserModel = new RegisterUserModel
             (
                 model.Email,
                 model.FirstName,
@@ -66,19 +66,19 @@ namespace WebAPI.Controllers
                 model.Password
             );
 
-            UserModel user = await _userService.Register(regModel);
+            UserModel user = await _userService.Register(registerUserModel);
 
             string token = _jwtService.GenerateJwtToken(user);
 
-            return Ok(new ResponseModel()
-                {
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Id = user.Id,
-                    Role = user.Role,
-                    Token = token
-                });
+            return Ok(new ResponseModel
+                (
+                    user.Id,
+                    user.Role,
+                    user.FirstName,
+                    user.LastName,
+                    user.Email,
+                    token
+                ));
         }
     }
 }
