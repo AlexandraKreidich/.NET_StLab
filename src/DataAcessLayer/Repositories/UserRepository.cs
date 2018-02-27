@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
 using DataAcessLayer.Contracts;
@@ -9,6 +10,7 @@ using JetBrains.Annotations;
 
 namespace DataAcessLayer.Repositories
 {
+    [UsedImplicitly]
     internal class UserRepository : IUserRepository
     {
         [NotNull]
@@ -21,7 +23,7 @@ namespace DataAcessLayer.Repositories
         }
 
 
-        public UserResp GetUser([NotNull] string email)
+        public Task<UserResp> GetUser([NotNull] string email)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -30,7 +32,7 @@ namespace DataAcessLayer.Repositories
                     new { Email = email },
                     commandType: CommandType.StoredProcedure);
 
-                return Mapper.Map<UserResp>(user);
+                return null; //Mapper.Map<UserResp>(user);
             }
         }
 

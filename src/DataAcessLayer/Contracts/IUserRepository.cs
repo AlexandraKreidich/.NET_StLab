@@ -1,4 +1,5 @@
-﻿using DataAcessLayer.Models.DataTransferObjects;
+﻿using System.Threading.Tasks;
+using DataAcessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
 
 namespace DataAcessLayer.Contracts
@@ -6,6 +7,6 @@ namespace DataAcessLayer.Contracts
     public interface IUserRepository
     {
         int Register(UserReq userReq);
-        UserResp GetUser([NotNull] string email);
+        Task<UserResp> GetUser([NotNull] string email);
     }
 }

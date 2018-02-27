@@ -26,14 +26,14 @@ namespace WebAPI.Controllers
 
         // POST /account/login
         [HttpPost]
-        public IActionResult Login([NotNull] [FromBody] LoginModel model)
+        public async Task<IActionResult> Login([NotNull] [FromBody]LoginModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            UserModel user = _userService.Login(model.Email, model.Password);
+            UserModel user = await _userService.Login(model.Email, model.Password);
 
             string token = _jwtService.GenerateJwtToken(user);
 
