@@ -6,9 +6,9 @@ namespace BusinessLayer.Contracts
 {
     public interface IUserService
     {
-        [ItemNotNull]
+        [ItemCanBeNull]
         Task<UserModel> Login([NotNull] string email, [NotNull] string password);
-        [ItemNotNull]
+        [ItemCanBeNull]
         Task<UserModel> Register([NotNull] RegisterUserModel user);
     }
 }

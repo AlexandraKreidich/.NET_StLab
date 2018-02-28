@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Common;
+﻿using Common;
 using JetBrains.Annotations;
 
 namespace BusinessLayer.Models
@@ -16,8 +15,8 @@ namespace BusinessLayer.Models
         public string Email { get;}
 
         public UserModel(
-            [Required] int id,
-            [Required] UserRole role,
+            int id,
+            UserRole role,
             [NotNull] string firstName,
             [NotNull] string lastName,
             [NotNull] string email

@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Contracts;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using WebApi.Contracts;
 
@@ -6,6 +7,7 @@ namespace WebApi
 {
     public class Settings : IDalSettings, IWebApiSettings
     {
+        [NotNull]
         private readonly IConfiguration _configuration;
 
         public string ConnectionString => _configuration[nameof(ConnectionString)];
@@ -13,7 +15,7 @@ namespace WebApi
         public string JwtExpireDays => _configuration[nameof(JwtExpireDays)];
         public string JwtIssuer => _configuration[nameof(JwtIssuer)];
 
-        public Settings(IConfiguration configuration)
+        public Settings([NotNull] IConfiguration configuration)
         {
             _configuration = configuration;
         }

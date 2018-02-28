@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Common;
+﻿using Common;
 using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.DataTransferObjects
