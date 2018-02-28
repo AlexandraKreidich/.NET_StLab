@@ -24,7 +24,6 @@ namespace WebApi.Controllers
         }
 
         // POST /account/login
-        [NotNull]
         [HttpPost]
         public async Task<IActionResult> Login([NotNull] [FromBody]LoginModel model)
         {
@@ -49,7 +48,6 @@ namespace WebApi.Controllers
         }
 
         // POST /account/register
-        [NotNull]
         [HttpPost]
         public async Task<IActionResult> Register([NotNull] [FromBody] RegisterModel model)
         {
