@@ -1,17 +1,21 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using JetBrains.Annotations;
 
 namespace BusinessLayer.Services
 {
     internal struct PasswordObject
     {
+        [NotNull]
         public byte[] PasswordHash { get; set; }
+        [NotNull]
         public byte[] Salt { get; set; }
     }
 
     internal static class CryptoService
     {
-        private static byte[] Combine(byte[] a, byte[] b)
+        [NotNull]
+        private static byte[] Combine([NotNull] byte[] a, [NotNull] byte[] b)
         {
             byte[] c = new byte[a.Length + b.Length];
             System.Buffer.BlockCopy(a, 0, c, 0, a.Length);
@@ -19,6 +23,7 @@ namespace BusinessLayer.Services
             return c;
         }
 
+        [NotNull]
         private static byte[] GetSalt()
         {
             byte[] salt = new byte[50];
@@ -31,7 +36,7 @@ namespace BusinessLayer.Services
             return salt;
         }
 
-        public static PasswordObject GetHash(string str, byte[] salt = null)
+        public static PasswordObject GetHash([NotNull] string str, [CanBeNull] byte[] salt = null)
         {
             if (salt == null)
             {

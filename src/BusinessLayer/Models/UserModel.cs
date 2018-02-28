@@ -6,9 +6,7 @@ namespace BusinessLayer.Models
 {
     public class UserModel
     {
-        [Required]
         public int Id { get;}
-        [Required]
         public UserRole Role { get;}
         [NotNull]
         public string FirstName { get;}

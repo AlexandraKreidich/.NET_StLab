@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Models;
+using JetBrains.Annotations;
 
 namespace WebApi.Contracts
 {
     public interface IJwtService
     {
-        string GenerateJwtToken(UserModel user);
+        [NotNull]
+        string GenerateJwtToken([NotNull] UserModel user);
     }
 }
