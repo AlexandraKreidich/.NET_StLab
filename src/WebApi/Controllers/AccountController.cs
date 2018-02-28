@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Contracts;
 using WebApi.Models.User;
 
-namespace WebAPI.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     public class AccountController : Controller

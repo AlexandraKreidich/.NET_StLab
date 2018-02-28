@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Service;
 using WebApi.Models.Session;
 
-namespace WebAPI.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class SessionsController : Controller

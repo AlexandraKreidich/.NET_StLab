@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Service;
 
-namespace WebAPI.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class ServicesController : Controller

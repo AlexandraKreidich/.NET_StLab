@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Hall;
 using WebApi.Models.Place;
 
-namespace WebAPI.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class HallsController : Controller
