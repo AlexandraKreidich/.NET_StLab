@@ -16,7 +16,12 @@ namespace DataAccessLayer
                 cfg.CreateMap<User, UserResponse>();
             });
 
+            Mapper.Initialize(cfg => {
+                    cfg.CreateMap<Cinema, CinemaResponse>();
+                });
+
             collection.AddSingleton<IUserRepository, UserRepository>();
+            collection.AddSingleton<ICinemaRepository, CinemaRepository>();
         }
     }
 }

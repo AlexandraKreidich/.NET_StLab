@@ -1,29 +1,48 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using AutoMapper;
+using BusinessLayer.Contracts;
+using BusinessLayer.Models;
+using DataAccessLayer.Contracts;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Cinema;
 using WebApi.Models.Hall;
+using BlCinemaModelResponse = BusinessLayer.Models.CinemaModelResponse;
+using BlCinemaModelRequest = BusinessLayer.Models.CinemaModelRequest;
+using ApiCinemaModelResponse = WebApi.Models.Cinema.CinemaModelResponse;
+using ApiCinemaModelRequest = WebApi.Models.Cinema.CinemaModelResponse;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class CinemasController : Controller
     {
+        [NotNull]
+        private readonly ICinemasService _cinemasService;
+
+        public CinemasController([NotNull] ICinemasService cinemasService)
+        {
+            _cinemasService = cinemasService;
+        }
+
         // GET /cinemas
         [HttpGet]
-        public IEnumerable<CinemaModelResponse> Get()
+        public IEnumerable<ApiCinemaModelResponse> Get()
         {
-            //User.FindFirst(ClaimTypes.NameIdentifier);
-            List<CinemaModelResponse> cinemas = new List<CinemaModelResponse>();
-            return cinemas;
+            IEnumerable<BlCinemaModelResponse> cinemas = _cinemasService.GetCinemas();
+
+            return cinemas.Select(Mapper.Map<ApiCinemaModelResponse>);
         }
 
         // GET /cinemas/{id}
         [HttpGet("{id:int}")]
-        public CinemaModelResponse Get(int id)
+        public ApiCinemaModelResponse Get(int id)
         {
-            var cinema = new CinemaModelResponse();
-            return cinema;
+            BlCinemaModelResponse cinema = _cinemasService.GetCinemaById(id);
+
+            return Mapper.Map<ApiCinemaModelResponse>(cinema);
         }
 
         // GET /cinemas/{id}/halls
@@ -35,16 +54,25 @@ namespace WebApi.Controllers
 
         // PUT /cinemas
         [HttpPut]
-        public IActionResult Put([FromBody]CinemaModelRequest cinema)
+        public ApiCinemaModelResponse Put([FromBody]ApiCinemaModelRequest cinema)
         {
-            return StatusCode((int)HttpStatusCode.Created);
+            BlCinemaModelRequest cinemaRequest = new BlCinemaModelRequest(cinema.Name, cinema.City);
+
+            BlCinemaModelResponse cinemaResponse = _cinemasService.AddCinema(cinemaRequest);
+
+            return Mapper.Map<ApiCinemaModelResponse>(cinemaResponse);
         }
 
         // DELETE /cinemas/{id}
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public HttpStatusCode Delete(int id)
         {
-            return StatusCode((int)HttpStatusCode.Accepted);
+            if (_cinemasService.DeleteCinema(id) == HttpStatusCode.Accepted)
+            {
+                return HttpStatusCode.Accepted;
+            }
+
+            return HttpStatusCode.BadRequest;
         }
     }
 }

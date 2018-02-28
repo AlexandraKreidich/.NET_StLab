@@ -1,9 +1,22 @@
-﻿namespace WebApi.Models.Cinema
+﻿using JetBrains.Annotations;
+
+namespace WebApi.Models.Cinema
 {
     public class CinemaModelBase
     {
-        protected string Name { get; set; }
-        protected string City { get; set; }
-        protected int HallsNumber { get; set; }
+        [NotNull]
+        public string Name { get; }
+
+        [NotNull]
+        public string City { get; }
+
+        public CinemaModelBase(
+            [NotNull] string name,
+            [NotNull] string city
+        )
+        {
+            Name = name;
+            City = city;
+        }
     }
 }
