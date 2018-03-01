@@ -46,7 +46,7 @@ namespace WebApi.Controllers
         }
 
         // GET /cinemas/{id}/halls
-        [HttpGet]
+        [HttpGet("{id:int}/halls")]
         public IEnumerable<HallModel> GetHalls(){
             List<HallModel> halls = new List<HallModel>();
             return halls;

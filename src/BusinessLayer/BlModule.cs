@@ -15,10 +15,6 @@ namespace BusinessLayer
         {
             collection.AddSingleton<IUserService, UserService>();
             collection.AddSingleton<ICinemasService, CinemasService>();
-
-            Mapper.Initialize(cfg => {
-                    cfg.CreateMap<CinemaResponse, CinemaModelResponse>();
-            });
         }
     }
 }
