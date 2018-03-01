@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
@@ -21,25 +22,25 @@ namespace BusinessLayer.Services
             _cinemaRepository = cinemaRepository;
         }
 
-        public IEnumerable<CinemaModelResponse> GetCinemas()
+        public async Task<IEnumerable<CinemaModelResponse>> GetCinemas()
         {
-            IEnumerable<CinemaResponse> cinemas = _cinemaRepository.GetCinemas();
+            IEnumerable<CinemaResponse> cinemas = await _cinemaRepository.GetCinemas();
 
             return cinemas.Select(Mapper.Map<CinemaModelResponse>);
         }
 
-        public CinemaModelResponse GetCinemaById(int id)
+        public async Task<CinemaModelResponse> GetCinemaById(int id)
         {
-            CinemaResponse cinema = _cinemaRepository.GetCinemaById(id);
+            CinemaResponse cinema = await _cinemaRepository.GetCinemaById(id);
 
-            return Mapper.Map<CinemaModelResponse>(cinema);
+            return (cinema == null) ? null : Mapper.Map<CinemaModelResponse>(cinema);
         }
 
-        public CinemaModelResponse AddCinema(CinemaModelRequest cinema)
+        public async Task<CinemaModelResponse> AddCinema(CinemaModelRequest cinema)
         {
             CinemaRequest cinemaToAdd = new CinemaRequest(cinema.Name, cinema.City);
 
-            int newCinemaId = _cinemaRepository.AddCinema(cinemaToAdd);
+            int newCinemaId = await _cinemaRepository.AddCinema(cinemaToAdd);
 
             return new CinemaModelResponse
             (
@@ -50,14 +51,9 @@ namespace BusinessLayer.Services
             );
         }
 
-        public HttpStatusCode DeleteCinema(int id)
+        public async Task<HttpStatusCode> DeleteCinema(int id)
         {
-            if (_cinemaRepository.DeleteCinema(id) == HttpStatusCode.Accepted)
-            {
-                return HttpStatusCode.Accepted;
-            }
-
-            return HttpStatusCode.BadRequest;
+            return await _cinemaRepository.DeleteCinema(id);
         }
     }
 }

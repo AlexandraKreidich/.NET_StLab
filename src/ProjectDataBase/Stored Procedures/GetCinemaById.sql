@@ -2,6 +2,7 @@
     @Id int
 AS
     SELECT
+        Cinema.Id,
         Cinema.Name,
         Cinema.City,
             (SELECT COUNT(CinemaId)

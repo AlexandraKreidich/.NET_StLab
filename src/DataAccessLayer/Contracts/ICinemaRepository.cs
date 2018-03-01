@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using DataAccessLayer.Models.DataTransferObjects;
 using DataAccessLayer.Models.Entities;
 using JetBrains.Annotations;
@@ -8,15 +9,14 @@ namespace DataAccessLayer.Contracts
 {
     public interface ICinemaRepository
     {
-        [NotNull]
-        IEnumerable<CinemaResponse> GetCinemas();
+        [ItemNotNull]
+        Task<IEnumerable<CinemaResponse>> GetCinemas();
 
-        [NotNull]
-        CinemaResponse GetCinemaById(int id);
+        [ItemCanBeNull]
+        Task<CinemaResponse> GetCinemaById(int id);
 
-        [NotNull]
-        int AddCinema([NotNull] CinemaRequest cinema);
+        Task<int> AddCinema([NotNull] CinemaRequest cinema);
 
-        HttpStatusCode DeleteCinema(int id);
+        Task<HttpStatusCode> DeleteCinema(int id);
     }
 }

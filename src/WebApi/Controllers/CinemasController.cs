@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
-using BusinessLayer.Models;
-using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models.Cinema;
 using WebApi.Models.Hall;
 using BlCinemaModelResponse = BusinessLayer.Models.CinemaModelResponse;
 using BlCinemaModelRequest = BusinessLayer.Models.CinemaModelRequest;
 using ApiCinemaModelResponse = WebApi.Models.Cinema.CinemaModelResponse;
-using ApiCinemaModelRequest = WebApi.Models.Cinema.CinemaModelResponse;
+using ApiCinemaModelRequest = WebApi.Models.Cinema.CinemaModelRequest;
 
 namespace WebApi.Controllers
 {
@@ -27,20 +25,23 @@ namespace WebApi.Controllers
             _cinemasService = cinemasService;
         }
 
-        // GET /cinemas
+        // GET /cinemas +
         [HttpGet]
-        public IEnumerable<ApiCinemaModelResponse> Get()
+        public async Task<IEnumerable<ApiCinemaModelResponse>> Get()
         {
-            IEnumerable<BlCinemaModelResponse> cinemas = _cinemasService.GetCinemas();
+            IEnumerable<BlCinemaModelResponse> cinemas = await _cinemasService.GetCinemas();
 
             return cinemas.Select(Mapper.Map<ApiCinemaModelResponse>);
         }
 
-        // GET /cinemas/{id}
+        // GET /cinemas/{id} +
         [HttpGet("{id:int}")]
-        public ApiCinemaModelResponse Get(int id)
+        public async Task<ApiCinemaModelResponse> Get(int id)
         {
-            BlCinemaModelResponse cinema = _cinemasService.GetCinemaById(id);
+            BlCinemaModelResponse cinema = await _cinemasService.GetCinemaById(id);
+
+            if (cinema == null)
+                return null;
 
             return Mapper.Map<ApiCinemaModelResponse>(cinema);
         }
@@ -52,27 +53,22 @@ namespace WebApi.Controllers
             return halls;
         }
 
-        // PUT /cinemas
+        // PUT /cinemas +
         [HttpPut]
-        public ApiCinemaModelResponse Put([FromBody]ApiCinemaModelRequest cinema)
+        public async Task<ApiCinemaModelResponse> Put([FromBody]ApiCinemaModelRequest cinema)
         {
             BlCinemaModelRequest cinemaRequest = new BlCinemaModelRequest(cinema.Name, cinema.City);
 
-            BlCinemaModelResponse cinemaResponse = _cinemasService.AddCinema(cinemaRequest);
+            BlCinemaModelResponse cinemaResponse = await _cinemasService.AddCinema(cinemaRequest);
 
             return Mapper.Map<ApiCinemaModelResponse>(cinemaResponse);
         }
 
-        // DELETE /cinemas/{id}
-        [HttpDelete]
-        public HttpStatusCode Delete(int id)
+        // DELETE /cinemas/{id} +
+        [HttpDelete("{id:int}")]
+        public async Task<HttpStatusCode> Delete(int id)
         {
-            if (_cinemasService.DeleteCinema(id) == HttpStatusCode.Accepted)
-            {
-                return HttpStatusCode.Accepted;
-            }
-
-            return HttpStatusCode.BadRequest;
+            return await _cinemasService.DeleteCinema(id);
         }
     }
 }

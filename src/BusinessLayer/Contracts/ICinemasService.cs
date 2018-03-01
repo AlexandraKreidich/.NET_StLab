@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
 
@@ -9,15 +10,15 @@ namespace BusinessLayer.Contracts
 {
     public interface ICinemasService
     {
-        [NotNull]
-        IEnumerable<CinemaModelResponse> GetCinemas();
+        [ItemNotNull]
+        Task<IEnumerable<CinemaModelResponse>> GetCinemas();
+
+        [ItemCanBeNull]
+        Task<CinemaModelResponse> GetCinemaById(int id);
 
         [NotNull]
-        CinemaModelResponse GetCinemaById(int id);
+        Task<CinemaModelResponse> AddCinema([NotNull] CinemaModelRequest cinema);
 
-        [NotNull]
-        CinemaModelResponse AddCinema([NotNull] CinemaModelRequest cinema);
-
-        HttpStatusCode DeleteCinema(int id);
+        Task<HttpStatusCode> DeleteCinema(int id);
     }
 }

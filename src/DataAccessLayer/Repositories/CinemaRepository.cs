@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
 using DataAccessLayer.Contracts;
@@ -23,11 +26,11 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public IEnumerable<CinemaResponse> GetCinemas()
+        public async Task<IEnumerable<CinemaResponse>> GetCinemas()
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<Cinema> cinemas = connection.Query<Cinema>(
+                IEnumerable<Cinema> cinemas = await connection.QueryAsync<Cinema>(
                     "GetCinemas",
                     commandType: CommandType.StoredProcedure);
 
@@ -35,11 +38,11 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public CinemaResponse GetCinemaById(int id)
+        public async Task<CinemaResponse> GetCinemaById(int id)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                Cinema cinema = connection.QuerySingleOrDefault<Cinema>(
+                Cinema cinema = await connection.QuerySingleOrDefaultAsync<Cinema>(
                     "GetCinemaById",
                     new { Id = id },
                     commandType: CommandType.StoredProcedure);
@@ -48,16 +51,16 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public int AddCinema(CinemaRequest cinema)
+        public async Task<int> AddCinema(CinemaRequest cinema)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                int id = connection.ExecuteScalar<int>(
+                int id = await connection.ExecuteScalarAsync<int>(
                     "AddCinema",
                     new
                         {
-                            cinema.Name,
-                            cinema.City
+                            Name = cinema.Name,
+                            City = cinema.City
                         },
                     commandType: CommandType.StoredProcedure);
 
@@ -65,9 +68,23 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public HttpStatusCode DeleteCinema(int id)
+        public async Task<HttpStatusCode> DeleteCinema(int id)
         {
-            throw new System.NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                int result = await connection.ExecuteScalarAsync<int>(
+                    "DeleteCinema",
+                    new
+                        {
+                            Id = id
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                if (result == 1)
+                    return HttpStatusCode.NoContent;
+            }
+
+            return HttpStatusCode.NotFound;
         }
     }
 }
