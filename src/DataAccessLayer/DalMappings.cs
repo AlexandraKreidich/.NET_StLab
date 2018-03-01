@@ -11,6 +11,8 @@ namespace DataAccessLayer
         {
             configuration.CreateMap<User, UserResponse>();
             configuration.CreateMap<Cinema, CinemaResponse>();
+            configuration.CreateMap<Hall, HallResponse>();
+            configuration.CreateMap<Place, PlaceResponse>();
         }
     }
 }

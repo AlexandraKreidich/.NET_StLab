@@ -86,5 +86,37 @@ namespace DataAccessLayer.Repositories
 
             return HttpStatusCode.NotFound;
         }
+
+        public async Task<IEnumerable<HallResponse>> GetHalls(int cinemaId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<Hall> halls = await connection.QueryAsync<Hall>(
+                    "GetHalls",
+                    new
+                        {
+                            CinemaId = cinemaId
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                return halls.Select(Mapper.Map<HallResponse>);
+            }
+        }
+
+        public async Task<IEnumerable<PlaceResponse>> GetPlaces(int hallId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<Place> places = await connection.QueryAsync<Place>(
+                    "GetPlaces",
+                    new
+                        {
+                            HallId = hallId
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                return places.Select(Mapper.Map<PlaceResponse>);
+            }
+        }
     }
 }

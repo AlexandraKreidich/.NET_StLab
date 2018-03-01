@@ -18,5 +18,10 @@ namespace DataAccessLayer.Contracts
         Task<int> AddCinema([NotNull] CinemaRequest cinema);
 
         Task<HttpStatusCode> DeleteCinema(int id);
+
+        [ItemCanBeNull]
+        Task<IEnumerable<HallResponse>> GetHalls(int cinemaId);
+
+        Task<IEnumerable<PlaceResponse>> GetPlaces(int hallId);
     }
 }
