@@ -70,6 +70,8 @@
     <Build Include="Stored Procedures\GetCinemas.sql" />
     <Build Include="Stored Procedures\AddCinema.sql" />
     <Build Include="Stored Procedures\DeleteCinema.sql" />
+    <Build Include="Stored Procedures\GetHalls.sql" />
+    <Build Include="Stored Procedures\GetPlaces.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
