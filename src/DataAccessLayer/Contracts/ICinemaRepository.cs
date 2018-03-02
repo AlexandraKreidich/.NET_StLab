@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using DataAccessLayer.Models.DataTransferObjects;
-using DataAccessLayer.Models.Entities;
 using JetBrains.Annotations;
 
 namespace DataAccessLayer.Contracts
@@ -17,11 +15,13 @@ namespace DataAccessLayer.Contracts
 
         Task<int> AddCinema([NotNull] CinemaRequest cinema);
 
-        Task<HttpStatusCode> DeleteCinema(int id);
-
-        [ItemCanBeNull]
+        [ItemNotNull]
         Task<IEnumerable<HallResponse>> GetHalls(int cinemaId);
 
+        [ItemNotNull]
         Task<IEnumerable<PlaceResponse>> GetPlaces(int hallId);
+
+        [ItemNotNull]
+        Task<IEnumerable<HallSchemeResponse>> GetHallScheme(int hallId);
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
@@ -12,6 +10,7 @@ using JetBrains.Annotations;
 
 namespace BusinessLayer.Services
 {
+    [UsedImplicitly]
     public class CinemasService : ICinemasService
     {
         [NotNull]
@@ -51,9 +50,35 @@ namespace BusinessLayer.Services
             );
         }
 
-        public async Task<HttpStatusCode> DeleteCinema(int id)
+        public async Task<IEnumerable<HallModelResponse>> GetHalls(int hallId)
         {
-            return await _cinemaRepository.DeleteCinema(id);
+            IEnumerable<HallResponse> halls = await _cinemaRepository.GetHalls(hallId);
+
+            List<HallModelResponse> results = new List<HallModelResponse>();
+
+            foreach (HallResponse hall in halls)
+            {
+                Task<IEnumerable<PlaceResponse>> t1 = _cinemaRepository.GetPlaces(hall.Id);
+                Task<IEnumerable<HallSchemeResponse>> t2 = _cinemaRepository.GetHallScheme(hall.Id);
+
+                IEnumerable <PlaceResponse> places = await t1;
+                PlaceModelResponse[] placesResponse = places.Select(Mapper.Map<PlaceModelResponse>).ToArray();
+
+                IEnumerable<HallSchemeResponse> hallSchemeResponse = await t2;
+
+                HallSchemeModelResponse[] hallSchemeModelsResponse =
+                    hallSchemeResponse.Select(Mapper.Map<HallSchemeModelResponse>).ToArray();
+
+                results.Add(new HallModelResponse(
+                    hall.Id,
+                    hall.CinemaId,
+                    hall.Name,
+                    placesResponse,
+                    hallSchemeModelsResponse
+                ));
+            }
+
+            return results;
         }
     }
 }

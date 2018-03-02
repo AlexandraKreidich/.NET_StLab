@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using BusinessLayer.Models;
 using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
@@ -13,6 +10,9 @@ namespace BusinessLayer
         public static void Initialize([NotNull] IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<CinemaModelResponse, CinemaResponse>();
+            configuration.CreateMap<HallResponse, HallModel>();
+            configuration.CreateMap<HallSchemeResponse, HallModelResponse>();
+            configuration.CreateMap<PlaceResponse, PlaceModelResponse>();
         }
     }
 }

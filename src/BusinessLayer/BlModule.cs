@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using BusinessLayer.Contracts;
-using BusinessLayer.Models;
+﻿using BusinessLayer.Contracts;
 using BusinessLayer.Services;
-using DataAccessLayer.Models.DataTransferObjects;
-using DataAccessLayer.Models.Entities;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 

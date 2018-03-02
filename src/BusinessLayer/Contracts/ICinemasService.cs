@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
@@ -16,9 +13,10 @@ namespace BusinessLayer.Contracts
         [ItemCanBeNull]
         Task<CinemaModelResponse> GetCinemaById(int id);
 
-        [NotNull]
+        [ItemNotNull]
         Task<CinemaModelResponse> AddCinema([NotNull] CinemaModelRequest cinema);
 
-        Task<HttpStatusCode> DeleteCinema(int id);
+        [ItemNotNull]
+        Task<IEnumerable<HallModelResponse>> GetHalls(int hallId);
     }
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
+    [UsedImplicitly]
     public class HallResponse
     {
         public int Id { get;}

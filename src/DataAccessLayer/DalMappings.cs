@@ -13,6 +13,7 @@ namespace DataAccessLayer
             configuration.CreateMap<Cinema, CinemaResponse>();
             configuration.CreateMap<Hall, HallResponse>();
             configuration.CreateMap<Place, PlaceResponse>();
+            configuration.CreateMap<HallScheme, HallSchemeResponse>();
         }
     }
 }

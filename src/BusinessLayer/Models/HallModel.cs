@@ -1,12 +1,14 @@
 ﻿using JetBrains.Annotations;
 
-namespace DataAccessLayer.Models.Entities
+namespace BusinessLayer.Models
 {
     [UsedImplicitly]
-    internal class Hall
+    internal class HallModel
     {
         public int Id { get; set; }
+
         public int CinemaId { get; set; }
+
         [NotNull]
         public string Name { get; set; }
     }

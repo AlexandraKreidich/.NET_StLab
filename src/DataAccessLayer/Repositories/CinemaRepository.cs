@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -68,25 +65,6 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<HttpStatusCode> DeleteCinema(int id)
-        {
-            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
-            {
-                int result = await connection.ExecuteScalarAsync<int>(
-                    "DeleteCinema",
-                    new
-                        {
-                            Id = id
-                        },
-                    commandType: CommandType.StoredProcedure);
-
-                if (result == 1)
-                    return HttpStatusCode.NoContent;
-            }
-
-            return HttpStatusCode.NotFound;
-        }
-
         public async Task<IEnumerable<HallResponse>> GetHalls(int cinemaId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
@@ -116,6 +94,22 @@ namespace DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure);
 
                 return places.Select(Mapper.Map<PlaceResponse>);
+            }
+        }
+
+        public async Task<IEnumerable<HallSchemeResponse>> GetHallScheme(int hallId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<HallScheme> scheme = await connection.QueryAsync<HallScheme>(
+                    "GetHallScheme",
+                    new
+                        {
+                            HallId = hallId
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                return scheme.Select(Mapper.Map<HallSchemeResponse>);
             }
         }
     }

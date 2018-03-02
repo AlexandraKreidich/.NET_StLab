@@ -4,7 +4,7 @@ AS
     SELECT
         p.Id,
         p.HallId,
-        pt.Name,
+        pt.Name AS Type,
         p.PlaceNumber,
         p.RowNumber
     FROM [Place] p
