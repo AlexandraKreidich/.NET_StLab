@@ -14,6 +14,5 @@ namespace DataAccessLayer.Models.Entities
         public string City { get; set; }
 
         public int HallsNumber { get; set; }
-
     }
 }

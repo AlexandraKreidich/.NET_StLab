@@ -35,11 +35,11 @@ namespace BusinessLayer.Services
             return (cinema == null) ? null : Mapper.Map<CinemaModelResponse>(cinema);
         }
 
-        public async Task<CinemaModelResponse> AddCinema(CinemaModelRequest cinema)
+        public async Task<CinemaModelResponse> AddOrUpdateCinema(CinemaModelRequest cinema)
         {
             CinemaRequest cinemaToAdd = new CinemaRequest(cinema.Name, cinema.City);
 
-            int newCinemaId = await _cinemaRepository.AddCinema(cinemaToAdd);
+            int newCinemaId = await _cinemaRepository.AddOrUpdateCinema(cinemaToAdd);
 
             return new CinemaModelResponse
             (

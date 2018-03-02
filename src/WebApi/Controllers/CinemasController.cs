@@ -46,7 +46,9 @@ namespace WebApi.Controllers
             BlCinemaModelResponse cinema = await _cinemasService.GetCinemaById(id);
 
             if (cinema == null)
-               return BadRequest();
+            {
+                return NotFound();
+            }
 
             return Ok(
                 Mapper.Map<ApiCinemaModelResponse>(cinema)
@@ -77,7 +79,7 @@ namespace WebApi.Controllers
         {
             BlCinemaModelRequest cinemaRequest = new BlCinemaModelRequest(cinema.Name, cinema.City);
 
-            BlCinemaModelResponse cinemaResponse = await _cinemasService.AddCinema(cinemaRequest);
+            BlCinemaModelResponse cinemaResponse = await _cinemasService.AddOrUpdateCinema(cinemaRequest);
 
             return Ok(
                 Mapper.Map<ApiCinemaModelResponse>(cinemaResponse)

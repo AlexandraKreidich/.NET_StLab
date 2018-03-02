@@ -48,7 +48,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> AddCinema(CinemaRequest cinema)
+        public async Task<int> AddOrUpdateCinema(CinemaRequest cinema)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {

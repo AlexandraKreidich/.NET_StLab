@@ -14,7 +14,7 @@ namespace BusinessLayer.Contracts
         Task<CinemaModelResponse> GetCinemaById(int id);
 
         [ItemNotNull]
-        Task<CinemaModelResponse> AddCinema([NotNull] CinemaModelRequest cinema);
+        Task<CinemaModelResponse> AddOrUpdateCinema([NotNull] CinemaModelRequest cinema);
 
         [ItemNotNull]
         Task<IEnumerable<HallModelResponse>> GetHalls(int hallId);
