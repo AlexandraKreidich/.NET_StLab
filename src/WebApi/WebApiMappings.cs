@@ -14,7 +14,6 @@ using BlServiceModelRRequest = BusinessLayer.Models.ServiceModelRequest;
 using BlServiceModelRequestForUpdate = BusinessLayer.Models.ServiceModelRequestForUpdate;
 using ApiServiceModelRequestForUpdate = WebApi.Models.Service.ServiceModelRequestForUpdate;
 
-
 namespace WebApi
 {
     public static class WebApiMappings

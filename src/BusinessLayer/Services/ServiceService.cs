@@ -37,9 +37,10 @@ namespace BusinessLayer.Services
             );
         }
 
-        public Task<ServiceModelResponse> UpdateService(ServiceModelRequestForUpdate service)
+        public Task<ServiceModelResponse> UpdateService(ServiceModelRequest service)
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

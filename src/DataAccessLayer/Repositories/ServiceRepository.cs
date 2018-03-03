@@ -55,22 +55,29 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<ServiceResponse> UpdateService(ServiceRequest service)
+        public Task<ServiceResponse> UpdateService(ServiceRequest service)
         {
-            Service serviceToUpdate = new Service();
-
-            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
-            {
-                await connection.ExecuteAsync(
-                    "UpdateService",
-                    new
-                    {
-
-                    },
-                    commandType: CommandType.StoredProcedure);
-
-
-            }
+            throw new NotImplementedException();
         }
+
+        //public async Task<ServiceResponse> UpdateService(ServiceRequest service)
+        //{
+        //    Service serviceToUpdate = Mapper.Map<Service>(service);
+
+        //    using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+        //    {
+        //        await connection.ExecuteAsync(
+        //            "UpdateService",
+        //            new
+        //            {
+        //                Id
+        //            },
+        //            commandType: CommandType.StoredProcedure);
+
+
+        //    }
+
+
+        //}
     }
 }

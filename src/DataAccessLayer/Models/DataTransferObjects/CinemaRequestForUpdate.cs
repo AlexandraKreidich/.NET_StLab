@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using DataAccessLayer.Models.DataTransferObjects;
+using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {

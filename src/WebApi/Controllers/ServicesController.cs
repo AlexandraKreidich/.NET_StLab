@@ -48,18 +48,18 @@ namespace WebApi.Controllers
         }
 
         // PUT /services/{id} -> update service
-        [HttpPut("{id:int}")]
-        public IActionResult Put([FromBody]ApiServiceModelRequest service, int id)
-        {
-            ServiceModelRequestForUpdate serviceModelRequestForUpdate = 
-                new ServiceModelRequestForUpdate(
-                    service.Name,
-                    service.Price,
-                    id
-                );
+        //[HttpPut("{id:int}")]
+        //public IActionResult Put([FromBody]ApiServiceModelRequest service, int id)
+        //{
+        //    ServiceModelRequestForUpdate serviceModelRequestForUpdate =
+        //        new ServiceModelRequestForUpdate(
+        //            service.Name,
+        //            service.Price,
+        //            id
+        //        );
 
-            BlServiceModelResponse updatedService = _serviceService.UpdateService(serviceModelRequestForUpdate);
-        }
+        //    BlServiceModelResponse updatedService = _serviceService.UpdateService(serviceModelRequestForUpdate);
+        //}
 
         // DELETE /services/{id}
         [HttpDelete("{id:int}")]
