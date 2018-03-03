@@ -72,6 +72,7 @@
     <Build Include="Stored Procedures\GetHalls.sql" />
     <Build Include="Stored Procedures\GetPlaces.sql" />
     <Build Include="Stored Procedures\GetHallScheme.sql" />
+    <Build Include="Stored Procedures\UpdateCinema.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

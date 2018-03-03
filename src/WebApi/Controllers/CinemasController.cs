@@ -12,8 +12,9 @@ using ApiCinemaModelResponse = WebApi.Models.Cinema.CinemaModelResponse;
 using ApiCinemaModelRequest = WebApi.Models.Cinema.CinemaModelRequest;
 using BlHallModelResponse = BusinessLayer.Models.HallModelResponse;
 using ApiHallModelResponse = WebApi.Models.Hall.HallModelResponse;
-using BlHallSchemeModelResponse = BusinessLayer.Models.HallSchemeModelResponse;
 using ApiHallSchemeModelResponse = WebApi.Models.Hall.HallSchemeModelResponse;
+using BlCinemaModelRequestForUpdate = BusinessLayer.Models.CinemaModelRequestForUpdate;
+using ApiCinemaModelRequestForUpdate = WebApi.Models.Cinema.CinemaModelRequestForUpdate;
 
 namespace WebApi.Controllers
 {
@@ -73,17 +74,34 @@ namespace WebApi.Controllers
             return Ok(results);
         }
 
-        // PUT /cinemas
+        // PUT /cinemas -> add cinema
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]ApiCinemaModelRequest cinema)
         {
-            BlCinemaModelRequest cinemaRequest = new BlCinemaModelRequest(cinema.Name, cinema.City);
-
-            BlCinemaModelResponse cinemaResponse = await _cinemasService.AddOrUpdateCinema(cinemaRequest);
+            BlCinemaModelResponse cinemaResponse = 
+                await _cinemasService.AddCinema(Mapper.Map<BlCinemaModelRequest>(cinema));
 
             return Ok(
                 Mapper.Map<ApiCinemaModelResponse>(cinemaResponse)
                 );
+        }
+
+        // PUT /cinemas/{id} -> update cinema
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Put([FromBody]ApiCinemaModelRequestForUpdate cinema, int id)
+        {
+            BlCinemaModelRequestForUpdate cinemaToUpdate = new BlCinemaModelRequestForUpdate(
+                id,
+                cinema.Name,
+                cinema.City,
+                cinema.HallsNumber
+            );
+
+            BlCinemaModelResponse cinemaResponse = await _cinemasService.UpdateCinema(cinemaToUpdate);
+
+            return Ok(
+                Mapper.Map<ApiCinemaModelResponse>(cinemaResponse)
+            );
         }
     }
 }

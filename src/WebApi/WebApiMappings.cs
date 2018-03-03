@@ -5,6 +5,8 @@ using WebApi.Models.Place;
 using BlCinemaModelResponse = BusinessLayer.Models.CinemaModelResponse;
 using ApiCinemaModelResponse = WebApi.Models.Cinema.CinemaModelResponse;
 using PlaceModelResponse = BusinessLayer.Models.PlaceModelResponse;
+using BlCinemaModelRequest = BusinessLayer.Models.CinemaModelRequest;
+using ApiCinemaModelRequest = WebApi.Models.Cinema.CinemaModelRequest;
 
 namespace WebApi
 {
@@ -16,6 +18,7 @@ namespace WebApi
             configuration.CreateMap<PlaceModelResponse, PlaceModelResponseForHall>();
             configuration.CreateMap<HallSchemeModelResponse, Models.Hall.HallSchemeModelResponse>();
             configuration.CreateMap<HallModelResponse, Models.Hall.HallModelResponse>();
+            configuration.CreateMap<ApiCinemaModelRequest, BlCinemaModelRequest>();
         }
     }
 }

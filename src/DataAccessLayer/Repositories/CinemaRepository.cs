@@ -48,7 +48,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> AddOrUpdateCinema(CinemaRequest cinema)
+        public async Task<int> AddCinema(CinemaRequest cinema)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -62,6 +62,27 @@ namespace DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure);
 
                 return id;
+            }
+        }
+
+        public async Task<CinemaResponse> UpdateCinema(CinemaRequestForUpdate cinema)
+        {
+
+            Cinema cinemaToUpdate = Mapper.Map<Cinema>(cinema);
+
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "UpdateCinema",
+                    new
+                    {
+                        Id = cinemaToUpdate.Id,
+                        Name = cinemaToUpdate.Name,
+                        City = cinemaToUpdate.City
+                    },
+                    commandType: CommandType.StoredProcedure);
+
+                return Mapper.Map<CinemaResponse>(cinemaToUpdate);
             }
         }
 
