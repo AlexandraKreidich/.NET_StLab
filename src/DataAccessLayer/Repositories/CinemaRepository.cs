@@ -42,7 +42,7 @@ namespace DataAccessLayer.Repositories
                 Cinema cinema = await connection.QuerySingleOrDefaultAsync<Cinema>(
                     "GetCinemaById",
                     new { Id = id },
-                    commandType: CommandType.StoredProcedure);
+                    commandType: CommandType.StoredProcedure); 
 
                 return Mapper.Map<CinemaResponse>(cinema);
             }

@@ -1,18 +1,22 @@
 ﻿using JetBrains.Annotations;
 
-namespace WebApi.Models.Service
+namespace BusinessLayer.Models
 {
-    public class ServiceModelBase
+    public class ServiceModelResponse
     {
+        public int Id { get; set; }
+
         [NotNull] public string Name { get; set; }
 
         public decimal Price { get; set; }
 
-        public ServiceModelBase(
+        public ServiceModelResponse(
+            int id,
             [NotNull] string name,
             decimal price
-            )
+        )
         {
+            Id = id;
             Name = name;
             Price = price;
         }

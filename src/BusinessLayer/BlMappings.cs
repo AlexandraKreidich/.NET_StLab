@@ -14,6 +14,8 @@ namespace BusinessLayer
             configuration.CreateMap<HallSchemeResponse, HallModelResponse>();
             configuration.CreateMap<PlaceResponse, PlaceModelResponse>();
             configuration.CreateMap<CinemaModelRequestForUpdate, CinemaRequestForUpdate>();
+            configuration.CreateMap<ServiceResponse, ServiceModelResponse>();
+            configuration.CreateMap<ServiceModelRequest, ServiceRequest>();
         }
     }
 }

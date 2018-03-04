@@ -11,6 +11,7 @@ namespace BusinessLayer
         {
             collection.AddSingleton<IUserService, UserService>();
             collection.AddSingleton<ICinemasService, CinemasService>();
+            collection.AddSingleton<IServiceService, ServiceService>();
         }
     }
 }
