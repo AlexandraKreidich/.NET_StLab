@@ -3,10 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
-using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
-using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
+using ServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
+using BlServiceModel = BusinessLayer.Models.ServiceModel;
+using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 
 namespace BusinessLayer.Services
 {
@@ -19,28 +20,22 @@ namespace BusinessLayer.Services
             _serviceRepository = serviceRepository;
         }
 
-        public async Task<IEnumerable<ServiceModelResponse>> GetServices()
+        public async Task<IEnumerable<BlServiceModel>> GetServices()
         {
-            IEnumerable<ServiceResponse> services = await _serviceRepository.GetServices();
+            IEnumerable<ServiceModel> services = await _serviceRepository.GetServices();
 
-            return services.Select(Mapper.Map<ServiceModelResponse>);
+            return services.Select(Mapper.Map<BlServiceModel>);
         }
 
-        public async Task<ServiceModelResponse> AddService(ServiceModelRequest service)
+        public async Task<BlServiceModel> AddOrUpdateService(BlServiceModel service)
         {
-            int id = await _serviceRepository.AddService(Mapper.Map<ServiceRequest>(service));
+            int id = await _serviceRepository.AddOrUpdateService(Mapper.Map<DalServiceModel>(service));
 
-            return new ServiceModelResponse(
-                id,
+            return new BlServiceModel(
+                (id != 0) ? id : service.Id,
                 service.Name,
                 service.Price
             );
         }
-
-        public Task<ServiceModelResponse> UpdateService(ServiceModelRequest service)
-        {
-            throw new System.NotImplementedException();
-        }
-
     }
 }

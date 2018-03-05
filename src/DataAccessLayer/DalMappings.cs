@@ -15,9 +15,8 @@ namespace DataAccessLayer
             configuration.CreateMap<Hall, HallResponse>();
             configuration.CreateMap<Place, PlaceResponse>();
             configuration.CreateMap<HallScheme, HallSchemeResponse>();
-            configuration.CreateMap<Service, ServiceResponse>();
-            configuration.CreateMap<ServiceResponse, Service>();
-            configuration.CreateMap<ServiceRequest, Service>();
+            configuration.CreateMap<Service, ServiceModel>();
+            configuration.CreateMap<ServiceModel, Service>();
         }
     }
 }

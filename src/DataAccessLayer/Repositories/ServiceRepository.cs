@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -24,7 +23,7 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<ServiceResponse>> GetServices()
+        public async Task<IEnumerable<ServiceModel>> GetServices()
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -32,52 +31,28 @@ namespace DataAccessLayer.Repositories
                     "GetServices",
                     commandType: CommandType.StoredProcedure);
 
-                return services.Select(Mapper.Map<ServiceResponse>);
+                return services.Select(Mapper.Map<ServiceModel>);
             }
         }
 
-        public async Task<int> AddService(ServiceRequest service)
+        public async Task<int> AddOrUpdateService(ServiceModel service)
         {
-            Service serviceToAdd = Mapper.Map<Service>(service);
+            Service serviceRequest = Mapper.Map<Service>(service);
 
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
                 int id = await connection.ExecuteScalarAsync<int>(
-                    "AddService",
+                    "AddOrUpdateService",
                     new
                     {
-                        Name = serviceToAdd.Name,
-                        Price = serviceToAdd.Price
+                        Id = serviceRequest.Id,
+                        Name = serviceRequest.Name,
+                        Price = serviceRequest.Price
                     },
                     commandType: CommandType.StoredProcedure);
 
                 return id;
             }
         }
-
-        public Task<ServiceResponse> UpdateService(ServiceRequest service)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public async Task<ServiceResponse> UpdateService(ServiceRequest service)
-        //{
-        //    Service serviceToUpdate = Mapper.Map<Service>(service);
-
-        //    using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
-        //    {
-        //        await connection.ExecuteAsync(
-        //            "UpdateService",
-        //            new
-        //            {
-        //                Id
-        //            },
-        //            commandType: CommandType.StoredProcedure);
-
-
-        //    }
-
-
-        //}
     }
 }

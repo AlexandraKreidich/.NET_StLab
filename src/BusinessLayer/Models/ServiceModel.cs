@@ -2,15 +2,15 @@
 
 namespace BusinessLayer.Models
 {
-    public class ServiceModelResponse
+    public class ServiceModel
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
-        [NotNull] public string Name { get; set; }
+        [NotNull] public string Name { get;}
 
-        public decimal Price { get; set; }
+        public decimal Price { get;}
 
-        public ServiceModelResponse(
+        public ServiceModel(
             int id,
             [NotNull] string name,
             decimal price

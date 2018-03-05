@@ -4,6 +4,8 @@ using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
 using DalCinemaModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
 using BlCinemaModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
+using BlServiceModel = BusinessLayer.Models.ServiceModel;
+using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 
 namespace BusinessLayer
 {
@@ -15,8 +17,7 @@ namespace BusinessLayer
             configuration.CreateMap<HallResponse, HallModel>();
             configuration.CreateMap<HallSchemeResponse, HallModelResponse>();
             configuration.CreateMap<PlaceResponse, PlaceModelResponse>();
-            configuration.CreateMap<ServiceResponse, ServiceModelResponse>();
-            configuration.CreateMap<ServiceModelRequest, ServiceRequest>();
+            configuration.CreateMap<BlServiceModel, DalServiceModel>();
         }
     }
 }

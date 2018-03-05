@@ -6,11 +6,8 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models.Service;
-using ApiServiceModelResponse = WebApi.Models.Service.ServiceModelResponse;
-using BlServiceModelResponse = BusinessLayer.Models.ServiceModelResponse;
-using ApiServiceModelRequest = WebApi.Models.Service.ServiceModelRequest;
-using BlServiceModelRRequest = BusinessLayer.Models.ServiceModelRequest;
+using ApiServiceModel = WebApi.Models.Service.ServiceModel;
+using BlServiceModel = BusinessLayer.Models.ServiceModel;
 
 namespace WebApi.Controllers
 {
@@ -29,37 +26,23 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<BlServiceModelResponse> services = await _serviceService.GetServices();
+            IEnumerable<BlServiceModel> services = await _serviceService.GetServices();
 
             return Ok(
-                services.Select(Mapper.Map<ApiServiceModelResponse>)
+                services.Select(Mapper.Map<ApiServiceModel>)
             );
         }
 
-        // PUT /services -> add service
+        // PUT /services -> add or update service
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]ApiServiceModelRequest service)
+        public async Task<IActionResult> Put([FromBody]ApiServiceModel service)
         {
-            BlServiceModelResponse newService = await _serviceService.AddService(Mapper.Map<BlServiceModelRRequest>(service));
+            BlServiceModel newService = await _serviceService.AddOrUpdateService(Mapper.Map<BlServiceModel>(service));
 
             return Ok(
-                Mapper.Map<ApiServiceModelResponse>(newService)
+                Mapper.Map<ApiServiceModel>(newService)
             );
         }
-
-        // PUT /services/{id} -> update service
-        //[HttpPut("{id:int}")]
-        //public IActionResult Put([FromBody]ApiServiceModelRequest service, int id)
-        //{
-        //    ServiceModelRequestForUpdate serviceModelRequestForUpdate =
-        //        new ServiceModelRequestForUpdate(
-        //            service.Name,
-        //            service.Price,
-        //            id
-        //        );
-
-        //    BlServiceModelResponse updatedService = _serviceService.UpdateService(serviceModelRequestForUpdate);
-        //}
 
         // DELETE /services/{id}
         [HttpDelete("{id:int}")]

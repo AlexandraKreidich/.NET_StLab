@@ -2,15 +2,16 @@
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public class ServiceResponse
+    [UsedImplicitly]
+    public class ServiceModel
     {
-        public int Id { get; set; }
+        public int Id { get;}
 
-        [NotNull] public string Name { get; set; }
+        [NotNull] public string Name { get;}
 
-        public decimal Price { get; set; }
+        public decimal Price { get;}
 
-        public ServiceResponse(
+        public ServiceModel(
             int id,
             [NotNull] string name,
             decimal price

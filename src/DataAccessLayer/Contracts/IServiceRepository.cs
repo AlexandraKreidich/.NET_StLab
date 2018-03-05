@@ -9,12 +9,9 @@ namespace DataAccessLayer.Contracts
     public interface IServiceRepository
     {
         [ItemNotNull]
-        Task<IEnumerable<ServiceResponse>> GetServices();
+        Task<IEnumerable<ServiceModel>> GetServices();
 
 
-        Task<int> AddService(ServiceRequest service);
-
-        [ItemNotNull]
-        Task<ServiceResponse> UpdateService(ServiceRequest service);
+        Task<int> AddOrUpdateService(ServiceModel service);
     }
 }

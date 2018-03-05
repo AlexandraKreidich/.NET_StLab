@@ -8,12 +8,9 @@ namespace BusinessLayer.Contracts
     public interface IServiceService
     {
         [ItemNotNull]
-        Task<IEnumerable<ServiceModelResponse>> GetServices();
+        Task<IEnumerable<ServiceModel>> GetServices();
 
         [ItemNotNull]
-        Task<ServiceModelResponse> AddService([NotNull] ServiceModelRequest service);
-
-        [ItemNotNull]
-        Task<ServiceModelResponse> UpdateService([NotNull] ServiceModelRequest service);
+        Task<ServiceModel> AddOrUpdateService([NotNull] ServiceModel service);
     }
 }

@@ -2,17 +2,24 @@
 
 namespace WebApi.Models.Service
 {
-    public class ServiceModelResponse : ServiceModelBase
+    [UsedImplicitly]
+    public class ServiceModel
     {
         public int Id { get; }
 
-        public ServiceModelResponse(
+        [NotNull] public string Name { get; }
+
+        public decimal Price { get; }
+
+        public ServiceModel(
             [NotNull] string name,
             decimal price,
             int id
-        ) : base(name, price)
+        )
         {
             Id = id;
+            Name = name;
+            Price = price;
         }
     }
 }

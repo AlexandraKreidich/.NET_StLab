@@ -11,9 +11,9 @@ namespace WebApi.Controllers
     {
         // GET /sessions/{id}/services
         [HttpGet("{id:int}/services")]
-        public IEnumerable<ServiceModelResponse> GetServices([FromBody]int id)
+        public IEnumerable<ServiceModel> GetServices([FromBody]int id)
         {
-            List<ServiceModelResponse> services = new List<ServiceModelResponse>();
+            List<ServiceModel> services = new List<ServiceModel>();
             return services;
         }
 
