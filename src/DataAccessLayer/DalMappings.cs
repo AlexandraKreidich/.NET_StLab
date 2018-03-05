@@ -10,11 +10,11 @@ namespace DataAccessLayer
         public static void Initialize([NotNull] IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<User, UserResponse>();
-            configuration.CreateMap<Cinema, CinemaResponse>();
+            configuration.CreateMap<Cinema, CinemaModel>();
+            configuration.CreateMap<CinemaModel, Cinema>();
             configuration.CreateMap<Hall, HallResponse>();
             configuration.CreateMap<Place, PlaceResponse>();
             configuration.CreateMap<HallScheme, HallSchemeResponse>();
-            configuration.CreateMap<CinemaRequestForUpdate, Cinema>();
             configuration.CreateMap<Service, ServiceResponse>();
             configuration.CreateMap<ServiceResponse, Service>();
             configuration.CreateMap<ServiceRequest, Service>();

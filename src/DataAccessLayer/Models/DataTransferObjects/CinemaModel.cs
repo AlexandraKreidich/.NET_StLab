@@ -1,23 +1,31 @@
 ﻿using JetBrains.Annotations;
 
-namespace BusinessLayer.Models
+namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public class CinemaModelRequestForUpdate : CinemaModelBase
+    [UsedImplicitly]
+    public class CinemaModel
     {
         public int Id { get; }
 
         public int HallsNumber { get; }
 
-        public CinemaModelRequestForUpdate(
+        [NotNull]
+        public string Name { get; }
+
+        [NotNull]
+        public string City { get; }
+
+        public CinemaModel(
             int id,
             [NotNull] string name,
             [NotNull] string city,
             int hallsNumber
         )
-            : base(name, city)
         {
             Id = id;
             HallsNumber = hallsNumber;
+            Name = name;
+            City = city;
         }
     }
 }

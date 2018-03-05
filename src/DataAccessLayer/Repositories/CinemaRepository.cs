@@ -23,7 +23,7 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<CinemaResponse>> GetCinemas()
+        public async Task<IEnumerable<CinemaModel>> GetCinemas()
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -31,11 +31,11 @@ namespace DataAccessLayer.Repositories
                     "GetCinemas",
                     commandType: CommandType.StoredProcedure);
 
-                return cinemas.Select(Mapper.Map<CinemaResponse>);
+                return cinemas.Select(Mapper.Map<CinemaModel>);
             }
         }
 
-        public async Task<CinemaResponse> GetCinemaById(int id)
+        public async Task<CinemaModel> GetCinemaById(int id)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -44,44 +44,25 @@ namespace DataAccessLayer.Repositories
                     new { Id = id },
                     commandType: CommandType.StoredProcedure);
 
-                return Mapper.Map<CinemaResponse>(cinema);
+                return Mapper.Map<CinemaModel>(cinema);
             }
         }
 
-        public async Task<int> AddCinema(CinemaRequest cinema)
+        public async Task<int> AddOrUpdateCinema(CinemaModel cinema)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
                 int id = await connection.ExecuteScalarAsync<int>(
-                    "AddCinema",
+                    "AddOrUpdateCinema",
                     new
                         {
+                            Id = cinema.Id,
                             Name = cinema.Name,
                             City = cinema.City
                         },
                     commandType: CommandType.StoredProcedure);
 
                 return id;
-            }
-        }
-
-        public async Task<CinemaResponse> UpdateCinema(CinemaRequestForUpdate cinema)
-        {
-            Cinema cinemaToUpdate = Mapper.Map<Cinema>(cinema);
-
-            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
-            {
-                await connection.ExecuteAsync(
-                    "UpdateCinema",
-                    new
-                    {
-                        Id = cinemaToUpdate.Id,
-                        Name = cinemaToUpdate.Name,
-                        City = cinemaToUpdate.City
-                    },
-                    commandType: CommandType.StoredProcedure);
-
-                return Mapper.Map<CinemaResponse>(cinemaToUpdate);
             }
         }
 

@@ -8,15 +8,12 @@ namespace DataAccessLayer.Contracts
     public interface ICinemaRepository
     {
         [ItemNotNull]
-        Task<IEnumerable<CinemaResponse>> GetCinemas();
+        Task<IEnumerable<CinemaModel>> GetCinemas();
 
         [ItemCanBeNull]
-        Task<CinemaResponse> GetCinemaById(int id);
+        Task<CinemaModel> GetCinemaById(int id);
 
-        Task<int> AddCinema([NotNull] CinemaRequest cinema);
-
-        [ItemNotNull]
-        Task<CinemaResponse> UpdateCinema([NotNull] CinemaRequestForUpdate cinema);
+        Task<int> AddOrUpdateCinema([NotNull] CinemaModel cinema);
 
         [ItemNotNull]
         Task<IEnumerable<HallResponse>> GetHalls(int cinemaId);

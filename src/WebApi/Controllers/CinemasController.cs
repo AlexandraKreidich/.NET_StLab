@@ -5,16 +5,13 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.Cinema;
 using WebApi.Models.Place;
-using BlCinemaModelResponse = BusinessLayer.Models.CinemaModelResponse;
-using BlCinemaModelRequest = BusinessLayer.Models.CinemaModelRequest;
-using ApiCinemaModelResponse = WebApi.Models.Cinema.CinemaModelResponse;
-using ApiCinemaModelRequest = WebApi.Models.Cinema.CinemaModelRequest;
 using BlHallModelResponse = BusinessLayer.Models.HallModelResponse;
 using ApiHallModelResponse = WebApi.Models.Hall.HallModelResponse;
 using ApiHallSchemeModelResponse = WebApi.Models.Hall.HallSchemeModelResponse;
-using BlCinemaModelRequestForUpdate = BusinessLayer.Models.CinemaModelRequestForUpdate;
-using ApiCinemaModelRequestForUpdate = WebApi.Models.Cinema.CinemaModelRequestForUpdate;
+using ApiCinemaModel = WebApi.Models.Cinema.CinemaModel;
+using CinemaModel = BusinessLayer.Models.CinemaModel;
 
 namespace WebApi.Controllers
 {
@@ -33,10 +30,10 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<BlCinemaModelResponse> cinemas = await _cinemasService.GetCinemas();
+            IEnumerable<CinemaModel> cinemas = await _cinemasService.GetCinemas();
 
             return Ok(
-                cinemas.Select(Mapper.Map<ApiCinemaModelResponse>)
+                cinemas.Select(Mapper.Map<ApiCinemaModel>)
                 );
         }
 
@@ -44,7 +41,7 @@ namespace WebApi.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            BlCinemaModelResponse cinema = await _cinemasService.GetCinemaById(id);
+            CinemaModel cinema = await _cinemasService.GetCinemaById(id);
 
             if (cinema == null)
             {
@@ -52,7 +49,7 @@ namespace WebApi.Controllers
             }
 
             return Ok(
-                Mapper.Map<ApiCinemaModelResponse>(cinema)
+                Mapper.Map<ApiCinemaModel>(cinema)
                 );
         }
 
@@ -74,34 +71,16 @@ namespace WebApi.Controllers
             return Ok(results);
         }
 
-        // PUT /cinemas -> add cinema
+        // PUT /cinemas -> add or update cinema
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]ApiCinemaModelRequest cinema)
+        public async Task<IActionResult> Put([FromBody]ApiCinemaModel cinema)
         {
-            BlCinemaModelResponse cinemaResponse = 
-                await _cinemasService.AddCinema(Mapper.Map<BlCinemaModelRequest>(cinema));
+            CinemaModel cinemaResponse =
+                await _cinemasService.AddOrUpdateCinema(Mapper.Map<CinemaModel>(cinema));
 
             return Ok(
-                Mapper.Map<ApiCinemaModelResponse>(cinemaResponse)
+                Mapper.Map<ApiCinemaModel>(cinemaResponse)
                 );
-        }
-
-        // PUT /cinemas/{id} -> update cinema
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put([FromBody]ApiCinemaModelRequestForUpdate cinema, int id)
-        {
-            BlCinemaModelRequestForUpdate cinemaToUpdate = new BlCinemaModelRequestForUpdate(
-                id,
-                cinema.Name,
-                cinema.City,
-                cinema.HallsNumber
-            );
-
-            BlCinemaModelResponse cinemaResponse = await _cinemasService.UpdateCinema(cinemaToUpdate);
-
-            return Ok(
-                Mapper.Map<ApiCinemaModelResponse>(cinemaResponse)
-            );
         }
     }
 }

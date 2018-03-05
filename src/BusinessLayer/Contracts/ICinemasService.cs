@@ -8,16 +8,13 @@ namespace BusinessLayer.Contracts
     public interface ICinemasService
     {
         [ItemNotNull]
-        Task<IEnumerable<CinemaModelResponse>> GetCinemas();
+        Task<IEnumerable<CinemaModel>> GetCinemas();
 
         [ItemCanBeNull]
-        Task<CinemaModelResponse> GetCinemaById(int id);
+        Task<CinemaModel> GetCinemaById(int id);
 
         [ItemNotNull]
-        Task<CinemaModelResponse> AddCinema([NotNull] CinemaModelRequest cinema);
-
-        [ItemNotNull]
-        Task<CinemaModelResponse> UpdateCinema([NotNull] CinemaModelRequestForUpdate cinema);
+        Task<CinemaModel> AddOrUpdateCinema([NotNull] CinemaModel cinema);
 
         [ItemNotNull]
         Task<IEnumerable<HallModelResponse>> GetHalls(int hallId);
