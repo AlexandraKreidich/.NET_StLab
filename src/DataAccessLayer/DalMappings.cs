@@ -16,6 +16,7 @@ namespace DataAccessLayer
             configuration.CreateMap<HallScheme, HallSchemeResponse>();
             configuration.CreateMap<CinemaRequestForUpdate, Cinema>();
             configuration.CreateMap<Service, ServiceResponse>();
+            configuration.CreateMap<ServiceResponse, Service>();
             configuration.CreateMap<ServiceRequest, Service>();
         }
     }

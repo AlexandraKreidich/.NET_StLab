@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,6 +13,7 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Repositories
 {
+    [UsedImplicitly]
     internal class ServiceRepository : IServiceRepository
     {
         [NotNull]
@@ -53,8 +55,10 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> UpdateService(ServiceRequest service)
+        public async Task<ServiceResponse> UpdateService(ServiceRequest service)
         {
+            Service serviceToUpdate = new Service();
+
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
                 await connection.ExecuteAsync(
@@ -64,6 +68,8 @@ namespace DataAccessLayer.Repositories
 
                     },
                     commandType: CommandType.StoredProcedure);
+
+
             }
         }
     }

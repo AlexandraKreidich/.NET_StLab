@@ -2,6 +2,7 @@
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
+    [UsedImplicitly]
     public class CinemaRequestForUpdate : CinemaBase
     {
         public int Id { get; }

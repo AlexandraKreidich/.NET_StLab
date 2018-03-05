@@ -42,7 +42,7 @@ namespace DataAccessLayer.Repositories
                 Cinema cinema = await connection.QuerySingleOrDefaultAsync<Cinema>(
                     "GetCinemaById",
                     new { Id = id },
-                    commandType: CommandType.StoredProcedure); 
+                    commandType: CommandType.StoredProcedure);
 
                 return Mapper.Map<CinemaResponse>(cinema);
             }
@@ -67,7 +67,6 @@ namespace DataAccessLayer.Repositories
 
         public async Task<CinemaResponse> UpdateCinema(CinemaRequestForUpdate cinema)
         {
-
             Cinema cinemaToUpdate = Mapper.Map<Cinema>(cinema);
 
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))

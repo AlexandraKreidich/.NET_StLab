@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
@@ -9,10 +10,11 @@ namespace DataAccessLayer.Contracts
     {
         [ItemNotNull]
         Task<IEnumerable<ServiceResponse>> GetServices();
-        
+
 
         Task<int> AddService(ServiceRequest service);
 
-        Task<int> UpdateService(ServiceRequest service);
+        [ItemNotNull]
+        Task<ServiceResponse> UpdateService(ServiceRequest service);
     }
 }
