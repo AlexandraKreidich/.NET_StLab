@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
@@ -11,6 +12,7 @@ using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 
 namespace BusinessLayer.Services
 {
+    [UsedImplicitly]
     public class ServiceService : IServiceService
     {
         [NotNull] private readonly IServiceRepository _serviceRepository;
@@ -36,6 +38,11 @@ namespace BusinessLayer.Services
                 service.Name,
                 service.Price
             );
+        }
+
+        public async Task<StoredProcedureExecutionResult> DeleteService(int id)
+        {
+            return Mapper.Map<StoredProcedureExecutionResult>(await _serviceRepository.DeleteService(id));
         }
     }
 }

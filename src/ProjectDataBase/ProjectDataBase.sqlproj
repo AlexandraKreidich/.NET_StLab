@@ -74,6 +74,7 @@
     <Build Include="Stored Procedures\GetServices.sql" />
     <Build Include="Stored Procedures\AddOrUpdateCinema.sql" />
     <Build Include="Stored Procedures\AddOrUpdateService.sql" />
+    <Build Include="Stored Procedures\DeleteService.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

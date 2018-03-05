@@ -5,7 +5,6 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models.Cinema;
 using WebApi.Models.Place;
 using BlHallModelResponse = BusinessLayer.Models.HallModelResponse;
 using ApiHallModelResponse = WebApi.Models.Hall.HallModelResponse;

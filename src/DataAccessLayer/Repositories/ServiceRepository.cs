@@ -54,5 +54,28 @@ namespace DataAccessLayer.Repositories
                 return id;
             }
         }
+
+        public async Task<StoredProcedureExecutionResult> DeleteService(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                   await connection.ExecuteAsync(
+                        "DeleteService",
+                        new
+                            {
+                                Id = id,
+                            },
+                        commandType: CommandType.StoredProcedure);
+
+                    return StoredProcedureExecutionResult.Ok;
+                }
+                catch (SqlException e) when (e.Number == 547) // Foreign key violation
+                {
+                    return StoredProcedureExecutionResult.ForeignKeyViolation;
+                }
+            }
+        }
     }
 }

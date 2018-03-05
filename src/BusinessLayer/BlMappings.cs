@@ -6,6 +6,8 @@ using DalCinemaModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
 using BlCinemaModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
 using BlServiceModel = BusinessLayer.Models.ServiceModel;
 using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
+using DalStoredProcedureResult = DataAccessLayer.StoredProcedureExecutionResult;
+using BlStoredProcedureResult = BusinessLayer.StoredProcedureExecutionResult;
 
 namespace BusinessLayer
 {
@@ -18,6 +20,7 @@ namespace BusinessLayer
             configuration.CreateMap<HallSchemeResponse, HallModelResponse>();
             configuration.CreateMap<PlaceResponse, PlaceModelResponse>();
             configuration.CreateMap<BlServiceModel, DalServiceModel>();
+            configuration.CreateMap<DalStoredProcedureResult, BlStoredProcedureResult>();
         }
     }
 }

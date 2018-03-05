@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using BusinessLayer;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
@@ -46,9 +47,16 @@ namespace WebApi.Controllers
 
         // DELETE /services/{id}
         [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+             StoredProcedureExecutionResult result =  await _serviceService.DeleteService(id);
+
+            if (result == StoredProcedureExecutionResult.Ok)
+            {
+                return Ok();
+            }
+
+            return BadRequest(HttpStatusCode.NotAcceptable);
         }
     }
 }
