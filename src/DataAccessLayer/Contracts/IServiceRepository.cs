@@ -10,6 +10,9 @@ namespace DataAccessLayer.Contracts
         [ItemNotNull]
         Task<IEnumerable<ServiceResponse>> GetServices();
         
+
         Task<int> AddService(ServiceRequest service);
+
+        Task<int> UpdateService(ServiceRequest service);
     }
 }

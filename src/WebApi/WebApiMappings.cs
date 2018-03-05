@@ -11,6 +11,8 @@ using ApiServiceModelResponse = WebApi.Models.Service.ServiceModelResponse;
 using BlServiceModelResponse = BusinessLayer.Models.ServiceModelResponse;
 using ApiServiceModelRequest = WebApi.Models.Service.ServiceModelRequest;
 using BlServiceModelRRequest = BusinessLayer.Models.ServiceModelRequest;
+using BlServiceModelRequestForUpdate = BusinessLayer.Models.ServiceModelRequestForUpdate;
+using ApiServiceModelRequestForUpdate = WebApi.Models.Service.ServiceModelRequestForUpdate;
 
 
 namespace WebApi
@@ -26,6 +28,7 @@ namespace WebApi
             configuration.CreateMap<ApiCinemaModelRequest, BlCinemaModelRequest>();
             configuration.CreateMap<ApiServiceModelResponse, BlServiceModelResponse>();
             configuration.CreateMap<ApiServiceModelRequest, BlServiceModelRRequest>();
+            configuration.CreateMap<ApiServiceModelRequestForUpdate, BlServiceModelRequestForUpdate>();
         }
     }
 }

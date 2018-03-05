@@ -75,6 +75,7 @@
     <Build Include="Stored Procedures\UpdateCinema.sql" />
     <Build Include="Stored Procedures\GetServices.sql" />
     <Build Include="Stored Procedures\AddService.sql" />
+    <Build Include="Stored Procedures\UpdateService.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

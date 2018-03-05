@@ -36,5 +36,10 @@ namespace BusinessLayer.Services
                 service.Price
             );
         }
+
+        public Task<ServiceModelResponse> UpdateService(ServiceModelRequestForUpdate service)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

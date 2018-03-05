@@ -31,14 +31,9 @@ namespace WebApi.Controllers
         {
             IEnumerable<BlServiceModelResponse> services = await _serviceService.GetServices();
 
-            if (services != null)
-            {
-                return Ok(
-                    services.Select(Mapper.Map<ApiServiceModelResponse>)
-                );
-            }
-
-            return NoContent();
+            return Ok(
+                services.Select(Mapper.Map<ApiServiceModelResponse>)
+            );
         }
 
         // PUT /services -> add service
@@ -54,9 +49,16 @@ namespace WebApi.Controllers
 
         // PUT /services/{id} -> update service
         [HttpPut("{id:int}")]
-        public IActionResult Put()
+        public IActionResult Put([FromBody]ApiServiceModelRequest service, int id)
         {
-            throw new NotImplementedException();
+            ServiceModelRequestForUpdate serviceModelRequestForUpdate = 
+                new ServiceModelRequestForUpdate(
+                    service.Name,
+                    service.Price,
+                    id
+                );
+
+            BlServiceModelResponse updatedService = _serviceService.UpdateService(serviceModelRequestForUpdate);
         }
 
         // DELETE /services/{id}

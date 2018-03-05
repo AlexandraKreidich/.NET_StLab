@@ -52,5 +52,19 @@ namespace DataAccessLayer.Repositories
                 return id;
             }
         }
+
+        public async Task<int> UpdateService(ServiceRequest service)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "UpdateService",
+                    new
+                    {
+
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

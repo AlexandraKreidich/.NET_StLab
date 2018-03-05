@@ -12,5 +12,8 @@ namespace BusinessLayer.Contracts
 
         [ItemNotNull]
         Task<ServiceModelResponse> AddService([NotNull] ServiceModelRequest service);
+
+        [ItemNotNull]
+        Task<ServiceModelResponse> UpdateService([NotNull] ServiceModelRequest service);
     }
 }
