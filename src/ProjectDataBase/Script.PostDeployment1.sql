@@ -79,16 +79,16 @@ BEGIN TRY
 
     INSERT INTO dbo.Film(StartRentdate, EndRentdate, [Name], [Description])
     VALUES
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Delirium', 'description'), /*(1)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Star Wars', 'description'), /*(2)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Tor', 'description'), /*(3)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Selfie', 'description'), /*(4)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Ferdinant', 'description'), /*(5)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Happy End', 'description'), /*(6)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Three Billboards Outside Ebbing', 'description'), /*(7)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Marry me', 'description'), /*(8)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Madagaskar', 'description'), /*(9)*/
-        (convert(datetimeoffset, '20170601'), convert(datetimeoffset, '20170606'), 'Number one', 'description') /*(10)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Delirium', 'description'), /*(1)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Star Wars', 'description'), /*(2)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Tor', 'description'), /*(3)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Selfie', 'description'), /*(4)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Ferdinant', 'description'), /*(5)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Happy End', 'description'), /*(6)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Three Billboards Outside Ebbing', 'description'), /*(7)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Marry me', 'description'), /*(8)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Madagaskar', 'description'), /*(9)*/
+        (convert(datetimeoffset, '20180601'), convert(datetimeoffset, '20180606'), 'Number one', 'description') /*(10)*/
 
     PRINT 'Inserting seed data for Session table'
 

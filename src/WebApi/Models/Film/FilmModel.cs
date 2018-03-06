@@ -2,7 +2,7 @@
 
 namespace WebApi.Models.Film
 {
-    public class FilmModelBase
+    public class FilmModel
     {
         public int Id { get; set; }
         protected string Name { get; set; }

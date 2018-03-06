@@ -17,6 +17,7 @@ namespace DataAccessLayer
             configuration.CreateMap<HallScheme, HallSchemeResponse>();
             configuration.CreateMap<Service, ServiceModel>();
             configuration.CreateMap<ServiceModel, Service>();
+            configuration.CreateMap<Film, FilmModel>();
         }
     }
 }

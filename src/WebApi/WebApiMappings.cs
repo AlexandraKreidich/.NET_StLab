@@ -6,6 +6,8 @@ using PlaceModelResponse = BusinessLayer.Models.PlaceModelResponse;
 using BlServiceModel = BusinessLayer.Models.ServiceModel;
 using ApiServiceModel = WebApi.Models.Service.ServiceModel;
 using ApiCinemaModel = WebApi.Models.Cinema.CinemaModel;
+using ApiFilmModel = WebApi.Models.Film.FilmModel;
+using BlFilmModel = BusinessLayer.Models.FilmModel;
 
 namespace WebApi
 {
@@ -20,6 +22,7 @@ namespace WebApi
             configuration.CreateMap<HallModelResponse, Models.Hall.HallModelResponse>();
             configuration.CreateMap<BlServiceModel, ApiServiceModel>();
             configuration.CreateMap<ApiServiceModel, BlServiceModel>();
+            configuration.CreateMap<BlFilmModel, ApiFilmModel>();
         }
     }
 }
