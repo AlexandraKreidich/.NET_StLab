@@ -58,14 +58,23 @@ namespace WebApi.Controllers
         {
             IEnumerable<BlHallModelResponse> halls = await _cinemasService.GetHalls(id);
 
-            List<ApiHallModelResponse> results =
-                halls.Select(hall => new ApiHallModelResponse(
-                    hall.Id,
-                    hall.CinemaId,
-                    hall.Name,
-                    hall.Places.Select(Mapper.Map<PlaceModelResponseForHall>).ToArray(),
-                    hall.HallSchemeModels.Select(Mapper.Map<ApiHallSchemeModelResponse>).ToArray())
-                ).ToList();
+            if (halls == null)
+            {
+                NotFound();
+            }
+
+            List<ApiHallModelResponse> results = new List<ApiHallModelResponse>();
+
+            if (halls != null)
+            {
+                results = halls.Select(hall => new ApiHallModelResponse(
+                        hall.Id,
+                        hall.CinemaId,
+                        hall.Name,
+                        hall.Places.Select(Mapper.Map<PlaceModelResponseForHall>).ToArray(),
+                        hall.HallSchemeModels.Select(Mapper.Map<ApiHallSchemeModelResponse>).ToArray())
+                    ).ToList();
+            }
 
             return Ok(results);
         }

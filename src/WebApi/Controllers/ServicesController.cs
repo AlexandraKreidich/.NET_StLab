@@ -51,12 +51,12 @@ namespace WebApi.Controllers
         {
              StoredProcedureExecutionResult result =  await _serviceService.DeleteService(id);
 
-            if (result == StoredProcedureExecutionResult.Ok)
+            if (result == StoredProcedureExecutionResult.ForeignKeyViolation)
             {
-                return Ok();
+                return BadRequest(HttpStatusCode.Conflict);
             }
 
-            return BadRequest(HttpStatusCode.NotAcceptable);
+            return Accepted();
         }
     }
 }

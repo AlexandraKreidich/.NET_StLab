@@ -10,7 +10,7 @@ namespace DataAccessLayer.Contracts
         [ItemNotNull]
         Task<IEnumerable<ServiceModel>> GetServices();
 
-        Task<int> AddOrUpdateService(ServiceModel service);
+        Task<int> AddOrUpdateService([NotNull] ServiceModel service);
 
         Task<StoredProcedureExecutionResult> DeleteService(int id);
     }

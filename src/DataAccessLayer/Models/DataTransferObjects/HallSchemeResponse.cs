@@ -13,6 +13,5 @@ namespace DataAccessLayer.Models.DataTransferObjects
         public int RowNumber { get; set; }
 
         public int PlacesCount { get; set; }
-
     }
 }

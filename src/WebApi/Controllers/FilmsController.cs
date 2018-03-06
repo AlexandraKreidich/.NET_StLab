@@ -20,7 +20,6 @@ namespace WebApi.Controllers
 
         // GET /films
         [HttpGet]
-        [Route("")]
         public IEnumerable<FilmModelResponse> Get()
         {
             List<FilmModelResponse> films = new List<FilmModelResponse>();
@@ -59,7 +58,7 @@ namespace WebApi.Controllers
             return StatusCode((int)HttpStatusCode.Created);
         }
 
-        // PUT /films --> add new film, if refresh(names should be equal)
+        // PUT /films --> add or update film
         [HttpPut]
         public IActionResult Put([FromBody]FilmModelRequest filmToAdd)
         {

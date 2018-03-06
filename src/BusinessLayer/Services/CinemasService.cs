@@ -52,32 +52,41 @@ namespace BusinessLayer.Services
             );
         }
 
-        public async Task<IEnumerable<HallModelResponse>> GetHalls(int hallId)
+        public async Task<IEnumerable<HallModelResponse>> GetHalls(int cinemaId)
         {
-            IEnumerable<HallResponse> halls = await _cinemaRepository.GetHalls(hallId);
+            DalCinemaModel cinema = await _cinemaRepository.GetCinemaById(cinemaId);
 
+            if (cinema == null)
+            {
+                return null;
+            }
+
+            IEnumerable<HallResponse> halls = await _cinemaRepository.GetHalls(cinemaId);
             List<HallModelResponse> results = new List<HallModelResponse>();
 
-            foreach (HallResponse hall in halls)
+            if (halls != null)
             {
-                Task<IEnumerable<PlaceResponse>> t1 = _cinemaRepository.GetPlaces(hall.Id);
-                Task<IEnumerable<HallSchemeResponse>> t2 = _cinemaRepository.GetHallScheme(hall.Id);
+                foreach (HallResponse hall in halls)
+                {
+                    Task<IEnumerable<PlaceResponse>> t1 = _cinemaRepository.GetPlaces(hall.Id);
+                    Task<IEnumerable<HallSchemeResponse>> t2 = _cinemaRepository.GetHallScheme(hall.Id);
 
-                IEnumerable <PlaceResponse> places = await t1;
-                PlaceModelResponse[] placesResponse = places.Select(Mapper.Map<PlaceModelResponse>).ToArray();
+                    IEnumerable<PlaceResponse> places = await t1;
+                    PlaceModelResponse[] placesResponse = places.Select(Mapper.Map<PlaceModelResponse>).ToArray();
 
-                IEnumerable<HallSchemeResponse> hallSchemeResponse = await t2;
+                    IEnumerable<HallSchemeResponse> hallSchemeResponse = await t2;
 
-                HallSchemeModelResponse[] hallSchemeModelsResponse =
-                    hallSchemeResponse.Select(Mapper.Map<HallSchemeModelResponse>).ToArray();
+                    HallSchemeModelResponse[] hallSchemeModelsResponse =
+                        hallSchemeResponse.Select(Mapper.Map<HallSchemeModelResponse>).ToArray();
 
-                results.Add(new HallModelResponse(
-                    hall.Id,
-                    hall.CinemaId,
-                    hall.Name,
-                    placesResponse,
-                    hallSchemeModelsResponse
-                ));
+                    results.Add(new HallModelResponse(
+                        hall.Id,
+                        hall.CinemaId,
+                        hall.Name,
+                        placesResponse,
+                        hallSchemeModelsResponse
+                    ));
+                }
             }
 
             return results;

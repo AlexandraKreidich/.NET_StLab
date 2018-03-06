@@ -7,7 +7,8 @@ namespace DataAccessLayer.Models.DataTransferObjects
     {
         public int Id { get;}
 
-        [NotNull] public string Name { get;}
+        [NotNull] 
+        public string Name { get;}
 
         public decimal Price { get;}
 

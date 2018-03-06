@@ -7,16 +7,13 @@ namespace WebApi.Models.Cinema
     {
         public int Id { get;}
 
-
         public int HallsNumber { get; }
-
 
         [NotNull]
         public string Name { get; }
 
         [NotNull]
         public string City { get; }
-
 
         public CinemaModel(
             int id,

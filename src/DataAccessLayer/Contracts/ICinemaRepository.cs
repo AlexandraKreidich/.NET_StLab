@@ -15,7 +15,7 @@ namespace DataAccessLayer.Contracts
 
         Task<int> AddOrUpdateCinema([NotNull] CinemaModel cinema);
 
-        [ItemNotNull]
+        [ItemCanBeNull]
         Task<IEnumerable<HallResponse>> GetHalls(int cinemaId);
 
         [ItemNotNull]

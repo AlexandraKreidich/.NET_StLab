@@ -6,7 +6,8 @@ namespace DataAccessLayer.Models.Entities
     {
         public int Id { get; set; }
 
-        [NotNull] public string Name { get; set; }
+        [NotNull] 
+        public string Name { get; set; }
 
         public decimal Price { get; set; }
     }
