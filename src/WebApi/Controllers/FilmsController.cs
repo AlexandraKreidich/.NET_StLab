@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
@@ -24,9 +23,8 @@ namespace WebApi.Controllers
         {
             _filmsService = filmsService;
         }
-
-
-        // GET /films/now-playing
+        
+        // GET /films/now-playing +
         [Route("now-playing")]
         public async Task<IEnumerable<ApiFilmModel>> GetNowPlayingFilms()
         {
@@ -35,23 +33,25 @@ namespace WebApi.Controllers
             return films.Select(Mapper.Map<ApiFilmModel>);
         }
 
-        // GET /films
+        // GET /films +
         [HttpGet]
-        public IEnumerable<FilmModel> Get()
+        public async Task<IEnumerable<ApiFilmModel>> Get()
         {
-            List<FilmModel> films = new List<FilmModel>();
-            return films;
+            IEnumerable<BlFilmModel> films = await _filmsService.GetFilms();
+
+            return films.Select(Mapper.Map<ApiFilmModel>);
         }
 
-        // GET /films/{id}
+        // GET /films/{id} +
         [HttpGet("{id:int}")]
-        public FilmModel Get(int id)
+        public async Task<ApiFilmModel> Get(int id)
         {
-            FilmModel film = new FilmModel();
-            return film;
+            BlFilmModel film = await _filmsService.GetFilmsById(id);
+
+            return Mapper.Map<ApiFilmModel>(film);
         }
 
-        // GET /films/{id}/sessions
+        // GET /films/{id}/sessions -> sp created
         [HttpGet("{id:int}/sessions")]
         public IEnumerable<SessionModelResponseForFilmApi> GetSessions(int id)
         {
@@ -62,13 +62,13 @@ namespace WebApi.Controllers
         // POST /films/search-films
         [HttpPost]
         [Route("search-films")]
-        public IEnumerable<FilmModel> SearchFilms([FromBody]FilmFilterModel request)
+        public IEnumerable<ApiFilmModel> SearchFilms([FromBody]FilmFilterModel request)
         {
-            List<FilmModel> responseFilms = new List<FilmModel>();
+            List<ApiFilmModel> responseFilms = new List<ApiFilmModel>();
             return responseFilms;
         }
 
-        //POST /films/{id}/add-service
+        //POST /films/{id}/add-service -> sessions ctrl
         [HttpPost]
         [Route("{id:int}/add-service")]
         public IActionResult AddService([FromBody] int serviceId){
@@ -77,7 +77,7 @@ namespace WebApi.Controllers
 
         // PUT /films --> add or update film
         [HttpPut]
-        public IActionResult Put([FromBody]FilmModel filmToAdd)
+        public IActionResult Put([FromBody]ApiFilmModel filmToAdd)
         {
             return StatusCode((int)HttpStatusCode.Created);
         }

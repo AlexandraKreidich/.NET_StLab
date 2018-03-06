@@ -33,5 +33,33 @@ namespace DataAccessLayer.Repositories
                 return films.Select(Mapper.Map<FilmModel>);
             }
         }
+
+        public async Task<IEnumerable<FilmModel>> GetFilms()
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<Film> films = await connection.QueryAsync<Film>(
+                    "GetFilms",
+                    commandType: CommandType.StoredProcedure);
+
+                return films.Select(Mapper.Map<FilmModel>);
+            }
+        }
+
+        public async Task<FilmModel> GetFilmById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                Film film = await connection.QuerySingleOrDefaultAsync<Film>(
+                    "GetFilms",
+                    new
+                    {
+                        Id = id
+                    },
+                    commandType: CommandType.StoredProcedure);
+
+                return Mapper.Map<FilmModel>(film);
+            }
+        }
     }
 }

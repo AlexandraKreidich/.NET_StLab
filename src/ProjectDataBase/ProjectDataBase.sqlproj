@@ -77,6 +77,9 @@
     <Build Include="Stored Procedures\DeleteService.sql" />
     <Build Include="Stored Procedures\GetFilms.sql" />
     <Build Include="Stored Procedures\GetNowPlayingFilms.sql" />
+    <Build Include="Stored Procedures\GetFilmById.sql" />
+    <Build Include="Stored Procedures\GetAllSessionsForFilm.sql" />
+    <Build Include="Stored Procedures\FilterFilms.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
