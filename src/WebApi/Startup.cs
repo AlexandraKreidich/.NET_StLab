@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using AutoMapper;
 using BusinessLayer;
 using DataAccessLayer;
 using DataAccessLayer.Contracts;
@@ -37,6 +38,13 @@ namespace WebApi
             DalModule.Register(services);
             BlModule.Register(services);
             WebApiModule.Register(services);
+
+            Mapper.Initialize(config =>
+                {
+                    DalMappings.Initialize(config);
+                    BlMappings.Initialize(config);
+                    WebApiMappings.Initialize(config);
+                });
 
             // ===== Add Jwt Authentication ========
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims

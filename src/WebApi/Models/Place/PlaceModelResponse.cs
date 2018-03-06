@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int HallId { get; set; }
-        public int PlaceType { get; set; }
+        public int Type { get; set; }
         public int PlaceStatus { get; set; }
         public int PlaceNumber { get; set; }
         public int RowNumber { get; set; }

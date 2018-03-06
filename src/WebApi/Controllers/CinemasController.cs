@@ -1,50 +1,94 @@
 ﻿using System.Collections.Generic;
-using System.Net;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using BusinessLayer.Contracts;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models.Cinema;
-using WebApi.Models.Hall;
+using WebApi.Models.Place;
+using BlHallModelResponse = BusinessLayer.Models.HallModelResponse;
+using ApiHallModelResponse = WebApi.Models.Hall.HallModelResponse;
+using ApiHallSchemeModelResponse = WebApi.Models.Hall.HallSchemeModelResponse;
+using ApiCinemaModel = WebApi.Models.Cinema.CinemaModel;
+using CinemaModel = BusinessLayer.Models.CinemaModel;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class CinemasController : Controller
     {
+        [NotNull]
+        private readonly ICinemasService _cinemasService;
+
+        public CinemasController([NotNull] ICinemasService cinemasService)
+        {
+            _cinemasService = cinemasService;
+        }
+
         // GET /cinemas
         [HttpGet]
-        public IEnumerable<CinemaModelResponse> Get()
+        public async Task<IActionResult> Get()
         {
-            //User.FindFirst(ClaimTypes.NameIdentifier);
-            List<CinemaModelResponse> cinemas = new List<CinemaModelResponse>();
-            return cinemas;
+            IEnumerable<CinemaModel> cinemas = await _cinemasService.GetCinemas();
+
+            return Ok(
+                cinemas.Select(Mapper.Map<ApiCinemaModel>)
+                );
         }
 
         // GET /cinemas/{id}
         [HttpGet("{id:int}")]
-        public CinemaModelResponse Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var cinema = new CinemaModelResponse();
-            return cinema;
+            CinemaModel cinema = await _cinemasService.GetCinemaById(id);
+
+            if (cinema == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(
+                Mapper.Map<ApiCinemaModel>(cinema)
+                );
         }
 
         // GET /cinemas/{id}/halls
-        [HttpGet]
-        public IEnumerable<HallModel> GetHalls(){
-            List<HallModel> halls = new List<HallModel>();
-            return halls;
+        [HttpGet("{id:int}/halls")]
+        public async Task<IActionResult> GetHalls(int id)
+        {
+            IEnumerable<BlHallModelResponse> halls = await _cinemasService.GetHalls(id);
+
+            if (halls == null)
+            {
+                NotFound();
+            }
+
+            List<ApiHallModelResponse> results = new List<ApiHallModelResponse>();
+
+            if (halls != null)
+            {
+                results = halls.Select(hall => new ApiHallModelResponse(
+                        hall.Id,
+                        hall.CinemaId,
+                        hall.Name,
+                        hall.Places.Select(Mapper.Map<PlaceModelResponseForHall>).ToArray(),
+                        hall.HallSchemeModels.Select(Mapper.Map<ApiHallSchemeModelResponse>).ToArray())
+                    ).ToList();
+            }
+
+            return Ok(results);
         }
 
-        // PUT /cinemas
+        // PUT /cinemas -> add or update cinema
         [HttpPut]
-        public IActionResult Put([FromBody]CinemaModelRequest cinema)
+        public async Task<IActionResult> Put([FromBody]ApiCinemaModel cinema)
         {
-            return StatusCode((int)HttpStatusCode.Created);
-        }
+            CinemaModel cinemaResponse =
+                await _cinemasService.AddOrUpdateCinema(Mapper.Map<CinemaModel>(cinema));
 
-        // DELETE /cinemas/{id}
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            return StatusCode((int)HttpStatusCode.Accepted);
+            return Ok(
+                Mapper.Map<ApiCinemaModel>(cinemaResponse)
+                );
         }
     }
 }

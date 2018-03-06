@@ -6,6 +6,7 @@ using WebApi.Models.Ticket;
 
 namespace WebApi.Controllers
 {
+    //User.FindFirst(ClaimTypes.NameIdentifier);
     [Route("api/[controller]")]
     [Authorize(Roles = "User")]
     public class TicketsController : Controller

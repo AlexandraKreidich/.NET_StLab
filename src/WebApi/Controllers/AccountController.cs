@@ -34,6 +34,11 @@ namespace WebApi.Controllers
 
             UserModel user = await _userService.Login(model.Email, model.Password);
 
+            if (user == null)
+            {
+                return BadRequest("Invalid login or password");
+            }
+
             string token = _jwtService.GenerateJwtToken(user);
 
             return Ok(new ResponseModel
@@ -65,6 +70,11 @@ namespace WebApi.Controllers
             );
 
             UserModel user = await _userService.Register(registerUserModel);
+
+            if (user == null)
+            {
+                return BadRequest("User already exists");
+            }
 
             string token = _jwtService.GenerateJwtToken(user);
 

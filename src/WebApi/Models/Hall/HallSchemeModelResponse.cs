@@ -3,17 +3,17 @@
 namespace WebApi.Models.Hall
 {
     [UsedImplicitly]
-    public class HallSchemeModel
+    public class HallSchemeModelResponse
     {
-        public int Id { get;}
+        public int Id { get; }
 
         public int HallId { get;}
 
-        public int RowNumber { get;}
+        public int RowNumber { get; }
 
-        public int PlacesCount { get;}
+        public int PlacesCount { get; }
 
-        public HallSchemeModel(
+        public HallSchemeModelResponse(
             int id,
             int hallId,
             int rowNumber,
