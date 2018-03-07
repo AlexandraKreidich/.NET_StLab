@@ -16,13 +16,20 @@ AS
         Session.Date as SessionDate
     FROM Hall
         JOIN Cinema ON hall.CinemaId = Cinema.Id
-        JOIN Session ON Session.HallId = Hall.Id
-        JOIN Film ON Session.FilmId = Film.Id
-        JOIN Place ON Hall.Id = Place.HallId
-        JOIN Ticket ON Ticket.PlaceId = Place.Id
-    WHERE (Cinema.Name = @Cinema) 
-        AND (Cinema.City = @City)
-        AND (Session.Date >= @date
-            AND Session.Date < DATEADD(d, 1, @date))
-        AND (Film.Name = @Film)
-        AND ((select count(Id) from Ticket) > @FreePlaces)
+        JOIN Session s ON s.HallId = Hall.Id
+        JOIN Place p ON Hall.Id = p.HallId,
+        Film
+        JOIN Session ON Session.FilmId = Film.Id,
+        Ticket
+        JOIN Place ON Ticket.PlaceId = Place.Id
+    WHERE (@Cinema is null 
+            or Cinema.Name = @Cinema) 
+        AND (@City is null 
+            or Cinema.City = @City)
+        AND (@date is null 
+            or (Session.Date >= @date
+                AND Session.Date < DATEADD(d, 1, @date)))
+        AND (@Film is null 
+            or Film.Name = @Film)
+        AND (@FreePlaces is null 
+            or (select count(Id) from Ticket) > @FreePlaces)
