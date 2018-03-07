@@ -3,12 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Place;
-using BlHallModelResponse = BusinessLayer.Models.HallModelResponse;
-using ApiHallModelResponse = WebApi.Models.Hall.HallModelResponse;
-using ApiHallSchemeModelResponse = WebApi.Models.Hall.HallSchemeModelResponse;
+using ApiHallModelResponse = WebApi.Models.Hall.HallModel;
+using ApiHallSchemeModelResponse = WebApi.Models.Hall.HallSchemeModel;
 using ApiCinemaModel = WebApi.Models.Cinema.CinemaModel;
 using CinemaModel = BusinessLayer.Models.CinemaModel;
 
@@ -56,7 +56,7 @@ namespace WebApi.Controllers
         [HttpGet("{id:int}/halls")]
         public async Task<IActionResult> GetHalls(int id)
         {
-            IEnumerable<BlHallModelResponse> halls = await _cinemasService.GetHalls(id);
+            IEnumerable<HallModelForApi> halls = await _cinemasService.GetHalls(id);
 
             if (halls == null)
             {
@@ -71,7 +71,7 @@ namespace WebApi.Controllers
                         hall.Id,
                         hall.CinemaId,
                         hall.Name,
-                        hall.Places.Select(Mapper.Map<PlaceModelResponseForHall>).ToArray(),
+                        hall.Places.Select(Mapper.Map<PlaceModelForHall>).ToArray(),
                         hall.HallSchemeModels.Select(Mapper.Map<ApiHallSchemeModelResponse>).ToArray())
                     ).ToList();
             }

@@ -82,6 +82,7 @@
     <Build Include="Stored Procedures\FilterFilms.sql" />
     <Build Include="Stored Procedures\AddOrUpdateFilm.sql" />
     <Build Include="Stored Procedures\DeleteFilm.sql" />
+    <Build Include="Stored Procedures\GetHallById.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

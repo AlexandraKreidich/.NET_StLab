@@ -25,9 +25,9 @@ namespace WebApi.Controllers
         {
             _filmsService = filmsService;
         }
-        
+
         // GET /films/now-playing +
-        [Route("now-playing")]
+        [HttpGet("now-playing")]
         public async Task<IActionResult> GetNowPlayingFilms()
         {
             IEnumerable<BlFilmModel> films = await _filmsService.GetNowPlayingFilms();

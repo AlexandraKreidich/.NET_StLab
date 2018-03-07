@@ -1,35 +1,42 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
+using System.Threading.Tasks;
+using BusinessLayer.Contracts;
+using BusinessLayer.Models;
+using DataAccessLayer.Contracts;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models.Hall;
-using WebApi.Models.Place;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class HallsController : Controller
     {
-        // GET /halls/{id}/scheme
-        [HttpGet]
-        [Route("{id:int}/scheme")]
-        public IEnumerable<HallSchemeModel> GetScheme(int id)
+        [NotNull]
+        private readonly IHallsService _hallsService;
+
+        public HallsController([NotNull] IHallsService hallsService)
         {
-            List<HallSchemeModel> scheme = new List<HallSchemeModel>();
-            return scheme;
+            _hallsService = hallsService;
         }
 
-        // GET /halls/{id}/places
+        // GET /halls/{id}
         [HttpGet]
-        [Route("{id:int}/places")]
-        public IEnumerable<PlaceModelResponse> Get(int id)
+        [Route("{id:int}")]
+        public async Task<IActionResult> Get(int id)
         {
-            List<PlaceModelResponse> places = new List<PlaceModelResponse>();
-            return places;
+            HallModelForApi hall = await _hallsService.GetHall(id);
+
+            if (hall == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(hall);
         }
 
         // PUT /halls
         [HttpPut]
-        public IActionResult Put([FromBody]HallModel hall)
+        public IActionResult Put(/*[FromBody]HallModel hall*/)
         {
             return StatusCode((int)HttpStatusCode.Created);
         }

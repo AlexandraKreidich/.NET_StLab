@@ -14,6 +14,7 @@ using DalFilmFilterModel = DataAccessLayer.Models.DataTransferObjects.FilmFilter
 
 namespace BusinessLayer.Services
 {
+    [UsedImplicitly]
     public class FilmsService : IFilmsService
     {
         [NotNull]

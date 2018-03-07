@@ -66,7 +66,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<HallResponse>> GetHalls(int cinemaId)
+        public async Task<IEnumerable<HallModel>> GetHalls(int cinemaId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -78,11 +78,11 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return halls.Select(Mapper.Map<HallResponse>);
+                return halls.Select(Mapper.Map<HallModel>);
             }
         }
 
-        public async Task<IEnumerable<PlaceResponse>> GetPlaces(int hallId)
+        public async Task<IEnumerable<PlaceModel>> GetPlaces(int hallId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -94,11 +94,11 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return places.Select(Mapper.Map<PlaceResponse>);
+                return places.Select(Mapper.Map<PlaceModel>);
             }
         }
 
-        public async Task<IEnumerable<HallSchemeResponse>> GetHallScheme(int hallId)
+        public async Task<IEnumerable<HallSchemeModel>> GetHallScheme(int hallId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -110,7 +110,7 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return scheme.Select(Mapper.Map<HallSchemeResponse>);
+                return scheme.Select(Mapper.Map<HallSchemeModel>);
             }
         }
     }

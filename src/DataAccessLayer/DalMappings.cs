@@ -12,9 +12,9 @@ namespace DataAccessLayer
             configuration.CreateMap<User, UserResponse>();
             configuration.CreateMap<Cinema, CinemaModel>();
             configuration.CreateMap<CinemaModel, Cinema>();
-            configuration.CreateMap<Hall, HallResponse>();
-            configuration.CreateMap<Place, PlaceResponse>();
-            configuration.CreateMap<HallScheme, HallSchemeResponse>();
+            configuration.CreateMap<Hall, HallModel>();
+            configuration.CreateMap<Place, PlaceModel>();
+            configuration.CreateMap<HallScheme, HallSchemeModel>();
             configuration.CreateMap<Service, ServiceModel>();
             configuration.CreateMap<ServiceModel, Service>();
             configuration.CreateMap<Film, FilmModel>();

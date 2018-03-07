@@ -7,14 +7,14 @@ namespace WebApi.Models.Film
     {
         public int Id { get; set; }
 
-        [NotNull] 
-        protected string Name { get; set; }
+        [NotNull]
+        public string Name { get; set; }
 
-        [NotNull] 
-        protected string Description { get; set; }
+        [NotNull]
+        public string Description { get; set; }
 
-        protected DateTimeOffset StartRentDate { get; set; }
+        public DateTimeOffset StartRentDate { get; set; }
 
-        protected DateTimeOffset EndRentDate { get; set; }
+        public DateTimeOffset EndRentDate { get; set; }
     }
 }

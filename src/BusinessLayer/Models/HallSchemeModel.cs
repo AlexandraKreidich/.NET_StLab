@@ -3,7 +3,7 @@
 namespace BusinessLayer.Models
 {
     [UsedImplicitly]
-    public class HallSchemeModelResponse
+    public class HallSchemeModel
     {
         public int Id { get;}
 
@@ -13,7 +13,7 @@ namespace BusinessLayer.Models
 
         public int PlacesCount { get;}
 
-        public HallSchemeModelResponse(
+        public HallSchemeModel(
             int id,
             int hallId,
             int rowNumber,

@@ -3,7 +3,7 @@
 namespace DataAccessLayer.Models.DataTransferObjects
 {
     [UsedImplicitly]
-    public class PlaceResponse
+    public class PlaceModel
     {
         public int Id { get;}
         public int HallId { get;}
@@ -12,7 +12,7 @@ namespace DataAccessLayer.Models.DataTransferObjects
         public int PlaceNumber { get;}
         public int RowNumber { get;}
 
-        public PlaceResponse(
+        public PlaceModel(
             int id,
             int hallId,
             [NotNull] string type,

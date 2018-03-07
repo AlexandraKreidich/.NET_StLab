@@ -3,7 +3,7 @@
 namespace DataAccessLayer.Models.DataTransferObjects
 {
     [UsedImplicitly]
-    public class HallSchemeResponse
+    public class HallSchemeModel
     {
 
         public int Id { get; set; }

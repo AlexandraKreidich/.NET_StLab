@@ -42,7 +42,9 @@ namespace DataAccessLayer.Repositories
                     "GetFilms",
                     commandType: CommandType.StoredProcedure);
 
-                return films.Select(Mapper.Map<FilmModel>);
+                IEnumerable<FilmModel> filmModels = films.Select(Mapper.Map<FilmModel>);
+
+                return filmModels;
             }
         }
 

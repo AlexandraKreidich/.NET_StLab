@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using BusinessLayer.Models;
 using JetBrains.Annotations;
+using WebApi.Models.Cinema;
 using WebApi.Models.Place;
-using PlaceModelResponse = BusinessLayer.Models.PlaceModelResponse;
+using WebApi.Models.Hall;
+using WebApi.Models.Service;
+using WebApi.Models.Session;
+using WebApi.Models.Film;
+using HallModelForApi = BusinessLayer.Models.HallModelForApi;
 using BlServiceModel = BusinessLayer.Models.ServiceModel;
-using ApiServiceModel = WebApi.Models.Service.ServiceModel;
-using ApiCinemaModel = WebApi.Models.Cinema.CinemaModel;
-using ApiFilmModel = WebApi.Models.Film.FilmModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
-using ApiSessionModelResponseForFilmsCtrl = WebApi.Models.Session.SessionModelResponseForFilmsCtrl;
 using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
 using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
-using ApiFilmFilterModel = WebApi.Models.Film.FilmFilterModel;
+using PlaceModel = BusinessLayer.Models.PlaceModel;
 
 namespace WebApi
 {
@@ -19,16 +19,16 @@ namespace WebApi
     {
         public static void Initialize([NotNull] IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<ApiCinemaModel, CinemaModel>();
-            configuration.CreateMap<CinemaModel, ApiCinemaModel>();
-            configuration.CreateMap<PlaceModelResponse, PlaceModelResponseForHall>();
-            configuration.CreateMap<HallSchemeModelResponse, Models.Hall.HallSchemeModelResponse>();
-            configuration.CreateMap<HallModelResponse, Models.Hall.HallModelResponse>();
-            configuration.CreateMap<BlServiceModel, ApiServiceModel>();
-            configuration.CreateMap<ApiServiceModel, BlServiceModel>();
-            configuration.CreateMap<BlFilmModel, ApiFilmModel>();
-            configuration.CreateMap<ApiSessionModelResponseForFilmsCtrl, BlSessionModelResponseForFilmsCtrl>();
-            configuration.CreateMap<ApiFilmFilterModel, BlFilmFilterModel>();
+            configuration.CreateMap<CinemaModel, CinemaModel>();
+            configuration.CreateMap<CinemaModel, CinemaModel>();
+            configuration.CreateMap<PlaceModel, PlaceModelForHall>();
+            configuration.CreateMap<HallSchemeModel, HallSchemeModel>();
+            configuration.CreateMap<HallModelForApi, HallModel>();
+            configuration.CreateMap<BlServiceModel, ServiceModel>();
+            configuration.CreateMap<ServiceModel, BlServiceModel>();
+            configuration.CreateMap<BlFilmModel, FilmModel>();
+            configuration.CreateMap<SessionModelResponseForFilmsCtrl, BlSessionModelResponseForFilmsCtrl>();
+            configuration.CreateMap<FilmFilterModel, BlFilmFilterModel>();
         }
     }
 }

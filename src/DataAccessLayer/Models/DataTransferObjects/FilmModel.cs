@@ -3,19 +3,20 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
+    [UsedImplicitly]
     public class FilmModel
     {
-        public int Id { get; set; }
+        public int Id { get;}
 
         [NotNull]
-        public string Name { get; set; }
+        public string Name { get;}
 
         [NotNull]
-        public string Description { get; set; }
+        public string Description { get;}
 
-        public DateTimeOffset StartRentDate { get; set; }
+        public DateTimeOffset StartRentDate { get;}
 
-        public DateTimeOffset EndRentDate { get; set; }
+        public DateTimeOffset EndRentDate { get;}
 
         public FilmModel(
             int id,
