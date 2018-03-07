@@ -6,13 +6,14 @@
     @FreePlaces int
 AS
     SET @date = CONVERT(DATETIME, @Date, 120);
-    SELECT
+    SELECT DISTINCT
         Session.Id,
         Session.HallId,
         Session.FilmId,
-        Session.Date,
+        Film.Name as FilmName,
         Cinema.Name as CinemaName,
-        Cinema.City as CinemaCity
+        Cinema.City as CinemaCity,
+        Session.Date as SessionDate
     FROM Hall
         JOIN Cinema ON hall.CinemaId = Cinema.Id
         JOIN Session ON Session.HallId = Hall.Id
@@ -25,4 +26,3 @@ AS
             AND Session.Date < DATEADD(d, 1, @date))
         AND (Film.Name = @Film)
         AND ((select count(Id) from Ticket) > @FreePlaces)
-

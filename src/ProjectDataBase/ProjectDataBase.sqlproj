@@ -80,6 +80,8 @@
     <Build Include="Stored Procedures\GetFilmById.sql" />
     <Build Include="Stored Procedures\GetAllSessionsForFilm.sql" />
     <Build Include="Stored Procedures\FilterFilms.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateFilm.sql" />
+    <Build Include="Stored Procedures\DeleteFilm.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

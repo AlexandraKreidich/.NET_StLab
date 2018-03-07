@@ -61,5 +61,37 @@ namespace DataAccessLayer.Repositories
                 return Mapper.Map<FilmModel>(film);
             }
         }
+
+        public async Task<IEnumerable<SessionModelResponseForFilmsCtrl>> GetSessionsForFilm(int filmId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<SessionResponseForFilmsCtrl> sessions = await connection.QueryAsync<SessionResponseForFilmsCtrl>(
+                    "GetAllSessionsForFilm",
+                    commandType: CommandType.StoredProcedure);
+
+                return sessions.Select(Mapper.Map<SessionModelResponseForFilmsCtrl>);
+            }
+        }
+
+        public async Task<IEnumerable<SessionModelResponseForFilmsCtrl>> SearchFilms(FilmFilterModel filters)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<SessionResponseForFilmsCtrl> sessions = await connection.QueryAsync<SessionResponseForFilmsCtrl>(
+                    "FilterFilms",
+                    new
+                    {
+                        City = filters.City,
+                        Cinema = filters.Cinema,
+                        Film = filters.Film,
+                        Date = filters.Date,
+                        FreePlaces = filters.FreePlaces
+                    },
+                    commandType: CommandType.StoredProcedure);
+
+                return sessions.Select(Mapper.Map<SessionModelResponseForFilmsCtrl>);
+            }
+        }
     }
 }

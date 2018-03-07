@@ -7,9 +7,10 @@ using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Film;
-using WebApi.Models.Session;
 using ApiFilmModel = WebApi.Models.Film.FilmModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
+using ApiSessionModelResponseForFilmsCtrl = WebApi.Models.Session.SessionModelResponseForFilmsCtrl;
+using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
 
 namespace WebApi.Controllers
 {
@@ -51,18 +52,19 @@ namespace WebApi.Controllers
             return Mapper.Map<ApiFilmModel>(film);
         }
 
-        // GET /films/{id}/sessions -> sp created
+        // GET /films/{id}/sessions +
         [HttpGet("{id:int}/sessions")]
-        public IEnumerable<SessionModelResponseForFilmApi> GetSessions(int id)
+        public async Task<IEnumerable<ApiSessionModelResponseForFilmsCtrl>> GetSessions(int id)
         {
-            List<SessionModelResponseForFilmApi> sessions = new List<SessionModelResponseForFilmApi>();
-            return sessions;
+            IEnumerable<BlSessionModelResponseForFilmsCtrl> sessions = await _filmsService.GetSessionsForFilm(id);
+
+            return sessions.Select(Mapper.Map<ApiSessionModelResponseForFilmsCtrl>);
         }
 
-        // POST /films/search-films
+        // POST /films/search-films +
         [HttpPost]
         [Route("search-films")]
-        public IEnumerable<ApiFilmModel> SearchFilms([FromBody]FilmFilterModel request)
+        public IEnumerable<ApiFilmModel> SearchFilms([NotNull] [FromBody]FilmFilterModel request)
         {
             List<ApiFilmModel> responseFilms = new List<ApiFilmModel>();
             return responseFilms;
@@ -75,14 +77,14 @@ namespace WebApi.Controllers
             return StatusCode((int)HttpStatusCode.Created);
         }
 
-        // PUT /films --> add or update film
+        // PUT /films --> add or update film sp created
         [HttpPut]
         public IActionResult Put([FromBody]ApiFilmModel filmToAdd)
         {
             return StatusCode((int)HttpStatusCode.Created);
         }
 
-        // DELETE /films/{id}
+        // DELETE /films/{id} sp created
         [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)
         {

@@ -10,6 +10,10 @@ using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
 using DalStoredProcedureResult = DataAccessLayer.StoredProcedureExecutionResult;
 using BlStoredProcedureResult = BusinessLayer.StoredProcedureExecutionResult;
+using DalSessionModelResponseForFilmsCtrl = DataAccessLayer.Models.DataTransferObjects.SessionModelResponseForFilmsCtrl;
+using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
+using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
+using DalFilmFilterModel = DataAccessLayer.Models.DataTransferObjects.FilmFilterModel;
 
 namespace BusinessLayer
 {
@@ -24,6 +28,8 @@ namespace BusinessLayer
             configuration.CreateMap<BlServiceModel, DalServiceModel>();
             configuration.CreateMap<DalFilmModel, BlFilmModel>();
             configuration.CreateMap<DalStoredProcedureResult, BlStoredProcedureResult>();
+            configuration.CreateMap<DalSessionModelResponseForFilmsCtrl, BlSessionModelResponseForFilmsCtrl>();
+            configuration.CreateMap<BlFilmFilterModel, DalFilmFilterModel>();
         }
     }
 }

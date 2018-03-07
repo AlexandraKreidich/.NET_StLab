@@ -3,10 +3,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
+using DalSessionModelResponseForFilmsCtrl = DataAccessLayer.Models.DataTransferObjects.SessionModelResponseForFilmsCtrl;
+using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
+using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
+using DalFilmFilterModel = DataAccessLayer.Models.DataTransferObjects.FilmFilterModel;
 
 namespace BusinessLayer.Services
 {
@@ -39,6 +44,20 @@ namespace BusinessLayer.Services
             DalFilmModel film = await _filmRepository.GetFilmById(id);
 
             return Mapper.Map<BlFilmModel>(film);
+        }
+
+        public async Task<IEnumerable<BlSessionModelResponseForFilmsCtrl>> GetSessionsForFilm(int filmId)
+        {
+            IEnumerable<DalSessionModelResponseForFilmsCtrl> sessions = await _filmRepository.GetSessionsForFilm(filmId);
+
+            return sessions.Select(Mapper.Map<BlSessionModelResponseForFilmsCtrl>);
+        }
+
+        public async Task<IEnumerable<BlSessionModelResponseForFilmsCtrl>> SearchFilms(BlFilmFilterModel filters)
+        {
+            IEnumerable<DalSessionModelResponseForFilmsCtrl> sessions = await _filmRepository.SearchFilms(Mapper.Map<DalFilmFilterModel>(filters));
+
+            return sessions.Select(Mapper.Map<BlSessionModelResponseForFilmsCtrl>);
         }
     }
 }

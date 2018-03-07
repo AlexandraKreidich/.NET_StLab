@@ -15,5 +15,11 @@ namespace DataAccessLayer.Contracts
 
         [ItemCanBeNull]
         Task<FilmModel> GetFilmById(int id);
+
+        [ItemNotNull]
+        Task<IEnumerable<SessionModelResponseForFilmsCtrl>> GetSessionsForFilm(int filmId);
+
+        [ItemNotNull]
+        Task<IEnumerable<SessionModelResponseForFilmsCtrl>> SearchFilms([NotNull] FilmFilterModel filters);
     } 
 }

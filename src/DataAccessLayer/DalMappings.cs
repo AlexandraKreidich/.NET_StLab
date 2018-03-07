@@ -18,6 +18,8 @@ namespace DataAccessLayer
             configuration.CreateMap<Service, ServiceModel>();
             configuration.CreateMap<ServiceModel, Service>();
             configuration.CreateMap<Film, FilmModel>();
+            configuration.CreateMap<SessionResponseForFilmsCtrl, SessionModelResponseForFilmsCtrl>();
+            configuration.CreateMap<SessionResponseForFilmsCtrl, SessionModelResponseForFilmsCtrl>();
         }
     }
 }
