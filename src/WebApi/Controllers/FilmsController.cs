@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models.Film;
 using ApiFilmModel = WebApi.Models.Film.FilmModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
 using ApiSessionModelResponseForFilmsCtrl = WebApi.Models.Session.SessionModelResponseForFilmsCtrl;
 using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
+using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
+using ApiFilmFilterModel = WebApi.Models.Film.FilmFilterModel;
+
 
 namespace WebApi.Controllers
 {
@@ -27,11 +28,13 @@ namespace WebApi.Controllers
         
         // GET /films/now-playing +
         [Route("now-playing")]
-        public async Task<IEnumerable<ApiFilmModel>> GetNowPlayingFilms()
+        public async Task<IActionResult> GetNowPlayingFilms()
         {
             IEnumerable<BlFilmModel> films = await _filmsService.GetNowPlayingFilms();
 
-            return films.Select(Mapper.Map<ApiFilmModel>);
+            return Ok(
+                    films.Select(Mapper.Map<ApiFilmModel>)
+                );
         }
 
         // GET /films +
@@ -45,50 +48,62 @@ namespace WebApi.Controllers
 
         // GET /films/{id} +
         [HttpGet("{id:int}")]
-        public async Task<ApiFilmModel> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             BlFilmModel film = await _filmsService.GetFilmsById(id);
 
-            return Mapper.Map<ApiFilmModel>(film);
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(
+                Mapper.Map<ApiFilmModel>(film)
+                );
         }
 
         // GET /films/{id}/sessions +
         [HttpGet("{id:int}/sessions")]
-        public async Task<IEnumerable<ApiSessionModelResponseForFilmsCtrl>> GetSessions(int id)
+        public async Task<IActionResult> GetSessions(int id)
         {
             IEnumerable<BlSessionModelResponseForFilmsCtrl> sessions = await _filmsService.GetSessionsForFilm(id);
 
-            return sessions.Select(Mapper.Map<ApiSessionModelResponseForFilmsCtrl>);
+            if (sessions == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(
+                sessions.Select(Mapper.Map<ApiSessionModelResponseForFilmsCtrl>)
+                );
         }
 
         // POST /films/search-films +
         [HttpPost]
         [Route("search-films")]
-        public IEnumerable<ApiFilmModel> SearchFilms([NotNull] [FromBody]FilmFilterModel request)
+        public async Task<IActionResult> SearchFilms([NotNull] [FromBody]ApiFilmFilterModel request)
         {
-            List<ApiFilmModel> responseFilms = new List<ApiFilmModel>();
-            return responseFilms;
+            IEnumerable<BlSessionModelResponseForFilmsCtrl> sessions = await _filmsService.SearchFilms(Mapper.Map<BlFilmFilterModel>(request));
+
+            if (sessions == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(
+                sessions.Select(Mapper.Map<ApiSessionModelResponseForFilmsCtrl>)
+                );
         }
 
-        //POST /films/{id}/add-service -> sessions ctrl
-        [HttpPost]
-        [Route("{id:int}/add-service")]
-        public IActionResult AddService([FromBody] int serviceId){
-            return StatusCode((int)HttpStatusCode.Created);
-        }
-
-        // PUT /films --> add or update film sp created
+        // PUT /films --> add or update film
         [HttpPut]
-        public IActionResult Put([FromBody]ApiFilmModel filmToAdd)
+        public async Task<IActionResult> Put([FromBody]ApiFilmModel filmToAdd)
         {
-            return StatusCode((int)HttpStatusCode.Created);
-        }
+            BlFilmModel film = await _filmsService.AddOrUpdateFilm(Mapper.Map<BlFilmModel>(filmToAdd));
 
-        // DELETE /films/{id} sp created
-        [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
-        {
-            return StatusCode((int)HttpStatusCode.Accepted);
+            return Ok(
+                Mapper.Map<ApiFilmModel>(film)
+                );
         }
     }
 }

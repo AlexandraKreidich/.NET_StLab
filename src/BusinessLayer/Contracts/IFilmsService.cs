@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
-using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
-using DalSessionModelResponseForFilmsCtrl = DataAccessLayer.Models.DataTransferObjects.SessionModelResponseForFilmsCtrl;
 using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
 
 namespace BusinessLayer.Contracts
@@ -20,10 +18,13 @@ namespace BusinessLayer.Contracts
         [ItemCanBeNull]
         Task<BlFilmModel> GetFilmsById(int id);
 
-        [ItemNotNull]
+        [ItemCanBeNull]
         Task<IEnumerable<BlSessionModelResponseForFilmsCtrl>> GetSessionsForFilm(int filmId);
 
+        [ItemCanBeNull]
+        Task<IEnumerable<BlSessionModelResponseForFilmsCtrl>> SearchFilms([NotNull] FilmFilterModel filters);
+
         [ItemNotNull]
-        Task<IEnumerable<SessionModelResponseForFilmsCtrl>> SearchFilms([NotNull] FilmFilterModel filters);
+        Task<BlFilmModel> AddOrUpdateFilm([NotNull] BlFilmModel film);
     }
 }

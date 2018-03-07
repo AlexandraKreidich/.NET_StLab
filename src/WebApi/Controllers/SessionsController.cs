@@ -25,6 +25,14 @@ namespace WebApi.Controllers
             return sessions;
         }
 
+        //POST /sessions/{id}/add-service
+        [HttpPost]
+        [Route("{id:int}/add-service")]
+        public IActionResult AddService([FromBody] int serviceId)
+        {
+            return StatusCode((int)HttpStatusCode.Created);
+        }
+
         // DELETE /sessions/{id}
         [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)

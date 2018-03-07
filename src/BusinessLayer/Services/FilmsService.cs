@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
-using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
@@ -58,6 +57,19 @@ namespace BusinessLayer.Services
             IEnumerable<DalSessionModelResponseForFilmsCtrl> sessions = await _filmRepository.SearchFilms(Mapper.Map<DalFilmFilterModel>(filters));
 
             return sessions.Select(Mapper.Map<BlSessionModelResponseForFilmsCtrl>);
+        }
+
+        public async Task<BlFilmModel> AddOrUpdateFilm(BlFilmModel film)
+        {
+            int id = await _filmRepository.AddOrUpdateFilm(Mapper.Map<DalFilmModel>(film));
+
+            return new BlFilmModel(
+                (id != 0) ? id : film.Id,
+                film.Name,
+                film.Description,
+                film.EndRentDate,
+                film.StartRentDate
+            );
         }
     }
 }

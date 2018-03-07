@@ -10,6 +10,8 @@ using ApiFilmModel = WebApi.Models.Film.FilmModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
 using ApiSessionModelResponseForFilmsCtrl = WebApi.Models.Session.SessionModelResponseForFilmsCtrl;
 using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
+using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
+using ApiFilmFilterModel = WebApi.Models.Film.FilmFilterModel;
 
 namespace WebApi
 {
@@ -26,6 +28,7 @@ namespace WebApi
             configuration.CreateMap<ApiServiceModel, BlServiceModel>();
             configuration.CreateMap<BlFilmModel, ApiFilmModel>();
             configuration.CreateMap<ApiSessionModelResponseForFilmsCtrl, BlSessionModelResponseForFilmsCtrl>();
+            configuration.CreateMap<ApiFilmFilterModel, BlFilmFilterModel>();
         }
     }
 }

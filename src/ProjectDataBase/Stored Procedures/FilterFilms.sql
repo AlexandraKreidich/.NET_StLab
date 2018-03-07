@@ -20,7 +20,7 @@ AS
         JOIN Film ON Session.FilmId = Film.Id
         JOIN Place ON Hall.Id = Place.HallId
         JOIN Ticket ON Ticket.PlaceId = Place.Id
-    WHERE (Cinema.Name = @Cinema)
+    WHERE (Cinema.Name = @Cinema) 
         AND (Cinema.City = @City)
         AND (Session.Date >= @date
             AND Session.Date < DATEADD(d, 1, @date))

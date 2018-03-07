@@ -8,14 +8,14 @@ namespace DataAccessLayer.Models.DataTransferObjects
         public int Id { get; set; }
 
         [NotNull]
-        protected string Name { get; set; }
+        public string Name { get; set; }
 
         [NotNull]
-        protected string Description { get; set; }
+        public string Description { get; set; }
 
-        protected DateTimeOffset StartRentDate { get; set; }
+        public DateTimeOffset StartRentDate { get; set; }
 
-        protected DateTimeOffset EndRentDate { get; set; }
+        public DateTimeOffset EndRentDate { get; set; }
 
         public FilmModel(
             int id,

@@ -93,5 +93,25 @@ namespace DataAccessLayer.Repositories
                 return sessions.Select(Mapper.Map<SessionModelResponseForFilmsCtrl>);
             }
         }
+
+        public async Task<int> AddOrUpdateFilm(FilmModel film)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                int id = await connection.ExecuteScalarAsync<int>(
+                    "AddOrUpdateFilm",
+                    new
+                    {
+                        Id = film.Id,
+                        Name = film.Name,
+                        Description = film.Description,
+                        StartRentDate = film.StartRentDate,
+                        EndRentDate = film.EndRentDate
+                    },
+                    commandType: CommandType.StoredProcedure);
+
+                return id;
+            }
+        }
     }
 }
