@@ -5,12 +5,11 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using ApiFilmModel = WebApi.Models.Film.FilmModel;
+using WebApi.Models.Film;
+using WebApi.Models.Session;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
-using ApiSessionModelResponseForFilmsCtrl = WebApi.Models.Session.SessionModelResponseForFilmsCtrl;
 using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
 using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
-using ApiFilmFilterModel = WebApi.Models.Film.FilmFilterModel;
 
 
 namespace WebApi.Controllers
@@ -33,17 +32,17 @@ namespace WebApi.Controllers
             IEnumerable<BlFilmModel> films = await _filmsService.GetNowPlayingFilms();
 
             return Ok(
-                    films.Select(Mapper.Map<ApiFilmModel>)
+                    films.Select(Mapper.Map<FilmModel>)
                 );
         }
 
         // GET /films +
         [HttpGet]
-        public async Task<IEnumerable<ApiFilmModel>> Get()
+        public async Task<IEnumerable<FilmModel>> Get()
         {
             IEnumerable<BlFilmModel> films = await _filmsService.GetFilms();
 
-            return films.Select(Mapper.Map<ApiFilmModel>);
+            return films.Select(Mapper.Map<FilmModel>);
         }
 
         // GET /films/{id} +
@@ -58,7 +57,7 @@ namespace WebApi.Controllers
             }
 
             return Ok(
-                Mapper.Map<ApiFilmModel>(film)
+                Mapper.Map<FilmModel>(film)
                 );
         }
 
@@ -74,14 +73,14 @@ namespace WebApi.Controllers
             }
 
             return Ok(
-                sessions.Select(Mapper.Map<ApiSessionModelResponseForFilmsCtrl>)
+                sessions.Select(Mapper.Map<SessionModelResponseForFilmsCtrl>)
                 );
         }
 
         // POST /films/search-films +
         [HttpPost]
         [Route("search-films")]
-        public async Task<IActionResult> SearchFilms([NotNull] [FromBody]ApiFilmFilterModel request)
+        public async Task<IActionResult> SearchFilms([NotNull] [FromBody]FilmFilterModel request)
         {
             IEnumerable<BlSessionModelResponseForFilmsCtrl> sessions = await _filmsService.SearchFilms(Mapper.Map<BlFilmFilterModel>(request));
 
@@ -91,18 +90,18 @@ namespace WebApi.Controllers
             }
 
             return Ok(
-                sessions.Select(Mapper.Map<ApiSessionModelResponseForFilmsCtrl>)
+                sessions.Select(Mapper.Map<SessionModelResponseForFilmsCtrl>)
                 );
         }
 
         // PUT /films --> add or update film
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]ApiFilmModel filmToAdd)
+        public async Task<IActionResult> Put([FromBody]FilmModel filmToAdd)
         {
             BlFilmModel film = await _filmsService.AddOrUpdateFilm(Mapper.Map<BlFilmModel>(filmToAdd));
 
             return Ok(
-                Mapper.Map<ApiFilmModel>(film)
+                Mapper.Map<FilmModel>(film)
                 );
         }
     }

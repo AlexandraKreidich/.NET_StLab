@@ -12,6 +12,8 @@ using BlFilmModel = BusinessLayer.Models.FilmModel;
 using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
 using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
 using PlaceModel = BusinessLayer.Models.PlaceModel;
+using BlHallSchemeModel = BusinessLayer.Models.HallSchemeModel;
+using BlCinemaModel = BusinessLayer.Models.CinemaModel;
 
 namespace WebApi
 {
@@ -19,10 +21,10 @@ namespace WebApi
     {
         public static void Initialize([NotNull] IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<CinemaModel, CinemaModel>();
-            configuration.CreateMap<CinemaModel, CinemaModel>();
+            configuration.CreateMap<CinemaModel, BlCinemaModel>();
+            configuration.CreateMap<BlCinemaModel, CinemaModel>();
             configuration.CreateMap<PlaceModel, PlaceModelForHall>();
-            configuration.CreateMap<HallSchemeModel, HallSchemeModel>();
+            configuration.CreateMap<BlHallSchemeModel, HallSchemeModel>();
             configuration.CreateMap<HallModelForApi, HallModel>();
             configuration.CreateMap<BlServiceModel, ServiceModel>();
             configuration.CreateMap<ServiceModel, BlServiceModel>();
