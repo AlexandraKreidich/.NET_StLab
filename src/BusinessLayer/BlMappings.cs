@@ -8,7 +8,6 @@ using DalHallSchemeModel = DataAccessLayer.Models.DataTransferObjects.HallScheme
 using DalPlaceModel = DataAccessLayer.Models.DataTransferObjects.PlaceModel;
 using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
-using DalSessionModelResponseForFilmsCtrl = DataAccessLayer.Models.DataTransferObjects.SessionModelResponseForFilmsCtrl;
 
 
 namespace BusinessLayer
@@ -23,7 +22,7 @@ namespace BusinessLayer
             configuration.CreateMap<DalPlaceModel, PlaceModel>();
             configuration.CreateMap<ServiceModel, DalServiceModel>();
             configuration.CreateMap<DalFilmModel, FilmModel>();
-            configuration.CreateMap<DalSessionModelResponseForFilmsCtrl, SessionModelResponseForFilmsCtrl>();
+            configuration.CreateMap<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse, SessionModelResponse>();
             configuration.CreateMap<FilmFilterModel, DalFilmFilterModel>();
             configuration.CreateMap<DataAccessLayer.StoredProcedureExecutionResult, StoredProcedureExecutionResult>();
         }

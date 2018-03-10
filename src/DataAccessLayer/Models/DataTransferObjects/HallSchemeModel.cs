@@ -13,5 +13,18 @@ namespace DataAccessLayer.Models.DataTransferObjects
         public int RowNumber { get; set; }
 
         public int PlacesCount { get; set; }
+
+        public HallSchemeModel(
+            int id,
+            int hallId,
+            int rowNumber,
+            int placesCount
+        )
+        {
+            Id = id;
+            HallId = hallId;
+            RowNumber = rowNumber;
+            PlacesCount = placesCount;
+        }
     }
 }

@@ -29,8 +29,10 @@ namespace DataAccessLayer.Repositories
                 IEnumerable<Film> films = await connection.QueryAsync<Film>(
                     "GetNowPlayingFilms",
                     commandType: CommandType.StoredProcedure);
+                    
+                IEnumerable<FilmModel> filmsResponse = films.Select(Mapper.Map<FilmModel>);
 
-                return films.Select(Mapper.Map<FilmModel>);
+                return filmsResponse;
             }
         }
 
@@ -53,34 +55,40 @@ namespace DataAccessLayer.Repositories
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
                 Film film = await connection.QuerySingleOrDefaultAsync<Film>(
-                    "GetFilms",
+                    "GetFilmById",
                     new
                     {
                         Id = id
                     },
                     commandType: CommandType.StoredProcedure);
 
-                return Mapper.Map<FilmModel>(film);
+                FilmModel filmResponse = Mapper.Map<FilmModel>(film);
+
+                return filmResponse;
             }
         }
 
-        public async Task<IEnumerable<SessionModelResponseForFilmsCtrl>> GetSessionsForFilm(int filmId)
+        public async Task<IEnumerable<SessionModelResponse>> GetSessionsForFilm(int filmId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<SessionResponseForFilmsCtrl> sessions = await connection.QueryAsync<SessionResponseForFilmsCtrl>(
+                IEnumerable<SessionResponse> sessions = await connection.QueryAsync<SessionResponse>(
                     "GetAllSessionsForFilm",
+                    new
+                    {
+                        FilmId = filmId
+                    },
                     commandType: CommandType.StoredProcedure);
 
-                return sessions.Select(Mapper.Map<SessionModelResponseForFilmsCtrl>);
+                return sessions.Select(Mapper.Map<SessionModelResponse>);
             }
         }
 
-        public async Task<IEnumerable<SessionModelResponseForFilmsCtrl>> SearchFilms(FilmFilterModel filters)
+        public async Task<IEnumerable<SessionModelResponse>> SearchFilms(FilmFilterModel filters)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<SessionResponseForFilmsCtrl> sessions = await connection.QueryAsync<SessionResponseForFilmsCtrl>(
+                IEnumerable<SessionResponse> sessions = await connection.QueryAsync<SessionResponse>(
                     "FilterFilms",
                     new
                     {
@@ -92,7 +100,7 @@ namespace DataAccessLayer.Repositories
                     },
                     commandType: CommandType.StoredProcedure);
 
-                return sessions.Select(Mapper.Map<SessionModelResponseForFilmsCtrl>);
+                return sessions.Select(Mapper.Map<SessionModelResponse>);
             }
         }
 

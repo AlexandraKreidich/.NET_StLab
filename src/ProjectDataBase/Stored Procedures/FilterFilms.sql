@@ -1,14 +1,16 @@
 ﻿CREATE PROCEDURE [dbo].[FilterFilms]
-    @City nvarchar(50),
-    @Cinema nvarchar(50),
-    @Film nvarchar(50),
-    @Date datetime,
-    @FreePlaces int
+    @City nvarchar(50) = null,
+    @Cinema nvarchar(50) = null,
+    @Film nvarchar(50) = null,
+    @Date datetime = null,
+    @FreePlaces int = null,
+    @d datetime
 AS
-    SET @date = CONVERT(DATETIME, @Date, 120);
+    SET @d = CONVERT(DATETIME, @Date, 120);
     SELECT DISTINCT
         Session.Id,
         Session.HallId,
+        Hall.Name,
         Session.FilmId,
         Film.Name as FilmName,
         Cinema.Name as CinemaName,
@@ -28,7 +30,7 @@ AS
             or Cinema.City = @City)
         AND (@date is null 
             or (Session.Date >= @date
-                AND Session.Date < DATEADD(d, 1, @date)))
+                AND Session.Date < DATEADD(d, 1, @d)))
         AND (@Film is null 
             or Film.Name = @Film)
         AND (@FreePlaces is null 

@@ -14,7 +14,7 @@ namespace BusinessLayer.Models
         [CanBeNull] 
         public string Film { get; set; }
 
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
 
         public int FreePlaces { get; set; }
     }

@@ -1,13 +1,16 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace DataAccessLayer.Models.DataTransferObjects
+namespace BusinessLayer.Models
 {
-    public class SessionModelResponseForFilmsCtrl
+    public class SessionModelResponse
     {
         public int Id { get; set; }
 
         public int HallId { get; set; }
+
+        [NotNull]
+        public string HallName { get; set; }
 
         public int FilmId { get; set; }
 
@@ -22,9 +25,10 @@ namespace DataAccessLayer.Models.DataTransferObjects
 
         public DateTimeOffset SessionDate { get; set; }
 
-        public SessionModelResponseForFilmsCtrl(
+        public SessionModelResponse(
             int id,
             int hallId,
+            [NotNull] string hallName,
             int filmId,
             [NotNull] string filmName,
             [NotNull] string cinemaName,
@@ -34,6 +38,7 @@ namespace DataAccessLayer.Models.DataTransferObjects
         {
             Id = id;
             HallId = hallId;
+            HallName = hallName;
             FilmId = filmId;
             FilmName = filmName;
             CinemaCity = cinemaCity;

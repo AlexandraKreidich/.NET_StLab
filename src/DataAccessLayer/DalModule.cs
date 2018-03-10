@@ -14,6 +14,7 @@ namespace DataAccessLayer
             collection.AddSingleton<IServiceRepository, ServiceRepository>();
             collection.AddSingleton<IFilmRepository, FilmRepository>();
             collection.AddSingleton<IHallsRepository, HallsRepository>();
+            collection.AddSingleton<ISessionsRepository, SessionsRepository>();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace WebApi.Models.Session
+namespace DataAccessLayer.Models.Entities
 {
     public class SessionModelRequest
     {
@@ -11,7 +13,5 @@ namespace WebApi.Models.Session
         public int HallId { get; set; }
 
         public DateTimeOffset Time { get; set; }
-
-        public int[] SessionId { get; set; }
     }
 }

@@ -3,11 +3,14 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.Entities
 {
-    internal class SessionResponseForFilmsCtrl
+    internal class SessionResponse
     {
         public int Id { get; set; }
 
         public int HallId { get; set; }
+
+        [NotNull]
+        public string HallName { get; set; }
 
         public int FilmId { get; set; }
 

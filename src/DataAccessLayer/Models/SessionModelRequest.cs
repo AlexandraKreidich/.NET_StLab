@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace WebApi.Models.Session
+namespace DataAccessLayer.Models
 {
     public class SessionModelRequest
     {

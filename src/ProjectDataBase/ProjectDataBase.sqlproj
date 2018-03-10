@@ -83,6 +83,11 @@
     <Build Include="Stored Procedures\AddOrUpdateFilm.sql" />
     <Build Include="Stored Procedures\DeleteFilm.sql" />
     <Build Include="Stored Procedures\GetHallById.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateHall.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateHallScheme.sql" />
+    <Build Include="Stored Procedures\AddOrUpdatePlace.sql" />
+    <Build Include="Stored Procedures\GetSessions.sql" />
+    <Build Include="Stored Procedures\GetServicesForSession.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

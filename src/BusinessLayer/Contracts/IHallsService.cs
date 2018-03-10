@@ -6,5 +6,7 @@ namespace BusinessLayer.Contracts
     public interface IHallsService
     {
         Task<HallModelForApi> GetHall(int id);
+
+        Task<HallModelForApi> AddOrOrUpdateHall(HallModelForApi hall);
     }
 }

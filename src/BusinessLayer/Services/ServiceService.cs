@@ -14,7 +14,8 @@ namespace BusinessLayer.Services
     [UsedImplicitly]
     public class ServiceService : IServiceService
     {
-        [NotNull] private readonly IServiceRepository _serviceRepository;
+        [NotNull] 
+        private readonly IServiceRepository _serviceRepository;
 
         public ServiceService([NotNull] IServiceRepository serviceRepository)
         {

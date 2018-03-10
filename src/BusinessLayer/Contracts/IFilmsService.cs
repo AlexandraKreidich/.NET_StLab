@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
-using BlSessionModelResponseForFilmsCtrl = BusinessLayer.Models.SessionModelResponseForFilmsCtrl;
 
 namespace BusinessLayer.Contracts
 {
@@ -19,10 +18,10 @@ namespace BusinessLayer.Contracts
         Task<BlFilmModel> GetFilmsById(int id);
 
         [ItemCanBeNull]
-        Task<IEnumerable<BlSessionModelResponseForFilmsCtrl>> GetSessionsForFilm(int filmId);
+        Task<IEnumerable<SessionModelResponse>> GetSessionsForFilm(int filmId);
 
         [ItemCanBeNull]
-        Task<IEnumerable<BlSessionModelResponseForFilmsCtrl>> SearchFilms([NotNull] FilmFilterModel filters);
+        Task<IEnumerable<SessionModelResponse>> SearchFilms([NotNull] FilmFilterModel filters);
 
         [ItemNotNull]
         Task<BlFilmModel> AddOrUpdateFilm([NotNull] BlFilmModel film);

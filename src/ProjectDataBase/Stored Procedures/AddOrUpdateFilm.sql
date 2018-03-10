@@ -12,8 +12,8 @@ AS
         UPDATE SET
             Name = source.Name,
             Description = source.Description,
-			StartRentDate = source.StartRentDate,
-			EndRentDate = source.EndRentDate
+            StartRentDate = source.StartRentDate,
+            EndRentDate = source.EndRentDate
     WHEN NOT MATCHED THEN
         INSERT (Name, Description, StartRentDate, EndRentDate)
         VALUES (source.Name, source.Description, source.StartRentDate, source.EndRentDate);

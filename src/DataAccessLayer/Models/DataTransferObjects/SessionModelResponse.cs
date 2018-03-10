@@ -1,30 +1,34 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace WebApi.Models.Session
+namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public class SessionModelResponseForFilmsCtrl
+    public class SessionModelResponse
     {
         public int Id { get; set; }
 
         public int HallId { get; set; }
 
+        [NotNull]
+        public string HallName { get; set; }
+
         public int FilmId { get; set; }
 
-        [NotNull] 
+        [NotNull]
         public string FilmName { get; set; }
 
-        [NotNull] 
+        [NotNull]
         public string CinemaName { get; set; }
 
-        [NotNull] 
+        [NotNull]
         public string CinemaCity { get; set; }
 
         public DateTimeOffset SessionDate { get; set; }
 
-        public SessionModelResponseForFilmsCtrl(
+        public SessionModelResponse(
             int id,
             int hallId,
+            [NotNull] string hallName,
             int filmId,
             [NotNull] string filmName,
             [NotNull] string cinemaName,
@@ -34,6 +38,7 @@ namespace WebApi.Models.Session
         {
             Id = id;
             HallId = hallId;
+            HallName = hallName;
             FilmId = filmId;
             FilmName = filmName;
             CinemaCity = cinemaCity;

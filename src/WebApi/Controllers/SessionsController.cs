@@ -1,43 +1,50 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using AutoMapper;
+using BusinessLayer.Contracts;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Service;
 using WebApi.Models.Session;
+using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
+using BlServiceModel = BusinessLayer.Models.ServiceModel;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class SessionsController : Controller
     {
-        // GET /sessions/{id}/services
-        [HttpGet("{id:int}/services")]
-        public IEnumerable<ServiceModel> GetServices([FromBody]int id)
+        [NotNull]
+        private readonly ISessionsService _sessionService;
+
+        public SessionsController([NotNull] ISessionsService sessionService)
         {
-            List<ServiceModel> services = new List<ServiceModel>();
-            return services;
+            _sessionService = sessionService;
         }
 
-        // GET /sessions
+        // GET /sessions/{id}/services -> +
         [HttpGet]
-        public IEnumerable<SessionModelResponseForSessionsCtrl> Get()
+        [Route("{sessionId}/services")]
+        public async Task<IActionResult> GetServices(int sessionId)
         {
-            List<SessionModelResponseForSessionsCtrl> sessions = new List<SessionModelResponseForSessionsCtrl>();
-            return sessions;
+            IEnumerable<BlServiceModel> services = await _sessionService.GetServises(sessionId);
+
+            return Ok(
+                services.Select(Mapper.Map<ServiceModel>)
+            );
         }
 
-        //POST /sessions/{id}/add-service
-        [HttpPost]
-        [Route("{id:int}/add-service")]
-        public IActionResult AddService([FromBody] int serviceId)
+        // GET /sessions sp created -> +
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            return StatusCode((int)HttpStatusCode.Created);
-        }
+            IEnumerable<BlSessionModelResponse> sessions = await _sessionService.GetSessions();
 
-        // DELETE /sessions/{id}
-        [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
-        {
-            return StatusCode((int)HttpStatusCode.Accepted);
+            return Ok(
+                sessions.Select(Mapper.Map<SessionModelResponse>)
+            );
         }
 
         // PUT /sessions
@@ -45,6 +52,13 @@ namespace WebApi.Controllers
         public IActionResult Put(SessionModelRequest session)
         {
             return StatusCode((int) HttpStatusCode.Created);
+        }
+
+        // DELETE /sessions/{id}
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            return StatusCode((int)HttpStatusCode.Accepted);
         }
     }
 }

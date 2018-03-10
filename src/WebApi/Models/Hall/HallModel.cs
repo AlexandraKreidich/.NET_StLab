@@ -13,25 +13,25 @@ namespace WebApi.Models.Hall
         [NotNull]
         public string Name { get; }
 
-        [CanBeNull]
+        [NotNull]
         public PlaceModelForHall[] Places { get; }
 
-        [CanBeNull]
+        [NotNull]
         public HallSchemeModel[] HallSchemeModels { get; }
 
         public HallModel(
             int id,
             int cinemaId,
             [NotNull] string name,
-            [CanBeNull] PlaceModelForHall[] places,
-            [CanBeNull] HallSchemeModel[] hallSchemeModel
+            [NotNull] PlaceModelForHall[] places,
+            [NotNull] HallSchemeModel[] hallSchemeModels
         )
         {
             Id = id;
             CinemaId = cinemaId;
             Name = name;
             Places = places;
-            HallSchemeModels = hallSchemeModel;
+            HallSchemeModels = hallSchemeModels;
         }
     }
 }

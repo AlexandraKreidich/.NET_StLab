@@ -1,10 +1,12 @@
-﻿using System.Net;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
-using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.Hall;
+using WebApi.Models.Place;
 
 namespace WebApi.Controllers
 {
@@ -31,22 +33,35 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok(hall);
+            return Ok(new HallModel(
+                hall.Id,
+                hall.CinemaId,
+                hall.Name,
+                hall.Places.Select(Mapper.Map<PlaceModelForHall>).ToArray(),
+                hall.HallSchemeModels.Select(Mapper.Map<Models.Hall.HallSchemeModel>).ToArray()
+            ));
         }
 
         // PUT /halls
         [HttpPut]
-        public IActionResult Put(/*[FromBody]HallModel hall*/)
+        public async Task<IActionResult> Put([NotNull] [FromBody]HallModel hall)
         {
-            return StatusCode((int)HttpStatusCode.Created);
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        // DELETE /halls/{id}
-        [HttpDelete]
-        [Route("{id:int}")]
-        public IActionResult Delete(int id)
-        {
-            return StatusCode((int)HttpStatusCode.Accepted);
+            HallModelForApi hallRequest = new HallModelForApi(
+                hall.Id,
+                hall.CinemaId,
+                hall.Name,
+                hall.Places.Select(Mapper.Map<BusinessLayer.Models.PlaceModel>).ToArray(),
+                hall.HallSchemeModels.Select(Mapper.Map<BusinessLayer.Models.HallSchemeModel>).ToArray()
+            );
+
+            HallModelForApi hallResponse = await _hallsService.AddOrOrUpdateHall(hallRequest);
+
+            return Ok(hallResponse);
         }
     }
 }

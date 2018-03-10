@@ -6,7 +6,9 @@ namespace DataAccessLayer.Models.DataTransferObjects
     public class HallModel
     {
         public int Id { get;}
+
         public int CinemaId { get;}
+
         [NotNull]
         public string Name { get;}
 

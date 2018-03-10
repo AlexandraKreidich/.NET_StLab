@@ -7,7 +7,7 @@ namespace WebApi.Models.Film
         public string City { get; set; }
         public string Cinema { get; set; }
         public string Film { get; set; }
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
         public int FreePlaces { get; set; }
     }
 }

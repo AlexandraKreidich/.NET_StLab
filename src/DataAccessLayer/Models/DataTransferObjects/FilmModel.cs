@@ -6,17 +6,17 @@ namespace DataAccessLayer.Models.DataTransferObjects
     [UsedImplicitly]
     public class FilmModel
     {
-        public int Id { get;}
+        public int Id { get; set; }
 
         [NotNull]
-        public string Name { get;}
+        public string Name { get; set; }
 
         [NotNull]
-        public string Description { get;}
+        public string Description { get; set; }
 
-        public DateTimeOffset StartRentDate { get;}
+        public DateTimeOffset StartRentDate { get; set; }
 
-        public DateTimeOffset EndRentDate { get;}
+        public DateTimeOffset EndRentDate { get; set; }
 
         public FilmModel(
             int id,

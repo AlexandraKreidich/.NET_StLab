@@ -16,5 +16,20 @@ namespace WebApi.Models.Film
         public DateTimeOffset StartRentDate { get; set; }
 
         public DateTimeOffset EndRentDate { get; set; }
+
+        public FilmModel(
+            int id,
+            [NotNull] string name,
+            [NotNull] string description,
+            DateTimeOffset startEndRentDate,
+            DateTimeOffset endRentDate
+        )
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            StartRentDate = startEndRentDate;
+            EndRentDate = endRentDate;
+        }
     }
 }
