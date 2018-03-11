@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLayer.Models
 {
@@ -14,6 +12,6 @@ namespace BusinessLayer.Models
 
         public DateTimeOffset Time { get; set; }
 
-        public int[] SessionId { get; set; }
+        public int[] Services { get; set; }
     }
 }

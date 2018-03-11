@@ -12,5 +12,8 @@ namespace BusinessLayer.Contracts
 
         [ItemNotNull]
         Task<IEnumerable<SessionModelResponse>> GetSessions();
+
+        [ItemNotNull]
+        Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session);
     }
 }

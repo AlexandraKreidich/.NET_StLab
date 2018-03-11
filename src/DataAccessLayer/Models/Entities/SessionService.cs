@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DataAccessLayer.Models.Entities
+﻿namespace DataAccessLayer.Models.Entities
 {
-    class SessionService
+    internal class SessionService
     {
+        public int SessionId { get; set; }
+
+        public int ServiceId { get; set; }
     }
 }

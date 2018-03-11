@@ -11,7 +11,7 @@ namespace WebApi.Controllers
     [Authorize(Roles = "User")]
     public class TicketsController : Controller
     {
-        // GET /tickets
+        // GET /tickets 
         [HttpGet]
         public IEnumerable<TicketModelResponse> Get()
         {
@@ -19,7 +19,7 @@ namespace WebApi.Controllers
             return tickets;
         }
 
-        // GET /tickets/{id}
+        // GET /tickets/{id} -> чей это id? пользователя или билета, может вообще нужно и то и то?
         [HttpGet("{id:int}")]
         public IEnumerable<TicketModelResponse> GetById(int id)
         {

@@ -15,6 +15,7 @@ namespace BusinessLayer
             collection.AddSingleton<IFilmsService, FilmsService>();
             collection.AddSingleton<IHallsService, HallsService>();
             collection.AddSingleton<ISessionsService, SessionsService>();
+            collection.AddSingleton<ITicketsService, TicketsService>();
         }
     }
 }

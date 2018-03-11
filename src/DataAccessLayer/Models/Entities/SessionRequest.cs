@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccessLayer.Models.Entities
 {
-    public class SessionModelRequest
+    internal class SessionModelRequest
     {
         public int Id { get; set; }
 

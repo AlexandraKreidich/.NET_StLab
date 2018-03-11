@@ -9,6 +9,7 @@ using DataAccessLayer.Contracts;
 using DataAccessLayer.Models.DataTransferObjects;
 using DataAccessLayer.Models.Entities;
 using JetBrains.Annotations;
+using SessionModelRequest = DataAccessLayer.Models.DataTransferObjects.SessionModelRequest;
 
 namespace DataAccessLayer.Repositories
 {
@@ -48,6 +49,11 @@ namespace DataAccessLayer.Repositories
 
                 return sessions.Select(Mapper.Map<SessionModelResponse>);
             }
+        }
+
+        public Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session, SessionServiceModel services)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

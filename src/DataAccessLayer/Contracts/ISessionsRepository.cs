@@ -14,6 +14,9 @@ namespace DataAccessLayer.Contracts
         Task<IEnumerable<SessionModelResponse>> GetSessions();
 
         [ItemNotNull]
-        Task<SessionModelResponse> AddOrUpdateSession()
+        Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session);
+
+        [ItemNotNull]
+        Task<SessionServiceModel> AddOrUpdateService(SessionServiceModel service);
     }
 }
