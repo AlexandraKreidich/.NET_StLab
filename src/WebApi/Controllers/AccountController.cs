@@ -44,7 +44,7 @@ namespace WebApi.Controllers
             return Ok(new ResponseModel
             (
                 user.Id,
-                user.Role,
+                user.Role.ToString(),
                 user.FirstName,
                 user.LastName,
                 user.Email,
@@ -81,7 +81,7 @@ namespace WebApi.Controllers
             return Ok(new ResponseModel
                 (
                     user.Id,
-                    user.Role,
+                    user.Role.ToString(),
                     user.FirstName,
                     user.LastName,
                     user.Email,

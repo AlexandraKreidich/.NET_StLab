@@ -25,7 +25,8 @@ namespace WebApi.Controllers
         }
 
         // GET /films/now-playing
-        [HttpGet("now-playing")]
+        [HttpGet]
+        [Route("now-playing")]
         public async Task<IActionResult> GetNowPlayingFilms()
         {
             IEnumerable<BlFilmModel> films = await _filmsService.GetNowPlayingFilms();
@@ -98,13 +99,7 @@ namespace WebApi.Controllers
         {
             //Mapper.Map<BlFilmModel>(filmToAdd)
 
-            BlFilmModel film = await _filmsService.AddOrUpdateFilm(new BlFilmModel(
-                filmToAdd.Id,
-                filmToAdd.Name,
-                filmToAdd.Description,
-                filmToAdd.StartRentDate,
-                filmToAdd.EndRentDate
-            ));
+            BlFilmModel film = await _filmsService.AddOrUpdateFilm(new BlFilmModel());
 
             return Ok(
                 Mapper.Map<FilmModel>(film)

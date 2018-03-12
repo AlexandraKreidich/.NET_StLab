@@ -8,7 +8,7 @@ namespace DataAccessLayer.Contracts
     {
         [ItemCanBeNull]
         Task<HallModel> GetHall(int id);
-        
+
         Task<int> AddOrUpdateHall(HallModel hall);
 
         [NotNull]

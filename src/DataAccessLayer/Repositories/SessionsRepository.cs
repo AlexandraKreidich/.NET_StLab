@@ -13,6 +13,7 @@ using SessionModelRequest = DataAccessLayer.Models.DataTransferObjects.SessionMo
 
 namespace DataAccessLayer.Repositories
 {
+    [UsedImplicitly]
     internal class SessionsRepository : ISessionsRepository
     {
         [NotNull]
@@ -49,6 +50,16 @@ namespace DataAccessLayer.Repositories
 
                 return sessions.Select(Mapper.Map<SessionModelResponse>);
             }
+        }
+
+        public Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<SessionServiceModel> AddOrUpdateService(SessionServiceModel service)
+        {
+            throw new System.NotImplementedException();
         }
 
         public Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session, SessionServiceModel services)

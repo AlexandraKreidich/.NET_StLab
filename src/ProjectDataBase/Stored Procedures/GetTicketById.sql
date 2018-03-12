@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[GetTicketById]
-    @Id
+    @Id INT
 AS
-    SELECT @param1, @param2
-RETURN 0
+    SELECT *
+    FROM Ticket
+    WHERE Id = @Id

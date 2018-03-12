@@ -12,6 +12,7 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Repositories
 {
+    [UsedImplicitly]
     internal class FilmRepository : IFilmRepository
     {
         [NotNull]
@@ -29,7 +30,7 @@ namespace DataAccessLayer.Repositories
                 IEnumerable<Film> films = await connection.QueryAsync<Film>(
                     "GetNowPlayingFilms",
                     commandType: CommandType.StoredProcedure);
-                    
+
                 IEnumerable<FilmModel> filmsResponse = films.Select(Mapper.Map<FilmModel>);
 
                 return filmsResponse;

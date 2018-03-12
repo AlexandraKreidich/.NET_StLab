@@ -240,103 +240,20 @@ BEGIN TRY
     PRINT 'Inserting seed data for Price table'
 
     DECLARE @number INT
+    DECLARE @placeId INT
     SET @number = 1;
+    SET @placeId = 1;
     WHILE @NUMBER <= 30
         BEGIN
-            INSERT INTO dbo.Price(SessionId, PlaceId, Price)
-        VALUES
-            (@number, 1, 8),
-            (@number, 2, 8),
-            (@number, 3, 8),
-            (@number, 4, 8),
-            (@number, 5, 8),
-            (@number, 6, 8),
-            (@number, 7, 8),
-            (@number, 8, 8),
-            (@number, 9, 8),
-            (@number, 10, 8),
-            (@number, 11, 8),
-            (@number, 12, 8),
-            (@number, 13, 8),
-            (@number, 14, 8),
-            (@number, 15, 8),
-            (@number, 16, 8),
-            (@number, 17, 8),
-            (@number, 18, 8),
-            (@number, 19, 8),
-            (@number, 20, 8),
-            (@number, 21, 8),
-            (@number, 22, 8),
-            (@number, 23, 8),
-            (@number, 24, 8),
-            (@number, 25, 8),
-            (@number, 26, 8),
-            (@number, 27, 8),
-            (@number, 28, 8),
-            (@number, 29, 8),
-            (@number, 30, 8),
-            (@number, 31, 8),
-            (@number, 32, 8),
-            (@number, 33, 8),
-            (@number, 34, 8),
-            (@number, 35, 8),
-            (@number, 36, 8),
-            (@number, 37, 8),
-            (@number, 38, 8),
-            (@number, 39, 8),
-            (@number, 40, 8),
-            (@number, 41, 8),
-            (@number, 42, 8),
-            (@number, 43, 8),
-            (@number, 44, 8),
-            (@number, 45, 8),
-            (@number, 46, 8),
-            (@number, 47, 8),
-            (@number, 48, 8),
-            (@number, 49, 8),
-            (@number, 50, 8),
-            (@number, 51, 8),
-            (@number, 52, 8),
-            (@number, 53, 8),
-            (@number, 54, 8),
-            (@number, 55, 8),
-            (@number, 56, 8),
-            (@number, 57, 8),
-            (@number, 58, 8),
-            (@number, 59, 8),
-            (@number, 60, 8),
-            (@number, 61, 8),
-            (@number, 62, 8),
-            (@number, 63, 8),
-            (@number, 64, 8),
-            (@number, 65, 8),
-            (@number, 66, 8),
-            (@number, 67, 8),
-            (@number, 68, 8),
-            (@number, 69, 8),
-            (@number, 70, 8),
-            (@number, 71, 8),
-            (@number, 72, 8),
-            (@number, 73, 8),
-            (@number, 74, 8),
-            (@number, 75, 8),
-            (@number, 76, 8),
-            (@number, 77, 8),
-            (@number, 78, 8),
-            (@number, 79, 8),
-            (@number, 80, 8),
-            (@number, 81, 8),
-            (@number, 82, 8),
-            (@number, 83, 8),
-            (@number, 84, 8),
-            (@number, 85, 8),
-            (@number, 86, 8),
-            (@number, 87, 8),
-            (@number, 88, 8),
-            (@number, 89, 8),
-            (@number, 90, 8)
-
+            WHILE @placeId < 90
+            BEGIN
+                INSERT INTO dbo.Price(SessionId, PlaceId, Price, SessionDate)
+                VALUES
+                    (@number, @placeId, 8, (SELECT Session.Date FROM Session WHERE Session.Id = @number))
+                SET @placeId = @placeId + 1
+            END;
             SET @number = @number + 1
+            SET @placeId = 1
         END;
 
     PRINT 'Inserting seed data for UserRole table'
