@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using JetBrains.Annotations;
 
-namespace WebApi.Models.Ticket
+namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public class TicketModelResponse
+    public class TicketInfoModel
     {
-        public int Id { get; set; }
+        public int TicketId { get; set; }
 
         [NotNull]
         public string FilmName { get; set; }
@@ -19,19 +21,17 @@ namespace WebApi.Models.Ticket
         [NotNull]
         public string PlaceType { get; set; }
 
-        public int HallName { get; set; }
+        [NotNull]
+        public string HallName { get; set; }
 
         [NotNull]
         public string CinemaName { get; set; }
-
-        public decimal SumPrice { get; set; }
-
-        [CanBeNull]
-        public string Services { get; set; }
 
         [NotNull]
         public string TicketStatus { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; }
+
+        public decimal SessionPrice { get; set; }
     }
 }

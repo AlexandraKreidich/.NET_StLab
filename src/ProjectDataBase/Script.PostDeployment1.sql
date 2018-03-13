@@ -30,15 +30,17 @@ BEGIN TRY
     INSERT INTO dbo.Hall ([CinemaId], [Name])
         VALUES
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'A'), /*(1)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'B'), /*(2)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'C'), /*(3)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'A'), /*(4)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'B'), /*(5)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'A'), /*(6)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'B'), /*(7)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'C'), /*(8)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'A'), /*(9)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'B') /*(10)*/
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'A'), /*(2)*/
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'A'), /*(3)*/
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'A') /*(4)*/
+        /*
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'B'),
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'C'),
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'B'),
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'B'),
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'C'),
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'B')
+        */
 
     PRINT 'Inserting seed data for HallScheme table'
 
@@ -55,7 +57,8 @@ BEGIN TRY
         (3,3,3),
         (1,2,4),
         (2,4,4),
-        (3,3,4),
+        (3,3,4)
+        /*
         (1,2,5),
         (2,4,5),
         (3,3,5),
@@ -74,6 +77,7 @@ BEGIN TRY
         (1,2,10),
         (2,4,10),
         (3,3,10)
+        */
 
     PRINT 'Inserting seed data for Film table'
 
@@ -105,7 +109,8 @@ BEGIN TRY
         (9, 3, convert(datetimeoffset, '20171006 14:15:00')),
         (10, 4, CONVERT(datetimeoffset, '20171008 11:15:00')),
         (1, 4, convert(datetimeoffset, '20171007 11:15:00')),
-        (2, 4, convert(datetimeoffset, '20171006 11:15:00')),
+        (2, 4, convert(datetimeoffset, '20171006 11:15:00'))
+        /*
         (3, 5, convert(datetimeoffset, '20171008 17:15:00')),
         (4, 5, convert(datetimeoffset, '20171007 17:15:00')),
         (5, 5, convert(datetimeoffset, '20171006 17:15:00')),
@@ -124,6 +129,7 @@ BEGIN TRY
         (8, 10, convert(datetimeoffset, '20171008 12:15:00')),
         (9, 10, convert(datetimeoffset, '20171007 12:15:00')),
         (10, 10, convert(datetimeoffset, '20171006 12:15:00'))
+        */
 
     PRINT 'Inserting seed data for PlaceType table'
 
@@ -175,8 +181,8 @@ BEGIN TRY
         (4, 1, 2, 4),
         (4, 1, 3, 1),
         (4, 1, 3, 2),
-        (4, 1, 3, 3),
-
+        (4, 1, 3, 3)
+        /*
         (5, 1, 1, 1),
         (5, 1, 1, 2),
         (5, 1, 2, 1),
@@ -236,10 +242,11 @@ BEGIN TRY
         (10, 1, 3, 1),
         (10, 1, 3, 2),
         (10, 1, 3, 3)
+        */
 
     PRINT 'Inserting seed data for Price table'
 
-    DECLARE @number INT
+    /*DECLARE @number INT
     DECLARE @placeId INT
     SET @number = 1;
     SET @placeId = 1;
@@ -254,7 +261,139 @@ BEGIN TRY
             END;
             SET @number = @number + 1
             SET @placeId = 1
-        END;
+        END;*/
+
+    INSERT INTO dbo.Price(SessionId, PlaceId, Price)
+    VALUES
+        /*21 price for 3 sessions in one hall with 9 places*/
+
+        /*for the first hall with id=1*/
+
+        (1, 1, 8),
+        (1, 2, 8),
+        (1, 3, 8),
+        (1, 4, 8),
+        (1, 5, 8),
+        (1, 6, 8),
+        (1, 7, 8),
+        (1, 8, 8),
+        (1, 9, 8),
+
+        (2, 1, 8),
+        (2, 2, 8),
+        (2, 3, 8),
+        (2, 4, 8),
+        (2, 5, 8),
+        (2, 6, 8),
+        (2, 7, 8),
+        (2, 8, 8),
+        (2, 9, 8),
+
+        (3, 1, 8),
+        (3, 2, 8),
+        (3, 3, 8),
+        (3, 4, 8),
+        (3, 5, 8),
+        (3, 6, 8),
+        (3, 7, 8),
+        (3, 8, 8),
+        (3, 9, 8),
+
+        /*for the second hall with id=2*/
+
+        (4, 10, 9),
+        (4, 11, 9),
+        (4, 12, 9),
+        (4, 13, 9),
+        (4, 14, 9),
+        (4, 15, 9),
+        (4, 16, 9),
+        (4, 17, 9),
+        (4, 18, 9),
+
+        (5, 10, 9),
+        (5, 11, 9),
+        (5, 12, 9),
+        (5, 13, 9),
+        (5, 14, 9),
+        (5, 15, 9),
+        (5, 16, 9),
+        (5, 17, 9),
+        (5, 18, 9),
+
+        (6, 10, 9),
+        (6, 11, 9),
+        (6, 12, 9),
+        (6, 13, 9),
+        (6, 14, 9),
+        (6, 15, 9),
+        (6, 16, 9),
+        (6, 17, 9),
+        (6, 18, 9),
+
+        /*for the third hall with id=3*/
+
+        (7, 19, 10),
+        (7, 20, 10),
+        (7, 21, 10),
+        (7, 22, 10),
+        (7, 23, 10),
+        (7, 24, 10),
+        (7, 25, 10),
+        (7, 26, 10),
+        (7, 27, 10),
+
+        (8, 19, 10),
+        (8, 20, 10),
+        (8, 21, 10),
+        (8, 22, 10),
+        (8, 23, 10),
+        (8, 24, 10),
+        (8, 25, 10),
+        (8, 26, 10),
+        (8, 27, 10),
+
+        (9, 19, 10),
+        (9, 20, 10),
+        (9, 21, 10),
+        (9, 22, 10),
+        (9, 23, 10),
+        (9, 24, 10),
+        (9, 25, 10),
+        (9, 26, 10),
+        (9, 27, 10),
+
+        /*for the fourth hall with id=4*/
+
+        (10, 28, 11),
+        (10, 29, 11),
+        (10, 30, 11),
+        (10, 31, 11),
+        (10, 32, 11),
+        (10, 33, 11),
+        (10, 34, 11),
+        (10, 35, 11),
+        (10, 36, 11),
+
+        (11, 28, 11),
+        (11, 29, 11),
+        (11, 30, 11),
+        (11, 31, 11),
+        (11, 32, 11),
+        (11, 33, 11),
+        (11, 34, 11),
+        (11, 35, 11),
+        (11, 36, 11),
+
+        (12, 28, 11),
+        (12, 29, 11),
+        (12, 30, 11),
+        (12, 31, 11),
+        (12, 32, 11),
+        (12, 33, 11),
+        (12, 34, 11),
+        (12, 35, 11),
+        (12, 36, 11)
 
     PRINT 'Inserting seed data for UserRole table'
 
@@ -290,14 +429,17 @@ BEGIN TRY
 
     PRINT 'Inserting seed data for Ticket table'
 
-    INSERT INTO dbo.Ticket(PlaceId, UserId, TicketStatusId, CreatedAt)
+    INSERT INTO dbo.Ticket(PriceId, UserId, TicketStatusId, CreatedAt)
     VALUES
         (1, 1, 1, convert(datetimeoffset, '20171006 12:15:00')),
-        (2, 2, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (3, 3, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (4, 4, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (5, 5, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (6, 5, 1, CONVERT(datetimeoffset, '20171006 12:15:00'))
+        (2, 1, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
+        (3, 2, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
+        (4, 2, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
+        (5, 3, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
+        (6, 3, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
+        (7, 4, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
+        (8, 4, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
+        (9, 5, 1, CONVERT(datetimeoffset, '20171006 12:15:00'))
 
     PRINT 'Inserting seed data for TicketService table'
 
