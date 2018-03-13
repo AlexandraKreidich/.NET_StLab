@@ -4,13 +4,13 @@
     @Film nvarchar(50) = null,
     @Date datetime = null,
     @FreePlaces int = null,
-    @d datetime
+    @d datetime = null
 AS
     SET @d = CONVERT(DATETIME, @Date, 120);
     SELECT 
         Session.Id,
         Session.HallId,
-        Hall.Name,
+        Hall.Name as HallName,
         Session.FilmId,
         Film.Name as FilmName,
         Cinema.Name as CinemaName,
@@ -31,7 +31,7 @@ AS
             or Film.Name = @Film)
         AND (
                 (
-                -- разница между количеством мест и купленных билетов
+                -- разница между количеством мест и купленными билетами
                 (
                     SELECT count(Id) 
                     FROM Place

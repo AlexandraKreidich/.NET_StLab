@@ -22,6 +22,10 @@ namespace BusinessLayer
             configuration.CreateMap<DalPlaceModel, PlaceModel>();
             configuration.CreateMap<ServiceModel, DalServiceModel>();
             configuration.CreateMap<DalFilmModel, FilmModel>();
+            configuration.CreateMap<FilmModel, DalFilmModel>().ConstructUsing
+            (
+                x => new DalFilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)
+            );
             configuration.CreateMap<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse, SessionModelResponse>();
             configuration.CreateMap<FilmFilterModel, DalFilmFilterModel>();
             configuration.CreateMap<DataAccessLayer.StoredProcedureExecutionResult, StoredProcedureExecutionResult>();

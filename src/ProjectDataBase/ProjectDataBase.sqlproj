@@ -92,6 +92,9 @@
     <Build Include="Stored Procedures\GetTicketById.sql" />
     <Build Include="Stored Procedures\GetTicketsForUser.sql" />
     <Build Include="Stored Procedures\GetServicesForTicketId.sql" />
+    <Build Include="Stored Procedures\AddServiceForSession.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateSession.sql" />
+    <Build Include="Stored Procedures\DeleteServicesFromSession.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

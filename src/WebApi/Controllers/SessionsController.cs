@@ -47,18 +47,18 @@ namespace WebApi.Controllers
             );
         }
 
-        // PUT /sessions -> ???? что делать с улугами, что делать,если у же есть билеты на сеанс купленные
+        // PUT /sessions 
         [HttpPut]
         public IActionResult Put(SessionModelRequest session)
         {
             return StatusCode((int) HttpStatusCode.Created);
         }
 
-        // DELETE /sessions/{id} - удалять только прошедшие сеансы можно
-        [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
-        {
-            return StatusCode((int)HttpStatusCode.Accepted);
-        }
+        //// DELETE /sessions/{id} - лучше сеансы не удалять вообще
+        //[HttpDelete("{id:int}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    return StatusCode((int)HttpStatusCode.Accepted);
+        //}
     }
 }

@@ -97,9 +97,8 @@ namespace WebApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([NotNull] [FromBody]FilmModel filmToAdd)
         {
-            //Mapper.Map<BlFilmModel>(filmToAdd)
 
-            BlFilmModel film = await _filmsService.AddOrUpdateFilm(new BlFilmModel());
+            BlFilmModel film = await _filmsService.AddOrUpdateFilm(Mapper.Map<BlFilmModel>(filmToAdd));
 
             return Ok(
                 Mapper.Map<FilmModel>(film)

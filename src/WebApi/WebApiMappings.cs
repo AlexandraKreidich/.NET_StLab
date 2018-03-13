@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using JetBrains.Annotations;
 using WebApi.Models.Cinema;
 using WebApi.Models.Place;
@@ -6,6 +7,7 @@ using WebApi.Models.Hall;
 using WebApi.Models.Service;
 using WebApi.Models.Session;
 using WebApi.Models.Film;
+using WebApi.Services;
 using HallModelForApi = BusinessLayer.Models.HallModelForApi;
 using BlServiceModel = BusinessLayer.Models.ServiceModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
@@ -28,10 +30,19 @@ namespace WebApi
             configuration.CreateMap<HallModelForApi, HallModel>();
             configuration.CreateMap<BlServiceModel, ServiceModel>();
             configuration.CreateMap<ServiceModel, BlServiceModel>();
-            configuration.CreateMap<BlFilmModel, FilmModel>();
-            configuration.CreateMap<FilmModel, BlFilmModel>();
+            //configuration.CreateMap<BlFilmModel, FilmModel>();
+            //configuration.CreateMap<FilmModel, BlFilmModel>();
+            configuration.CreateMap<FilmModel, BlFilmModel>().ConstructUsing
+            (
+                x=> new BlFilmModel(x.Id, x.Name, x.Description,x.StartRentDate,x.EndRentDate)
+            );
+            configuration.CreateMap<BlFilmModel, FilmModel>().ConstructUsing
+            (
+                x => new FilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)
+            );
             configuration.CreateMap<SessionModelResponse, BlSessionModelResponse>();
             configuration.CreateMap<FilmFilterModel, BlFilmFilterModel>();
+            configuration.CreateMap<string, DateTimeOffset>().ConvertUsing<StringToDateTimeConverter>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace WebApi.Models.Session
 
         public int HallId { get; set; }
 
-        public DateTimeOffset Time { get; set; }
+        public DateTimeOffset Date { get; set; }
 
         public int[] SessionId { get; set; }
     }

@@ -17,19 +17,19 @@ namespace WebApi.Models.Film
 
         public DateTimeOffset EndRentDate { get; set; }
 
-        //public FilmModel(
-        //    int id,
-        //    [NotNull] string name,
-        //    [NotNull] string description,
-        //    DateTimeOffset startEndRentDate,
-        //    DateTimeOffset endRentDate
-        //)
-        //{
-        //    Id = id;
-        //    Name = name;
-        //    Description = description;
-        //    StartRentDate = startEndRentDate;
-        //    EndRentDate = endRentDate;
-        //}
+        public FilmModel(
+            int id,
+            [NotNull] string name,
+            [NotNull] string description,
+            DateTimeOffset startEndRentDate,
+            DateTimeOffset endRentDate
+        )
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            StartRentDate = startEndRentDate;
+            EndRentDate = endRentDate;
+        }
     }
 }

@@ -61,22 +61,22 @@ namespace BusinessLayer.Services
         {
             int id = await _filmRepository.AddOrUpdateFilm(Mapper.Map<DalFilmModel>(film));
 
-            //return new FilmModel(
-            //    (id != 0) ? id : film.Id,
-            //    film.Name,
-            //    film.Description,
-            //    film.StartRentDate,
-            //    film.EndRentDate
-            //);
+            return new FilmModel(
+                (id != 0) ? id : film.Id,
+                film.Name,
+                film.Description,
+                film.StartRentDate,
+                film.EndRentDate
+            );
 
-            return new FilmModel()
-                {
-                    Description = film.Description,
-                    EndRentDate = film.EndRentDate,
-                    Id = (id != 0) ? id : film.Id,
-                    Name = film.Name,
-                    StartRentDate = film.StartRentDate
-            };
+            //return new FilmModel()
+            //    {
+            //        Description = film.Description,
+            //        EndRentDate = film.EndRentDate,
+            //        Id = (id != 0) ? id : film.Id,
+            //        Name = film.Name,
+            //        StartRentDate = film.StartRentDate
+            //};
         }
     }
 }

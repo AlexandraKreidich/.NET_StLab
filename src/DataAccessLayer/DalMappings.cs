@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DataAccessLayer.Models.DataTransferObjects;
 using DataAccessLayer.Models.Entities;
 using JetBrains.Annotations;
@@ -17,7 +18,10 @@ namespace DataAccessLayer
             configuration.CreateMap<HallScheme, HallSchemeModel>();
             configuration.CreateMap<Service, ServiceModel>();
             configuration.CreateMap<ServiceModel, Service>();
-            configuration.CreateMap<Film, FilmModel>();
+            configuration.CreateMap<Film, FilmModel>().ConstructUsing
+            (
+                x=> new FilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)
+            );
             configuration.CreateMap<FilmModel, Film>();
             configuration.CreateMap<SessionResponse, SessionModelResponse>();
             configuration.CreateMap<SessionResponse, SessionModelResponse>();
