@@ -12,6 +12,7 @@ using DalHallSchemeModel = DataAccessLayer.Models.DataTransferObjects.HallScheme
 
 namespace BusinessLayer.Services
 {
+    [UsedImplicitly]
     internal class HallsService : IHallsService
     {
         [NotNull]
@@ -70,13 +71,13 @@ namespace BusinessLayer.Services
                 hall.CinemaId,
                 hall.Name
             );
-                
+
             List<DalPlaceModel> placesList = new List<DalPlaceModel>();
 
             if (hall.Places != null)
             {
 
-                foreach (var place in hall.Places)
+                foreach (PlaceModel place in hall.Places)
                 {
                     PlaceModel placeRequest = new PlaceModel(
                         place.Id,

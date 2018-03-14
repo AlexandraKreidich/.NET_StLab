@@ -17,13 +17,13 @@ namespace DataAccessLayer.Contracts
         [ItemCanBeNull]
         Task<SessionModelResponse> GetSessionById(int id);
 
-        Task<int> AddOrUpdateSession(SessionModelRequest session);
+        Task<int> AddOrUpdateSession([NotNull] SessionModelRequest session);
 
         void AddOrUpdatePriceForSession(int sessionId, int placeId, decimal price);
 
         void DeleteServiceFromSession(int sessionId);
 
-        void AddServiceToSession(SessionServiceModel service);
+        void AddServiceToSession([NotNull] SessionServiceModel service);
 
         void DeleteSession(int id);
     }

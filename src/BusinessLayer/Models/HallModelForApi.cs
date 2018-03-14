@@ -11,18 +11,18 @@ namespace BusinessLayer.Models
         [NotNull]
         public string Name { get;}
 
-        [NotNull]
+        [CanBeNull]
         public PlaceModel[] Places { get;}
 
-        [NotNull]
+        [CanBeNull]
         public HallSchemeModel[] HallSchemeModels { get;}
 
         public HallModelForApi(
             int id,
             int cinemaId,
             [NotNull] string name,
-            [NotNull] PlaceModel[] places,
-            [NotNull] HallSchemeModel[] hallSchemeModel
+            [CanBeNull] PlaceModel[] places,
+            [CanBeNull] HallSchemeModel[] hallSchemeModel
         )
         {
             Id = id;

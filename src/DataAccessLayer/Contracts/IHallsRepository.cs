@@ -9,12 +9,11 @@ namespace DataAccessLayer.Contracts
         [ItemCanBeNull]
         Task<HallModel> GetHall(int id);
 
-        Task<int> AddOrUpdateHall(HallModel hall);
+        Task<int> AddOrUpdateHall([NotNull] HallModel hall);
 
-        [NotNull]
-        Task<int> AddOrUpdateHallScheme(HallSchemeModel hallScheme);
+        Task<int> AddOrUpdateHallScheme([NotNull] HallSchemeModel hallScheme);
 
-        [NotNull]
-        Task<int> AddOrUpdatePlace(PlaceModel place);
+
+        Task<int> AddOrUpdatePlace([NotNull] PlaceModel place);
     }
 }

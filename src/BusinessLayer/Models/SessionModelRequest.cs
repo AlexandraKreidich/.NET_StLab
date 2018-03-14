@@ -1,7 +1,9 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace BusinessLayer.Models
 {
+    [UsedImplicitly]
     public class SessionModelRequest
     {
         public int Id { get; set; }
@@ -12,6 +14,7 @@ namespace BusinessLayer.Models
 
         public DateTimeOffset Time { get; set; }
 
+        [CanBeNull]
         public int[] Services { get; set; }
     }
 }

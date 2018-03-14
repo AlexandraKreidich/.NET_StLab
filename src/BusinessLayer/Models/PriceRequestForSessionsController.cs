@@ -5,11 +5,13 @@ namespace BusinessLayer.Models
     [UsedImplicitly]
     public class PriceRequestForSessionController
     {
-        public int[] PlaceId { get; set; }
+        [NotNull]
+        public int[] PlaceId { get;}
 
-        public decimal[] Price { get; set; }
+        [NotNull]
+        public decimal[] Price { get;}
 
-        public int SessionId { get; set; }
+        public int SessionId { get;}
 
         public PriceRequestForSessionController
         (

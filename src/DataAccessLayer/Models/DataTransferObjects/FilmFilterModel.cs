@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
+    [UsedImplicitly]
     public class FilmFilterModel
     {
         [NotNull]
@@ -14,6 +15,7 @@ namespace DataAccessLayer.Models.DataTransferObjects
         [NotNull]
         public string Film { get; set; }
 
+        [CanBeNull]
         public DateTime? Date { get; set; }
 
         public int FreePlaces { get; set; }
