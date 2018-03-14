@@ -15,4 +15,4 @@ AS
         @Email,
         (SELECT Id FROM [dbo].UserRole
         WHERE [Name] = @UserRole))
-SELECT SCOPE_IDENTITY()
+    SELECT SCOPE_IDENTITY()

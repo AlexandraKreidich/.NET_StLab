@@ -3,5 +3,9 @@
     @ServiceId int
 AS
     INSERT INTO SessionService(SessionId, ServiceId)
-    VALUES (@SessionId, @ServiceId)
-SELECT SCOPE_IDENTITY();
+    VALUES
+    (
+        @SessionId,
+        @ServiceId
+    )
+    SELECT SCOPE_IDENTITY();

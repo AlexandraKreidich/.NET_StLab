@@ -4,7 +4,10 @@
     @Price money
 AS
     MERGE dbo.Service AS target
-    USING (SELECT @Id, @Name, @Price) AS source (Id, Name, Price)
+    USING
+        (SELECT @Id, @Name, @Price)
+    AS source
+        (Id, Name, Price)
     ON (target.Id = source.Id)
     WHEN MATCHED THEN
         UPDATE SET
@@ -12,5 +15,9 @@ AS
             Price = source.Price
     WHEN NOT MATCHED THEN
         INSERT (Name, Price)
-        VALUES (source.Name, source.Price);
-select SCOPE_IDENTITY()
+        VALUES
+        (
+            source.Name,
+            source.Price
+        );
+    select SCOPE_IDENTITY()

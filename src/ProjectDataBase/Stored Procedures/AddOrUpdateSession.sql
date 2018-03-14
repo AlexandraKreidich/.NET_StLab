@@ -5,7 +5,10 @@
     @Date datetimeoffset
 AS
     MERGE dbo.Session AS target
-    USING (SELECT @Id, @FilmId, @HallId, @Date) AS source (Id, FilmId, HallId, Date)
+    USING
+        (SELECT @Id, @FilmId, @HallId, @Date)
+    AS source
+        (Id, FilmId, HallId, Date)
     ON (target.Id = source.Id)
     WHEN MATCHED THEN
         UPDATE SET
@@ -14,5 +17,10 @@ AS
             Date = source.Date
     WHEN NOT MATCHED THEN
         INSERT (FilmId, HallId, Date)
-        VALUES (source.FilmId, source.HallId, source.Date);
-select SCOPE_IDENTITY()
+        VALUES
+        (
+            source.FilmId,
+            source.HallId,
+            source.Date
+        );
+    SELECT SCOPE_IDENTITY()

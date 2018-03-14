@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using Common;
+using JetBrains.Annotations;
 
 namespace WebApi.Models.User
 {
@@ -6,8 +7,7 @@ namespace WebApi.Models.User
     {
         public int Id { get;}
 
-        [NotNull]
-        public string UserRole { get;}
+        public UserRole UserRole { get;}
 
         [NotNull]
         public string FirstName { get;}
@@ -23,7 +23,7 @@ namespace WebApi.Models.User
 
         public ResponseModel(
             int id,
-            [NotNull] string userRole,
+            UserRole userRole,
             [NotNull] string firstName,
             [NotNull] string lastName,
             [NotNull] string email,

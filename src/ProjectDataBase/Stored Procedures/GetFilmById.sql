@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[GetFilmById]
     @Id int
 AS
-    SELECT 
+    SELECT
         Film.Id,
         Film.Name,
         Film.Description,
