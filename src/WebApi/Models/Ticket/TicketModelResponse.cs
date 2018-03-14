@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using Common;
 using JetBrains.Annotations;
+using WebApi.Models.Service;
 
 namespace WebApi.Models.Ticket
 {
@@ -28,10 +31,9 @@ namespace WebApi.Models.Ticket
         public decimal SumPrice { get; set; }
 
         [CanBeNull]
-        public string Services { get; set; }
+        public List<ServiceModel> Services { get; set; }
 
-        [NotNull]
-        public string TicketStatus { get; set; }
+        public TicketStatus TicketStatus { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; }
     }
