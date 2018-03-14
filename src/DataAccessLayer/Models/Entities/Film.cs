@@ -14,8 +14,8 @@ namespace DataAccessLayer.Models.Entities
         [NotNull]
         public string Description { get; set; }
 
-        public DateTimeOffset StartRentDate { get; set; }
+        public DateTime StartRentDate { get; set; }
 
-        public DateTimeOffset EndRentDate { get; set; }
+        public DateTime EndRentDate { get; set; }
     }
 }

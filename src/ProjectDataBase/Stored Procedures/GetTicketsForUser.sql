@@ -28,10 +28,10 @@ AS
     (
         SELECT Cinema.Name
         FROM Cinema
-        WHERE Cinema.Id = 
+        WHERE Cinema.Id =
         (
-            SELECT Hall.CinemaId 
-            FROM Hall 
+            SELECT Hall.CinemaId
+            FROM Hall
             WHERE Session.HallId = Hall.Id
         )
     ) as CinemaName,
@@ -48,5 +48,5 @@ FROM
         JOIN Session ON Session.Id = Price.SessionId
         JOIN Film ON Film.Id = Session.FilmId
         JOIN Place ON Place.Id = Price.PlaceId
-WHERE 
+WHERE
     Ticket.UserId = @UserId

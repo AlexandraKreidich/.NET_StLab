@@ -31,8 +31,6 @@ namespace WebApi
             configuration.CreateMap<HallModelForApi, HallModel>();
             configuration.CreateMap<BlServiceModel, ServiceModel>();
             configuration.CreateMap<ServiceModel, BlServiceModel>();
-            //configuration.CreateMap<BlFilmModel, FilmModel>();
-            //configuration.CreateMap<FilmModel, BlFilmModel>();
             configuration.CreateMap<FilmModel, BlFilmModel>().ConstructUsing
             (
                 x=> new BlFilmModel(x.Id, x.Name, x.Description,x.StartRentDate,x.EndRentDate)

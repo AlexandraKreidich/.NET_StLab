@@ -88,8 +88,6 @@
     <Build Include="Stored Procedures\AddOrUpdatePlace.sql" />
     <Build Include="Stored Procedures\GetSessions.sql" />
     <Build Include="Stored Procedures\GetServicesForSession.sql" />
-    <Build Include="Stored Procedures\GetTickets.sql" />
-    <Build Include="Stored Procedures\GetTicketById.sql" />
     <Build Include="Stored Procedures\GetTicketsForUser.sql" />
     <Build Include="Stored Procedures\GetServicesForTicketId.sql" />
     <Build Include="Stored Procedures\AddServiceForSession.sql" />

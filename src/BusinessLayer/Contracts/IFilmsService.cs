@@ -17,7 +17,7 @@ namespace BusinessLayer.Contracts
         [ItemCanBeNull]
         Task<BlFilmModel> GetFilmsById(int id);
 
-        [ItemNotNull]
+        [ItemCanBeNull]
         Task<IEnumerable<SessionModelResponse>> GetSessionsForFilm(int filmId);
 
         [ItemNotNull]

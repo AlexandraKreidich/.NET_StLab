@@ -42,7 +42,6 @@ namespace WebApi.Controllers
         {
             IEnumerable<BlFilmModel> films = await _filmsService.GetFilms();
 
-            //return films.Select(Mapper.Map<FilmModel>);
             return Ok(
                 Mapper.Map<IEnumerable<FilmModel>>(films)
             );

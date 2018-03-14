@@ -1,10 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[GetServicesForTicketId]
     @TicketId int
 AS
-    SELECT 
-        Service.Id,
-        Service.Name,
-        Service.Price
-    FROM Service
-        JOIN TicketService ON TicketService.ServiceId = Service.Id
-WHERE TicketService.TicketId = @TicketId
+    SELECT
+        s.Id,
+        s.Name,
+        s.Price
+    FROM Service s
+        JOIN TicketService ts ON ts.ServiceId = s.Id
+    WHERE ts.TicketId = @TicketId

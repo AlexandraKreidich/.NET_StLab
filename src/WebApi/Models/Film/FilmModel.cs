@@ -5,30 +5,30 @@ namespace WebApi.Models.Film
 {
     public class FilmModel
     {
-        public int Id { get; set; }
+        public int Id { get;}
 
         [NotNull]
-        public string Name { get; set; }
+        public string Name { get;}
 
         [NotNull]
-        public string Description { get; set; }
+        public string Description { get;}
 
-        public DateTimeOffset StartRentDate { get; set; }
+        public DateTime StartRentDate { get;}
 
-        public DateTimeOffset EndRentDate { get; set; }
+        public DateTime EndRentDate { get;}
 
         public FilmModel(
             int id,
             [NotNull] string name,
             [NotNull] string description,
-            DateTimeOffset startEndRentDate,
-            DateTimeOffset endRentDate
+            DateTime startRentDate,
+            DateTime endRentDate
         )
         {
             Id = id;
             Name = name;
             Description = description;
-            StartRentDate = startEndRentDate;
+            StartRentDate = startRentDate;
             EndRentDate = endRentDate;
         }
     }

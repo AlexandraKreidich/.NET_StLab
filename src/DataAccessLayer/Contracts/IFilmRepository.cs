@@ -21,7 +21,7 @@ namespace DataAccessLayer.Contracts
 
         [ItemNotNull]
         Task<IEnumerable<SessionModelResponse>> SearchSessions([NotNull] FilmFilterModel filters);
-        
+
         Task<int> AddOrUpdateFilm([NotNull] FilmModel film);
-    } 
+    }
 }

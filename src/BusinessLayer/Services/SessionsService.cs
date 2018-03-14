@@ -16,6 +16,7 @@ using SessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 
 namespace BusinessLayer.Services
 {
+    [UsedImplicitly]
     internal class SessionsService : ISessionsService
     {
         [NotNull]
@@ -59,8 +60,8 @@ namespace BusinessLayer.Services
 
                 services.Add(sessionService);
             }
-            
-            // что возвращать ?
+
+            // что  ?
             throw new NotImplementedException();
         }
 

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using System;
+using JetBrains.Annotations;
 
 namespace WebApi.Services
 {
+    [UsedImplicitly]
     public class StringToDateTimeConverter : ITypeConverter<string, DateTimeOffset>
     {
         public DateTimeOffset Convert(string source, DateTimeOffset destination, ResolutionContext context)

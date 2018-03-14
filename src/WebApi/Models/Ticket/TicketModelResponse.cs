@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 
 namespace WebApi.Models.Ticket
 {
+    [UsedImplicitly]
     public class TicketModelResponse
     {
         public int Id { get; set; }

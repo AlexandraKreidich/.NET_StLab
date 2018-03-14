@@ -26,7 +26,6 @@ namespace BusinessLayer.Services
         {
             IEnumerable<DalFilmModel> films = await _filmRepository.GetNowPlayingFilms();
 
-            //return films.Select(Mapper.Map<FilmModel>);
             return Mapper.Map<IEnumerable<FilmModel>>(films);
         }
 
@@ -34,7 +33,6 @@ namespace BusinessLayer.Services
         {
             IEnumerable<DalFilmModel> films = await _filmRepository.GetFilms();
 
-            //return films.Select(Mapper.Map<FilmModel>);
             return Mapper.Map<IEnumerable<FilmModel>>(films);
         }
 
@@ -47,7 +45,14 @@ namespace BusinessLayer.Services
 
         public async Task<IEnumerable<SessionModelResponse>> GetSessionsForFilm(int filmId)
         {
-            IEnumerable<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse> sessions = 
+            DalFilmModel film = await _filmRepository.GetFilmById(filmId);
+
+            if (film == null)
+            {
+                return null;
+            }
+
+            IEnumerable<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse> sessions =
                 await _filmRepository.GetSessionsForFilm(filmId);
 
             return sessions.Select(Mapper.Map<SessionModelResponse>);
