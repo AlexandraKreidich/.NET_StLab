@@ -94,6 +94,8 @@
     <Build Include="Stored Procedures\AddOrUpdateSession.sql" />
     <Build Include="Stored Procedures\DeleteServicesFromSession.sql" />
     <Build Include="Stored Procedures\DeleteSession.sql" />
+    <Build Include="Stored Procedures\GetSessionById.sql" />
+    <Build Include="Stored Procedures\AddOrUpdatePriceForSessionAndPlace.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

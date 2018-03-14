@@ -3,27 +3,28 @@ using JetBrains.Annotations;
 
 namespace WebApi.Models.Session
 {
+    [UsedImplicitly]
     public class SessionModelResponse
     {
-        public int Id { get; set; }
+        public int Id { get;}
 
-        public int HallId { get; set; }
+        public int HallId { get;}
 
-        [NotNull] 
-        public string HallName {get;set;}
+        [NotNull]
+        public string HallName {get;}
 
-        public int FilmId { get; set; }
+        public int FilmId { get;}
 
-        [NotNull] 
-        public string FilmName { get; set; }
+        [NotNull]
+        public string FilmName { get;}
 
-        [NotNull] 
-        public string CinemaName { get; set; }
+        [NotNull]
+        public string CinemaName { get;}
 
-        [NotNull] 
-        public string CinemaCity { get; set; }
+        [NotNull]
+        public string CinemaCity { get;}
 
-        public DateTimeOffset SessionDate { get; set; }
+        public DateTimeOffset SessionDate { get;}
 
         public SessionModelResponse(
             int id,

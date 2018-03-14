@@ -7,16 +7,20 @@ namespace BusinessLayer.Contracts
 {
     public interface ISessionsService
     {
-        [ItemNotNull]
-        Task<IEnumerable<ServiceModel>> GetServises(int sessionId);
+        [ItemCanBeNull]
+        Task<IEnumerable<ServiceModel>> GetServices(int sessionId);
 
         [ItemNotNull]
         Task<IEnumerable<SessionModelResponse>> GetSessions();
 
+        [ItemCanBeNull]
+        Task<SessionModelResponse> GetSessionById(int id);
+
         [ItemNotNull]
         Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session);
-        
-        //что должна возвращать такая операция
+
+        void AddOrUpdatePriceForSession(PriceRequestForSessionController price);
+
         void DeleteSession(int id);
     }
 }

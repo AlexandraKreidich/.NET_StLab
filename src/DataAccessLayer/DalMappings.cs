@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using DataAccessLayer.Models.DataTransferObjects;
 using DataAccessLayer.Models.Entities;
 using JetBrains.Annotations;

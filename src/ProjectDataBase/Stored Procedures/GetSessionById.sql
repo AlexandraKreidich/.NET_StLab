@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[GetSessions]
+﻿CREATE PROCEDURE [dbo].[GetSessionById]
+    @Id int
 AS
     SELECT DISTINCT
         Session.Id,
@@ -13,3 +14,4 @@ AS
         JOIN Hall ON Hall.Id = Session.HallId
         JOIN Cinema ON Cinema.Id = Hall.CinemaId
         JOIN Film ON Film.Id = Session.FilmId
+    WHERE Session.Id = @Id

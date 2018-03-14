@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
@@ -27,9 +28,16 @@ namespace BusinessLayer.Services
             _sessionRepository = sessionsRepository;
         }
 
-        public async Task<IEnumerable<ServiceModel>> GetServises(int sessionId)
+        public async Task<IEnumerable<ServiceModel>> GetServices(int sessionId)
         {
-            IEnumerable<DalServiceModel> services = await _sessionRepository.GetServises(sessionId);
+            DalSessionModelResponse session = await _sessionRepository.GetSessionById(sessionId);
+
+            if (session == null)
+            {
+                return null;
+            }
+
+            IEnumerable<DalServiceModel> services = await _sessionRepository.GetServices(sessionId);
 
             return services.Select(Mapper.Map<ServiceModel>);
         }
@@ -41,28 +49,37 @@ namespace BusinessLayer.Services
             return sessions.Select(Mapper.Map<SessionModelResponse>);
         }
 
+        public async Task<SessionModelResponse> GetSessionById(int id)
+        {
+            DalSessionModelResponse session = await _sessionRepository.GetSessionById(id);
+
+            return Mapper.Map<SessionModelResponse>(session);
+        }
+
         public async Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session)
         {
-            // все удаляем
             _sessionRepository.DeleteServiceFromSession(session.Id);
 
-            // обновляем
             int id = await _sessionRepository.AddOrUpdateSession(Mapper.Map<DalSessionModelRequest>(session));
-
-            // добавляем новые сервисы
-            List<DalSessionServiceModel> services = new List<DalSessionServiceModel>();
 
             foreach (var service in session.Services)
             {
                 DalSessionServiceModel sessionService = new DalSessionServiceModel(session.Id, service);
 
-                sessionService.Id = await _sessionRepository.AddServiceToSession(sessionService);
-
-                services.Add(sessionService);
+                _sessionRepository.AddServiceToSession(sessionService);
             }
 
-            // что  ?
-            throw new NotImplementedException();
+            return await GetSessionById(session.Id) ?? throw new InvalidOperationException();
+        }
+
+        public void AddOrUpdatePriceForSession(PriceRequestForSessionController price)
+        {
+            int l = price.Price.Length;
+
+            for (int i = 0; i < l; i++)
+            {
+                _sessionRepository.AddOrUpdatePriceForSession(price.SessionId, price.PlaceId[i], price.Price[i]);
+            }
         }
 
         public void DeleteSession(int id)

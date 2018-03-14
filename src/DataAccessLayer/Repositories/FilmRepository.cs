@@ -31,8 +31,6 @@ namespace DataAccessLayer.Repositories
                     "GetNowPlayingFilms",
                     commandType: CommandType.StoredProcedure);
 
-                //IEnumerable<FilmModel> filmModels = films.Select(Mapper.Map<FilmModel>);
-
                 IEnumerable<FilmModel> filmModels = Mapper.Map<IEnumerable<FilmModel>>(films);
 
                 return filmModels;
@@ -46,8 +44,6 @@ namespace DataAccessLayer.Repositories
                 IEnumerable<Film> films = await connection.QueryAsync<Film>(
                     "GetFilms",
                     commandType: CommandType.StoredProcedure);
-
-                //IEnumerable<FilmModel> filmModels = films.Select(Mapper.Map<FilmModel>);
 
                 IEnumerable<FilmModel> filmModels = Mapper.Map<IEnumerable<FilmModel>>(films);
 

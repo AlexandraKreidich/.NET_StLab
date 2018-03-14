@@ -24,7 +24,7 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<ServiceModel>> GetServises(int sessionId)
+        public async Task<IEnumerable<ServiceModel>> GetServices(int sessionId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -52,6 +52,24 @@ namespace DataAccessLayer.Repositories
             }
         }
 
+        public async Task<SessionModelResponse> GetSessionById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                SessionResponse session = await connection.QuerySingleOrDefaultAsync<SessionResponse>(
+                    "GetSessionById",
+                    new
+                        {
+                            Id = id
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                SessionModelResponse sessionResponse = Mapper.Map<SessionModelResponse>(session);
+
+                return sessionResponse;
+            }
+        }
+
         public async Task<int> AddOrUpdateSession(SessionModelRequest session)
         {
             int id;
@@ -69,10 +87,24 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
             }
-            // нужно добавить новые сервисы и потом какой должен быть возвращаемый результат определить
-            // создать модель и вернуть в ней массив новых сервисов или просто вернуть модель или сделать еще один запрос потом просто
 
             return id;
+        }
+
+        public async void AddOrUpdatePriceForSession(int sessionId, int placeId, decimal price)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "AddOrUpdatePriceForSessionAndPlace",
+                    new
+                        {
+                            SessionId = sessionId,
+                            PlaceId = placeId,
+                            Price = price
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
         }
 
         public async void DeleteServiceFromSession(int sessionId)
@@ -89,7 +121,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> AddServiceToSession(SessionServiceModel service)
+        public async void AddServiceToSession(SessionServiceModel service)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -101,8 +133,6 @@ namespace DataAccessLayer.Repositories
                             ServiceId = service.ServiceId
                         },
                     commandType: CommandType.StoredProcedure);
-
-                return id;
             }
         }
 

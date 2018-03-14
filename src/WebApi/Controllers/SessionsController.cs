@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.Price;
 using WebApi.Models.Service;
 using WebApi.Models.Session;
 using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 using BlSessionModelRequest = BusinessLayer.Models.SessionModelRequest;
 using BlServiceModel = BusinessLayer.Models.ServiceModel;
+using BlPriceRequestForSessionsController = BusinessLayer.Models.PriceRequestForSessionController;
 
 namespace WebApi.Controllers
 {
@@ -25,20 +26,9 @@ namespace WebApi.Controllers
             _sessionService = sessionService;
         }
 
-        // GET /sessions/{id}/services -> + (если нет такого сеанса?)
+        // GET /sessions
         [HttpGet]
-        [Route("{sessionId}/services")]
-        public async Task<IActionResult> GetServices(int sessionId)
-        {
-            IEnumerable<BlServiceModel> services = await _sessionService.GetServises(sessionId);
-
-            return Ok(
-                services.Select(Mapper.Map<ServiceModel>)
-            );
-        }
-
-        // GET /sessions sp created -> +
-        [HttpGet]
+        [Route("")]
         public async Task<IActionResult> Get()
         {
             IEnumerable<BlSessionModelResponse> sessions = await _sessionService.GetSessions();
@@ -48,22 +38,72 @@ namespace WebApi.Controllers
             );
         }
 
-        // PUT /sessions ?генерация еще нужна цены для каждого места в зале
-        [HttpPut]
-        public IActionResult Put(SessionModelRequest session)
+        // GET /sessions/{id}
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Get(int id)
         {
-            _sessionService.AddOrUpdateSession(Mapper.Map<BlSessionModelRequest>(session));
+            BlSessionModelResponse session = await _sessionService.GetSessionById(id);
 
-            return StatusCode((int) HttpStatusCode.Created);
+            if (session == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(
+                Mapper.Map<BlSessionModelResponse>(session)
+                );
         }
 
-        // DELETE /sessions/{id} - при удалении удалятся и билеты и цена
+        // GET /sessions/{id}/services
+        [HttpGet]
+        [Route("{sessionId}/services")]
+        public async Task<IActionResult> GetServices(int sessionId)
+        {
+            IEnumerable<BlServiceModel> services = await _sessionService.GetServices(sessionId);
+
+            if (services == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(
+                services.Select(Mapper.Map<ServiceModel>)
+            );
+        }
+
+        // PUT /sessions
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]SessionModelRequest session)
+        {
+            BlSessionModelResponse sessionResponse = await _sessionService.AddOrUpdateSession(Mapper.Map<BlSessionModelRequest>(session));
+
+            return Ok(
+                Mapper.Map<SessionModelResponse>(sessionResponse)
+            );
+        }
+
+        // PUT /sessions/{id}/price
+        [HttpPut]
+        [Route("{id:int}/price")]
+        public IActionResult Put(int id, [FromBody] PriceRequestForSessionController price)
+        {
+            BlPriceRequestForSessionsController priceRequest = new BlPriceRequestForSessionsController(
+                price.PlaceId, price.Price, id
+            );
+
+            _sessionService.AddOrUpdatePriceForSession(priceRequest);
+
+            return Ok();
+        }
+
+        // DELETE /sessions/{id}
         [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)
         {
             _sessionService.DeleteSession(id);
 
-            return StatusCode((int)HttpStatusCode.Accepted);
+            return Ok();
         }
     }
 }
