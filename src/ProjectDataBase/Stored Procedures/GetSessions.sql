@@ -3,7 +3,7 @@ AS
     SELECT DISTINCT
         Session.Id,
         Session.HallId,
-        Hall.Name,
+        Hall.Name as HallName,
         Session.FilmId,
         Film.Name as FilmName,
         Cinema.Name as CinemaName,

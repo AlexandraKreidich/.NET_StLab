@@ -32,17 +32,20 @@ namespace WebApi.Controllers
             IEnumerable<BlFilmModel> films = await _filmsService.GetNowPlayingFilms();
 
             return Ok(
-                    films.Select(Mapper.Map<FilmModel>)
+                    Mapper.Map<IEnumerable<FilmModel>>(films)
                 );
         }
 
         // GET /films
         [HttpGet]
-        public async Task<IEnumerable<FilmModel>> Get()
+        public async Task<IActionResult> Get()
         {
             IEnumerable<BlFilmModel> films = await _filmsService.GetFilms();
 
-            return films.Select(Mapper.Map<FilmModel>);
+            //return films.Select(Mapper.Map<FilmModel>);
+            return Ok(
+                Mapper.Map<IEnumerable<FilmModel>>(films)
+            );
         }
 
         // GET /films/{id}
@@ -77,23 +80,19 @@ namespace WebApi.Controllers
                 );
         }
 
-        // POST /films/search-films ??? -> Datetime
+        // POST /films/search-films
         [HttpPost("search-films")]
         public async Task<IActionResult> SearchFilms([NotNull] [FromBody]FilmFilterModel request)
         {
-            IEnumerable<BusinessLayer.Models.SessionModelResponse> sessions = await _filmsService.SearchFilms(Mapper.Map<BlFilmFilterModel>(request));
-
-            if (sessions == null)
-            {
-                return NotFound();
-            }
+            IEnumerable<BusinessLayer.Models.SessionModelResponse> sessions =
+                await _filmsService.SearchSessions(Mapper.Map<BlFilmFilterModel>(request));
 
             return Ok(
                 sessions.Select(Mapper.Map<SessionModelResponse>)
                 );
         }
 
-        // PUT /films ???
+        // PUT /films
         [HttpPut]
         public async Task<IActionResult> Put([NotNull] [FromBody]FilmModel filmToAdd)
         {

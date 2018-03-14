@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[AddOrUpdateService]
-    @Id INT,
+    @Id INT = 0,
     @Name NVARCHAR(50),
     @Price money
 AS

@@ -26,14 +26,16 @@ namespace BusinessLayer.Services
         {
             IEnumerable<DalFilmModel> films = await _filmRepository.GetNowPlayingFilms();
 
-            return films.Select(Mapper.Map<FilmModel>);
+            //return films.Select(Mapper.Map<FilmModel>);
+            return Mapper.Map<IEnumerable<FilmModel>>(films);
         }
 
         public async Task<IEnumerable<FilmModel>> GetFilms()
         {
             IEnumerable<DalFilmModel> films = await _filmRepository.GetFilms();
 
-            return films.Select(Mapper.Map<FilmModel>);
+            //return films.Select(Mapper.Map<FilmModel>);
+            return Mapper.Map<IEnumerable<FilmModel>>(films);
         }
 
         public async Task<FilmModel> GetFilmsById(int id)
@@ -45,14 +47,16 @@ namespace BusinessLayer.Services
 
         public async Task<IEnumerable<SessionModelResponse>> GetSessionsForFilm(int filmId)
         {
-            IEnumerable<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse> sessions = await _filmRepository.GetSessionsForFilm(filmId);
+            IEnumerable<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse> sessions = 
+                await _filmRepository.GetSessionsForFilm(filmId);
 
             return sessions.Select(Mapper.Map<SessionModelResponse>);
         }
 
-        public async Task<IEnumerable<SessionModelResponse>> SearchFilms(FilmFilterModel filters)
+        public async Task<IEnumerable<SessionModelResponse>> SearchSessions(FilmFilterModel filters)
         {
-            IEnumerable<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse> sessions = await _filmRepository.SearchFilms(Mapper.Map<DalFilmFilterModel>(filters));
+            IEnumerable<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse> sessions =
+                await _filmRepository.SearchSessions(Mapper.Map<DalFilmFilterModel>(filters));
 
             return sessions.Select(Mapper.Map<SessionModelResponse>);
         }
@@ -68,15 +72,6 @@ namespace BusinessLayer.Services
                 film.StartRentDate,
                 film.EndRentDate
             );
-
-            //return new FilmModel()
-            //    {
-            //        Description = film.Description,
-            //        EndRentDate = film.EndRentDate,
-            //        Id = (id != 0) ? id : film.Id,
-            //        Name = film.Name,
-            //        StartRentDate = film.StartRentDate
-            //};
         }
     }
 }

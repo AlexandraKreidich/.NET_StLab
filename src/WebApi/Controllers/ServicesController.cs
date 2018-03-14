@@ -45,7 +45,7 @@ namespace WebApi.Controllers
             );
         }
 
-        // DELETE /services/{id}
+        // DELETE /services/{id} Что делать, если такого id не существует
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {

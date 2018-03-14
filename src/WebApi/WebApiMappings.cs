@@ -16,6 +16,7 @@ using PlaceModel = BusinessLayer.Models.PlaceModel;
 using BlHallSchemeModel = BusinessLayer.Models.HallSchemeModel;
 using BlCinemaModel = BusinessLayer.Models.CinemaModel;
 using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
+using BlSessionModelRequest = BusinessLayer.Models.SessionModelRequest;
 
 namespace WebApi
 {
@@ -43,6 +44,7 @@ namespace WebApi
             configuration.CreateMap<SessionModelResponse, BlSessionModelResponse>();
             configuration.CreateMap<FilmFilterModel, BlFilmFilterModel>();
             configuration.CreateMap<string, DateTimeOffset>().ConvertUsing<StringToDateTimeConverter>();
+            configuration.CreateMap<SessionModelRequest, BlSessionModelRequest>();
         }
     }
 }

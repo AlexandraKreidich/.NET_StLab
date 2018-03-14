@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[AddOrUpdateSession]
-    @Id int,
+    @Id int = 0,
     @FilmId int,
     @HallId int,
     @Date datetimeoffset

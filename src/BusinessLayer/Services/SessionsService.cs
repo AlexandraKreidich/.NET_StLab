@@ -4,13 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
-using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 using DalSessionModelResponse = DataAccessLayer.Models.DataTransferObjects.SessionModelResponse;
 using DalSessionServiceModel = DataAccessLayer.Models.DataTransferObjects.SessionServiceModel;
 using DalSessionModelRequest = DataAccessLayer.Models.DataTransferObjects.SessionModelRequest;
+using ServiceModel = BusinessLayer.Models.ServiceModel;
+using SessionModelRequest = BusinessLayer.Models.SessionModelRequest;
+using SessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 
 namespace BusinessLayer.Services
 {
@@ -38,14 +40,33 @@ namespace BusinessLayer.Services
             return sessions.Select(Mapper.Map<SessionModelResponse>);
         }
 
-        public Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session)
+        public async Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session)
         {
+            // все удаляем
+            _sessionRepository.DeleteServiceFromSession(session.Id);
+
+            // обновляем
+            int id = await _sessionRepository.AddOrUpdateSession(Mapper.Map<DalSessionModelRequest>(session));
+
+            // добавляем новые сервисы
+            List<DalSessionServiceModel> services = new List<DalSessionServiceModel>();
+
             foreach (var service in session.Services)
             {
-                
-            }
+                DalSessionServiceModel sessionService = new DalSessionServiceModel(session.Id, service);
 
+                sessionService.Id = await _sessionRepository.AddServiceToSession(sessionService);
+
+                services.Add(sessionService);
+            }
+            
+            // что возвращать ?
             throw new NotImplementedException();
+        }
+
+        public void DeleteSession(int id)
+        {
+            _sessionRepository.DeleteSession(id);
         }
     }
 }

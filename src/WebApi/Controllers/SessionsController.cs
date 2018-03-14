@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Service;
 using WebApi.Models.Session;
 using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
+using BlSessionModelRequest = BusinessLayer.Models.SessionModelRequest;
 using BlServiceModel = BusinessLayer.Models.ServiceModel;
 
 namespace WebApi.Controllers
@@ -24,7 +25,7 @@ namespace WebApi.Controllers
             _sessionService = sessionService;
         }
 
-        // GET /sessions/{id}/services -> +
+        // GET /sessions/{id}/services -> + (если нет такого сеанса?)
         [HttpGet]
         [Route("{sessionId}/services")]
         public async Task<IActionResult> GetServices(int sessionId)
@@ -47,18 +48,22 @@ namespace WebApi.Controllers
             );
         }
 
-        // PUT /sessions 
+        // PUT /sessions ?генерация еще нужна цены для каждого места в зале
         [HttpPut]
         public IActionResult Put(SessionModelRequest session)
         {
+            _sessionService.AddOrUpdateSession(Mapper.Map<BlSessionModelRequest>(session));
+
             return StatusCode((int) HttpStatusCode.Created);
         }
 
-        //// DELETE /sessions/{id} - лучше сеансы не удалять вообще
-        //[HttpDelete("{id:int}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    return StatusCode((int)HttpStatusCode.Accepted);
-        //}
+        // DELETE /sessions/{id} - при удалении удалятся и билеты и цена
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            _sessionService.DeleteSession(id);
+
+            return StatusCode((int)HttpStatusCode.Accepted);
+        }
     }
 }

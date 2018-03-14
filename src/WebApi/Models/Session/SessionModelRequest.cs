@@ -12,6 +12,6 @@ namespace WebApi.Models.Session
 
         public DateTimeOffset Date { get; set; }
 
-        public int[] SessionId { get; set; }
+        public int[] Services { get; set; }
     }
 }

@@ -6,6 +6,6 @@
     [TicketStatusId] INT NOT NULL,
     [CreatedAt] DATETIMEOFFSET NOT NULL,
     FOREIGN KEY (UserId) REFERENCES [dbo].[User](Id),
-    FOREIGN KEY (PriceId) REFERENCES [dbo].[Price](Id),
+    FOREIGN KEY (PriceId) REFERENCES [dbo].[Price](Id) ON DELETE CASCADE,
     FOREIGN KEY (TicketStatusId) REFERENCES [dbo].[TicketStatus](Id)
 )

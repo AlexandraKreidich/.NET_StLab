@@ -31,9 +31,11 @@ namespace DataAccessLayer.Repositories
                     "GetNowPlayingFilms",
                     commandType: CommandType.StoredProcedure);
 
-                IEnumerable<FilmModel> filmsResponse = films.Select(Mapper.Map<FilmModel>);
+                //IEnumerable<FilmModel> filmModels = films.Select(Mapper.Map<FilmModel>);
 
-                return filmsResponse;
+                IEnumerable<FilmModel> filmModels = Mapper.Map<IEnumerable<FilmModel>>(films);
+
+                return filmModels;
             }
         }
 
@@ -45,7 +47,9 @@ namespace DataAccessLayer.Repositories
                     "GetFilms",
                     commandType: CommandType.StoredProcedure);
 
-                IEnumerable<FilmModel> filmModels = films.Select(Mapper.Map<FilmModel>);
+                //IEnumerable<FilmModel> filmModels = films.Select(Mapper.Map<FilmModel>);
+
+                IEnumerable<FilmModel> filmModels = Mapper.Map<IEnumerable<FilmModel>>(films);
 
                 return filmModels;
             }
@@ -85,7 +89,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<SessionModelResponse>> SearchFilms(FilmFilterModel filters)
+        public async Task<IEnumerable<SessionModelResponse>> SearchSessions(FilmFilterModel filters)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {

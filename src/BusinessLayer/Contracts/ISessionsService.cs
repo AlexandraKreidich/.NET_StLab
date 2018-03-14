@@ -15,5 +15,8 @@ namespace BusinessLayer.Contracts
 
         [ItemNotNull]
         Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session);
+        
+        //что должна возвращать такая операция
+        void DeleteSession(int id);
     }
 }

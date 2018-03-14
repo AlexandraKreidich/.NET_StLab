@@ -17,11 +17,11 @@ namespace BusinessLayer.Contracts
         [ItemCanBeNull]
         Task<BlFilmModel> GetFilmsById(int id);
 
-        [ItemCanBeNull]
+        [ItemNotNull]
         Task<IEnumerable<SessionModelResponse>> GetSessionsForFilm(int filmId);
 
-        [ItemCanBeNull]
-        Task<IEnumerable<SessionModelResponse>> SearchFilms([NotNull] FilmFilterModel filters);
+        [ItemNotNull]
+        Task<IEnumerable<SessionModelResponse>> SearchSessions([NotNull] FilmFilterModel filters);
 
         [ItemNotNull]
         Task<BlFilmModel> AddOrUpdateFilm([NotNull] BlFilmModel film);

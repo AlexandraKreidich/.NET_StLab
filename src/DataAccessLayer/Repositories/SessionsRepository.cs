@@ -52,19 +52,72 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session)
+        public async Task<int> AddOrUpdateSession(SessionModelRequest session)
         {
-            throw new System.NotImplementedException();
+            int id;
+
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                id = await connection.ExecuteScalarAsync<int>(
+                    "AddOrUpdateSession",
+                    new
+                        {
+                            Id = session.Id,
+                            FilmId = session.FilmId,
+                            HallId = session.HallId,
+                            Date = session.Time
+                        },
+                    commandType: CommandType.StoredProcedure);
+            }
+            // нужно добавить новые сервисы и потом какой должен быть возвращаемый результат определить
+            // создать модель и вернуть в ней массив новых сервисов или просто вернуть модель или сделать еще один запрос потом просто
+
+            return id;
         }
 
-        public Task<SessionServiceModel> AddOrUpdateService(SessionServiceModel service)
+        public async void DeleteServiceFromSession(int sessionId)
         {
-            throw new System.NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "DeleteServicesFromSession",
+                    new
+                        {
+                            SessionId = sessionId,
+                        },
+                    commandType: CommandType.StoredProcedure);
+            }
         }
 
-        public Task<SessionModelResponse> AddOrUpdateSession(SessionModelRequest session, SessionServiceModel services)
+        public async Task<int> AddServiceToSession(SessionServiceModel service)
         {
-            throw new System.NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                int id = await connection.ExecuteScalarAsync<int>(
+                    "AddServiceForSession",
+                    new
+                        {
+                            SessionId = service.SessionId,
+                            ServiceId = service.ServiceId
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                return id;
+            }
+        }
+
+        public async void DeleteSession(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "DeleteSession",
+                    new
+                        {
+                            Id = id,
+                        },
+                    commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }
