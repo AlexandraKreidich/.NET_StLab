@@ -14,7 +14,7 @@ namespace WebApi.Models.Session
         public DateTimeOffset Date { get;}
 
         [CanBeNull]
-        public int[] Services { get;}
+        public int[] ServiceIds { get;}
 
         public SessionModelRequest
         (
@@ -22,14 +22,14 @@ namespace WebApi.Models.Session
             int filmId,
             int hallId,
             DateTimeOffset date,
-            int[] services
+            [CanBeNull] int[] serviceIds
         )
         {
             Id = id;
             FilmId = filmId;
             HallId = hallId;
             Date = date;
-            Services = services;
+            ServiceIds = serviceIds;
         }
     }
 }

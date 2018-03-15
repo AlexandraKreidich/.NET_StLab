@@ -3,15 +3,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Price;
-using WebApi.Models.Service;
-using WebApi.Models.Session;
 using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 using BlSessionModelRequest = BusinessLayer.Models.SessionModelRequest;
 using BlServiceModel = BusinessLayer.Models.ServiceModel;
-using BlPriceRequestForSessionsController = BusinessLayer.Models.PriceRequestForSessionController;
+using ServiceModel = WebApi.Models.Service.ServiceModel;
+using SessionModelRequest = WebApi.Models.Session.SessionModelRequest;
+using SessionModelResponse = WebApi.Models.Session.SessionModelResponse;
 
 namespace WebApi.Controllers
 {
@@ -86,13 +87,13 @@ namespace WebApi.Controllers
         // PUT /sessions/{id}/price
         [HttpPut]
         [Route("{id:int}/price")]
-        public IActionResult Put(int id, [FromBody] PriceRequestForSessionController price)
+        public IActionResult Put(int id, [FromBody] PriceApiRequest priceApi)
         {
-            BlPriceRequestForSessionsController priceRequest = new BlPriceRequestForSessionsController(
-                price.PlaceId, price.Price, id
+            PriceBlRequest priceBlRequest = new PriceBlRequest(
+                priceApi.PlaceIds, priceApi.Prices, id
             );
 
-            _sessionService.AddOrUpdatePriceForSession(priceRequest);
+            _sessionService.AddOrUpdatePriceForSession(priceBlRequest);
 
             return Ok();
         }

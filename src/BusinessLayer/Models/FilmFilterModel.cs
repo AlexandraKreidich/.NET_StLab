@@ -3,17 +3,19 @@ using JetBrains.Annotations;
 
 namespace BusinessLayer.Models
 {
+    [UsedImplicitly]
     public class FilmFilterModel
     {
-        [CanBeNull] 
+        [CanBeNull]
         public string City { get; set; }
 
-        [CanBeNull] 
+        [CanBeNull]
         public string Cinema { get; set; }
 
-        [CanBeNull] 
+        [CanBeNull]
         public string Film { get; set; }
 
+        [CanBeNull]
         public DateTime? Date { get; set; }
 
         public int FreePlaces { get; set; }

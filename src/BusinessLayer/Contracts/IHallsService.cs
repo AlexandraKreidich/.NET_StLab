@@ -10,6 +10,6 @@ namespace BusinessLayer.Contracts
         Task<HallModelForApi> GetHall(int id);
 
         [ItemNotNull]
-        Task<HallModelForApi> AddOrOrUpdateHall(HallModelForApi hall);
+        Task<HallModelForApi> AddOrOrUpdateHall([NotNull] HallModelForApi hall);
     }
 }

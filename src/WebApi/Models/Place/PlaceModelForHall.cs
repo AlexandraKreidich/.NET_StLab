@@ -4,7 +4,7 @@ namespace WebApi.Models.Place
 {
     [UsedImplicitly]
     public class PlaceModelForHall
-    { 
+    {
         public int Id { get; }
 
         public int HallId { get; }

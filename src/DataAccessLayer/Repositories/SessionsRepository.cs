@@ -83,7 +83,7 @@ namespace DataAccessLayer.Repositories
                             Id = session.Id,
                             FilmId = session.FilmId,
                             HallId = session.HallId,
-                            Date = session.Time
+                            Date = session.Date
                         },
                     commandType: CommandType.StoredProcedure);
             }

@@ -19,7 +19,7 @@ namespace BusinessLayer.Contracts
         [ItemNotNull]
         Task<SessionModelResponse> AddOrUpdateSession([NotNull] SessionModelRequest session);
 
-        void AddOrUpdatePriceForSession([NotNull] PriceRequestForSessionController price);
+        void AddOrUpdatePriceForSession([NotNull] PriceBlRequest priceBl);
 
         void DeleteSession(int id);
     }
