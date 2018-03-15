@@ -1,9 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace BusinessLayer.Models
+namespace DataAccessLayer.Models.Entities
 {
     [UsedImplicitly]
-    internal class HallModel
+    internal class HallDalModel
     {
         public int Id { get; set; }
 

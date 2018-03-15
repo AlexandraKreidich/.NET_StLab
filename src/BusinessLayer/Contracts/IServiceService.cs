@@ -8,10 +8,10 @@ namespace BusinessLayer.Contracts
     public interface IServiceService
     {
         [ItemNotNull]
-        Task<IEnumerable<ServiceModel>> GetServices();
+        Task<IEnumerable<ServiceBlModel>> GetServices();
 
         [ItemNotNull]
-        Task<ServiceModel> AddOrUpdateService([NotNull] ServiceModel service);
+        Task<ServiceBlModel> AddOrUpdateService([NotNull] ServiceBlModel service);
 
         Task<StoredProcedureExecutionResult> DeleteService(int id);
     }

@@ -11,7 +11,6 @@ using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 using DalSessionModelResponse = DataAccessLayer.Models.DataTransferObjects.SessionModelResponse;
 using DalSessionServiceModel = DataAccessLayer.Models.DataTransferObjects.SessionServiceModel;
 using DalSessionModelRequest = DataAccessLayer.Models.DataTransferObjects.SessionModelRequest;
-using ServiceModel = BusinessLayer.Models.ServiceModel;
 using SessionModelRequest = BusinessLayer.Models.SessionModelRequest;
 using SessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 
@@ -28,7 +27,7 @@ namespace BusinessLayer.Services
             _sessionRepository = sessionsRepository;
         }
 
-        public async Task<IEnumerable<ServiceModel>> GetServices(int sessionId)
+        public async Task<IEnumerable<ServiceBlModel>> GetServices(int sessionId)
         {
             DalSessionModelResponse session = await _sessionRepository.GetSessionById(sessionId);
 
@@ -39,7 +38,7 @@ namespace BusinessLayer.Services
 
             IEnumerable<DalServiceModel> services = await _sessionRepository.GetServices(sessionId);
 
-            return services.Select(Mapper.Map<ServiceModel>);
+            return services.Select(Mapper.Map<ServiceBlModel>);
         }
 
         public async Task<IEnumerable<SessionModelResponse>> GetSessions()

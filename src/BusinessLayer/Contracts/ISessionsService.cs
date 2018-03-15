@@ -8,7 +8,7 @@ namespace BusinessLayer.Contracts
     public interface ISessionsService
     {
         [ItemCanBeNull]
-        Task<IEnumerable<ServiceModel>> GetServices(int sessionId);
+        Task<IEnumerable<ServiceBlModel>> GetServices(int sessionId);
 
         [ItemNotNull]
         Task<IEnumerable<SessionModelResponse>> GetSessions();

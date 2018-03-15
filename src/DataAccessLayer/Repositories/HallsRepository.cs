@@ -21,20 +21,20 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<HallModel> GetHall(int id)
+        public async Task<HallDalDtoModel> GetHall(int id)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                Hall hall = await connection.QuerySingleOrDefaultAsync<Hall>(
+                HallDalModel hallDalModel = await connection.QuerySingleOrDefaultAsync<HallDalModel>(
                     "GetHallById",
                     new { Id = id },
                     commandType: CommandType.StoredProcedure);
 
-                return Mapper.Map<HallModel>(hall);
+                return Mapper.Map<HallDalDtoModel>(hallDalModel);
             }
         }
 
-        public async Task<int> AddOrUpdateHall(HallModel hall)
+        public async Task<int> AddOrUpdateHall(HallDalDtoModel hallDalDto)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -42,9 +42,9 @@ namespace DataAccessLayer.Repositories
                     "AddOrUpdateHall",
                     new
                     {
-                        Id = hall.Id,
-                        CinemaId = hall.CinemaId,
-                        Name = hall.Name
+                        Id = hallDalDto.Id,
+                        CinemaId = hallDalDto.CinemaId,
+                        Name = hallDalDto.Name
                     },
                     commandType: CommandType.StoredProcedure);
 
@@ -52,7 +52,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> AddOrUpdateHallScheme(HallSchemeModel hallScheme)
+        public async Task<int> AddOrUpdateHallScheme(HallSchemeDalDtoModel hallSchemeDalDto)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -60,10 +60,10 @@ namespace DataAccessLayer.Repositories
                     "AddOrUpdateHallScheme",
                     new
                     {
-                        Id = hallScheme.Id,
-                        HallId = hallScheme.HallId,
-                        RowNumber = hallScheme.RowNumber,
-                        PlacesCount = hallScheme.PlacesCount
+                        Id = hallSchemeDalDto.Id,
+                        HallId = hallSchemeDalDto.HallId,
+                        RowNumber = hallSchemeDalDto.RowNumber,
+                        PlacesCount = hallSchemeDalDto.PlacesCount
                     },
                     commandType: CommandType.StoredProcedure);
 
@@ -71,7 +71,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> AddOrUpdatePlace(PlaceModel place)
+        public async Task<int> AddOrUpdatePlace(PlaceDalDtoModel placeDalDto)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -79,11 +79,11 @@ namespace DataAccessLayer.Repositories
                     "AddOrUpdatePlace",
                     new
                     {
-                        Id = place.Id,
-                        HallId = place.HallId,
-                        PlaceType = place.Type,
-                        PlaceNumber = place.PlaceNumber,
-                        RowNumber = place.RowNumber
+                        Id = placeDalDto.Id,
+                        HallId = placeDalDto.HallId,
+                        PlaceTypeId = placeDalDto.TypeId,
+                        PlaceNumber = placeDalDto.PlaceNumber,
+                        RowNumber = placeDalDto.RowNumber
                     },
                     commandType: CommandType.StoredProcedure);
 

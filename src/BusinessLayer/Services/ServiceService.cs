@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
 using JetBrains.Annotations;
 using ServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
-using BlServiceModel = BusinessLayer.Models.ServiceModel;
 using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 
 namespace BusinessLayer.Services
@@ -22,18 +22,18 @@ namespace BusinessLayer.Services
             _serviceRepository = serviceRepository;
         }
 
-        public async Task<IEnumerable<BlServiceModel>> GetServices()
+        public async Task<IEnumerable<ServiceBlModel>> GetServices()
         {
             IEnumerable<ServiceModel> services = await _serviceRepository.GetServices();
 
-            return services.Select(Mapper.Map<BlServiceModel>);
+            return services.Select(Mapper.Map<ServiceBlModel>);
         }
 
-        public async Task<BlServiceModel> AddOrUpdateService(BlServiceModel service)
+        public async Task<ServiceBlModel> AddOrUpdateService(ServiceBlModel service)
         {
             int id = await _serviceRepository.AddOrUpdateService(Mapper.Map<DalServiceModel>(service));
 
-            return new BlServiceModel(
+            return new ServiceBlModel(
                 (id != 0) ? id : service.Id,
                 service.Name,
                 service.Price

@@ -1,22 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[AddOrUpdatePlace]
     @Id int,
     @HallId int,
-    @PlaceType nvarchar(50),
+    @PlaceTypeId int,
     @PlaceNumber int,
     @RowNumber int
 AS
     MERGE dbo.Place AS target
     USING
-        (SELECT @Id, @HallId, @PlaceType, @PlaceNumber, @RowNumber)
+        (SELECT @Id, @HallId, @PlaceTypeId, @PlaceNumber, @RowNumber)
     AS source
-        (Id, HallId, PlaceType, PlaceNumber, RowNumber)
+        (Id, HallId, PlaceTypeId, PlaceNumber, RowNumber)
     ON (target.Id = source.Id)
     WHEN MATCHED THEN
         UPDATE SET
-            PlaceTypeId = (
-                SELECT Id FROM [dbo].PlaceType
-                WHERE [Name] = @PlaceType
-            ),
+            PlaceTypeId = source.PlaceTypeId,
             PlaceNumber = source.PlaceNumber,
             RowNumber = source.RowNumber
     WHEN NOT MATCHED THEN
@@ -24,10 +21,7 @@ AS
         VALUES
         (
             source.HallId,
-            (
-               SELECT Id FROM [dbo].PlaceType
-               WHERE [Name] = @PlaceType
-            ),
+            source.PlaceTypeId,
             source.PlaceNumber,
             source.RowNumber);
     select SCOPE_IDENTITY()

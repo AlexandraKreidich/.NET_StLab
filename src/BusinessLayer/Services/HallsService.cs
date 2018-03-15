@@ -5,10 +5,8 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
+using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
-using DalHallModel = DataAccessLayer.Models.DataTransferObjects.HallModel;
-using DalPlaceModel = DataAccessLayer.Models.DataTransferObjects.PlaceModel;
-using DalHallSchemeModel = DataAccessLayer.Models.DataTransferObjects.HallSchemeModel;
 
 namespace BusinessLayer.Services
 {
@@ -27,117 +25,126 @@ namespace BusinessLayer.Services
             _cinemaRepository = cinemaRepository;
         }
 
-        public async Task<HallModelForApi> GetHall(int id)
+        public async Task<FullHallBlModel> GetHall(int id)
         {
-            DalHallModel hall = await _hallsRepository.GetHall(id);
+            HallDalDtoModel hallDalDto = await _hallsRepository.GetHall(id);
 
-            if (hall == null)
+            if (hallDalDto == null)
             {
                 return null;
             }
 
-            Task<IEnumerable<DalPlaceModel>> t1 = _cinemaRepository.GetPlaces(hall.Id);
-            Task<IEnumerable<DalHallSchemeModel>> t2 = _cinemaRepository.GetHallScheme(hall.Id);
+            Task<IEnumerable<PlaceDalDtoModel>> t1 = _cinemaRepository.GetPlaces(hallDalDto.Id);
+            Task<IEnumerable<HallSchemeDalDtoModel>> t2 = _cinemaRepository.GetHallScheme(hallDalDto.Id);
 
-            IEnumerable<DalPlaceModel> places = await t1;
-            PlaceModel[] placesArray = places.Select(Mapper.Map<PlaceModel>).ToArray();
+            IEnumerable<PlaceDalDtoModel> places = await t1;
+            PlaceBlModel[] placesBlArray = places.Select
+            (
+                x => new PlaceBlModel
+                    (
+                        x.Id,
+                        x.HallId,
+                        new PlaceTypeBlModel(x.TypeId, x.Type),
+                        x.RowNumber,
+                        x.PlaceNumber
+                    )
+             ).ToArray();
 
-            IEnumerable<DalHallSchemeModel> hallSchemeResponse = await t2;
-            HallSchemeModel[] hallSchemeModels =
-                hallSchemeResponse.Select(Mapper.Map<HallSchemeModel>).ToArray();
+            IEnumerable<HallSchemeDalDtoModel> hallSchemeResponse = await t2;
+            HallSchemeBlModel[] hallSchemeBlModels =
+                hallSchemeResponse.Select(Mapper.Map<HallSchemeBlModel>).ToArray();
 
-            return new HallModelForApi(
-                hall.Id,
-                hall.CinemaId,
-                hall.Name,
-                placesArray,
-                hallSchemeModels
+            return new FullHallBlModel(
+                hallDalDto.Id,
+                hallDalDto.CinemaId,
+                hallDalDto.Name,
+                placesBlArray,
+                hallSchemeBlModels
             );
         }
 
-        public async Task<HallModelForApi> AddOrOrUpdateHall(HallModelForApi hall)
+        public async Task<FullHallBlModel> AddOrOrUpdateHall(FullHallBlModel hallBlModel)
         {
-            HallModel hallRequest = new HallModel()
-            {
-                Id = hall.Id,
-                CinemaId = hall.CinemaId,
-                Name = hall.Name
-            };
-
-            int hallModelResponseId = await _hallsRepository.AddOrUpdateHall(Mapper.Map<DalHallModel>(hallRequest));
-
-            DalHallModel hallModelResponse = new DalHallModel(
-                (hallModelResponseId != 0) ? hallModelResponseId : hall.Id,
-                hall.CinemaId,
-                hall.Name
+            HallBlModel hallBlRequest = new HallBlModel(
+                hallBlModel.Id,
+                hallBlModel.CinemaId,
+                hallBlModel.Name
             );
 
-            List<DalPlaceModel> placesList = new List<DalPlaceModel>();
+            int hallModelResponseId = await _hallsRepository.AddOrUpdateHall(Mapper.Map<HallDalDtoModel>(hallBlRequest));
 
-            if (hall.Places != null)
+            HallDalDtoModel hallDalDtoModelResponse = new HallDalDtoModel(
+                (hallModelResponseId != 0) ? hallModelResponseId : hallBlModel.Id,
+                hallBlModel.CinemaId,
+                hallBlModel.Name
+            );
+
+            List<PlaceBlModel> placesList = new List<PlaceBlModel>();
+
+            if (hallBlModel.PlacesBl != null)
             {
 
-                foreach (PlaceModel place in hall.Places)
+                foreach (PlaceBlModel place in hallBlModel.PlacesBl)
                 {
-                    PlaceModel placeRequest = new PlaceModel(
-                        place.Id,
-                        place.HallId,
-                        place.Type,
-                        place.RowNumber,
-                        place.PlaceNumber
-                    );
-
                     int placeResponseId =
-                        await _hallsRepository.AddOrUpdatePlace(Mapper.Map<DalPlaceModel>(placeRequest));
+                        await _hallsRepository.AddOrUpdatePlace
+                        (
+                            new PlaceDalDtoModel
+                            (
+                                place.Id,
+                                place.HallId,
+                                place.Type.Name,
+                                place.Type.Id,
+                                place.PlaceNumber,
+                                place.RowNumber
+                            )
+                        );
 
-                    DalPlaceModel placeResponse = new DalPlaceModel(
+                    PlaceBlModel placeBlModel = new PlaceBlModel(
                         (placeResponseId != 0) ? placeResponseId : place.Id,
                         place.HallId,
-                        place.Type,
+                        new PlaceTypeBlModel
+                        (
+                            place.Type.Id,
+                            place.Type.Name
+                        ),
                         place.PlaceNumber,
                         place.RowNumber
                     );
 
-                    placesList.Add(placeResponse);
+                    placesList.Add(placeBlModel);
                 }
             }
 
-            List<DalHallSchemeModel> schemeModelList = new List<DalHallSchemeModel>();
+            List<HallSchemeBlModel> schemeModelList = new List<HallSchemeBlModel>();
 
-            if (hall.HallSchemeModels != null)
+            if (hallBlModel.HallSchemeBlModels != null)
             {
-                foreach (var hallScheme in hall.HallSchemeModels)
+                foreach (HallSchemeBlModel hallScheme in hallBlModel.HallSchemeBlModels)
                 {
-                    HallSchemeModel hallSchemeRequest = new HallSchemeModel(
-                        hallScheme.Id,
+                    int hallSchemeResponseId =
+                        await _hallsRepository.AddOrUpdateHallScheme(Mapper.Map<HallSchemeDalDtoModel>(hallScheme));
+
+                    HallSchemeBlModel hallSchemeBlModel = new HallSchemeBlModel(
+                        (hallSchemeResponseId != 0) ? hallSchemeResponseId : hallScheme.Id,
                         hallScheme.HallId,
                         hallScheme.RowNumber,
                         hallScheme.PlacesCount
                     );
 
-                    int hallSchemeResponseId =
-                        await _hallsRepository.AddOrUpdateHallScheme(Mapper.Map<DalHallSchemeModel>(hallSchemeRequest));
-
-                    DalHallSchemeModel hallSchemeResponse = new DalHallSchemeModel(
-                        (hallSchemeResponseId != 0) ? hallSchemeResponseId : hallSchemeRequest.Id,
-                        hallSchemeRequest.HallId,
-                        hallSchemeRequest.RowNumber,
-                        hallSchemeRequest.PlacesCount
-                    );
-
-                    schemeModelList.Add(hallSchemeResponse);
+                    schemeModelList.Add(hallSchemeBlModel);
                 }
             }
 
-            HallModelForApi hallModelResponseForApi = new HallModelForApi(
-                hallModelResponse.Id,
-                hallModelResponse.CinemaId,
-                hallModelResponse.Name,
-                placesList.Select(Mapper.Map<PlaceModel>).ToArray(),
-                schemeModelList.Select(Mapper.Map<HallSchemeModel>).ToArray()
+            FullHallBlModel fullHallBlModel = new FullHallBlModel(
+                hallDalDtoModelResponse.Id,
+                hallDalDtoModelResponse.CinemaId,
+                hallDalDtoModelResponse.Name,
+                placesList.ToArray(),
+                schemeModelList.ToArray()
             );
 
-            return hallModelResponseForApi;
+            return fullHallBlModel;
         }
     }
 }

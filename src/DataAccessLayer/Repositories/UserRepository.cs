@@ -21,8 +21,8 @@ namespace DataAccessLayer.Repositories
         {
             _settings = settings;
         }
-        
-        public async Task<UserResponse> GetUser([NotNull] string email)
+
+        public async Task<UserResponse> GetUser(string email)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {

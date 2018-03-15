@@ -5,6 +5,7 @@ AS
         p.Id,
         p.HallId,
         pt.Name AS Type,
+        pt.Id AS TypeId,
         p.PlaceNumber,
         p.RowNumber
     FROM [Place] p

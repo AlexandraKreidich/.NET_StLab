@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[GetTicketsForUser]
-    @UserId int
+﻿CREATE PROCEDURE [dbo].[GetTicketById]
+    @Id int
 AS
     SELECT
         Ticket.Id as TicketId,
@@ -24,4 +24,4 @@ AS
             JOIN Cinema ON Cinema.Id = Hall.CinemaId
             JOIN TicketStatus ON Ticket.TicketStatusId = TicketStatus.Id
     WHERE
-        Ticket.UserId = @UserId
+        Ticket.Id = @Id

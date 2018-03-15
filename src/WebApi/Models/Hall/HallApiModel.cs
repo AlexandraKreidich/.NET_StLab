@@ -4,7 +4,7 @@ using WebApi.Models.Place;
 namespace WebApi.Models.Hall
 {
     [UsedImplicitly]
-    public class HallModel
+    public class HallApiModel
     {
         public int Id { get; }
 
@@ -13,25 +13,25 @@ namespace WebApi.Models.Hall
         [NotNull]
         public string Name { get; }
 
-        [NotNull]
-        public PlaceModelForHall[] Places { get; }
+        [CanBeNull]
+        public PlaceApiModel[] PlacesApi { get; }
 
-        [NotNull]
-        public HallSchemeModel[] HallSchemeModels { get; }
+        [CanBeNull]
+        public HallSchemeApiModel[] HallSchemeApiModels { get; }
 
-        public HallModel(
+        public HallApiModel(
             int id,
             int cinemaId,
             [NotNull] string name,
-            [NotNull] PlaceModelForHall[] places,
-            [NotNull] HallSchemeModel[] hallSchemeModels
+            [CanBeNull] PlaceApiModel[] placesApi,
+            [CanBeNull] HallSchemeApiModel[] hallSchemeApiModels
         )
         {
             Id = id;
             CinemaId = cinemaId;
             Name = name;
-            Places = places;
-            HallSchemeModels = hallSchemeModels;
+            PlacesApi = placesApi;
+            HallSchemeApiModels = hallSchemeApiModels;
         }
     }
 }

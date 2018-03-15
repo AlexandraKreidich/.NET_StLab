@@ -7,9 +7,9 @@ namespace BusinessLayer.Contracts
     public interface IHallsService
     {
         [ItemCanBeNull]
-        Task<HallModelForApi> GetHall(int id);
+        Task<FullHallBlModel> GetHall(int id);
 
         [ItemNotNull]
-        Task<HallModelForApi> AddOrOrUpdateHall([NotNull] HallModelForApi hall);
+        Task<FullHallBlModel> AddOrOrUpdateHall([NotNull] FullHallBlModel fullHallBl);
     }
 }

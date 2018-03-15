@@ -7,10 +7,9 @@ using BusinessLayer.Models;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Price;
+using WebApi.Models.Service;
 using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 using BlSessionModelRequest = BusinessLayer.Models.SessionModelRequest;
-using BlServiceModel = BusinessLayer.Models.ServiceModel;
-using ServiceModel = WebApi.Models.Service.ServiceModel;
 using SessionModelRequest = WebApi.Models.Session.SessionModelRequest;
 using SessionModelResponse = WebApi.Models.Session.SessionModelResponse;
 
@@ -61,7 +60,7 @@ namespace WebApi.Controllers
         [Route("{sessionId}/services")]
         public async Task<IActionResult> GetServices(int sessionId)
         {
-            IEnumerable<BlServiceModel> services = await _sessionService.GetServices(sessionId);
+            IEnumerable<ServiceBlModel> services = await _sessionService.GetServices(sessionId);
 
             if (services == null)
             {
@@ -69,7 +68,7 @@ namespace WebApi.Controllers
             }
 
             return Ok(
-                services.Select(Mapper.Map<ServiceModel>)
+                services.Select(Mapper.Map<ServiceApiModel>)
             );
         }
 

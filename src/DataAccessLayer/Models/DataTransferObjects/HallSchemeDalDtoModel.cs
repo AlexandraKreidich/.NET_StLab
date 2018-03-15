@@ -1,19 +1,19 @@
 ﻿using JetBrains.Annotations;
 
-namespace WebApi.Models.Hall
+namespace DataAccessLayer.Models.DataTransferObjects
 {
     [UsedImplicitly]
-    public class HallSchemeModel
+    public class HallSchemeDalDtoModel
     {
         public int Id { get; }
 
-        public int HallId { get;}
+        public int HallId { get; }
 
         public int RowNumber { get; }
 
         public int PlacesCount { get; }
 
-        public HallSchemeModel(
+        public HallSchemeDalDtoModel(
             int id,
             int hallId,
             int rowNumber,

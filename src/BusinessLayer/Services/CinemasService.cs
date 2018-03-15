@@ -5,11 +5,10 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
+using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
 using CinemaDalModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
-using HallDalModel = DataAccessLayer.Models.DataTransferObjects.HallModel;
-using PlaceDalModel = DataAccessLayer.Models.DataTransferObjects.PlaceModel;
-using HallSchemeDalModel = DataAccessLayer.Models.DataTransferObjects.HallSchemeModel;
+using CinemaModel = BusinessLayer.Models.CinemaModel;
 
 namespace BusinessLayer.Services
 {
@@ -53,7 +52,7 @@ namespace BusinessLayer.Services
             );
         }
 
-        public async Task<IEnumerable<HallModelForApi>> GetHalls(int cinemaId)
+        public async Task<IEnumerable<FullHallBlModel>> GetHalls(int cinemaId)
         {
             CinemaDalModel cinema = await _cinemaRepository.GetCinemaById(cinemaId);
 
@@ -62,30 +61,39 @@ namespace BusinessLayer.Services
                 return null;
             }
 
-            IEnumerable<HallDalModel> halls = await _cinemaRepository.GetHalls(cinemaId);
-            List<HallModelForApi> results = new List<HallModelForApi>();
+            IEnumerable<HallDalDtoModel> halls = await _cinemaRepository.GetHalls(cinemaId);
+            List<FullHallBlModel> results = new List<FullHallBlModel>();
 
             if (halls != null)
             {
-                foreach (HallDalModel hall in halls)
+                foreach (HallDalDtoModel hall in halls)
                 {
-                    Task<IEnumerable<PlaceDalModel>> t1 = _cinemaRepository.GetPlaces(hall.Id);
-                    Task<IEnumerable<HallSchemeDalModel>> t2 = _cinemaRepository.GetHallScheme(hall.Id);
+                    Task<IEnumerable<PlaceDalDtoModel>> t1 = _cinemaRepository.GetPlaces(hall.Id);
+                    Task<IEnumerable<HallSchemeDalDtoModel>> t2 = _cinemaRepository.GetHallScheme(hall.Id);
 
-                    IEnumerable<PlaceDalModel> places = await t1;
-                    PlaceModel[] placesArray = places.Select(Mapper.Map<PlaceModel>).ToArray();
+                    IEnumerable<PlaceDalDtoModel> places = await t1;
+                    PlaceBlModel[] placesBlArray = places.Select(
+                        x => new PlaceBlModel
+                        (
+                            x.Id,
+                            x.HallId,
+                            new PlaceTypeBlModel(x.TypeId, x.Type),
+                            x.RowNumber,
+                            x.PlaceNumber
+                        )
+                    ).ToArray();
 
-                    IEnumerable<HallSchemeDalModel> hallSchemeResponse = await t2;
+                    IEnumerable<HallSchemeDalDtoModel> hallSchemeResponse = await t2;
 
-                    HallSchemeModel[] hallSchemeModels =
-                        hallSchemeResponse.Select(Mapper.Map<HallSchemeModel>).ToArray();
+                    HallSchemeBlModel[] hallSchemeBlModels =
+                        hallSchemeResponse.Select(Mapper.Map<HallSchemeBlModel>).ToArray();
 
-                    results.Add(new HallModelForApi(
+                    results.Add(new FullHallBlModel(
                         hall.Id,
                         hall.CinemaId,
                         hall.Name,
-                        placesArray,
-                        hallSchemeModels
+                        placesBlArray,
+                        hallSchemeBlModels
                     ));
                 }
             }

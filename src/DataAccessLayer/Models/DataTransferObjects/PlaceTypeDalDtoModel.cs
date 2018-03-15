@@ -3,23 +3,20 @@
 namespace DataAccessLayer.Models.DataTransferObjects
 {
     [UsedImplicitly]
-    public class HallModel
+    public class PlaceTypeDalDtoModel
     {
-        public int Id { get;}
-
-        public int CinemaId { get;}
+        public int Id { get; }
 
         [NotNull]
-        public string Name { get;}
+        public string Name { get; }
 
-        public HallModel(
+        public PlaceTypeDalDtoModel
+        (
             int id,
-            int cinemaId,
             [NotNull] string name
         )
         {
             Id = id;
-            CinemaId = cinemaId;
             Name = name;
         }
     }

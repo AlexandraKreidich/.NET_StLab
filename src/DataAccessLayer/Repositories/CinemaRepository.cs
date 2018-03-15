@@ -66,11 +66,12 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<HallModel>> GetHalls(int cinemaId)
+
+        public async Task<IEnumerable<HallDalDtoModel>> GetHalls(int cinemaId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<Hall> halls = await connection.QueryAsync<Hall>(
+                IEnumerable<HallDalModel> halls = await connection.QueryAsync<HallDalModel>(
                     "GetHalls",
                     new
                         {
@@ -78,15 +79,15 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return halls.Select(Mapper.Map<HallModel>);
+                return halls.Select(Mapper.Map<HallDalDtoModel>);
             }
         }
 
-        public async Task<IEnumerable<PlaceModel>> GetPlaces(int hallId)
+        public async Task<IEnumerable<PlaceDalDtoModel>> GetPlaces(int hallId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<Place> places = await connection.QueryAsync<Place>(
+                IEnumerable<PlaceDalModel> places = await connection.QueryAsync<PlaceDalModel>(
                     "GetPlaces",
                     new
                         {
@@ -94,15 +95,15 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return places.Select(Mapper.Map<PlaceModel>);
+                return places.Select(Mapper.Map<PlaceDalDtoModel>);
             }
         }
 
-        public async Task<IEnumerable<HallSchemeModel>> GetHallScheme(int hallId)
+        public async Task<IEnumerable<HallSchemeDalDtoModel>> GetHallScheme(int hallId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<HallScheme> scheme = await connection.QueryAsync<HallScheme>(
+                IEnumerable<HallSchemeDalModel> scheme = await connection.QueryAsync<HallSchemeDalModel>(
                     "GetHallScheme",
                     new
                         {
@@ -110,7 +111,7 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return scheme.Select(Mapper.Map<HallSchemeModel>);
+                return scheme.Select(Mapper.Map<HallSchemeDalDtoModel>);
             }
         }
     }

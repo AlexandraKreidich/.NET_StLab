@@ -12,9 +12,9 @@ namespace DataAccessLayer
             configuration.CreateMap<User, UserResponse>();
             configuration.CreateMap<Cinema, CinemaModel>();
             configuration.CreateMap<CinemaModel, Cinema>();
-            configuration.CreateMap<Hall, HallModel>();
-            configuration.CreateMap<Place, PlaceModel>();
-            configuration.CreateMap<HallScheme, HallSchemeModel>();
+            configuration.CreateMap<HallDalModel, HallDalDtoModel>();
+            configuration.CreateMap<PlaceDalModel, PlaceDalDtoModel>();
+            configuration.CreateMap<HallSchemeDalModel, HallSchemeDalDtoModel>();
             configuration.CreateMap<Service, ServiceModel>();
             configuration.CreateMap<ServiceModel, Service>();
             configuration.CreateMap<Film, FilmModel>().ConstructUsing
@@ -24,6 +24,7 @@ namespace DataAccessLayer
             configuration.CreateMap<FilmModel, Film>();
             configuration.CreateMap<SessionResponse, SessionModelResponse>();
             configuration.CreateMap<SessionResponse, SessionModelResponse>();
+            configuration.CreateMap<TicketDalModelResponse, TicketDalDtoModelResponse>();
         }
     }
 }
