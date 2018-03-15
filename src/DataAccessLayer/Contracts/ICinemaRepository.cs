@@ -16,12 +16,12 @@ namespace DataAccessLayer.Contracts
         Task<int> AddOrUpdateCinema([NotNull] CinemaModel cinema);
 
         [ItemCanBeNull]
-        Task<IEnumerable<HallResponse>> GetHalls(int cinemaId);
+        Task<IEnumerable<HallModel>> GetHalls(int cinemaId);
 
         [ItemNotNull]
-        Task<IEnumerable<PlaceResponse>> GetPlaces(int hallId);
+        Task<IEnumerable<PlaceModel>> GetPlaces(int hallId);
 
         [ItemNotNull]
-        Task<IEnumerable<HallSchemeResponse>> GetHallScheme(int hallId);
+        Task<IEnumerable<HallSchemeModel>> GetHallScheme(int hallId);
     }
 }

@@ -3,14 +3,16 @@
 namespace DataAccessLayer.Models.DataTransferObjects
 {
     [UsedImplicitly]
-    public class HallResponse
+    public class HallModel
     {
         public int Id { get;}
+
         public int CinemaId { get;}
+
         [NotNull]
         public string Name { get;}
 
-        public HallResponse(
+        public HallModel(
             int id,
             int cinemaId,
             [NotNull] string name

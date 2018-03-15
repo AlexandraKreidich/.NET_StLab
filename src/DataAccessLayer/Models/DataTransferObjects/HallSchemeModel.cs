@@ -1,19 +1,20 @@
 ﻿using JetBrains.Annotations;
 
-namespace BusinessLayer.Models
+namespace DataAccessLayer.Models.DataTransferObjects
 {
     [UsedImplicitly]
-    public class HallSchemeModelResponse
+    public class HallSchemeModel
     {
-        public int Id { get;}
 
-        public int HallId { get;}
+        public int Id { get; set; }
 
-        public int RowNumber { get;}
+        public int HallId { get; set; }
 
-        public int PlacesCount { get;}
+        public int RowNumber { get; set; }
 
-        public HallSchemeModelResponse(
+        public int PlacesCount { get; set; }
+
+        public HallSchemeModel(
             int id,
             int hallId,
             int rowNumber,

@@ -1,19 +1,19 @@
 ﻿using JetBrains.Annotations;
 
-namespace WebApi.Models.Hall
+namespace BusinessLayer.Models
 {
     [UsedImplicitly]
-    public class HallSchemeModelResponse
+    public class HallSchemeModel
     {
-        public int Id { get; }
+        public int Id { get;}
 
         public int HallId { get;}
 
-        public int RowNumber { get; }
+        public int RowNumber { get;}
 
-        public int PlacesCount { get; }
+        public int PlacesCount { get;}
 
-        public HallSchemeModelResponse(
+        public HallSchemeModel(
             int id,
             int hallId,
             int rowNumber,

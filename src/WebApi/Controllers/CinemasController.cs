@@ -5,12 +5,11 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.Hall;
 using WebApi.Models.Place;
-using BlHallModelResponse = BusinessLayer.Models.HallModelResponse;
-using ApiHallModelResponse = WebApi.Models.Hall.HallModelResponse;
-using ApiHallSchemeModelResponse = WebApi.Models.Hall.HallSchemeModelResponse;
-using ApiCinemaModel = WebApi.Models.Cinema.CinemaModel;
-using CinemaModel = BusinessLayer.Models.CinemaModel;
+using WebApi.Models.Cinema;
+using BlCinemaModel = BusinessLayer.Models.CinemaModel;
+using BlHallModelForApi = BusinessLayer.Models.HallModelForApi;
 
 namespace WebApi.Controllers
 {
@@ -29,10 +28,10 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<CinemaModel> cinemas = await _cinemasService.GetCinemas();
+            IEnumerable<BlCinemaModel> cinemas = await _cinemasService.GetCinemas();
 
             return Ok(
-                cinemas.Select(Mapper.Map<ApiCinemaModel>)
+                cinemas.Select(Mapper.Map<CinemaModel>)
                 );
         }
 
@@ -40,7 +39,7 @@ namespace WebApi.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            CinemaModel cinema = await _cinemasService.GetCinemaById(id);
+            BlCinemaModel cinema = await _cinemasService.GetCinemaById(id);
 
             if (cinema == null)
             {
@@ -48,7 +47,7 @@ namespace WebApi.Controllers
             }
 
             return Ok(
-                Mapper.Map<ApiCinemaModel>(cinema)
+                Mapper.Map<CinemaModel>(cinema)
                 );
         }
 
@@ -56,23 +55,23 @@ namespace WebApi.Controllers
         [HttpGet("{id:int}/halls")]
         public async Task<IActionResult> GetHalls(int id)
         {
-            IEnumerable<BlHallModelResponse> halls = await _cinemasService.GetHalls(id);
+            IEnumerable<BlHallModelForApi> halls = await _cinemasService.GetHalls(id);
 
             if (halls == null)
             {
                 NotFound();
             }
 
-            List<ApiHallModelResponse> results = new List<ApiHallModelResponse>();
+            List<HallModel> results = new List<HallModel>();
 
             if (halls != null)
             {
-                results = halls.Select(hall => new ApiHallModelResponse(
+                results = halls.Select(hall => new HallModel(
                         hall.Id,
                         hall.CinemaId,
                         hall.Name,
-                        hall.Places.Select(Mapper.Map<PlaceModelResponseForHall>).ToArray(),
-                        hall.HallSchemeModels.Select(Mapper.Map<ApiHallSchemeModelResponse>).ToArray())
+                        hall.Places.Select(Mapper.Map<PlaceModelForHall>).ToArray(),
+                        hall.HallSchemeModels.Select(Mapper.Map<HallSchemeModel>).ToArray())
                     ).ToList();
             }
 
@@ -81,13 +80,13 @@ namespace WebApi.Controllers
 
         // PUT /cinemas -> add or update cinema
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]ApiCinemaModel cinema)
+        public async Task<IActionResult> Put([FromBody]CinemaModel cinema)
         {
-            CinemaModel cinemaResponse =
-                await _cinemasService.AddOrUpdateCinema(Mapper.Map<CinemaModel>(cinema));
+            BlCinemaModel cinemaResponse =
+                await _cinemasService.AddOrUpdateCinema(Mapper.Map<BlCinemaModel>(cinema));
 
             return Ok(
-                Mapper.Map<ApiCinemaModel>(cinemaResponse)
+                Mapper.Map<CinemaModel>(cinemaResponse)
                 );
         }
     }

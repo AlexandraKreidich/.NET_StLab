@@ -1,12 +1,35 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace WebApi.Models.Session
 {
     public class SessionModelRequest
     {
-        public int FilmId { get; set; }
-        public int HallId { get; set; }
-        public DateTimeOffset Time { get; set; }
-        public decimal Price { get; set; }
+        public int Id { get; }
+
+        public int FilmId { get;}
+
+        public int HallId { get;}
+
+        public DateTimeOffset Date { get;}
+
+        [CanBeNull]
+        public int[] ServiceIds { get;}
+
+        public SessionModelRequest
+        (
+            int id,
+            int filmId,
+            int hallId,
+            DateTimeOffset date,
+            [CanBeNull] int[] serviceIds
+        )
+        {
+            Id = id;
+            FilmId = filmId;
+            HallId = hallId;
+            Date = date;
+            ServiceIds = serviceIds;
+        }
     }
 }

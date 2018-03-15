@@ -1,6 +1,6 @@
 ﻿namespace WebApi.Models.Place
 {
-    public class PlaceModelResponse
+    public class PlaceModel
     {
         public int Id { get; set; }
         public int HallId { get; set; }

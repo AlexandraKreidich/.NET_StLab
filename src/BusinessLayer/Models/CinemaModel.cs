@@ -2,6 +2,7 @@
 
 namespace BusinessLayer.Models
 {
+    [UsedImplicitly]
     public class CinemaModel
     {
         public int Id { get; }

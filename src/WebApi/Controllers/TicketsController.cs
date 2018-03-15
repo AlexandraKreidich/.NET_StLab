@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Ticket;
@@ -11,12 +14,16 @@ namespace WebApi.Controllers
     [Authorize(Roles = "User")]
     public class TicketsController : Controller
     {
-        // GET /tickets
+        // GET /tickets (for user)
         [HttpGet]
-        public IEnumerable<TicketModelResponse> Get()
+        public async Task<IActionResult> Get()
         {
-            List<TicketModelResponse> tickets = new List<TicketModelResponse>();
-            return tickets;
+
+            int userId = Int32.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            //HttpContext.User.GetId();
+
+            throw new NotImplementedException();
         }
 
         // GET /tickets/{id}

@@ -2,7 +2,7 @@
 
 namespace BusinessLayer.Models
 {
-    public class HallModelResponse
+    public class HallModelForApi
     {
         public int Id { get;}
 
@@ -11,18 +11,18 @@ namespace BusinessLayer.Models
         [NotNull]
         public string Name { get;}
 
-        [NotNull]
-        public PlaceModelResponse[] Places { get;}
+        [CanBeNull]
+        public PlaceModel[] Places { get;}
 
-        [NotNull]
-        public HallSchemeModelResponse[] HallSchemeModels { get;}
+        [CanBeNull]
+        public HallSchemeModel[] HallSchemeModels { get;}
 
-        public HallModelResponse(
+        public HallModelForApi(
             int id,
             int cinemaId,
             [NotNull] string name,
-            [NotNull] PlaceModelResponse[] places,
-            [NotNull] HallSchemeModelResponse[] hallSchemeModel
+            [CanBeNull] PlaceModel[] places,
+            [CanBeNull] HallSchemeModel[] hallSchemeModel
         )
         {
             Id = id;

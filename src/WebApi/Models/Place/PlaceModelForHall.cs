@@ -3,9 +3,8 @@
 namespace WebApi.Models.Place
 {
     [UsedImplicitly]
-    public class PlaceModelResponseForHall
+    public class PlaceModelForHall
     {
-
         public int Id { get; }
 
         public int HallId { get; }
@@ -17,7 +16,7 @@ namespace WebApi.Models.Place
 
         public int PlaceNumber { get;}
 
-        public PlaceModelResponseForHall(
+        public PlaceModelForHall(
             int id,
             int hallId,
             [NotNull] string type,

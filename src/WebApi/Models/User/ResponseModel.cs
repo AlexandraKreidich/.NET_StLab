@@ -7,19 +7,23 @@ namespace WebApi.Models.User
     {
         public int Id { get;}
 
-        public UserRole Role { get;}
+        public UserRole UserRole { get;}
+
         [NotNull]
         public string FirstName { get;}
+
         [NotNull]
         public string LastName { get;}
+
         [NotNull]
         public string Email { get;}
+
         [NotNull]
         public string Token { get;}
 
         public ResponseModel(
             int id,
-            UserRole role,
+            UserRole userRole,
             [NotNull] string firstName,
             [NotNull] string lastName,
             [NotNull] string email,
@@ -27,7 +31,7 @@ namespace WebApi.Models.User
         )
         {
             Id = id;
-            Role = role;
+            UserRole = userRole;
             FirstName = firstName;
             LastName = lastName;
             Email = email;

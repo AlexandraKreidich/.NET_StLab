@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
@@ -15,7 +14,8 @@ namespace BusinessLayer.Services
     [UsedImplicitly]
     public class ServiceService : IServiceService
     {
-        [NotNull] private readonly IServiceRepository _serviceRepository;
+        [NotNull] 
+        private readonly IServiceRepository _serviceRepository;
 
         public ServiceService([NotNull] IServiceRepository serviceRepository)
         {

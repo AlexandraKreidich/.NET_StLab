@@ -4,6 +4,6 @@
     [SessionId] INT NOT NULL,
     [PlaceId] INT NOT NULL,
     [Price] MONEY NOT NULL,
-    FOREIGN KEY (SessionId) REFERENCES [dbo].[Session](Id),
+    FOREIGN KEY (SessionId) REFERENCES [dbo].[Session](Id) ON DELETE CASCADE,
     FOREIGN KEY (PlaceId) REFERENCES [dbo].[Place](Id)
 )

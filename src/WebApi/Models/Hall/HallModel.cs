@@ -1,28 +1,30 @@
 ﻿using JetBrains.Annotations;
+using WebApi.Models.Place;
 
 namespace WebApi.Models.Hall
 {
+    [UsedImplicitly]
     public class HallModel
     {
-        public int Id { get;}
+        public int Id { get; }
 
-        public int CinemaId { get;}
+        public int CinemaId { get; }
 
         [NotNull]
-        public string Name { get;}
+        public string Name { get; }
 
-        [CanBeNull]
-        public Place.Place[] Places { get;}
+        [NotNull]
+        public PlaceModelForHall[] Places { get; }
 
-        [CanBeNull]
-        public HallSchemeModel[] HallSchemeModels { get;}
+        [NotNull]
+        public HallSchemeModel[] HallSchemeModels { get; }
 
         public HallModel(
             int id,
             int cinemaId,
             [NotNull] string name,
-            [CanBeNull] Place.Place[] places,
-            [CanBeNull] HallSchemeModel[] hallSchemeModels
+            [NotNull] PlaceModelForHall[] places,
+            [NotNull] HallSchemeModel[] hallSchemeModels
         )
         {
             Id = id;

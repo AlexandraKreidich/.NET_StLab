@@ -75,6 +75,27 @@
     <Build Include="Stored Procedures\AddOrUpdateCinema.sql" />
     <Build Include="Stored Procedures\AddOrUpdateService.sql" />
     <Build Include="Stored Procedures\DeleteService.sql" />
+    <Build Include="Stored Procedures\GetFilms.sql" />
+    <Build Include="Stored Procedures\GetNowPlayingFilms.sql" />
+    <Build Include="Stored Procedures\GetFilmById.sql" />
+    <Build Include="Stored Procedures\GetAllSessionsForFilm.sql" />
+    <Build Include="Stored Procedures\FilterFilms.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateFilm.sql" />
+    <Build Include="Stored Procedures\DeleteFilm.sql" />
+    <Build Include="Stored Procedures\GetHallById.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateHall.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateHallScheme.sql" />
+    <Build Include="Stored Procedures\AddOrUpdatePlace.sql" />
+    <Build Include="Stored Procedures\GetSessions.sql" />
+    <Build Include="Stored Procedures\GetServicesForSession.sql" />
+    <Build Include="Stored Procedures\GetTicketsForUser.sql" />
+    <Build Include="Stored Procedures\GetServicesForTicketId.sql" />
+    <Build Include="Stored Procedures\AddServiceForSession.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateSession.sql" />
+    <Build Include="Stored Procedures\DeleteServicesFromSession.sql" />
+    <Build Include="Stored Procedures\DeleteSession.sql" />
+    <Build Include="Stored Procedures\GetSessionById.sql" />
+    <Build Include="Stored Procedures\AddOrUpdatePriceForSessionAndPlace.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

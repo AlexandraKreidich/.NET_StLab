@@ -49,7 +49,7 @@ namespace WebApi.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-             StoredProcedureExecutionResult result =  await _serviceService.DeleteService(id);
+            StoredProcedureExecutionResult result =  await _serviceService.DeleteService(id);
 
             if (result == StoredProcedureExecutionResult.ForeignKeyViolation)
             {

@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using BusinessLayer.Contracts;
+using BusinessLayer.Models;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Hall;
 using WebApi.Models.Place;
@@ -9,37 +13,55 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class HallsController : Controller
     {
-        // GET /halls/{id}/scheme
-        [HttpGet]
-        [Route("{id:int}/scheme")]
-        public IEnumerable<HallSchemeModel> GetScheme(int id)
+        [NotNull]
+        private readonly IHallsService _hallsService;
+
+        public HallsController([NotNull] IHallsService hallsService)
         {
-            List<HallSchemeModel> scheme = new List<HallSchemeModel>();
-            return scheme;
+            _hallsService = hallsService;
         }
 
-        // GET /halls/{id}/places
+        // GET /halls/{id}
         [HttpGet]
-        [Route("{id:int}/places")]
-        public IEnumerable<PlaceModelResponse> Get(int id)
+        [Route("{id:int}")]
+        public async Task<IActionResult> Get(int id)
         {
-            List<PlaceModelResponse> places = new List<PlaceModelResponse>();
-            return places;
+            HallModelForApi hall = await _hallsService.GetHall(id);
+
+            if (hall == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new HallModel(
+                hall.Id,
+                hall.CinemaId,
+                hall.Name,
+                hall.Places.Select(Mapper.Map<PlaceModelForHall>).ToArray(),
+                hall.HallSchemeModels.Select(Mapper.Map<Models.Hall.HallSchemeModel>).ToArray()
+            ));
         }
 
         // PUT /halls
         [HttpPut]
-        public IActionResult Put([FromBody]HallModel hall)
+        public async Task<IActionResult> Put([NotNull] [FromBody]HallModel hall)
         {
-            return StatusCode((int)HttpStatusCode.Created);
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        // DELETE /halls/{id}
-        [HttpDelete]
-        [Route("{id:int}")]
-        public IActionResult Delete(int id)
-        {
-            return StatusCode((int)HttpStatusCode.Accepted);
+            HallModelForApi hallRequest = new HallModelForApi(
+                hall.Id,
+                hall.CinemaId,
+                hall.Name,
+                hall.Places.Select(Mapper.Map<BusinessLayer.Models.PlaceModel>).ToArray(),
+                hall.HallSchemeModels.Select(Mapper.Map<BusinessLayer.Models.HallSchemeModel>).ToArray()
+            );
+
+            HallModelForApi hallResponse = await _hallsService.AddOrOrUpdateHall(hallRequest);
+
+            return Ok(hallResponse);
         }
     }
 }
