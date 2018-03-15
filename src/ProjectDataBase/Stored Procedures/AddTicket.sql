@@ -17,3 +17,4 @@ AS
         ),
         @CreatedAt
     )
+    SELECT SCOPE_IDENTITY()

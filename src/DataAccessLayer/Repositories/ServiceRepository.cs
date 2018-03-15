@@ -23,21 +23,21 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<ServiceModel>> GetServices()
+        public async Task<IEnumerable<ServiceDalDtoModel>> GetServices()
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<Service> services = await connection.QueryAsync<Service>(
+                IEnumerable<ServiceDalModel> services = await connection.QueryAsync<ServiceDalModel>(
                     "GetServices",
                     commandType: CommandType.StoredProcedure);
 
-                return services.Select(Mapper.Map<ServiceModel>);
+                return services.Select(Mapper.Map<ServiceDalDtoModel>);
             }
         }
 
-        public async Task<int> AddOrUpdateService(ServiceModel service)
+        public async Task<int> AddOrUpdateService(ServiceDalDtoModel service)
         {
-            Service serviceRequest = Mapper.Map<Service>(service);
+            ServiceDalModel serviceRequest = Mapper.Map<ServiceDalModel>(service);
 
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {

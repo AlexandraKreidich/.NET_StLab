@@ -5,9 +5,8 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
+using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
-using ServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
-using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 
 namespace BusinessLayer.Services
 {
@@ -24,14 +23,14 @@ namespace BusinessLayer.Services
 
         public async Task<IEnumerable<ServiceBlModel>> GetServices()
         {
-            IEnumerable<ServiceModel> services = await _serviceRepository.GetServices();
+            IEnumerable<ServiceDalDtoModel> services = await _serviceRepository.GetServices();
 
             return services.Select(Mapper.Map<ServiceBlModel>);
         }
 
         public async Task<ServiceBlModel> AddOrUpdateService(ServiceBlModel service)
         {
-            int id = await _serviceRepository.AddOrUpdateService(Mapper.Map<DalServiceModel>(service));
+            int id = await _serviceRepository.AddOrUpdateService(Mapper.Map<ServiceDalDtoModel>(service));
 
             return new ServiceBlModel(
                 (id != 0) ? id : service.Id,

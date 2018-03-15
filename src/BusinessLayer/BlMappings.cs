@@ -5,7 +5,6 @@ using JetBrains.Annotations;
 using CinemaModel = BusinessLayer.Models.CinemaModel;
 using DalFilmFilterModel = DataAccessLayer.Models.DataTransferObjects.FilmFilterModel;
 using DalCinemaModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
-using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
 using FilmFilterModel = BusinessLayer.Models.FilmFilterModel;
 using FilmModel = BusinessLayer.Models.FilmModel;
@@ -24,7 +23,7 @@ namespace BusinessLayer
 
             configuration.CreateMap<HallSchemeDalDtoModel, HallSchemeBlModel>();
 
-            configuration.CreateMap<ServiceBlModel, DalServiceModel>();
+            configuration.CreateMap<ServiceBlModel, ServiceDalDtoModel>();
 
             configuration.CreateMap<DalFilmModel, FilmModel>().ConstructUsing
             (

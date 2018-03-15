@@ -4,6 +4,7 @@ using BusinessLayer.Models;
 using JetBrains.Annotations;
 using WebApi.Models.Hall;
 using WebApi.Models.Service;
+using WebApi.Models.Ticket;
 using WebApi.Services;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
 using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
@@ -40,6 +41,7 @@ namespace WebApi
             configuration.CreateMap<FilmFilterModel, BlFilmFilterModel>();
             configuration.CreateMap<string, DateTimeOffset>().ConvertUsing<StringToDateTimeConverter>();
             configuration.CreateMap<SessionModelRequest, BlSessionModelRequest>();
+            configuration.CreateMap<TicketBlModelResponse, TicketApiModelResponse>();
         }
     }
 }

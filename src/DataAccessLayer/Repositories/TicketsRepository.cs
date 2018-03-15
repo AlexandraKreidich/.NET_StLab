@@ -53,11 +53,27 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async void CreateTicket(TicketDalDtoModelRequest ticket)
+        public async Task<IEnumerable<ServiceDalDtoModel>> GetServicesForTicket(int ticketId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                await connection.ExecuteAsync(
+                IEnumerable<ServiceDalModel> services = await connection.QueryAsync<ServiceDalModel>(
+                    "GetServicesForTicketId",
+                    new
+                        {
+                            TicketId = ticketId
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                return services.Select(Mapper.Map<ServiceDalDtoModel>);
+            }
+        }
+
+        public async Task<int> CreateTicket(TicketDalDtoModelRequest ticket)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                int id = await connection.ExecuteScalarAsync<int>(
                     "AddTicket",
                     new
                         {
@@ -66,6 +82,8 @@ namespace DataAccessLayer.Repositories
                             TicketStatus = ticket.Status.ToString()
                         },
                     commandType: CommandType.StoredProcedure);
+
+                return id;
             }
         }
 
@@ -84,7 +102,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<TicketDalDtoModelResponse> PayForTicket(int ticketId)
+        public async void PayForTicket(int ticketId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -96,8 +114,6 @@ namespace DataAccessLayer.Repositories
                             TicketId = ticketId
                         },
                     commandType: CommandType.StoredProcedure);
-
-                return await GetTicketById(id);
             }
         }
         public async void DeleteTicket(int id)

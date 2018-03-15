@@ -19,7 +19,8 @@ namespace BusinessLayer.Models
         [NotNull]
         public PlaceTypeBlModel PlaceType { get; }
 
-        public int HallName { get; }
+        [NotNull]
+        public string HallName { get; }
 
         [NotNull]
         public string CinemaName { get; }
@@ -40,7 +41,7 @@ namespace BusinessLayer.Models
             int placeNumber,
             int rowNumber,
             [NotNull] PlaceTypeBlModel placeType,
-            int hallName,
+            [NotNull] string hallName,
             [NotNull] string cinemaName,
             decimal sessionPrice,
             [CanBeNull] ServiceBlModel[] services,

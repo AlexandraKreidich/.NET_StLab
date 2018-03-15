@@ -15,8 +15,8 @@ namespace DataAccessLayer
             configuration.CreateMap<HallDalModel, HallDalDtoModel>();
             configuration.CreateMap<PlaceDalModel, PlaceDalDtoModel>();
             configuration.CreateMap<HallSchemeDalModel, HallSchemeDalDtoModel>();
-            configuration.CreateMap<Service, ServiceModel>();
-            configuration.CreateMap<ServiceModel, Service>();
+            configuration.CreateMap<ServiceDalModel, ServiceDalDtoModel>();
+            configuration.CreateMap<ServiceDalDtoModel, ServiceDalModel>();
             configuration.CreateMap<Film, FilmModel>().ConstructUsing
             (
                 x=> new FilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)

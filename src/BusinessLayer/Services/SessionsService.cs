@@ -6,8 +6,8 @@ using AutoMapper;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
+using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
-using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 using DalSessionModelResponse = DataAccessLayer.Models.DataTransferObjects.SessionModelResponse;
 using DalSessionServiceModel = DataAccessLayer.Models.DataTransferObjects.SessionServiceModel;
 using DalSessionModelRequest = DataAccessLayer.Models.DataTransferObjects.SessionModelRequest;
@@ -36,7 +36,7 @@ namespace BusinessLayer.Services
                 return null;
             }
 
-            IEnumerable<DalServiceModel> services = await _sessionRepository.GetServices(sessionId);
+            IEnumerable<ServiceDalDtoModel> services = await _sessionRepository.GetServices(sessionId);
 
             return services.Select(Mapper.Map<ServiceBlModel>);
         }

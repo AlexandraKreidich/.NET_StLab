@@ -1,7 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using BusinessLayer.Contracts;
+using BusinessLayer.Models;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Ticket;
@@ -13,43 +16,88 @@ namespace WebApi.Controllers
     [Authorize(Roles = "User")]
     public class TicketsController : Controller
     {
-        // GET /tickets (for user)
+        [NotNull]
+        private readonly ITicketsService _ticketsService;
+
+        public TicketsController([NotNull] ITicketsService ticketsService)
+        {
+            _ticketsService = ticketsService;
+        }
+
+        // GET /tickets
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             int userId = HttpContext.User.GetUserId();
 
-            throw new NotImplementedException();
+            IEnumerable<TicketBlModelResponse> tickets = await _ticketsService.GetTicketsForUser(userId);
+
+            return Ok(
+                tickets.Select(Mapper.Map<TicketApiModelResponse>)
+            );
         }
 
         // GET /tickets/{id}
+
         [HttpGet("{id:int}")]
-        public IEnumerable<TicketApiModelResponse> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            List<TicketApiModelResponse> tickets = new List<TicketApiModelResponse>();
-            return tickets;
+            TicketBlModelResponse ticket = await _ticketsService.GetTicketById(id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(
+                Mapper.Map<TicketApiModelResponse>(ticket)
+            );
         }
 
         // PUT /tickets
+
         [HttpPut]
-        public IActionResult Put([FromBody]TicketApiModelRequest ticket)
+        public IActionResult Put([NotNull] [FromBody] TicketApiModelRequest ticket)
         {
-            return StatusCode((int)HttpStatusCode.Created);
+            TicketBlModelRequest ticketRequest = new TicketBlModelRequest
+            (
+                HttpContext.User.GetUserId(),
+                ticket.PriceId,
+                ticket.Status,
+                ticket.Services
+
+            );
+
+            _ticketsService.CreateTicket(ticketRequest);
+
+            return Ok();
         }
 
         // POST /tickets/{id}/pay
+
         [HttpPost]
         [Route("{id:int}/pay")]
-        public IActionResult Pay(int id)
+        public async Task<IActionResult> Pay(int id)
         {
-            return StatusCode((int)HttpStatusCode.NoContent);
+            TicketBlModelResponse ticket = await _ticketsService.PayForTicket(id);
+
+            return Ok(
+                Mapper.Map<TicketApiModelResponse>(ticket)
+            );
         }
 
         // DELETE /tickets/{id}
+
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return StatusCode((int)HttpStatusCode.Accepted);
+            if (await _ticketsService.DeleteTicket(id) == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
     }
 }

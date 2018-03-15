@@ -8,7 +8,7 @@ namespace DataAccessLayer.Contracts
     public interface ISessionsRepository
     {
         [ItemNotNull]
-        Task<IEnumerable<ServiceModel>> GetServices(int sessionId);
+        Task<IEnumerable<ServiceDalDtoModel>> GetServices(int sessionId);
 
         [ItemNotNull]
         Task<IEnumerable<SessionModelResponse>> GetSessions();
