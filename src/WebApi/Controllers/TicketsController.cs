@@ -21,7 +21,7 @@ namespace WebApi.Controllers
 
             int userId = Int32.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-
+            //HttpContext.User.GetId();
 
             throw new NotImplementedException();
         }

@@ -5,13 +5,14 @@ AS
         Session.Id,
         Session.HallId,
         Session.FilmId,
-        Hall.Name,
+        Hall.Name AS HallName,
         Film.Name as FilmName,
         Cinema.Name as CinemaName,
         Cinema.City as CinemaCity,
         Session.Date as SessionDate
-    FROM Hall
-        JOIN Cinema ON hall.CinemaId=Cinema.Id
-        JOIN Session ON Session.HallId = Hall.Id,
-        Film
-    WHERE Session.FilmId = @FilmId AND Film.Id = @FilmId
+    FROM Session
+        JOIN Hall ON Hall.Id = Session.HallId
+        JOIN Film ON Session.FilmId = Film.Id
+        JOIN Cinema ON Hall.CinemaId = Cinema.Id
+    WHERE
+        Session.FilmId = @FilmId

@@ -7,7 +7,7 @@
     @d datetime = null
 AS
     SET @d = CONVERT(DATETIME, @Date, 120);
-    SELECT 
+    SELECT
         Session.Id,
         Session.HallId,
         Hall.Name as HallName,
@@ -20,26 +20,25 @@ AS
         JOIN Film ON Film.Id = Session.FilmId
         JOIN Hall ON Hall.Id = Session.HallId
         JOIN Cinema ON Cinema.Id = Hall.CinemaId
-    WHERE (@Cinema is null 
-            or Cinema.Name = @Cinema) 
-        AND (@City is null 
+    WHERE (@Cinema is null
+            or Cinema.Name = @Cinema)
+        AND (@City is null
             or Cinema.City = @City)
-        AND (@date is null 
+        AND (@date is null
             or (Session.Date >= @date
                 AND Session.Date < DATEADD(d, 1, @d)))
-        AND (@Film is null 
+        AND (@Film is null
             or Film.Name = @Film)
         AND (
                 (
-                -- разница между количеством мест и купленными билетами
                 (
-                    SELECT count(Id) 
+                    SELECT count(Id)
                     FROM Place
                     WHERE Place.HallId = Session.HallId
-                ) - 
+                ) -
                 (
                     SELECT count(Ticket.Id)
-                    FROM Ticket 
+                    FROM Ticket
                         JOIN Price ON Price.SessionId = Session.Id
                     WHERE Ticket.PriceId = Price.Id
                 )

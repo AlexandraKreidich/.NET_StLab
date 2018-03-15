@@ -10,6 +10,6 @@ namespace DataAccessLayer.Models.Entities
 
         public int HallId { get; set; }
 
-        public DateTimeOffset Time { get; set; }
+        public DateTimeOffset Date { get; set; }
     }
 }

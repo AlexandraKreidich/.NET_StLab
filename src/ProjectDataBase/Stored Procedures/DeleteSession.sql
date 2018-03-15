@@ -3,4 +3,4 @@
 AS
     DELETE FROM Session
     WHERE Id = @Id
-SELECT @Id
+    SELECT @Id

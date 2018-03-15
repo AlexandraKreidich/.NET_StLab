@@ -1,12 +1,15 @@
 ﻿using System.Threading.Tasks;
 using BusinessLayer.Models;
+using JetBrains.Annotations;
 
 namespace BusinessLayer.Contracts
 {
     public interface IHallsService
     {
+        [ItemCanBeNull]
         Task<HallModelForApi> GetHall(int id);
 
-        Task<HallModelForApi> AddOrOrUpdateHall(HallModelForApi hall);
+        [ItemNotNull]
+        Task<HallModelForApi> AddOrOrUpdateHall([NotNull] HallModelForApi hall);
     }
 }

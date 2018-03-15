@@ -62,23 +62,27 @@ namespace BusinessLayer.Services
 
             int id = await _sessionRepository.AddOrUpdateSession(Mapper.Map<DalSessionModelRequest>(session));
 
-            foreach (var service in session.Services)
+            if (session.ServiceIds != null)
             {
-                DalSessionServiceModel sessionService = new DalSessionServiceModel(session.Id, service);
 
-                _sessionRepository.AddServiceToSession(sessionService);
+                foreach (var service in session.ServiceIds)
+                {
+                    DalSessionServiceModel sessionService = new DalSessionServiceModel(session.Id, service);
+
+                    _sessionRepository.AddServiceToSession(sessionService);
+                }
             }
 
             return await GetSessionById(session.Id) ?? throw new InvalidOperationException();
         }
 
-        public void AddOrUpdatePriceForSession(PriceRequestForSessionController price)
+        public void AddOrUpdatePriceForSession(PriceBlRequest priceBl)
         {
-            int l = price.Price.Length;
+            int l = priceBl.Prices.Length;
 
             for (int i = 0; i < l; i++)
             {
-                _sessionRepository.AddOrUpdatePriceForSession(price.SessionId, price.PlaceId[i], price.Price[i]);
+                _sessionRepository.AddOrUpdatePriceForSession(priceBl.SessionId, priceBl.PlaceIds[i], priceBl.Prices[i]);
             }
         }
 

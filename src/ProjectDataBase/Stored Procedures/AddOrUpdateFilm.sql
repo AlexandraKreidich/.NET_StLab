@@ -6,7 +6,10 @@
     @EndRentDate datetimeoffset
 AS
     MERGE dbo.Film AS target
-    USING (SELECT @Id, @Name, @Description, @StartRentDate, @EndRentDate) AS source (Id, Name, Description, StartRentDate, EndRentDate)
+    USING
+        (SELECT @Id, @Name, @Description, @StartRentDate, @EndRentDate)
+    AS source
+        (Id, Name, Description, StartRentDate, EndRentDate)
     ON (target.Id = source.Id)
     WHEN MATCHED THEN
         UPDATE SET
@@ -16,5 +19,11 @@ AS
             EndRentDate = source.EndRentDate
     WHEN NOT MATCHED THEN
         INSERT (Name, Description, StartRentDate, EndRentDate)
-        VALUES (source.Name, source.Description, source.StartRentDate, source.EndRentDate);
-select SCOPE_IDENTITY()
+        VALUES
+        (
+            source.Name,
+            source.Description,
+            source.StartRentDate,
+            source.EndRentDate
+        );
+    select SCOPE_IDENTITY()

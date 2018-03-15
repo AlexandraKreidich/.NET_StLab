@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
+    [UsedImplicitly]
     public class SessionModelResponse
     {
         public int Id { get; set; }
