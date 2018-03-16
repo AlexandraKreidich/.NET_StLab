@@ -38,7 +38,7 @@ namespace WebApi.Controllers
                 fullHallBl.CinemaId,
                 fullHallBl.Name,
                 fullHallBl.PlacesBl?.Select(Mapper.Map<PlaceApiModel>).ToArray(),
-                fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<Models.Hall.HallSchemeApiModel>).ToArray()
+                fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<HallSchemeApiModel>).ToArray()
             ));
         }
 

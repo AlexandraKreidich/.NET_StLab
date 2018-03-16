@@ -10,18 +10,14 @@ namespace DataAccessLayer.Models.DataTransferObjects
 
         public int PriceId { get; }
 
-        public TicketStatus Status { get; }
-
         public TicketDalDtoModelRequest
         (
             int userId,
-            int priceId,
-            TicketStatus status
+            int priceId
         )
         {
             UserId = userId;
             PriceId = priceId;
-            Status = status;
         }
     }
 }

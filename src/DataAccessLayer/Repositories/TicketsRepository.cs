@@ -13,11 +13,11 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Repositories
 {
+    [UsedImplicitly]
     internal class TicketsRepository : ITicketsRepository
     {
         [NotNull]
         private readonly IDalSettings _settings;
-
 
         public TicketsRepository([NotNull] IDalSettings settings)
         {
@@ -79,7 +79,7 @@ namespace DataAccessLayer.Repositories
                         {
                             UserId = ticket.UserId,
                             PriceId = ticket.PriceId,
-                            TicketStatus = ticket.Status.ToString()
+                            TicketStatus = TicketStatus.InProcess.ToString()
                         },
                     commandType: CommandType.StoredProcedure);
 

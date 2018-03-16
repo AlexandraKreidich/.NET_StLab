@@ -21,7 +21,8 @@ namespace WebApi.Models.Ticket
         [NotNull]
         public PlaceTypeApiModel PlaceType { get; }
 
-        public int HallName { get; }
+        [NotNull]
+        public string HallName { get; }
 
         [NotNull]
         public string CinemaName { get; }
@@ -42,7 +43,7 @@ namespace WebApi.Models.Ticket
             int placeNumber,
             int rowNumber,
             [NotNull] PlaceTypeApiModel placeType,
-            int hallName,
+            [NotNull] string hallName,
             [NotNull] string cinemaName,
             decimal sessionPrice,
             [CanBeNull] ServiceApiModel[] services,

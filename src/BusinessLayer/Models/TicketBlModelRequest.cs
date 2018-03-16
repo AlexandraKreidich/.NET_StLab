@@ -9,8 +9,6 @@ namespace BusinessLayer.Models
 
         public int PriceId { get; }
 
-        public TicketStatus Status { get; }
-
         [CanBeNull]
         public int[] Services { get; }
 
@@ -18,13 +16,11 @@ namespace BusinessLayer.Models
         (
             int userId,
             int priceId,
-            TicketStatus status,
             [CanBeNull] int[] services
         )
         {
             UserId = userId;
             PriceId = priceId;
-            Status = status;
             Services = services;
         }
     }

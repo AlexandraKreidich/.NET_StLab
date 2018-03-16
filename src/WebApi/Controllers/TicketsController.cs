@@ -33,8 +33,10 @@ namespace WebApi.Controllers
 
             IEnumerable<TicketBlModelResponse> tickets = await _ticketsService.GetTicketsForUser(userId);
 
+            IEnumerable<TicketApiModelResponse> ticketsResponse = tickets.Select(Mapper.Map<TicketApiModelResponse>);
+
             return Ok(
-                tickets.Select(Mapper.Map<TicketApiModelResponse>)
+                ticketsResponse
             );
         }
 
@@ -64,7 +66,6 @@ namespace WebApi.Controllers
             (
                 HttpContext.User.GetUserId(),
                 ticket.PriceId,
-                ticket.Status,
                 ticket.Services
 
             );
@@ -90,6 +91,7 @@ namespace WebApi.Controllers
         // DELETE /tickets/{id}
 
         [HttpDelete]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (await _ticketsService.DeleteTicket(id) == 0)

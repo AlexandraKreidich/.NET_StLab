@@ -10,18 +10,14 @@ namespace WebApi.Models.Ticket
         [CanBeNull]
         public int[] Services { get; }
 
-        public TicketStatus Status { get; }
-
         public TicketApiModelRequest
         (
             int priceId,
-            [CanBeNull] int[] services,
-            TicketStatus status
+            [CanBeNull] int[] services
         )
         {
             PriceId = priceId;
             Services = services;
-            Status = status;
         }
     }
 }

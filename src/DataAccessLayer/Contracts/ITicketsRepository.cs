@@ -15,13 +15,13 @@ namespace DataAccessLayer.Contracts
 
         [ItemNotNull]
         Task<IEnumerable<ServiceDalDtoModel>> GetServicesForTicket(int ticketId);
-        
+
         void PayForTicket(int ticketId);
 
         Task<int> CreateTicket([NotNull] TicketDalDtoModelRequest ticket);
 
         void AddServiceToTicket(int ticketId, int serviceId);
-        
+
         void DeleteTicket(int id);
     }
 }

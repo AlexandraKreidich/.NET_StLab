@@ -11,6 +11,7 @@ using JetBrains.Annotations;
 
 namespace BusinessLayer.Services
 {
+    [UsedImplicitly]
     internal class TicketsService : ITicketsService
     {
         [NotNull] private readonly ITicketsRepository _ticketsRepository;
@@ -106,8 +107,7 @@ namespace BusinessLayer.Services
             TicketDalDtoModelRequest ticketRequest = new TicketDalDtoModelRequest
                 (
                     ticket.UserId,
-                    ticket.PriceId,
-                    ticket.Status
+                    ticket.PriceId
                 );
 
             int id = await _ticketsRepository.CreateTicket(ticketRequest);

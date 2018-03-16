@@ -17,7 +17,7 @@ namespace BusinessLayer.Contracts
         Task<TicketBlModelResponse> PayForTicket(int ticketId);
 
         void CreateTicket([NotNull] TicketBlModelRequest ticket);
-        
+
         Task<int> DeleteTicket(int id);
     }
 }
