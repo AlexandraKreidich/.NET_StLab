@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using BusinessLayer.Models;
+using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
+using CinemaModel = BusinessLayer.Models.CinemaModel;
 using DalFilmFilterModel = DataAccessLayer.Models.DataTransferObjects.FilmFilterModel;
 using DalCinemaModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
-using DalHallModel = DataAccessLayer.Models.DataTransferObjects.HallModel;
-using DalHallSchemeModel = DataAccessLayer.Models.DataTransferObjects.HallSchemeModel;
-using DalPlaceModel = DataAccessLayer.Models.DataTransferObjects.PlaceModel;
-using DalServiceModel = DataAccessLayer.Models.DataTransferObjects.ServiceModel;
 using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
+using FilmFilterModel = BusinessLayer.Models.FilmFilterModel;
+using FilmModel = BusinessLayer.Models.FilmModel;
+using SessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 
 
 namespace BusinessLayer
@@ -18,13 +19,11 @@ namespace BusinessLayer
         {
             configuration.CreateMap<DalCinemaModel, CinemaModel>();
 
-            configuration.CreateMap<DalHallModel, HallModel>();
+            configuration.CreateMap<HallDalDtoModel, HallBlModel>();
 
-            configuration.CreateMap<DalHallSchemeModel, HallSchemeModel>();
+            configuration.CreateMap<HallSchemeDalDtoModel, HallSchemeBlModel>();
 
-            configuration.CreateMap<DalPlaceModel, PlaceModel>();
-
-            configuration.CreateMap<ServiceModel, DalServiceModel>();
+            configuration.CreateMap<ServiceBlModel, ServiceDalDtoModel>();
 
             configuration.CreateMap<DalFilmModel, FilmModel>().ConstructUsing
             (

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using ApiServiceModel = WebApi.Models.Service.ServiceModel;
-using BlServiceModel = BusinessLayer.Models.ServiceModel;
+using WebApi.Models.Service;
 
 namespace WebApi.Controllers
 {
@@ -27,21 +27,21 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<BlServiceModel> services = await _serviceService.GetServices();
+            IEnumerable<ServiceBlModel> services = await _serviceService.GetServices();
 
             return Ok(
-                services.Select(Mapper.Map<ApiServiceModel>)
+                services.Select(Mapper.Map<ServiceApiModel>)
             );
         }
 
         // PUT /services -> add or update service
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]ApiServiceModel service)
+        public async Task<IActionResult> Put([FromBody]ServiceApiModel service)
         {
-            BlServiceModel newService = await _serviceService.AddOrUpdateService(Mapper.Map<BlServiceModel>(service));
+            ServiceBlModel newService = await _serviceService.AddOrUpdateService(Mapper.Map<ServiceBlModel>(service));
 
             return Ok(
-                Mapper.Map<ApiServiceModel>(newService)
+                Mapper.Map<ServiceApiModel>(newService)
             );
         }
 

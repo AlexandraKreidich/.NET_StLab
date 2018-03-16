@@ -26,42 +26,42 @@ namespace WebApi.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            HallModelForApi hall = await _hallsService.GetHall(id);
+            FullHallBlModel fullHallBl = await _hallsService.GetHall(id);
 
-            if (hall == null)
+            if (fullHallBl == null)
             {
                 return NotFound();
             }
 
-            return Ok(new HallModel(
-                hall.Id,
-                hall.CinemaId,
-                hall.Name,
-                hall.Places.Select(Mapper.Map<PlaceModelForHall>).ToArray(),
-                hall.HallSchemeModels.Select(Mapper.Map<Models.Hall.HallSchemeModel>).ToArray()
+            return Ok(new HallApiModel(
+                fullHallBl.Id,
+                fullHallBl.CinemaId,
+                fullHallBl.Name,
+                fullHallBl.PlacesBl?.Select(Mapper.Map<PlaceApiModel>).ToArray(),
+                fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<HallSchemeApiModel>).ToArray()
             ));
         }
 
         // PUT /halls
         [HttpPut]
-        public async Task<IActionResult> Put([NotNull] [FromBody]HallModel hall)
+        public async Task<IActionResult> Put([NotNull] [FromBody]HallApiModel hallApi)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            HallModelForApi hallRequest = new HallModelForApi(
-                hall.Id,
-                hall.CinemaId,
-                hall.Name,
-                hall.Places.Select(Mapper.Map<BusinessLayer.Models.PlaceModel>).ToArray(),
-                hall.HallSchemeModels.Select(Mapper.Map<BusinessLayer.Models.HallSchemeModel>).ToArray()
+            FullHallBlModel fullHallBlRequest = new FullHallBlModel(
+                hallApi.Id,
+                hallApi.CinemaId,
+                hallApi.Name,
+                hallApi.PlacesApi?.Select(Mapper.Map<BusinessLayer.Models.PlaceBlModel>).ToArray(),
+                hallApi.HallSchemeApiModels?.Select(Mapper.Map<BusinessLayer.Models.HallSchemeBlModel>).ToArray()
             );
 
-            HallModelForApi hallResponse = await _hallsService.AddOrOrUpdateHall(hallRequest);
+            FullHallBlModel fullHallBl = await _hallsService.AddOrOrUpdateHall(fullHallBlRequest);
 
-            return Ok(hallResponse);
+            return Ok(fullHallBl);
         }
     }
 }

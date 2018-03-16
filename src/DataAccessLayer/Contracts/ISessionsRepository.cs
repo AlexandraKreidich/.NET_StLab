@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using System.Threading.Tasks;
 using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
@@ -9,7 +8,7 @@ namespace DataAccessLayer.Contracts
     public interface ISessionsRepository
     {
         [ItemNotNull]
-        Task<IEnumerable<ServiceModel>> GetServices(int sessionId);
+        Task<IEnumerable<ServiceDalDtoModel>> GetServices(int sessionId);
 
         [ItemNotNull]
         Task<IEnumerable<SessionModelResponse>> GetSessions();

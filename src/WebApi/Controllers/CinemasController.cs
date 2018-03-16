@@ -3,13 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Hall;
 using WebApi.Models.Place;
-using WebApi.Models.Cinema;
 using BlCinemaModel = BusinessLayer.Models.CinemaModel;
-using BlHallModelForApi = BusinessLayer.Models.HallModelForApi;
+using CinemaModel = WebApi.Models.Cinema.CinemaModel;
 
 namespace WebApi.Controllers
 {
@@ -55,23 +55,23 @@ namespace WebApi.Controllers
         [HttpGet("{id:int}/halls")]
         public async Task<IActionResult> GetHalls(int id)
         {
-            IEnumerable<BlHallModelForApi> halls = await _cinemasService.GetHalls(id);
+            IEnumerable<FullHallBlModel> halls = await _cinemasService.GetHalls(id);
 
             if (halls == null)
             {
                 NotFound();
             }
 
-            List<HallModel> results = new List<HallModel>();
+            List<HallApiModel> results = new List<HallApiModel>();
 
             if (halls != null)
             {
-                results = halls.Select(hall => new HallModel(
+                results = halls.Select(hall => new HallApiModel(
                         hall.Id,
                         hall.CinemaId,
                         hall.Name,
-                        hall.Places.Select(Mapper.Map<PlaceModelForHall>).ToArray(),
-                        hall.HallSchemeModels.Select(Mapper.Map<HallSchemeModel>).ToArray())
+                        hall.PlacesBl.Select(Mapper.Map<PlaceApiModel>).ToArray(),
+                        hall.HallSchemeBlModels.Select(Mapper.Map<HallSchemeApiModel>).ToArray())
                     ).ToList();
             }
 

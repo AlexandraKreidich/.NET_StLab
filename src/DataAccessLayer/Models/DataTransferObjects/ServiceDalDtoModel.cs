@@ -3,7 +3,7 @@
 namespace DataAccessLayer.Models.DataTransferObjects
 {
     [UsedImplicitly]
-    public class ServiceModel
+    public class ServiceDalDtoModel
     {
         public int Id { get;}
 
@@ -12,7 +12,7 @@ namespace DataAccessLayer.Models.DataTransferObjects
 
         public decimal Price { get;}
 
-        public ServiceModel(
+        public ServiceDalDtoModel(
             int id,
             [NotNull] string name,
             decimal price

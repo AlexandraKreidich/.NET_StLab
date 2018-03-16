@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Models.Entities
 {
-    internal class Service
+    internal class ServiceDalModel
     {
         public int Id { get; set; }
 

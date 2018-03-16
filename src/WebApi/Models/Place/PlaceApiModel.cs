@@ -1,25 +1,25 @@
 ﻿using JetBrains.Annotations;
 
-namespace BusinessLayer.Models
+namespace WebApi.Models.Place
 {
     [UsedImplicitly]
-    public class PlaceModel
+    public class PlaceApiModel
     {
         public int Id { get; }
 
         public int HallId { get; }
 
         [NotNull]
-        public string Type { get; }
+        public PlaceTypeApiModel Type { get; }
 
-        public int RowNumber { get; }
+        public int RowNumber { get;}
 
-        public int PlaceNumber { get; }
+        public int PlaceNumber { get;}
 
-        public PlaceModel(
+        public PlaceApiModel(
             int id,
             int hallId,
-            [NotNull] string type,
+            [NotNull] PlaceTypeApiModel type,
             int rowNumber,
             int placeNumber
         )

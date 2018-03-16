@@ -8,9 +8,9 @@ namespace DataAccessLayer.Contracts
     public interface IServiceRepository
     {
         [ItemNotNull]
-        Task<IEnumerable<ServiceModel>> GetServices();
+        Task<IEnumerable<ServiceDalDtoModel>> GetServices();
 
-        Task<int> AddOrUpdateService([NotNull] ServiceModel service);
+        Task<int> AddOrUpdateService([NotNull] ServiceDalDtoModel service);
 
         Task<StoredProcedureExecutionResult> DeleteService(int id);
     }

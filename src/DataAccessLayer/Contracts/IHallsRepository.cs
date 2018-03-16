@@ -7,13 +7,12 @@ namespace DataAccessLayer.Contracts
     public interface IHallsRepository
     {
         [ItemCanBeNull]
-        Task<HallModel> GetHall(int id);
+        Task<HallDalDtoModel> GetHall(int id);
 
-        Task<int> AddOrUpdateHall([NotNull] HallModel hall);
+        Task<int> AddOrUpdateHall([NotNull] HallDalDtoModel hallDalDto);
 
-        Task<int> AddOrUpdateHallScheme([NotNull] HallSchemeModel hallScheme);
+        Task<int> AddOrUpdateHallScheme([NotNull] HallSchemeDalDtoModel hallSchemeDalDto);
 
-
-        Task<int> AddOrUpdatePlace([NotNull] PlaceModel place);
+        Task<int> AddOrUpdatePlace([NotNull] PlaceDalDtoModel placeDalDto);
     }
 }

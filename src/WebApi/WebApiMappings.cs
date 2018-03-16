@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
+using BusinessLayer.Models;
 using JetBrains.Annotations;
-using WebApi.Models.Cinema;
-using WebApi.Models.Place;
 using WebApi.Models.Hall;
+using WebApi.Models.Place;
 using WebApi.Models.Service;
-using WebApi.Models.Session;
-using WebApi.Models.Film;
+using WebApi.Models.Ticket;
 using WebApi.Services;
-using HallModelForApi = BusinessLayer.Models.HallModelForApi;
-using BlServiceModel = BusinessLayer.Models.ServiceModel;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
 using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
-using PlaceModel = BusinessLayer.Models.PlaceModel;
-using BlHallSchemeModel = BusinessLayer.Models.HallSchemeModel;
 using BlCinemaModel = BusinessLayer.Models.CinemaModel;
 using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 using BlSessionModelRequest = BusinessLayer.Models.SessionModelRequest;
+using CinemaModel = WebApi.Models.Cinema.CinemaModel;
+using FilmFilterModel = WebApi.Models.Film.FilmFilterModel;
+using FilmModel = WebApi.Models.Film.FilmModel;
+using SessionModelRequest = WebApi.Models.Session.SessionModelRequest;
+using SessionModelResponse = WebApi.Models.Session.SessionModelResponse;
 
 namespace WebApi
 {
@@ -26,23 +27,48 @@ namespace WebApi
         {
             configuration.CreateMap<CinemaModel, BlCinemaModel>();
             configuration.CreateMap<BlCinemaModel, CinemaModel>();
-            configuration.CreateMap<PlaceModel, PlaceModelForHall>();
-            configuration.CreateMap<BlHallSchemeModel, HallSchemeModel>();
-            configuration.CreateMap<HallModelForApi, HallModel>();
-            configuration.CreateMap<BlServiceModel, ServiceModel>();
-            configuration.CreateMap<ServiceModel, BlServiceModel>();
-            configuration.CreateMap<FilmModel, BlFilmModel>().ConstructUsing
-            (
-                x=> new BlFilmModel(x.Id, x.Name, x.Description,x.StartRentDate,x.EndRentDate)
-            );
-            configuration.CreateMap<BlFilmModel, FilmModel>().ConstructUsing
-            (
-                x => new FilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)
-            );
+            configuration.CreateMap<HallSchemeBlModel, HallSchemeApiModel>();
+            configuration.CreateMap<FullHallBlModel, HallApiModel>();
+            configuration.CreateMap<ServiceBlModel, ServiceApiModel>();
+            configuration.CreateMap<ServiceApiModel, ServiceBlModel>();
+            configuration.CreateMap<FilmModel, BlFilmModel>()
+                .ConstructUsing
+                (
+                    x=> new BlFilmModel(x.Id, x.Name, x.Description,x.StartRentDate,x.EndRentDate)
+                );
+            configuration.CreateMap<BlFilmModel, FilmModel>()
+                .ConstructUsing
+                (
+                    x => new FilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)
+                );
             configuration.CreateMap<SessionModelResponse, BlSessionModelResponse>();
             configuration.CreateMap<FilmFilterModel, BlFilmFilterModel>();
             configuration.CreateMap<string, DateTimeOffset>().ConvertUsing<StringToDateTimeConverter>();
             configuration.CreateMap<SessionModelRequest, BlSessionModelRequest>();
+
+            configuration.CreateMap<PlaceTypeBlModel, PlaceTypeApiModel>()
+                .ConstructUsing
+                (
+                    x=> new PlaceTypeApiModel(x.Id, x.Name)
+                );
+            configuration.CreateMap<TicketBlModelResponse, TicketApiModelResponse>()
+                .ConstructUsing
+                (
+                    x=> new TicketApiModelResponse
+                        (
+                        x.TicketId,
+                        x.FilmName,
+                        x.PlaceNumber,
+                        x.RowNumber,
+                        (Mapper.Map<PlaceTypeBlModel, PlaceTypeApiModel>(x.PlaceType)),
+                        x.HallName,
+                        x.CinemaName,
+                        x.SessionPrice,
+                        Mapper.Map<ServiceBlModel[], ServiceApiModel[]>(x.Services),
+                        x.TicketStatus,
+                        x.CreatedAt
+                        )
+                );
         }
     }
 }

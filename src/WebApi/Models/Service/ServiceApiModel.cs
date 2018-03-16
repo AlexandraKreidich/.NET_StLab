@@ -3,15 +3,16 @@
 namespace WebApi.Models.Service
 {
     [UsedImplicitly]
-    public class ServiceModel
+    public class ServiceApiModel
     {
         public int Id { get; }
 
-        [NotNull] public string Name { get; }
+        [NotNull]
+        public string Name { get; }
 
         public decimal Price { get; }
 
-        public ServiceModel(
+        public ServiceApiModel(
             [NotNull] string name,
             decimal price,
             int id
