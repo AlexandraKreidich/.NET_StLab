@@ -5,21 +5,18 @@ import {Header} from '../components/Header'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {logoutUser} from '../../user/actions/ActionCreators'
+import {setVisibilityFilter} from '../../films/actions/ActionCreators'
 
 class HeaderContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      search: ''
-    }
   }
 
   onInputChange = (e) => {
-    this.setState({
-      ...this.state,
-      search: e.target.value
-    })
+    this.props.setVisibilityFilter({
+      filmName: e.target.value
+    });
   }
 
   onSearchClick = () => {}
@@ -43,10 +40,10 @@ class HeaderContainer extends React.Component {
         {
           this.props.user.token
             ? <span className="navbar-text">
-                Hello {this.props.user.firstName} {this.props.user.lastName}
+                Hello {this.props.user.firstName}
+                {this.props.user.lastName}
               </span>
-            : <span className="navbar-text">
-              </span>
+            : <span className="navbar-text"></span>
         }
       </div>
       <div className="col-xs-3">
@@ -70,10 +67,14 @@ class HeaderContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({user: state.user.userData})
+const mapStateToProps = (state) => ({
+  user: state.user.userData,
+  visibilityFilters: state.film.visibilityFilters
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
+  setVisibilityFilter: (filters) => dispatch(setVisibilityFilter(filters))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderContainer));

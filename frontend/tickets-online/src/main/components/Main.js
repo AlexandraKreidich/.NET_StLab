@@ -11,7 +11,7 @@ const Main = () => (<div className="container">
   <Switch>
     <Route exact path='/' component={FilmListContainer}/>
     <Route exact path='/login' component={LoginForm}/>
-  <Route exact path='/register' component={RegisterForm}/>
+    <Route exact path='/register' component={RegisterForm}/>
   </Switch>
 </div>)
 

@@ -31,11 +31,6 @@ class Application extends React.Component {
         ...this.state,
         films: newProps.films
       })
-    } else if (newProps.sessions) {
-      this.setState({
-        ...this.state,
-        sessions: newProps.sessions
-      })
     }
   }
 

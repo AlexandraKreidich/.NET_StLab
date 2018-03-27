@@ -3,8 +3,6 @@ import {Field, reduxForm} from 'redux-form'
 
 const LoginFormValidation = values => {
 
-  console.log('here');
-
   const errors = {}
 
   if (!values.password) {
