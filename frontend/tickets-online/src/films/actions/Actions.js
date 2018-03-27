@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {requestFilms, receiveFilms} from './ActionCreators'
+import {url} from '../../config.js';
 
 export function fetchFilms() {
   const requestOptions = {
@@ -11,7 +12,7 @@ export function fetchFilms() {
   }
   return function(dispatch) {
     dispatch(requestFilms())
-    return fetch('http://localhost:65436/api/films/now-playing', requestOptions)
+    return fetch(url + 'api/films/now-playing', requestOptions)
       .then(function(response) {
         return response.json();
       })

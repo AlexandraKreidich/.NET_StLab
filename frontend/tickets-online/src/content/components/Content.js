@@ -7,7 +7,7 @@ import RegisterForm from '../../registerForm/containers/RegisterForm'
 
 import '../../bootstrap.css';
 
-const Main = () => (<div className="container">
+const Content = () => (<div className="container">
   <Switch>
     <Route exact path='/' component={FilmListContainer}/>
     <Route exact path='/login' component={LoginForm}/>
@@ -16,5 +16,5 @@ const Main = () => (<div className="container">
 </div>)
 
 export {
-  Main
+  Content
 }

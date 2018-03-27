@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {url} from '../../config.js';
 
 import {
   setUser,
@@ -21,7 +22,7 @@ function logInUser(email, password) {
 
   return function(dispatch) {
     dispatch(loginUser())
-    return fetch('http://localhost:65436/api/account/login', requestOptions).then(function(response) {
+    return fetch(url + 'api/account/login', requestOptions).then(function(response) {
       if (!response.ok) {
         return Promise.reject(response.statusText);
       }
@@ -56,7 +57,7 @@ function registerNewUser(email, firstName, lastName, password) {
 
   return function(dispatch) {
     dispatch(registerUser())
-    return fetch('http://localhost:65436/api/account/register', requestOptions).then(function(response) {
+    return fetch(url + 'api/account/register', requestOptions).then(function(response) {
       if (!response.ok) {
         return Promise.reject(response.statusText);
       }

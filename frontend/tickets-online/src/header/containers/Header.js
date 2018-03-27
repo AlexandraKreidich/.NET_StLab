@@ -40,8 +40,7 @@ class HeaderContainer extends React.Component {
         {
           this.props.user.token
             ? <span className="navbar-text">
-                Hello {this.props.user.firstName}
-                {this.props.user.lastName}
+                {this.props.user.email}
               </span>
             : <span className="navbar-text"></span>
         }

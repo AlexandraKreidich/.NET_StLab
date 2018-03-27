@@ -9,19 +9,21 @@ const FilmList = ({films}) => (<ul>
   {films.map((film, index) => (<Film key={index} {...film} /*onClick={() => onFilmClick(index)}*//>))}
 </ul>)
 
+const propsForFilmsArray = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
+  //startRentDate: PropTypes.string.isRequired,
+  //endRentDate: PropTypes.string.isRequired
+}
 
 FilmList.propTypes = {
-  films: PropTypes.arrayOf(
+  films: PropTypes.arrayOf
+  (
     PropTypes
-      .shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired
-        //startRentDate: PropTypes.string.isRequired,
-        //endRentDate: PropTypes.string.isRequired
-      })
+      .shape(propsForFilmsArray)
       .isRequired
-    ).isRequired
+  ).isRequired
 }
 
 export {

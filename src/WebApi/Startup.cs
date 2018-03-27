@@ -98,13 +98,6 @@ namespace WebApi
             // ===== Use Authentication ======
             app.UseAuthentication();
 
-            // Shows UseCors with CorsPolicyBuilder.
-            //app.UseCors
-            //(
-            //    builder =>
-            //    builder.WithOrigins("http://localhost:3000").AllowAnyMethod()
-            //);
-
             app.UseMvc();
         }
     }

@@ -8,12 +8,12 @@ import {
 } from '../actions/ActionCreators'
 
 import {
-  REGISTER_USER,
-  FAIL_REGISTRATION,
-  LOGIN_USER,
-  FAIL_LOGIN,
-  SET_USER,
-  LOGOUT_USER
+  USER_REGISTER,
+  USER_FAIL_REGISTRATION,
+  USER_LOGIN,
+  USER_FAIL_LOGIN,
+  USER_SET,
+  USER_LOGOUT
 } from '../actions/ActionTypes';
 
 const initialState = {
@@ -33,51 +33,49 @@ const initialState = {
 
 const userReducer = function(state = initialState, action) {
   switch (action.type) {
-    case REGISTER_USER:
-      return Object.assign({}, state, {isRegistrationInProgress: true});
-    case FAIL_REGISTRATION:
-      return Object.assign({}, state, {isRegistrationFailed: true});
-    case LOGIN_USER:
-      return Object.assign({}, state, {isLoginInProgress: true});
-    case FAIL_LOGIN:
-      return Object.assign({}, state, {isLoginFailed: true});
-    case LOGOUT_USER:
-      return Object.assign({}, state, {
-        isLoginInProgress: false,
-        userData: {
-          id: 0,
-          userRole: null,
-          email: null,
-          firstName: null,
-          lastName: null,
-          token: null
+    case USER_REGISTER:
+      return {
+        ...state,
+        isRegistrationInProgress: true
+      };
+    case USER_FAIL_REGISTRATION:
+      return {
+        ...state,
+        isRegistrationFailed: true
+      };
+    case USER_LOGIN:
+      return {
+        ...state,
+        isLoginInProgress: true
+      };
+    case USER_FAIL_LOGIN:
+      return {
+        ...state,
+        isLoginFailed: true
+      };
+    case USER_LOGOUT:
+      return {
+        ...initialState
+      };
+    case USER_SET:
+      if (state.isLoginFailed) {
+        return {
+          ...initialState
         }
-      });
-    case SET_USER:
-      return Object.assign({}, state, {
-        isLoginInProgress: state.isLoginFailed,
-        userData: {
-          ...state.userData,
-          id: state.isLoginFailed
-            ? 0
-            : action.user.id,
-          userRole: state.isLoginFailed
-            ? null
-            : action.user.userRole,
-          email: state.isLoginFailed
-            ? null
-            : action.user.email,
-          firstName: state.isLoginFailed
-            ? null
-            : action.user.firstName,
-          lastName: state.isLoginFailed
-            ? null
-            : action.user.lastName,
-          token: state.isLoginFailed
-            ? null
-            : action.user.token
+      } else {
+        return {
+          ...state,
+          isLoginInProgress: false,
+          userData: {
+            id: action.user.id,
+            userRole: action.user.userRole,
+            email: action.user.email,
+            firstName: action.user.firstName,
+            lastName: action.user.lastName,
+            token: action.user.token
+          }
         }
-      });
+      }
   }
   return state;
 }

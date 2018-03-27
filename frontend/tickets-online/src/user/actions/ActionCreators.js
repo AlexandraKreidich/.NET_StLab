@@ -1,32 +1,32 @@
 import {
-  REGISTER_USER,
-  FAIL_REGISTRATION,
-  LOGIN_USER,
-  FAIL_LOGIN,
-  SET_USER,
-  LOGOUT_USER
+  USER_REGISTER,
+  USER_FAIL_REGISTRATION,
+  USER_LOGIN,
+  USER_FAIL_LOGIN,
+  USER_SET,
+  USER_LOGOUT
 } from './ActionTypes';
 
 export function setUser(user) {
-  return {type: SET_USER, user: user}
+  return {type: USER_SET, user: user}
 }
 
 export function registerUser(user) {
-  return {type: REGISTER_USER}
+  return {type: USER_REGISTER}
 }
 
 export function failRegistration(){
-  return {type: FAIL_REGISTRATION}
+  return {type: USER_FAIL_REGISTRATION}
 }
 
 export function loginUser() {
-  return {type: LOGIN_USER}
+  return {type: USER_LOGIN}
 }
 
 export function failLogin(){
-  return {type: FAIL_LOGIN}
+  return {type: USER_FAIL_LOGIN}
 }
 
 export function logoutUser() {
-  return {type: LOGOUT_USER}
+  return {type: USER_LOGOUT}
 }
