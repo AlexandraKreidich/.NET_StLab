@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using AutoMapper;
 using BusinessLayer.Models;
 using JetBrains.Annotations;

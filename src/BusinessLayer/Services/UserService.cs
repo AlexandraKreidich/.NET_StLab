@@ -59,7 +59,7 @@ namespace BusinessLayer.Services
         {
             regModel.EnsureObjectPropertiesNotNull();
 
-            if (_userRepository.GetUser(regModel.Email) != null)
+            if (await _userRepository.GetUser(regModel.Email) != null)
             {
                 // error, user with this email already exist
                 return null;

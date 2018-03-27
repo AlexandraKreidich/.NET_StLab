@@ -35,6 +35,7 @@ namespace WebApi
             services.AddSingleton<IDalSettings>(settings);
             services.AddSingleton<IWebApiSettings>(settings);
 
+
             DalModule.Register(services);
             BlModule.Register(services);
             WebApiModule.Register(services);
@@ -71,19 +72,38 @@ namespace WebApi
                             };
                     });
 
+            services.AddCors(options =>
+                {
+                    options.AddPolicy("CorsPolicy",
+                        builder => builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials());
+                });
+
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
+
             // ===== Use Authentication ======
             app.UseAuthentication();
+
+            // Shows UseCors with CorsPolicyBuilder.
+            //app.UseCors
+            //(
+            //    builder =>
+            //    builder.WithOrigins("http://localhost:3000").AllowAnyMethod()
+            //);
 
             app.UseMvc();
         }

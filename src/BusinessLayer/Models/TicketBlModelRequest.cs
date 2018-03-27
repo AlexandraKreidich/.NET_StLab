@@ -1,5 +1,4 @@
-﻿using Common;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace BusinessLayer.Models
 {
