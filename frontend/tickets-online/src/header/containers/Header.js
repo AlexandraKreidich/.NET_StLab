@@ -26,29 +26,19 @@ class HeaderContainer extends React.Component {
   }
 
   render() {
-    return (<nav className="navbar navbar-light bg-light justify-content-between">
-      <div className="col-xs-3">
+    return (
+      <div>
+      <nav className="navbar navbar-light bg-light justify-content-between">
         <Link to='/' className="navbar-brand">
           <img className="logo-img" src="logo.svg" width="30" height="30" alt=""/>
           TicketsOnline
         </Link>
-      </div>
       <div className="col-xs-3">
         <SearchFilmsForm onInputChange={this.onInputChange} onSearchClick={this.onSearchClick}/>
       </div>
-      <div className="col-xs-3">
-        {
-          this.props.user.token
-            ? <span className="navbar-text">
-                {this.props.user.email}
-              </span>
-            : <span className="navbar-text"></span>
-        }
-      </div>
-      <div className="col-xs-3">
         <div className="btn-group" role="group">
           {
-            !this.props.user.token
+            !this.props.user.userData.token
               ? <button type="button" className="btn btn-link">
                   <Link to='/login'>Login</Link>
                 </button>
@@ -60,14 +50,22 @@ class HeaderContainer extends React.Component {
           <button type="button" className="btn btn-link">
             <Link to='/register'>Register</Link>
           </button>
-        </div>
       </div>
-    </nav>)
+    </nav>
+    {
+      this.props.user.userData.token
+        ? <div className="alert alert-success text-center">
+          <strong>Hello,</strong> {this.props.user.userData.firstName}
+          </div>
+        : <div />
+    }
+  </div>
+  )
   }
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user.userData,
+  user: state.user,
   visibilityFilters: state.film.visibilityFilters
 })
 

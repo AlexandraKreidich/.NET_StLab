@@ -1,7 +1,9 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form'
-import {LoginFormValidation} from './LoginFormValidation'
+import {validate} from './FormValidation'
+
 import '../../bootstrap.css';
+import '../../index.css';
 
 const RenderField = ({
   input,
@@ -14,7 +16,7 @@ const RenderField = ({
 }) => (<div className="form-group">
   <label>{label}</label>
   <div>
-    <input {...input} placeholder={label} type={type}/> {touched && error && <span>{error}</span>}
+    <input {...input} placeholder={label} type={type}/> <br /> {touched && error && <span className="validation-error-text">{error}</span>}
   </div>
 </div>);
 

@@ -24,3 +24,11 @@ body {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+.form-danger{
+  margin-top: 10px;
+}
+
+.validation-error-text{
+  color: red;
+}

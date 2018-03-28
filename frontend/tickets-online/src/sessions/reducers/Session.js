@@ -9,9 +9,16 @@ const initialState = {
 const sessionReducer = function(state = initialState, action) {
   switch (action.type) {
     case REQUEST_SESSIONS:
-      return Object.assign({}, state, {isFilmsLoading: true});
+      return {
+        ...state,
+        isSessionsLoading: true
+      };
     case RECEIVE_SESSIONS:
-      return Object.assign({}, state, {films: action.response, isFilmsLoading: false});;
+      return {
+        ...state,
+        sessions: action.response,
+        isSessionsLoading: false
+      }
   }
   return state;
 }

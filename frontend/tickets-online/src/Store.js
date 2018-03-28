@@ -6,6 +6,7 @@ import {sessionReducer} from './sessions/reducers/Session'
 import { reducer as formReducer } from 'redux-form'
 import ReduxThunk from 'redux-thunk'
 import {fetchFilms} from './films/actions/Actions'
+import {fetchSessions} from './sessions/actions/Actions'
 
 
 const rootReducer = combineReducers({

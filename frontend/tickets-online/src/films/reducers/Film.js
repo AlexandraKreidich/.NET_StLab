@@ -1,5 +1,5 @@
 import {requestFilms, receiveFilms, setVisibilityFilter} from '../actions/ActionCreators'
-import {FILMS_REQUEST, FILMS_RECEIVE, VISIBILITY_FILTER_SET} from '../actions/ActionTypes'
+import {FILMS_REQUEST, FILMS_RESPONSE, VISIBILITY_FILTER_SET} from '../actions/ActionTypes'
 
 const initialState = {
   films: [],
@@ -16,7 +16,7 @@ const filmReducer = function(state = initialState, action) {
         ...state,
         isFilmsLoading: true
       };
-    case FILMS_RECEIVE:
+    case FILMS_RESPONSE:
       return {
         ...state,
         films: action.response,

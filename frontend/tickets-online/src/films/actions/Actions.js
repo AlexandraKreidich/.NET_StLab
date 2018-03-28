@@ -11,13 +11,17 @@ export function fetchFilms() {
     }
   }
   return function(dispatch) {
+
     dispatch(requestFilms())
+
     return fetch(url + 'api/films/now-playing', requestOptions)
       .then(function(response) {
         return response.json();
       })
       .then(function(response) {
         dispatch(receiveFilms(response));
-      })
+      }).catch(function(error) {
+        console.log(error);
+    });
   }
 }

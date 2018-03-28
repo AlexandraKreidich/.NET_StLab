@@ -36,7 +36,8 @@ const userReducer = function(state = initialState, action) {
     case USER_REGISTER:
       return {
         ...state,
-        isRegistrationInProgress: true
+        isRegistrationInProgress: true,
+        isRegistrationFailed: false
       };
     case USER_FAIL_REGISTRATION:
       return {
@@ -46,7 +47,8 @@ const userReducer = function(state = initialState, action) {
     case USER_LOGIN:
       return {
         ...state,
-        isLoginInProgress: true
+        isLoginInProgress: true,
+        isLoginFailed: false
       };
     case USER_FAIL_LOGIN:
       return {

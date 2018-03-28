@@ -1,11 +1,11 @@
-import {FILMS_REQUEST, FILMS_RECEIVE, VISIBILITY_FILTER_SET} from './ActionTypes';
+import {FILMS_REQUEST, FILMS_RESPONSE, VISIBILITY_FILTER_SET} from './ActionTypes';
 
 export function requestFilms() {
   return {type: FILMS_REQUEST}
 }
 
 export function receiveFilms(response) {
-  return {type: FILMS_RECEIVE, response: response}
+  return {type: FILMS_RESPONSE, response: response}
 }
 
 export function setVisibilityFilter(filters) {

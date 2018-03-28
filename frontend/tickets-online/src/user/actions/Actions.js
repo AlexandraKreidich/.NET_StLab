@@ -10,7 +10,6 @@ import {
 } from '../actions/ActionCreators'
 
 function logInUser(email, password) {
-  console.log(email, password);
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -21,27 +20,33 @@ function logInUser(email, password) {
   }
 
   return function(dispatch) {
-    dispatch(loginUser())
-    return fetch(url + 'api/account/login', requestOptions).then(function(response) {
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    }).then(function(user) {
-      console.log(user);
-      if (user && user.token) {
-        dispatch(setUser({
-          id: user.id,
-          userRole: user.userRole,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          token: user.token
-        }));
-      } else {
-        dispatch(failLogin());
-      }
-    });
+
+    dispatch(loginUser());
+
+    return fetch(url + 'api/account/login', requestOptions)
+      .then(function(response){
+        if(response.status === 400){
+          return dispatch(failLogin());
+        }
+        return response.json();
+      })
+      .then(function(responseJson) {
+        if (responseJson && responseJson.token) {
+          dispatch(setUser(
+            {
+            id: responseJson.id,
+            userRole: responseJson.userRole,
+            email: responseJson.email,
+            firstName: responseJson.firstName,
+            lastName: responseJson.lastName,
+            token: responseJson.token
+            }
+          ));
+        }
+      })
+      .catch(function(error){
+        console.log(error);
+      })
   }
 }
 
@@ -56,19 +61,22 @@ function registerNewUser(email, firstName, lastName, password) {
   }
 
   return function(dispatch) {
-    dispatch(registerUser())
-    return fetch(url + 'api/account/register', requestOptions).then(function(response) {
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
+
+    dispatch(registerUser());
+
+    return fetch(url + 'api/account/register', requestOptions)
+    .then(function(response){
+      if(response.status === 400){
+        return dispatch(failRegistration());
       }
       return response.json();
-    }).then(function(user) {
-      if (user && user.token) {
-        console.log(user);
-        dispatch(logInUser(user.email, password));
-      } else {
-        dispatch(failRegistration());
+    }).then(function(responseJson) {
+      if (responseJson && responseJson.token) {
+        dispatch(logInUser(responseJson.email, password));
       }
+    })
+    .catch(function(error){
+      console.log(error);
     });
   }
 }

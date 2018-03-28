@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
-import {requestSessions, receiveSessions} from './ActionCreators'
+import {requestSessions, receiveSessions} from './ActionCreators';
+import {url} from '../../config.js';
 
-export function fetchFilms() {
+export function fetchSessions() {
   const requestOptions = {
     method: 'GET',
     headers: {
@@ -11,11 +12,12 @@ export function fetchFilms() {
   }
   return function(dispatch) {
     dispatch(requestSessions())
-    return fetch('http://localhost:65436/api/sessions', requestOptions)
+    return fetch(url + 'api/sessions', requestOptions)
       .then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      dispatch(receiveSessions(response));
-    })
+        return response.json();
+      })
+      .then(function(response) {
+        dispatch(receiveSessions(response));
+      })
   }
 }

@@ -1,11 +1,11 @@
 /*register*/
-export const USER_REGISTER = 'REGISTER_USER';
-export const USER_FAIL_REGISTRATION = 'FAIL_REGISTRATION';
+export const USER_REGISTER = 'USER_REGISTER';
+export const USER_FAIL_REGISTRATION = 'USER_FAIL_REGISTRATION';
 
 /*login*/
-export const USER_LOGIN = 'LOGIN_USER';
-export const USER_FAIL_LOGIN = 'FAIL_REGISTRATION';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_FAIL_LOGIN = 'USER_FAIL_LOGIN';
 
-export const USER_SET = 'SET_USER';
+export const USER_SET = 'USER_SET';
 
-export const USER_LOGOUT = 'LOGOUT_USER';
+export const USER_LOGOUT = 'USER_LOGOUT';
