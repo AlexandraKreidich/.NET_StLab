@@ -11,13 +11,17 @@ export function fetchSessions() {
     }
   }
   return function(dispatch) {
-    dispatch(requestSessions())
+
+    dispatch(requestSessions());
+
     return fetch(url + 'api/sessions', requestOptions)
       .then(function(response) {
         return response.json();
       })
       .then(function(response) {
-        dispatch(receiveSessions(response));
+        dispatch(
+          receiveSessions(response)
+        );
       })
   }
 }

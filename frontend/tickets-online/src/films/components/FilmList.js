@@ -5,8 +5,9 @@ import {Film} from './Film'
 import '../../bootstrap.css';
 import '../../index.css';
 
-const FilmList = ({films}) => (<ul>
-  {films.map((film, index) => (<Film key={index} {...film} /*onClick={() => onFilmClick(index)}*//>))}
+const FilmList = ({films, onFilmClick}) => (<ul>
+  {films.map((film, index) => (
+    <Film key={index} {...film} onFilmClick={onFilmClick}/>))}
 </ul>)
 
 const propsForFilmsArray = {

@@ -66,16 +66,21 @@ function registerNewUser(email, firstName, lastName, password) {
 
     return fetch(url + 'api/account/register', requestOptions)
     .then(function(response){
-      if(response.status === 400){
-        return dispatch(failRegistration());
+      if(response.status === 400) {
+        return dispatch(
+          failRegistration()
+        );
       }
       return response.json();
-    }).then(function(responseJson) {
+    })
+    .then(function(responseJson) {
       if (responseJson && responseJson.token) {
-        dispatch(logInUser(responseJson.email, password));
+        dispatch(
+          logInUser(responseJson.email, password)
+        );
       }
     })
-    .catch(function(error){
+    .catch(function(error) {
       console.log(error);
     });
   }

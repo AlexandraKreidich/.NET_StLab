@@ -19,7 +19,7 @@ const getFilteredFilms = (films, filters) => {
         return true;
       }
     });
-    
+
   }
 
 class FilmContainer extends React.Component {
@@ -28,13 +28,18 @@ class FilmContainer extends React.Component {
     super(props);
   }
 
+  onFilmClick = (e, id) =>{
+    e.preventDefault();
+    console.log('id: ',id);
+  }
+
   render() {
     return (<div className="top-indent">
       {
         this.props.isLoading && <div className="text-center div-load-img">
             <img className="img-responsive" width="50px" height="50px" src={loadImg}/></div>
       }
-      {this.props.films && <FilmList films={this.props.films}/>}
+      {this.props.films && <FilmList films={this.props.films} onFilmClick={this.onFilmClick}/>}
     </div>)
   }
 };

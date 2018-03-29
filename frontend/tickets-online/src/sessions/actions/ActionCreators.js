@@ -1,9 +1,9 @@
-import {REQUEST_SESSIONS, RECEIVE_SESSIONS} from './ActionTypes'
+import {SESSIONS_REQUEST, SESSIONS_RESPONSE} from './ActionTypes'
 
 export function requestSessions() {
-  return {type: REQUEST_SESSIONS}
+  return {type: SESSIONS_REQUEST}
 }
 
 export function receiveSessions(response) {
-  return {type: RECEIVE_SESSIONS, response: response}
+  return {type: SESSIONS_RESPONSE, response: response}
 }

@@ -1,5 +1,5 @@
 import {requestSessions, receiveSessions} from '../actions/ActionCreators'
-import {REQUEST_SESSIONS, RECEIVE_SESSIONS} from '../actions/ActionTypes'
+import {SESSIONS_REQUEST, SESSIONS_RESPONSE} from '../actions/ActionTypes'
 
 const initialState = {
   sessions: [],
@@ -8,12 +8,12 @@ const initialState = {
 
 const sessionReducer = function(state = initialState, action) {
   switch (action.type) {
-    case REQUEST_SESSIONS:
+    case SESSIONS_REQUEST:
       return {
         ...state,
         isSessionsLoading: true
       };
-    case RECEIVE_SESSIONS:
+    case SESSIONS_RESPONSE:
       return {
         ...state,
         sessions: action.response,
