@@ -1,0 +1,41 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import '../../bootstrap.css';
+import '../../index.css';
+
+class Film extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onFilm = this.onFilm.bind(this);
+  }
+
+  onFilm(e){
+    e.preventDefault();
+    this.props.onFilmClick(this.props.id);
+  }
+
+  render() {
+    return(
+      <a onClick={(e) => this.onFilm(e)} href="#" className="film-item list-group-item list-group-item-action flex-column align-items-start">
+      <div className="d-flex w-100 justify-content-between">
+        <h5 className="mb-1"><strong>{this.props.name}</strong></h5>
+      <small>Start rent date: {new Date(this.props.startRentDate).toDateString()}</small>
+      </div>
+      <p className="mb-1">DESCRIPTION: Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small>End rent date: {new Date(this.props.endRentDate).toDateString()}</small>
+    </a>
+    )
+  }
+}
+
+
+
+Film.propTypes = {
+  onFilmClick: PropTypes.func.isRequired
+}
+
+export {
+  Film
+}
