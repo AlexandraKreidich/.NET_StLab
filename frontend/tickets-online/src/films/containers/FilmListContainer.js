@@ -28,8 +28,7 @@ class FilmContainer extends React.Component {
     super(props);
   }
 
-  onFilmClick = (e, id) =>{
-    e.preventDefault();
+  onFilmClick = (id) =>{
     console.log('id: ',id);
   }
 

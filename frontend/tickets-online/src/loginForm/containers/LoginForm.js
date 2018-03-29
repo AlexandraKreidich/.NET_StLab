@@ -23,11 +23,11 @@ class LoginForm extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(newProps.user.isLoginFailed){
+    if(newProps.user.isLoginFailed) {
       this.setState({
         isLoginFailed: true
       })
-    }else if(!newProps.user.isLoginFailed){
+    } else if(!newProps.user.isLoginFailed) {
         this.setState({
           isLoginFailed: false
         })
@@ -41,7 +41,7 @@ class LoginForm extends React.Component {
     return (<div className="top-indent">
       <form onSubmit={handleSubmit(this.submit)}>
         <Field name="email" component={RenderField} label="Email" type="text"/>
-        <Field name="password" component={RenderField} label="Password" type="text"/> <br /> {error && <strong>{error}</strong>}
+        <Field name="password" component={RenderField} label="Password" type="password"/> <br /> {error && <strong>{error}</strong>}
         <div>
           <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Log in</button>
         </div>

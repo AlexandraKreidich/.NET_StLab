@@ -12,7 +12,7 @@ export function fetchFilms() {
   }
   return function(dispatch) {
 
-    dispatch(requestFilms())
+    dispatch(requestFilms());
 
     return fetch(url + 'api/films/now-playing', requestOptions)
       .then(function(response) {
@@ -20,7 +20,8 @@ export function fetchFilms() {
       })
       .then(function(response) {
         dispatch(receiveFilms(response));
-      }).catch(function(error) {
+      })
+      .catch(function(error) {
         console.log(error);
     });
   }

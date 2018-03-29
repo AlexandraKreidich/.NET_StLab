@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import {url} from '../../config.js';
 
 import {
@@ -16,7 +15,7 @@ function logInUser(email, password) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({ email, password })
   }
 
   return function(dispatch) {
@@ -32,16 +31,14 @@ function logInUser(email, password) {
       })
       .then(function(responseJson) {
         if (responseJson && responseJson.token) {
-          dispatch(setUser(
-            {
+          dispatch(setUser({
             id: responseJson.id,
             userRole: responseJson.userRole,
             email: responseJson.email,
             firstName: responseJson.firstName,
             lastName: responseJson.lastName,
             token: responseJson.token
-            }
-          ));
+          }));
         }
       })
       .catch(function(error){

@@ -39,7 +39,7 @@ class RegisterForm extends React.Component {
         <Field name="email" component={RenderField} label="Email" type="text"/>
         <Field name="firstName" component={RenderField} label="First Name" type="text"/>
         <Field name="lastName" component={RenderField} label="Last Name" type="text"/>
-        <Field name="password" component={RenderField} label="Password" type="text"/> {error && <strong>{error}</strong>}
+        <Field name="password" component={RenderField} label="Password" type="password"/> {error && <strong>{error}</strong>}
         <div>
           <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Register</button>
         </div>
