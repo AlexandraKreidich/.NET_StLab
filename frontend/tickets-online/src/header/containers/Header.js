@@ -29,7 +29,7 @@ class HeaderContainer extends React.Component {
     return (
       <div>
       <nav className="navbar navbar-light bg-light justify-content-between">
-        <Link to='/' className="navbar-brand">
+        <Link to='/films' className="navbar-brand">
           <img className="logo-img" src="logo.svg" width="30" height="30" alt=""/>
           TicketsOnline
         </Link>

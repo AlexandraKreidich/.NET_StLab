@@ -1,4 +1,8 @@
-import {FILMS_REQUEST, FILMS_RESPONSE, VISIBILITY_FILTER_SET} from './ActionTypes';
+import {
+  FILMS_REQUEST,
+  FILMS_RESPONSE,
+  VISIBILITY_FILTER_SET
+} from './ActionTypes';
 
 export function requestFilms() {
   return {type: FILMS_REQUEST}

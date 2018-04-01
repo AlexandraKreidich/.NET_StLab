@@ -4,6 +4,7 @@ import {store} from '../../App';
 import {FilmList} from '../components/FilmList';
 import {fetchFilms} from '../actions/Actions';
 import loadImg from '../../load-img.gif';
+import {withRouter} from 'react-router-dom';
 
 import '../../bootstrap.css';
 import '../../index.css';
@@ -13,6 +14,7 @@ const getFilteredFilms = (films, filters) => {
   if (!filters.filmName) {
     return films;
   }
+
   return films
     .filter(function(film) {
       if (film.name.toLowerCase().includes(filters.filmName.toLowerCase())) {
@@ -28,8 +30,8 @@ class FilmContainer extends React.Component {
     super(props);
   }
 
-  onFilmClick = (id) =>{
-    console.log('id: ',id);
+  onFilmClick = (id) => {
+    this.props.history.push('/films/' + id + '/sessions');
   }
 
   render() {
@@ -54,7 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchFilms: () => dispatch(fetchFilms())
 });
 
-const FilmListContainer = connect(mapStateToProps, mapDispatchToProps)(FilmContainer);
+const FilmListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FilmContainer));
 
 export {
   FilmListContainer

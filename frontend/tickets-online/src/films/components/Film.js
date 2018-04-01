@@ -18,7 +18,7 @@ class Film extends React.Component {
 
   render() {
     return(
-      <a onClick={(e) => this.onFilm(e)} href="#" className="film-item list-group-item list-group-item-action flex-column align-items-start">
+      <a onClick={this.onFilm} href="#" className="film-item list-group-item list-group-item-action flex-column align-items-start">
       <div className="d-flex w-100 justify-content-between">
         <h5 className="mb-1"><strong>{this.props.name}</strong></h5>
       <small>Start rent date: {new Date(this.props.startRentDate).toDateString()}</small>
