@@ -1,6 +1,6 @@
-import React from 'react'
-import {Content} from './content/components/Content'
-import HeaderContainer from './header/containers/Header'
+import React from 'react';
+import Routes from './routes';
+import HeaderContainer from './header/containers/Header';
 
 import './bootstrap.css';
 import './index.css'
@@ -8,7 +8,9 @@ import './index.css'
 const Application = () => (
   <div className="container-fluid navbar-container">
     <HeaderContainer />
-    <Content />
+    <div className="container">
+      <Routes />
+    </div>
   </div>
 )
 
