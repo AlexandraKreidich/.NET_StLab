@@ -30,8 +30,12 @@ class LoginForm extends React.Component {
     } else if(!newProps.user.isLoginFailed) {
         this.setState({
           isLoginFailed: false
-        })
+        });
       }
+      
+    if(newProps.user.userData.token){
+      this.props.history.push('/films');
+    }
   }
 
   render() {

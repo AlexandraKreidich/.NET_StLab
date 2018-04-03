@@ -13,12 +13,6 @@ const AuthRoute = (props) => {
       return <Redirect to={redirectTo} push />
     }
   
-    if (nonAuthenticationRequired && token) {
-      redirectTo = redirectTo || '/films'
-  
-      return <Redirect to={redirectTo} push />
-    }
-  
     return <Route {...props} component={component} />
   }
   

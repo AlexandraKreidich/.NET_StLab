@@ -28,6 +28,10 @@ class RegisterForm extends React.Component {
     }else if(!newProps.user.isRegistrationFailed){
       this.setState({isRegistrationFailed: false});
     }
+
+    if(newProps.user.userData.token){
+      this.props.history.push('/films');
+    }
   }
 
   render() {
