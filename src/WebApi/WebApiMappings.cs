@@ -2,13 +2,13 @@
 using AutoMapper;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
+using WebApi.Models.Film;
 using WebApi.Models.Hall;
 using WebApi.Models.Place;
 using WebApi.Models.Service;
 using WebApi.Models.Ticket;
 using WebApi.Services;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
-using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
 using BlCinemaModel = BusinessLayer.Models.CinemaModel;
 using BlSessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 using BlSessionModelRequest = BusinessLayer.Models.SessionModelRequest;
@@ -41,7 +41,7 @@ namespace WebApi
                     x => new FilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)
                 );
             configuration.CreateMap<SessionModelResponse, BlSessionModelResponse>();
-            configuration.CreateMap<FilmFilterModel, BlFilmFilterModel>();
+            configuration.CreateMap<FilmFilterModel, FilmFilterBlModel>();
             configuration.CreateMap<string, DateTimeOffset>().ConvertUsing<StringToDateTimeConverter>();
             configuration.CreateMap<SessionModelRequest, BlSessionModelRequest>();
 
@@ -68,6 +68,7 @@ namespace WebApi
                         x.CreatedAt
                         )
                 );
+            configuration.CreateMap<FiltersInfoBlModel, FiltersInfoModel>();
         }
     }
 }

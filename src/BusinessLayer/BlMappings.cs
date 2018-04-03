@@ -6,7 +6,6 @@ using CinemaModel = BusinessLayer.Models.CinemaModel;
 using DalFilmFilterModel = DataAccessLayer.Models.DataTransferObjects.FilmFilterModel;
 using DalCinemaModel = DataAccessLayer.Models.DataTransferObjects.CinemaModel;
 using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
-using FilmFilterModel = BusinessLayer.Models.FilmFilterModel;
 using FilmModel = BusinessLayer.Models.FilmModel;
 using SessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 
@@ -37,7 +36,7 @@ namespace BusinessLayer
 
             configuration.CreateMap<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse, SessionModelResponse>();
 
-            configuration.CreateMap<FilmFilterModel, DalFilmFilterModel>();
+            configuration.CreateMap<FilmFilterBlModel, DalFilmFilterModel>();
 
             configuration.CreateMap<DataAccessLayer.StoredProcedureExecutionResult, StoredProcedureExecutionResult>();
         }

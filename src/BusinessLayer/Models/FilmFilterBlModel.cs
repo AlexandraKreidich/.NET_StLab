@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace BusinessLayer.Models
 {
     [UsedImplicitly]
-    public class FilmFilterModel
+    public class FilmFilterBlModel
     {
         [CanBeNull]
         public string City { get; set; }
