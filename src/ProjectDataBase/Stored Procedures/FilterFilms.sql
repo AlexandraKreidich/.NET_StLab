@@ -7,11 +7,11 @@
     @d datetime = null
 AS
     SET @d = CONVERT(DATETIME, @Date, 120);
-    SELECT 
+    SELECT
         Film.Id,
         Film.Name,
         Film.Description,
-        Film.StartRentDate, 
+        Film.StartRentDate,
         Film.EndRentDate
     FROM Film
         JOIN Session ON Film.Id = Session.FilmId

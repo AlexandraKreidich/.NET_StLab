@@ -35,7 +35,7 @@ class SearchBarContainer extends React.Component {
             date: date
         });
         this.props.setVisibilityFilter({
-            date: (date.calendar().toString()) ? date.calendar().toString() : ''
+            date: (date.format('YYYY-DD-MM')) ? date.format('YYYY-DD-MM') : ''
         });
     }
 
