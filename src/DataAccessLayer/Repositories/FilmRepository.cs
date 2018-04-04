@@ -85,11 +85,47 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<SessionModelResponse>> SearchSessions(FilmFilterModel filters)
+        public async Task<IEnumerable<CinemaNamesDalDtoModel>> GetCinemaNames()
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<SessionResponse> sessions = await connection.QueryAsync<SessionResponse>(
+                IEnumerable<CinemaName> names = await connection.QueryAsync<CinemaName>(
+                    "GetCinemaNames",
+                    commandType: CommandType.StoredProcedure);
+
+                return names.Select(Mapper.Map<CinemaNamesDalDtoModel>);
+            }
+        }
+
+        public async Task<IEnumerable<CityNamesDalDtoModel>> GetCityNames()
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<CityNames> names = await connection.QueryAsync<CityNames>(
+                    "GetCinemaCities",
+                    commandType: CommandType.StoredProcedure);
+
+                return names.Select(Mapper.Map<CityNamesDalDtoModel>);
+            }
+        }
+
+        public async Task<IEnumerable<FilmNamesDalDtoModel>> GetFilmNames()
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<FilmNames> names = await connection.QueryAsync<FilmNames>(
+                    "GetFilmNames",
+                    commandType: CommandType.StoredProcedure);
+
+                return names.Select(Mapper.Map<FilmNamesDalDtoModel>);
+            }
+        }
+
+        public async Task<IEnumerable<FilmModel>> SearchFilms(FilmFilterModel filters)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<Film> films = await connection.QueryAsync<Film>(
                     "FilterFilms",
                     new
                     {
@@ -101,7 +137,7 @@ namespace DataAccessLayer.Repositories
                     },
                     commandType: CommandType.StoredProcedure);
 
-                return sessions.Select(Mapper.Map<SessionModelResponse>);
+                return films.Select(Mapper.Map<FilmModel>);
             }
         }
 

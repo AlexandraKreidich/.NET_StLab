@@ -17,7 +17,6 @@ namespace WebApi.Models.Film
         [CanBeNull]
         public DateTime? Date { get; }
 
-
         public int FreePlaces { get;}
 
         public FilmFilterModel
@@ -25,7 +24,7 @@ namespace WebApi.Models.Film
             [CanBeNull] string city,
             string cinema,
             string film,
-            DateTime date,
+            DateTime? date,
             int freePlaces
         )
         {

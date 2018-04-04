@@ -1,13 +1,9 @@
-import {requestFilms, receiveFilms, setVisibilityFilter} from '../actions/ActionCreators'
-import {FILMS_REQUEST, FILMS_RESPONSE, VISIBILITY_FILTER_SET} from '../actions/ActionTypes'
+import { FILMS_REQUEST, FILMS_RESPONSE } from '../actions/ActionTypes';
 
 const initialState = {
   films: [],
-  isFilmsLoading: false,
-  visibilityFilters: {
-    filmName: ''
-  }
-}
+  isFilmsLoading: false
+};
 
 const filmReducer = function(state = initialState, action) {
   switch (action.type) {
@@ -22,18 +18,8 @@ const filmReducer = function(state = initialState, action) {
         films: action.response,
         isFilmsLoading: false
       };
-    case VISIBILITY_FILTER_SET:
-      return {
-        ...state,
-        visibilityFilters: {
-          ...state.visibilityFilters,
-          filmName: action.filters.filmName
-        }
-      }
   }
   return state;
-}
+};
 
-export {
-  filmReducer
-}
+export { filmReducer };

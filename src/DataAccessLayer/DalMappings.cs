@@ -25,6 +25,9 @@ namespace DataAccessLayer
             configuration.CreateMap<SessionResponse, SessionModelResponse>();
             configuration.CreateMap<SessionResponse, SessionModelResponse>();
             configuration.CreateMap<TicketDalModelResponse, TicketDalDtoModelResponse>();
+            configuration.CreateMap<CinemaName, CinemaNamesDalDtoModel>();
+            configuration.CreateMap<FilmNames, FilmNamesDalDtoModel>();
+            configuration.CreateMap<CityNames, CityNamesDalDtoModel>();
         }
     }
 }

@@ -3,12 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
+using BusinessLayer.Models;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Film;
-using WebApi.Models.Session;
 using BlFilmModel = BusinessLayer.Models.FilmModel;
-using BlFilmFilterModel = BusinessLayer.Models.FilmFilterModel;
+using FilmModel = WebApi.Models.Film.FilmModel;
+using SessionModelResponse = WebApi.Models.Session.SessionModelResponse;
 
 
 namespace WebApi.Controllers
@@ -79,15 +80,26 @@ namespace WebApi.Controllers
                 );
         }
 
+        // GET /films/filters-info
+        [HttpGet("filters-info")]
+        public async Task<IActionResult> GetFiltersInfo()
+        {
+            FiltersInfoBlModel filters = await _filmsService.GetFiltersInfo();
+
+            return Ok(
+                Mapper.Map<FiltersInfoModel>(filters)
+            );
+        }
+
         // POST /films/search-films
         [HttpPost("search-films")]
         public async Task<IActionResult> SearchFilms([NotNull] [FromBody]FilmFilterModel request)
         {
-            IEnumerable<BusinessLayer.Models.SessionModelResponse> sessions =
-                await _filmsService.SearchSessions(Mapper.Map<BlFilmFilterModel>(request));
+            IEnumerable<BlFilmModel> films =
+                await _filmsService.SearchFilms(Mapper.Map<FilmFilterBlModel>(request));
 
             return Ok(
-                sessions.Select(Mapper.Map<SessionModelResponse>)
+                films.Select(Mapper.Map<FilmModel>)
                 );
         }
 

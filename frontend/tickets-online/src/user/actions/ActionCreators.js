@@ -8,25 +8,25 @@ import {
 } from './ActionTypes';
 
 export function setUser(user) {
-  return {type: USER_SET, user: user}
+  return { type: USER_SET, user: user };
 }
 
 export function registerUser(user) {
-  return {type: USER_REGISTER}
+  return { type: USER_REGISTER };
 }
 
-export function failRegistration(){
-  return {type: USER_FAIL_REGISTRATION}
+export function failRegistration() {
+  return { type: USER_FAIL_REGISTRATION };
 }
 
 export function loginUser() {
-  return {type: USER_LOGIN}
+  return { type: USER_LOGIN };
 }
 
-export function failLogin(){
-  return {type: USER_FAIL_LOGIN}
+export function failLogin() {
+  return { type: USER_FAIL_LOGIN };
 }
 
 export function logoutUser() {
-  return {type: USER_LOGOUT}
+  return { type: USER_LOGOUT };
 }

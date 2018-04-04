@@ -21,7 +21,10 @@ namespace BusinessLayer.Contracts
         Task<IEnumerable<SessionModelResponse>> GetSessionsForFilm(int filmId);
 
         [ItemNotNull]
-        Task<IEnumerable<SessionModelResponse>> SearchSessions([NotNull] FilmFilterModel filters);
+        Task<FiltersInfoBlModel> GetFiltersInfo();
+
+        [ItemNotNull]
+        Task<IEnumerable<BlFilmModel>> SearchFilms([NotNull] FilmFilterBlModel filtersBl);
 
         [ItemNotNull]
         Task<BlFilmModel> AddOrUpdateFilm([NotNull] BlFilmModel film);

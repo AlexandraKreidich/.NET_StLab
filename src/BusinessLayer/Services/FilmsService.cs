@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using DataAccessLayer.Contracts;
+using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
 using DalFilmModel = DataAccessLayer.Models.DataTransferObjects.FilmModel;
 using DalFilmFilterModel = DataAccessLayer.Models.DataTransferObjects.FilmFilterModel;
+using FilmModel = BusinessLayer.Models.FilmModel;
+using SessionModelResponse = BusinessLayer.Models.SessionModelResponse;
 
 namespace BusinessLayer.Services
 {
@@ -58,12 +62,50 @@ namespace BusinessLayer.Services
             return sessions.Select(Mapper.Map<SessionModelResponse>);
         }
 
-        public async Task<IEnumerable<SessionModelResponse>> SearchSessions(FilmFilterModel filters)
+        public async Task<FiltersInfoBlModel> GetFiltersInfo()
         {
-            IEnumerable<DataAccessLayer.Models.DataTransferObjects.SessionModelResponse> sessions =
-                await _filmRepository.SearchSessions(Mapper.Map<DalFilmFilterModel>(filters));
+            IEnumerable<CinemaNamesDalDtoModel> cinemaNames = await _filmRepository.GetCinemaNames();
+            IEnumerable<CityNamesDalDtoModel> cityNames = await _filmRepository.GetCityNames();
+            IEnumerable<FilmNamesDalDtoModel> filmNames = await _filmRepository.GetFilmNames();
 
-            return sessions.Select(Mapper.Map<SessionModelResponse>);
+            List<string> cinemaNamesList = new List<string>();
+
+            foreach (var elem in cinemaNames)
+            {
+                cinemaNamesList.Add(elem.Name);
+            }
+
+            List<string> cityNamesList = new List<string>();
+
+            foreach (var elem in cityNames)
+            {
+                cityNamesList.Add(elem.Name);
+            }
+
+            List<string> filmNamesList = new List<string>();
+
+            foreach (var elem in filmNames)
+            {
+                filmNamesList.Add(elem.Name);
+            }
+ 
+
+            FiltersInfoBlModel filtersInfo = new FiltersInfoBlModel
+            (
+                filmNamesList.ToArray(),
+                cinemaNamesList.ToArray(),
+                cityNamesList.ToArray()
+            );
+
+            return filtersInfo;
+        }
+
+        public async Task<IEnumerable<FilmModel>> SearchFilms(FilmFilterBlModel filtersBl)
+        {
+            IEnumerable<DalFilmModel> films =
+                await _filmRepository.SearchFilms(Mapper.Map<DalFilmFilterModel>(filtersBl));
+
+            return films.Select(Mapper.Map<FilmModel>);
         }
 
         public async Task<FilmModel> AddOrUpdateFilm(FilmModel film)

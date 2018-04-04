@@ -32,3 +32,24 @@ body {
 .validation-error-text{
   color: red;
 }
+
+.search-bar{
+  margin-top: 20px;
+}
+
+.search-bar__select{
+    margin-left: 10px;
+    width: 150px;
+    height: 40px;
+}
+
+.search-bar__input{
+    margin-left: 10px;
+    width: 150px;
+    height: 40px;
+    color: black;
+}
+
+.reset-btn{
+  margin-left: 10px;
+}

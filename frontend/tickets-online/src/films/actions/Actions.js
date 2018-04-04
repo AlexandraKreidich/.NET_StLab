@@ -1,6 +1,5 @@
-import fetch from 'isomorphic-fetch';
-import {requestFilms, receiveFilms} from './ActionCreators'
-import {url} from '../../config.js';
+import { requestFilms, receiveFilms } from './ActionCreators';
+import { url } from '../../config.js';
 
 export function fetchFilms() {
   const requestOptions = {
@@ -9,9 +8,9 @@ export function fetchFilms() {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     }
-  }
-  return function(dispatch) {
+  };
 
+  return function(dispatch) {
     dispatch(requestFilms());
 
     return fetch(url + 'api/films/now-playing', requestOptions)
@@ -23,6 +22,35 @@ export function fetchFilms() {
       })
       .catch(function(error) {
         console.log(error);
-    });
-  }
+      });
+  };
+}
+
+export function fetchFilteredFilms(filters) {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify(filters)
+  };
+
+  console.log(JSON.stringify(filters));
+
+  return function(dispatch) {
+    dispatch(requestFilms());
+
+    return fetch(url + 'api/films/search-films', requestOptions)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        console.log(response);
+        dispatch(receiveFilms(response));
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 }
