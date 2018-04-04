@@ -1,12 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Session } from './Session';
+import React from "react";
+import PropTypes from "prop-types";
+import { Session } from "./Session";
 
-import '../../bootstrap.css';
-import '../../index.css';
+import "../../bootstrap.css";
+import "../../index.css";
 
-const SessionsList = ({ sessions }) => (
-  <ul>{sessions.map((session, index) => <Session key={index} {...session} />)}</ul>
+const SessionsList = ({ sessions, onSessionClick }) => (
+  <ul>
+    {sessions.map((session, index) => (
+      <Session onSessionClick={onSessionClick} key={index} {...session} />
+    ))}
+  </ul>
 );
 
 export { SessionsList };
