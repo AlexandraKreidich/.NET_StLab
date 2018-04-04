@@ -5,7 +5,7 @@ import {
   loginUser,
   failLogin,
   logoutUser
-} from '../actions/ActionCreators'
+} from '../actions/ActionCreators';
 
 import {
   USER_REGISTER,
@@ -29,7 +29,7 @@ const initialState = {
     lastName: null,
     token: null
   }
-}
+};
 
 const userReducer = function(state = initialState, action) {
   switch (action.type) {
@@ -63,7 +63,7 @@ const userReducer = function(state = initialState, action) {
       if (state.isLoginFailed) {
         return {
           ...initialState
-        }
+        };
       } else {
         return {
           ...state,
@@ -76,12 +76,10 @@ const userReducer = function(state = initialState, action) {
             lastName: action.user.lastName,
             token: action.user.token
           }
-        }
+        };
       }
   }
   return state;
-}
+};
 
-export {
-  userReducer
-}
+export { userReducer };

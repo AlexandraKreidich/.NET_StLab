@@ -19,7 +19,7 @@ import {
 const initialState = {
   sessions: [],
   isSessionsLoading: false
-}
+};
 
 const sessionReducer = function(state = initialState, action) {
   switch (action.type) {
@@ -33,7 +33,7 @@ const sessionReducer = function(state = initialState, action) {
         ...state,
         sessions: action.response,
         isSessionsLoading: false
-      }
+      };
     case SESSIONS_FOR_FILM_REQUEST:
       return {
         ...state,
@@ -44,13 +44,10 @@ const sessionReducer = function(state = initialState, action) {
         ...state,
         sessions: action.response,
         isSessionsLoading: false
-      }
+      };
     case SERVICES_FOR_SESSION_REQUEST:
-
   }
   return state;
-}
+};
 
-export {
-  sessionReducer
-}
+export { sessionReducer };

@@ -1,7 +1,4 @@
-import {
-  FILMS_REQUEST,
-  FILMS_RESPONSE
-} from '../actions/ActionTypes';
+import { FILMS_REQUEST, FILMS_RESPONSE } from '../actions/ActionTypes';
 
 const initialState = {
   films: [],
@@ -25,6 +22,4 @@ const filmReducer = function(state = initialState, action) {
   return state;
 };
 
-export {
-  filmReducer
-}
+export { filmReducer };

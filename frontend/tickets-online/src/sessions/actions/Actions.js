@@ -7,7 +7,7 @@ import {
   receiveServicesForSession
 } from './ActionCreators';
 
-import {url} from '../../config.js';
+import { url } from '../../config.js';
 
 function fetchSessions() {
   const requestOptions = {
@@ -16,9 +16,8 @@ function fetchSessions() {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     }
-  }
+  };
   return function(dispatch) {
-
     dispatch(requestSessions());
 
     return fetch(url + 'api/sessions', requestOptions)
@@ -26,11 +25,9 @@ function fetchSessions() {
         return response.json();
       })
       .then(function(response) {
-        dispatch(
-          receiveSessions(response)
-        );
-      })
-  }
+        dispatch(receiveSessions(response));
+      });
+  };
 }
 
 function fetchSessionsForFilm(filmId) {
@@ -40,9 +37,8 @@ function fetchSessionsForFilm(filmId) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     }
-  }
+  };
   return function(dispatch) {
-
     dispatch(requestSessionsForFilm());
 
     return fetch(url + 'api/films/' + filmId + '/sessions', requestOptions)
@@ -50,11 +46,9 @@ function fetchSessionsForFilm(filmId) {
         return response.json();
       })
       .then(function(response) {
-        dispatch(
-          receiveSessionsForFilm(response)
-        );
-      })
-  }
+        dispatch(receiveSessionsForFilm(response));
+      });
+  };
 }
 
 function fetchServicesForSessions(sessionId) {
@@ -64,9 +58,8 @@ function fetchServicesForSessions(sessionId) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     }
-  }
+  };
   return function(dispatch) {
-
     dispatch(requestSessionsForFilm());
 
     return fetch(url + 'api/sessions/' + sessionId + '/services', requestOptions)
@@ -74,11 +67,9 @@ function fetchServicesForSessions(sessionId) {
         return response.json();
       })
       .then(function(response) {
-        dispatch(
-          receiveSessionsForFilm(response)
-        );
-      })
-  }
+        dispatch(receiveSessionsForFilm(response));
+      });
+  };
 }
 
-export {fetchSessions, fetchSessionsForFilm}
+export { fetchSessions, fetchSessionsForFilm };

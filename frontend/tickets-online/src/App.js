@@ -14,6 +14,6 @@ const Application = () => (
       <Routes />
     </div>
   </div>
-)
+);
 
-export default Application
+export default Application;

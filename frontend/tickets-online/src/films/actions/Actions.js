@@ -1,8 +1,7 @@
-import {requestFilms, receiveFilms} from './ActionCreators'
-import {url} from '../../config.js';
+import { requestFilms, receiveFilms } from './ActionCreators';
+import { url } from '../../config.js';
 
 export function fetchFilms() {
-
   const requestOptions = {
     method: 'GET',
     headers: {
@@ -12,7 +11,6 @@ export function fetchFilms() {
   };
 
   return function(dispatch) {
-
     dispatch(requestFilms());
 
     return fetch(url + 'api/films/now-playing', requestOptions)
@@ -24,11 +22,11 @@ export function fetchFilms() {
       })
       .catch(function(error) {
         console.log(error);
-    });
-  }
+      });
+  };
 }
 
-export function fetchFilteredFilms(filters){
+export function fetchFilteredFilms(filters) {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -53,6 +51,6 @@ export function fetchFilteredFilms(filters){
       })
       .catch(function(error) {
         console.log(error);
-    });
-  }
+      });
+  };
 }
