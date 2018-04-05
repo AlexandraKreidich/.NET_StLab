@@ -21,6 +21,7 @@ namespace WebApi.Controllers
             _hallsService = hallsService;
         }
 
+        // For admin
         // GET /halls/{id}
         [HttpGet]
         [Route("{id:int}")]
@@ -40,6 +41,15 @@ namespace WebApi.Controllers
                 fullHallBl.PlacesBl?.Select(Mapper.Map<PlaceApiModel>).ToArray(),
                 fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<HallSchemeApiModel>).ToArray()
             ));
+        }
+
+        // For Session
+        // GET /halls/{hallId}/session/{sessionId}
+        [HttpGet]
+        [Route("{hallId:int}/session/{sessionId:int}")]
+        public IActionResult Get(int hallId, int sessionId)
+        {
+            return Ok(hallId.ToString() + sessionId.ToString());
         }
 
         // PUT /halls

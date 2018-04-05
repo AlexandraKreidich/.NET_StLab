@@ -19,8 +19,4 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
-// store.dispatch(fetchHallModel(1)).then(function() {
-//   console.log(store.getState());
-// });
-
 export { store };

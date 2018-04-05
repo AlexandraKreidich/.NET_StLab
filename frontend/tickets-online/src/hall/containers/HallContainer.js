@@ -7,8 +7,9 @@ import { Hall } from '../components/Hall';
 function createRows(places, scheme) {
   const rows = scheme.map(elem => {
     let row = new Object();
+    let rowPlaces = new Array();
     row.rowNumber = elem.rowNumber;
-    let rowPlaces = [];
+
     places.forEach(element => {
       if (element.rowNumber === elem.rowNumber) {
         rowPlaces.push({
@@ -17,6 +18,7 @@ function createRows(places, scheme) {
         });
       }
     });
+
     row.places = rowPlaces;
     return row;
   });
