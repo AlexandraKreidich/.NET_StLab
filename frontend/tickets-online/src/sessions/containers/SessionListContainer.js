@@ -1,13 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
-import { store } from "../../App";
-import { SessionsList } from "../components/SessionList";
-import { fetchSessionsForFilm } from "../actions/Actions";
-import loadImg from "../../load-img.gif";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { store } from '../../App';
+import { SessionsList } from '../components/SessionList';
+import { fetchSessionsForFilm } from '../actions/Actions';
+import loadImg from '../../load-img.gif';
+import { withRouter } from 'react-router-dom';
 
-import "../../bootstrap.css";
-import "../../index.css";
+import '../../bootstrap.css';
+import '../../index.css';
 
 class SessionsContainer extends React.Component {
   constructor(props) {
@@ -19,8 +19,8 @@ class SessionsContainer extends React.Component {
     this.props.fetchSessionsForFilm(this.props.match.params.filmId);
   }
 
-  onSessionClick(hallId) {
-    this.props.history.push("/hall/" + hallId);
+  onSessionClick(hallId, sessionId, cinemaName) {
+    this.props.history.push('/hall/' + hallId);
   }
 
   render() {
@@ -28,19 +28,11 @@ class SessionsContainer extends React.Component {
       <div className="top-indent">
         {this.props.isLoading && (
           <div className="text-center div-load-img">
-            <img
-              className="img-responsive"
-              width="50px"
-              height="50px"
-              src={loadImg}
-            />
+            <img className="img-responsive" width="50px" height="50px" src={loadImg} />
           </div>
         )}
         {this.props.sessions && (
-          <SessionsList
-            onSessionClick={this.onSessionClick}
-            sessions={this.props.sessions}
-          />
+          <SessionsList onSessionClick={this.onSessionClick} sessions={this.props.sessions} />
         )}
       </div>
     );
