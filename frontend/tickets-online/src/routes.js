@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { SessionsListContainer } from './sessions/containers/SessionListContainer';
 import { FilmListContainer } from './films/containers/FilmListContainer';
+import { HallContainer } from './hall/containers/HallContainer';
 import RegisterForm from './registerForm/containers/RegisterForm';
 import LoginForm from './loginForm/containers/LoginForm';
 
@@ -18,6 +19,11 @@ const Routes = () => {
         path="/films/:filmId/sessions"
         component={SessionsListContainer}
         nonAuthenticationRequired
+      />
+      <AuthRoute
+        path="/hall/:hallId/session/:sessionId"
+        component={HallContainer}
+        authenticationRequired
       />
       <AuthRoute path="/films" component={FilmListContainer} nonAuthenticationRequired />
     </Switch>

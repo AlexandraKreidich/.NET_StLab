@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { SearchFilmsForm } from '../../searchFilmsForm/components/SearchFilmsForm';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { logoutUser } from '../../user/actions/ActionCreators';
-import { setVisibilityFilter } from '../../searchBar/actions/ActionCreators';
-import { fetchFilteredFilms } from '../../films/actions/Actions';
+import React from "react";
+import { Link } from "react-router-dom";
+import { SearchFilmsForm } from "../../searchFilmsForm/components/SearchFilmsForm";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { logoutUser } from "../../user/actions/ActionCreators";
+import { setVisibilityFilter } from "../../searchBar/actions/ActionCreators";
+import { fetchFilteredFilms } from "../../films/actions/Actions";
 
 class HeaderContainer extends React.Component {
   constructor(props) {
@@ -20,6 +20,9 @@ class HeaderContainer extends React.Component {
 
   onSearchClick = () => {
     this.props.fetchFilteredFilms(this.props.visibilityFilters);
+    if (this.props.history.location.pathname !== "/films") {
+      this.props.history.push("/films");
+    }
   };
 
   logout = () => {
@@ -31,7 +34,13 @@ class HeaderContainer extends React.Component {
       <div>
         <nav className="navbar navbar-light bg-light justify-content-between">
           <Link to="/films" className="navbar-brand">
-            <img className="logo-img" src="logo.svg" width="30" height="30" alt="" />
+            <img
+              className="logo-img"
+              src="logo.svg"
+              width="30"
+              height="30"
+              alt=""
+            />
             TicketsOnline
           </Link>
           <div className="col-xs-3">
@@ -46,7 +55,11 @@ class HeaderContainer extends React.Component {
                 <Link to="/login">Login</Link>
               </button>
             ) : (
-              <button onClick={this.logout} type="button" className="btn btn-link">
+              <button
+                onClick={this.logout}
+                type="button"
+                className="btn btn-link"
+              >
                 Log out
               </button>
             )}
@@ -79,4 +92,6 @@ const mapDispatchToProps = dispatch => ({
   fetchFilteredFilms: filters => dispatch(fetchFilteredFilms(filters))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderContainer));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HeaderContainer)
+);

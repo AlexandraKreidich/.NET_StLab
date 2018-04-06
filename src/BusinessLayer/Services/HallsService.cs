@@ -46,9 +46,49 @@ namespace BusinessLayer.Services
                         x.HallId,
                         new PlaceTypeBlModel(x.TypeId, x.Type),
                         x.RowNumber,
-                        x.PlaceNumber
+                        x.PlaceNumber,
+                        x.Price
                     )
              ).ToArray();
+
+            IEnumerable<HallSchemeDalDtoModel> hallSchemeResponse = await t2;
+            HallSchemeBlModel[] hallSchemeBlModels =
+                hallSchemeResponse.Select(Mapper.Map<HallSchemeBlModel>).ToArray();
+
+            return new FullHallBlModel(
+                hallDalDto.Id,
+                hallDalDto.CinemaId,
+                hallDalDto.Name,
+                placesBlArray,
+                hallSchemeBlModels
+            );
+        }
+
+        public async Task<FullHallBlModel> GetHallForSession(int hallId, int sessionId)
+        {
+            HallDalDtoModel hallDalDto = await _hallsRepository.GetHall(hallId);
+
+            if (hallDalDto == null)
+            {
+                return null;
+            }
+
+            Task<IEnumerable<PlaceDalDtoModel>> t1 = _hallsRepository.GetPlacesForSession(hallDalDto.Id, sessionId);
+            Task<IEnumerable<HallSchemeDalDtoModel>> t2 = _cinemaRepository.GetHallScheme(hallDalDto.Id);
+
+            IEnumerable<PlaceDalDtoModel> places = await t1;
+            PlaceBlModel[] placesBlArray = places.Select
+            (
+                x => new PlaceBlModel
+                (
+                    x.Id,
+                    x.HallId,
+                    new PlaceTypeBlModel(x.TypeId, x.Type),
+                    x.RowNumber,
+                    x.PlaceNumber,
+                    x.Price
+                )
+            ).ToArray();
 
             IEnumerable<HallSchemeDalDtoModel> hallSchemeResponse = await t2;
             HallSchemeBlModel[] hallSchemeBlModels =
@@ -96,7 +136,8 @@ namespace BusinessLayer.Services
                                 place.Type.Name,
                                 place.Type.Id,
                                 place.PlaceNumber,
-                                place.RowNumber
+                                place.RowNumber,
+                                place.Price
                             )
                         );
 
@@ -109,7 +150,8 @@ namespace BusinessLayer.Services
                             place.Type.Name
                         ),
                         place.PlaceNumber,
-                        place.RowNumber
+                        place.RowNumber,
+                        place.Price
                     );
 
                     placesList.Add(placeBlModel);

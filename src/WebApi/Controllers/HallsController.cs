@@ -41,6 +41,27 @@ namespace WebApi.Controllers
                 fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<HallSchemeApiModel>).ToArray()
             ));
         }
+        
+        // GET /halls/{hallId}/session/{sessionId}
+        [HttpGet]
+        [Route("{hallId:int}/session/{sessionId:int}")]
+        public async Task<IActionResult> Get(int hallId, int sessionId)
+        {
+            FullHallBlModel fullHallBl = await _hallsService.GetHallForSession(hallId, sessionId);
+
+            if (fullHallBl == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new HallApiModel(
+                fullHallBl.Id,
+                fullHallBl.CinemaId,
+                fullHallBl.Name,
+                fullHallBl.PlacesBl?.Select(Mapper.Map<PlaceApiModel>).ToArray(),
+                fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<HallSchemeApiModel>).ToArray()
+            ));
+        }
 
         // PUT /halls
         [HttpPut]

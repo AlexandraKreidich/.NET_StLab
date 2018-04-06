@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -31,6 +33,23 @@ namespace DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure);
 
                 return Mapper.Map<HallDalDtoModel>(hallDalModel);
+            }
+        }
+
+        public async Task<IEnumerable<PlaceDalDtoModel>> GetPlacesForSession(int hallId, int sessionId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<PlaceDalModel> places = await connection.QueryAsync<PlaceDalModel>(
+                    "GetPlacesForSession",
+                    new
+                    {
+                        HallId = hallId,
+                        SessionId = sessionId
+                    },
+                    commandType: CommandType.StoredProcedure);
+
+                return places.Select(Mapper.Map<PlaceDalDtoModel>);
             }
         }
 
