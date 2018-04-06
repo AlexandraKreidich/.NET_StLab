@@ -92,7 +92,8 @@ namespace BusinessLayer.Services
                     results.Add(new FullHallBlModel(
                         hall.Id,
                         hall.CinemaId,
-                        hall.Name,
+                        hall.HallName,
+                        hall.CinemaName,
                         placesBlArray,
                         hallSchemeBlModels
                     ));

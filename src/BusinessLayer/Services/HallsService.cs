@@ -58,7 +58,8 @@ namespace BusinessLayer.Services
             return new FullHallBlModel(
                 hallDalDto.Id,
                 hallDalDto.CinemaId,
-                hallDalDto.Name,
+                hallDalDto.HallName,
+                hallDalDto.CinemaName,
                 placesBlArray,
                 hallSchemeBlModels
             );
@@ -97,7 +98,8 @@ namespace BusinessLayer.Services
             return new FullHallBlModel(
                 hallDalDto.Id,
                 hallDalDto.CinemaId,
-                hallDalDto.Name,
+                hallDalDto.HallName,
+                hallDalDto.CinemaName,
                 placesBlArray,
                 hallSchemeBlModels
             );
@@ -108,7 +110,8 @@ namespace BusinessLayer.Services
             HallBlModel hallBlRequest = new HallBlModel(
                 hallBlModel.Id,
                 hallBlModel.CinemaId,
-                hallBlModel.Name
+                hallBlModel.HallName,
+                hallBlModel.CinemaName
             );
 
             int hallModelResponseId = await _hallsRepository.AddOrUpdateHall(Mapper.Map<HallDalDtoModel>(hallBlRequest));
@@ -116,7 +119,8 @@ namespace BusinessLayer.Services
             HallDalDtoModel hallDalDtoModelResponse = new HallDalDtoModel(
                 (hallModelResponseId != 0) ? hallModelResponseId : hallBlModel.Id,
                 hallBlModel.CinemaId,
-                hallBlModel.Name
+                hallBlModel.HallName,
+                hallBlModel.CinemaName
             );
 
             List<PlaceBlModel> placesList = new List<PlaceBlModel>();
@@ -181,7 +185,8 @@ namespace BusinessLayer.Services
             FullHallBlModel fullHallBlModel = new FullHallBlModel(
                 hallDalDtoModelResponse.Id,
                 hallDalDtoModelResponse.CinemaId,
-                hallDalDtoModelResponse.Name,
+                hallDalDtoModelResponse.HallName,
+                hallDalDtoModelResponse.CinemaName,
                 placesList.ToArray(),
                 schemeModelList.ToArray()
             );

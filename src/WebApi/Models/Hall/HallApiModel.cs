@@ -11,7 +11,10 @@ namespace WebApi.Models.Hall
         public int CinemaId { get; }
 
         [NotNull]
-        public string Name { get; }
+        public string HallName { get; }
+
+        [NotNull]
+        public string CinemaName { get; }
 
         [CanBeNull]
         public PlaceApiModel[] PlacesApi { get; }
@@ -22,14 +25,16 @@ namespace WebApi.Models.Hall
         public HallApiModel(
             int id,
             int cinemaId,
-            [NotNull] string name,
+            [NotNull] string hallName,
+            [NotNull] string cinemaName,
             [CanBeNull] PlaceApiModel[] placesApi,
             [CanBeNull] HallSchemeApiModel[] hallSchemeApiModels
         )
         {
             Id = id;
             CinemaId = cinemaId;
-            Name = name;
+            HallName = hallName;
+            CinemaName = cinemaName;
             PlacesApi = placesApi;
             HallSchemeApiModels = hallSchemeApiModels;
         }

@@ -10,6 +10,9 @@ namespace DataAccessLayer.Models.Entities
         public int CinemaId { get; set; }
 
         [NotNull]
-        public string Name { get; set; }
+        public string HallName { get; }
+
+        [NotNull]
+        public string CinemaName { get; }
     }
 }

@@ -63,7 +63,7 @@ namespace DataAccessLayer.Repositories
                     {
                         Id = hallDalDto.Id,
                         CinemaId = hallDalDto.CinemaId,
-                        Name = hallDalDto.Name
+                        Name = hallDalDto.HallName
                     },
                     commandType: CommandType.StoredProcedure);
 
