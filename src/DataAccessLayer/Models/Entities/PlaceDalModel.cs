@@ -17,5 +17,7 @@ namespace DataAccessLayer.Models.Entities
         public int PlaceNumber { get; set; }
 
         public int RowNumber { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

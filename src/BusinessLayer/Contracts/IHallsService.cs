@@ -9,6 +9,9 @@ namespace BusinessLayer.Contracts
         [ItemCanBeNull]
         Task<FullHallBlModel> GetHall(int id);
 
+        [ItemCanBeNull]
+        Task<FullHallBlModel> GetHallForSession(int hallId, int sessionId);
+
         [ItemNotNull]
         Task<FullHallBlModel> AddOrOrUpdateHall([NotNull] FullHallBlModel fullHallBl);
     }

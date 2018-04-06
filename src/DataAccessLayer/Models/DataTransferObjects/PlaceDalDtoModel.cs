@@ -18,13 +18,16 @@ namespace DataAccessLayer.Models.DataTransferObjects
 
         public int RowNumber { get;}
 
+        public decimal Price { get; }
+
         public PlaceDalDtoModel(
             int id,
             int hallId,
             [NotNull] string type,
             int typeId,
             int placeNumber,
-            int rowNumber
+            int rowNumber,
+            decimal price
         )
         {
             Id = id;
@@ -33,6 +36,7 @@ namespace DataAccessLayer.Models.DataTransferObjects
             TypeId = typeId;
             PlaceNumber = placeNumber;
             RowNumber = rowNumber;
+            Price = price;
         }
     }
 }

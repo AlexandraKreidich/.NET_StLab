@@ -79,7 +79,8 @@ namespace BusinessLayer.Services
                             x.HallId,
                             new PlaceTypeBlModel(x.TypeId, x.Type),
                             x.RowNumber,
-                            x.PlaceNumber
+                            x.PlaceNumber,
+                            x.Price
                         )
                     ).ToArray();
 

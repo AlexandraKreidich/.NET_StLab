@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
 
@@ -14,5 +15,8 @@ namespace DataAccessLayer.Contracts
         Task<int> AddOrUpdateHallScheme([NotNull] HallSchemeDalDtoModel hallSchemeDalDto);
 
         Task<int> AddOrUpdatePlace([NotNull] PlaceDalDtoModel placeDalDto);
+
+        [ItemNotNull]
+        Task<IEnumerable<PlaceDalDtoModel>> GetPlacesForSession(int hallId, int sessionId);
     }
 }
