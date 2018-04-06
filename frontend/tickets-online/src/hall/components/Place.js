@@ -7,12 +7,13 @@ import '../../index.css';
 class Place extends React.Component {
   constructor(props) {
     super(props);
+    this.onClick = this.onClick.bind(this);
   }
 
-  onClick = e => {
+  onClick(e) {
     e.preventDefault();
-    this.props.onPlaceClick(this.props.placeId);
-  };
+    this.props.onPlaceClick(this.props.placeId, this.props.placePrice);
+  }
 
   render() {
     return (

@@ -19,8 +19,8 @@ class SessionsContainer extends React.Component {
     this.props.fetchSessionsForFilm(this.props.match.params.filmId);
   }
 
-  onSessionClick(hallId, sessionId, cinemaName) {
-    this.props.history.push('/hall/' + hallId);
+  onSessionClick(hallId, sessionId) {
+    this.props.history.push('/hall/' + hallId + '/session/' + sessionId);
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { DATE_FORMAT_FOR_FILM } from '../../shared/DateFormats';
 
 import '../../bootstrap.css';
 import '../../index.css';
@@ -27,13 +28,15 @@ class Film extends React.Component {
           <h5 className="mb-1">
             <strong>{this.props.name}</strong>
           </h5>
-          <small>Start rent date: {moment(this.props.startRentDate).format('DD.MM.YY')}</small>
+          <small>
+            Start rent date: {moment(this.props.startRentDate).format(DATE_FORMAT_FOR_FILM)}
+          </small>
         </div>
         <p className="mb-1">
           DESCRIPTION: Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
           risus varius blandit.
         </p>
-        <small>End rent date: {moment(this.props.endRentDate).format('DD.MM.YY')}</small>
+        <small>End rent date: {moment(this.props.endRentDate).format(DATE_FORMAT_FOR_FILM)}</small>
       </a>
     );
   }

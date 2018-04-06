@@ -14,7 +14,8 @@ function createRows(places, scheme) {
       if (element.rowNumber === elem.rowNumber) {
         rowPlaces.push({
           placeId: element.id,
-          placeNumber: element.placeNumber
+          placeNumber: element.placeNumber,
+          placePrice: element.price
         });
       }
     });
@@ -32,15 +33,12 @@ class HallModelContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchHallModel(this.props.match.params.hallId);
+    this.props.fetchHallModel(this.props.match.params.hallId, this.props.match.params.sessionId);
   }
 
-  onPlaceClick(placeId) {
-    console.log(placeId);
-  }
+  onPlaceClick(placeId, placePrice) {}
 
   render() {
-    console.log(this.props.hall.hall);
     return (
       <div>
         {this.props.hall.hall && (
@@ -64,7 +62,7 @@ const mapStateToProps = function(store) {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchHallModel: hallId => dispatch(fetchHallModel(hallId))
+  fetchHallModel: (hallId, sessionId) => dispatch(fetchHallModel(hallId, sessionId))
 });
 
 const HallContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(HallModelContainer));

@@ -36,8 +36,6 @@ export function fetchFilteredFilms(filters) {
     body: JSON.stringify(filters)
   };
 
-  console.log(JSON.stringify(filters));
-
   return function(dispatch) {
     dispatch(requestFilms());
 
@@ -46,7 +44,6 @@ export function fetchFilteredFilms(filters) {
         return response.json();
       })
       .then(function(response) {
-        console.log(response);
         dispatch(receiveFilms(response));
       })
       .catch(function(error) {

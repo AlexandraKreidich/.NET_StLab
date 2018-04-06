@@ -21,7 +21,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .prettierrs
-.eslintrc.yml
+.eslintrc.json
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
