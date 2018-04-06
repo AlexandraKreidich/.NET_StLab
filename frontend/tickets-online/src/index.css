@@ -55,5 +55,18 @@ body {
 }
 
 .margin-top-indent {
+  margin-top: 20px;
+}
+
+.place-info {
+  margin-top: 20px;
+}
+
+.order-ticket-btn {
+  margin-top: 10px;
+  width: 100px;
+}
+
+.hall-container {
   margin-top: 50px;
 }

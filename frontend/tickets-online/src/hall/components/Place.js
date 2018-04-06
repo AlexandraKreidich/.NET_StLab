@@ -12,7 +12,7 @@ class Place extends React.Component {
 
   onClick(e) {
     e.preventDefault();
-    this.props.onPlaceClick(this.props.placeId, this.props.placePrice);
+    this.props.onPlaceClick(this.props.rowNumber, this.props.placeNumber);
   }
 
   render() {

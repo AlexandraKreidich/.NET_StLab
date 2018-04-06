@@ -13,7 +13,7 @@ class Session extends React.Component {
 
   onClick = e => {
     e.preventDefault();
-    this.props.onSessionClick(this.props.hallId, this.props.id, this.props.cinemaName);
+    this.props.onSessionClick(this.props.hallId, this.props.id);
   };
 
   render() {
