@@ -80,7 +80,8 @@ namespace BusinessLayer.Services
                             new PlaceTypeBlModel(x.TypeId, x.Type),
                             x.RowNumber,
                             x.PlaceNumber,
-                            x.Price
+                            x.Price,
+                            x.PlaceStatus
                         )
                     ).ToArray();
 

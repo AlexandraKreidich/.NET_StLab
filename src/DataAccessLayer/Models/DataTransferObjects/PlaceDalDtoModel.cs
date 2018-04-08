@@ -20,6 +20,8 @@ namespace DataAccessLayer.Models.DataTransferObjects
 
         public decimal Price { get; }
 
+        public string PlaceStatus { get; }
+
         public PlaceDalDtoModel(
             int id,
             int hallId,
@@ -27,7 +29,8 @@ namespace DataAccessLayer.Models.DataTransferObjects
             int typeId,
             int placeNumber,
             int rowNumber,
-            decimal price
+            decimal price,
+            [NotNull] string placeStatus
         )
         {
             Id = id;
@@ -37,6 +40,7 @@ namespace DataAccessLayer.Models.DataTransferObjects
             PlaceNumber = placeNumber;
             RowNumber = rowNumber;
             Price = price;
+            PlaceStatus = placeStatus;
         }
     }
 }

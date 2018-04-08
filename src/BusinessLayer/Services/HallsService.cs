@@ -47,7 +47,8 @@ namespace BusinessLayer.Services
                         new PlaceTypeBlModel(x.TypeId, x.Type),
                         x.RowNumber,
                         x.PlaceNumber,
-                        x.Price
+                        x.Price,
+                        x.PlaceStatus
                     )
              ).ToArray();
 
@@ -87,7 +88,8 @@ namespace BusinessLayer.Services
                     new PlaceTypeBlModel(x.TypeId, x.Type),
                     x.RowNumber,
                     x.PlaceNumber,
-                    x.Price
+                    x.Price,
+                    x.PlaceStatus
                 )
             ).ToArray();
 
@@ -141,7 +143,8 @@ namespace BusinessLayer.Services
                                 place.Type.Id,
                                 place.PlaceNumber,
                                 place.RowNumber,
-                                place.Price
+                                place.Price,
+                                place.PlaceStatus
                             )
                         );
 
@@ -155,7 +158,8 @@ namespace BusinessLayer.Services
                         ),
                         place.PlaceNumber,
                         place.RowNumber,
-                        place.Price
+                        place.Price,
+                        place.PlaceStatus
                     );
 
                     placesList.Add(placeBlModel);
