@@ -18,7 +18,8 @@ function createRows(places, scheme) {
           placeNumber: element.placeNumber,
           rowNumber: element.rowNumber,
           placePrice: element.price,
-          placeType: element.type.name
+          placeType: element.type.name,
+          placeStatus: element.placeStatus
         });
       }
     });

@@ -12,15 +12,24 @@ class Place extends React.Component {
 
   onClick(e) {
     e.preventDefault();
-    this.props.onPlaceClick(this.props.rowNumber, this.props.placeNumber);
+    this.props.onPlaceClick(this.props.rowNumber, this.props.placeNumber, this.props.placeStatus);
   }
 
   render() {
-    return (
-      <button onClick={this.onClick} type="button" className="btn btn-outline-primary">
-        {this.props.placeNumber}
-      </button>
-    );
+    if(this.props.placeStatus === "Free"){
+      return (
+        (<button onClick={this.onClick}  type="button" className="btn btn-outline-primary">
+          {this.props.placeNumber}
+        </button>)
+      );
+    }else{
+      return (
+        (<button onClick={this.onClick}  type="button" disabled className="btn btn-secondary">
+          {this.props.placeNumber}
+        </button>)
+      );
+    }
+    
   }
 }
 
