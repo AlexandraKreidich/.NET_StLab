@@ -71,6 +71,7 @@ namespace DataAccessLayer.Repositories
 
                     return StoredProcedureExecutionResult.Ok;
                 }
+                // can appear if users add that service to their tickets
                 catch (SqlException e) when (e.Number == 547) // Foreign key violation
                 {
                     return StoredProcedureExecutionResult.ForeignKeyViolation;

@@ -20,6 +20,8 @@ namespace DataAccessLayer.Models.Entities
 
         public decimal Price { get; set; }
 
+        public int PriceId { get; set; }
+
         [NotNull] 
         public string PlaceStatus { get; set; }
     }

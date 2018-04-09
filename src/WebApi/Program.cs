@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using FluentScheduler;
 
 namespace WebApi
 {
@@ -7,6 +8,8 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
+            //var registry = new Registry();
+            //registry.Schedule<MyJob>().ToRunNow().AndEvery(2).Seconds();
             BuildWebHost(args).Run();
         }
 
@@ -15,4 +18,5 @@ namespace WebApi
                 .UseStartup<Startup>()
                 .Build();
     }
+
 }

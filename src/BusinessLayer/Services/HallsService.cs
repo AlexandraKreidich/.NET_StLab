@@ -48,6 +48,7 @@ namespace BusinessLayer.Services
                         x.RowNumber,
                         x.PlaceNumber,
                         x.Price,
+                        x.PriceId,
                         x.PlaceStatus
                     )
              ).ToArray();
@@ -89,6 +90,7 @@ namespace BusinessLayer.Services
                     x.RowNumber,
                     x.PlaceNumber,
                     x.Price,
+                    x.PriceId,
                     x.PlaceStatus
                 )
             ).ToArray();
@@ -144,6 +146,7 @@ namespace BusinessLayer.Services
                                 place.PlaceNumber,
                                 place.RowNumber,
                                 place.Price,
+                                place.PriceId,
                                 place.PlaceStatus
                             )
                         );
@@ -159,6 +162,7 @@ namespace BusinessLayer.Services
                         place.PlaceNumber,
                         place.RowNumber,
                         place.Price,
+                        place.PriceId,
                         place.PlaceStatus
                     );
 

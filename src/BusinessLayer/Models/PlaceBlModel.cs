@@ -18,6 +18,8 @@ namespace BusinessLayer.Models
 
         public decimal Price { get; }
 
+        public int PriceId { get; }
+
         [NotNull] public string PlaceStatus { get; }
 
         public PlaceBlModel(
@@ -27,6 +29,7 @@ namespace BusinessLayer.Models
             int rowNumber,
             int placeNumber,
             decimal price,
+            int priceId,
             [NotNull] string placeStatus
         )
         {
@@ -36,6 +39,7 @@ namespace BusinessLayer.Models
             RowNumber = rowNumber;
             PlaceNumber = placeNumber;
             Price = price;
+            PriceId = priceId;
             PlaceStatus = placeStatus;
         }
     }

@@ -14,6 +14,8 @@ namespace WebApi.Models.Place
 
         public decimal Price { get; }
 
+        public  int PriceId { get; }
+
         public int RowNumber { get;}
 
         public int PlaceNumber { get;}
@@ -25,6 +27,7 @@ namespace WebApi.Models.Place
             int hallId,
             [NotNull] PlaceTypeApiModel type,
             decimal price,
+            int priceId,
             int rowNumber,
             int placeNumber,
             string placeStatus
@@ -34,6 +37,7 @@ namespace WebApi.Models.Place
             HallId = hallId;
             Type = type;
             Price = price;
+            PriceId = priceId;
             RowNumber = rowNumber;
             PlaceNumber = placeNumber;
             PlaceStatus = placeStatus;

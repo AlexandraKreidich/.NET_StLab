@@ -81,6 +81,7 @@ namespace BusinessLayer.Services
                             x.RowNumber,
                             x.PlaceNumber,
                             x.Price,
+                            x.PriceId,
                             x.PlaceStatus
                         )
                     ).ToArray();

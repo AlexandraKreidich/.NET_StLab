@@ -105,6 +105,7 @@
     <Build Include="Stored Procedures\GetCinemaNames.sql" />
     <Build Include="Stored Procedures\GetCinemaCities.sql" />
     <Build Include="Stored Procedures\GetPlacesForSession.sql" />
+    <Build Include="Stored Procedures\ClearBookedTickets.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

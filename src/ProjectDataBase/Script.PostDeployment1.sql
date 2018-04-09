@@ -431,15 +431,16 @@ BEGIN TRY
 
     INSERT INTO dbo.Ticket(PriceId, UserId, TicketStatusId, CreatedAt)
     VALUES
-        (1, 1, 1, convert(datetimeoffset, '20171006 12:15:00')),
-        (2, 1, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (3, 2, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (4, 2, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (5, 3, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (6, 3, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (7, 4, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (8, 4, 1, CONVERT(datetimeoffset, '20171006 12:15:00')),
-        (9, 5, 1, CONVERT(datetimeoffset, '20171006 12:15:00'))
+        (1, 1, 1, convert(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (2, 1, 2, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (3, 2, 1, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (4, 2, 1, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (5, 3, 2, CONVERT(datetimeoffset, '20180409 19:10:00.0000000 +03:00')),
+        (6, 3, 1, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (7, 4, 1, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (8, 4, 2, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (9, 5, 1, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (10, 5, 2, CONVERT(datetimeoffset, '20180409 19:15:00.0000000 +03:00'))
 
     PRINT 'Inserting seed data for TicketService table'
 
