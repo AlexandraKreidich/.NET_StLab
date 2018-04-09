@@ -8,6 +8,12 @@ import '../../index.css';
 class PlaceInfo extends React.Component {
   constructor(props) {
     super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(e) {
+    e.preventDefault();
+    this.props.onBookBtnClick();
   }
 
   render() {
@@ -23,7 +29,7 @@ class PlaceInfo extends React.Component {
           <br />
           Price: {this.props.placePrice}
           <br />
-          <button type="button" className="btn btn-info order-ticket-btn">
+          <button type="button" onClick={this.onClick} className="btn btn-info order-ticket-btn">
             Book it
           </button>
         </div>

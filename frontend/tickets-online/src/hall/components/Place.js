@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PlaceStatus } from '../../shared/PlaceStatus';
 
 import '../../bootstrap.css';
 import '../../index.css';
@@ -16,7 +17,7 @@ class Place extends React.Component {
   }
 
   render() {
-    if(this.props.placeStatus === "Free"){
+    if(this.props.placeStatus === PlaceStatus.Free){
       return (
         (<button onClick={this.onClick}  type="button" className="btn btn-outline-primary">
           {this.props.placeNumber}

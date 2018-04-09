@@ -18,12 +18,12 @@ function createRows(places, scheme) {
           placeNumber: element.placeNumber,
           rowNumber: element.rowNumber,
           placePrice: element.price,
+          placePriceId: element.priceId,
           placeType: element.type.name,
           placeStatus: element.placeStatus
         });
       }
     });
-    //console.log(rowPlaces);
     row.places = rowPlaces;
     return row;
   });
@@ -34,6 +34,7 @@ class HallModelContainer extends React.Component {
   constructor(props) {
     super(props);
     this.onPlaceClick = this.onPlaceClick.bind(this);
+    this.onBookBtnClick = this.onBookBtnClick.bind(this);
     this.state = {
       rows: [],
       isPlaceChoosen: false,
@@ -45,7 +46,6 @@ class HallModelContainer extends React.Component {
     this.props
       .fetchHallModel(this.props.match.params.hallId, this.props.match.params.sessionId)
       .then(() => {
-        console.log(this.props.hall);
         this.setState({
           rows: createRows(this.props.hall.hall.placesApi, this.props.hall.hall.hallSchemeApiModels)
         });
@@ -54,7 +54,6 @@ class HallModelContainer extends React.Component {
 
   onPlaceClick(rowNumber, placeNumber) {
     if (!this.state.isPlaceChoosen) {
-      console.log(this.state.rows);
       this.setState({
         isPlaceChoosen: true,
         placeInfo: this.state.rows[rowNumber - 1].places[placeNumber - 1]
@@ -77,6 +76,11 @@ class HallModelContainer extends React.Component {
     }
   }
 
+  onBookBtnClick() {
+    // placePriceId -> setTicket and go to the ticketComponent
+    console.log(this.state.placeInfo.placePriceId);
+  }
+
   render() {
     console.log('render');
     return (
@@ -88,7 +92,9 @@ class HallModelContainer extends React.Component {
           </h3>
         )}
         {this.props.hall.hall && <Hall onPlaceClick={this.onPlaceClick} rows={this.state.rows} />}
-        {this.state.isPlaceChoosen && <PlaceInfo {...this.state.placeInfo} />}
+        {this.state.isPlaceChoosen && (
+          <PlaceInfo {...this.state.placeInfo} onBookBtnClick={this.onBookBtnClick} />
+        )}
       </div>
     );
   }

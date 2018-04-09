@@ -2,9 +2,7 @@ import {
   SESSIONS_REQUEST,
   SESSIONS_RESPONSE,
   SESSIONS_FOR_FILM_REQUEST,
-  SESSIONS_FOR_FILM_RESPONSE,
-  SERVICES_FOR_SESSION_REQUEST,
-  SERVICES_FOR_SESSION_RESPONSE
+  SESSIONS_FOR_FILM_RESPONSE
 } from './ActionTypes';
 
 export function requestSessions() {
@@ -21,12 +19,4 @@ export function requestSessionsForFilm() {
 
 export function receiveSessionsForFilm(response) {
   return { type: SESSIONS_FOR_FILM_RESPONSE, response: response };
-}
-
-export function requestServicesForSession() {
-  return { type: SERVICES_FOR_SESSION_REQUEST };
-}
-
-export function receiveServicesForSession(response) {
-  return { type: SERVICES_FOR_SESSION_RESPONSE, response: response };
 }
