@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -69,21 +70,36 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> CreateTicket(TicketDalDtoModelRequest ticket)
+        public async Task<Tuple<StoredProcedureExecutionResult, int>> CreateTicket(TicketDalDtoModelRequest ticket)
         {
-            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            try
             {
-                int id = await connection.ExecuteScalarAsync<int>(
-                    "AddTicket",
-                    new
+                using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+                {
+                    int id = await connection.ExecuteScalarAsync<int>(
+                        "AddTicket",
+                        new
                         {
                             UserId = ticket.UserId,
                             PriceId = ticket.PriceId,
                             TicketStatus = TicketStatus.InProcess.ToString()
                         },
-                    commandType: CommandType.StoredProcedure);
+                        commandType: CommandType.StoredProcedure);
 
-                return id;
+                    return new Tuple<StoredProcedureExecutionResult, int>
+                    (
+                        StoredProcedureExecutionResult.Ok,
+                        id
+                    );
+                }
+            }
+            catch (SqlException e) when (e.Number == 2627) // Unique key violation
+            {
+                return new Tuple<StoredProcedureExecutionResult, int>
+                (
+                    StoredProcedureExecutionResult.UniqueKeyViolation,
+                    0
+                );
             }
         }
 

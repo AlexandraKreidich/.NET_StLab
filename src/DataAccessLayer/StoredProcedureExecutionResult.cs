@@ -4,6 +4,6 @@
     {
         Ok,
         ForeignKeyViolation,
-        UniqueKeyViolation // 2627
+        UniqueKeyViolation
     }
 }

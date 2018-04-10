@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccessLayer.Models.DataTransferObjects;
 using JetBrains.Annotations;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.Contracts
 
         void PayForTicket(int ticketId);
 
-        Task<int> CreateTicket([NotNull] TicketDalDtoModelRequest ticket);
+        Task<Tuple<StoredProcedureExecutionResult, int>> CreateTicket([NotNull] TicketDalDtoModelRequest ticket);
 
         void AddServiceToTicket(int ticketId, int serviceId);
 

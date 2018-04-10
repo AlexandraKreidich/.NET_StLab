@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using BusinessLayer;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
@@ -60,7 +62,7 @@ namespace WebApi.Controllers
         // PUT /tickets
 
         [HttpPut]
-        public IActionResult Put([NotNull] [FromBody] TicketApiModelRequest ticket)
+        public async Task<IActionResult> Put([NotNull] [FromBody] TicketApiModelRequest ticket)
         {
             TicketBlModelRequest ticketRequest = new TicketBlModelRequest
             (
@@ -70,9 +72,18 @@ namespace WebApi.Controllers
 
             );
 
-            _ticketsService.CreateTicket(ticketRequest);
+            TicketBlModelResponse ticketResponse = await _ticketsService.CreateTicket(ticketRequest);
 
-            return Ok();
+            if (ticketResponse == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(
+                    Mapper.Map<TicketApiModelResponse>(ticket)
+                );
+            }
         }
 
         // POST /tickets/{id}/pay

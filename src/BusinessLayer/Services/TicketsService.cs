@@ -102,7 +102,7 @@ namespace BusinessLayer.Services
             return await GetTicketById(ticketId) ?? throw new InvalidOperationException();
         }
 
-        public async void CreateTicket(TicketBlModelRequest ticket)
+        public async Task<TicketBlModelResponse> CreateTicket(TicketBlModelRequest ticket)
         {
             TicketDalDtoModelRequest ticketRequest = new TicketDalDtoModelRequest
                 (
@@ -110,14 +110,24 @@ namespace BusinessLayer.Services
                     ticket.PriceId
                 );
 
-            int id = await _ticketsRepository.CreateTicket(ticketRequest);
+            Tuple<DataAccessLayer.StoredProcedureExecutionResult, int> resultTuple
+                = await _ticketsRepository.CreateTicket(ticketRequest);
 
-            if (ticket.Services != null)
+            if (resultTuple.Item1 == DataAccessLayer.StoredProcedureExecutionResult.Ok)
             {
-                foreach (int service in ticket.Services)
+                if (ticket.Services != null)
                 {
-                    _ticketsRepository.AddServiceToTicket(id, service);
+                    foreach (int service in ticket.Services)
+                    {
+                        _ticketsRepository.AddServiceToTicket(resultTuple.Item2, service);
+                    }
                 }
+                
+                return await GetTicketById(resultTuple.Item2);
+            }
+            else
+            {
+                return null;
             }
         }
 

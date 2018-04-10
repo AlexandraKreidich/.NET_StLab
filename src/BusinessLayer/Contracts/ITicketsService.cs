@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
@@ -16,7 +17,8 @@ namespace BusinessLayer.Contracts
         [ItemNotNull]
         Task<TicketBlModelResponse> PayForTicket(int ticketId);
 
-        void CreateTicket([NotNull] TicketBlModelRequest ticket);
+        [ItemCanBeNull]
+        Task<TicketBlModelResponse> CreateTicket([NotNull] TicketBlModelRequest ticket);
 
         Task<int> DeleteTicket(int id);
 
