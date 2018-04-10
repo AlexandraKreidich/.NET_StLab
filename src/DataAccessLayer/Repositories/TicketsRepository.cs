@@ -129,5 +129,15 @@ namespace DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
+
+        public async void ClearBookedTickets()
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "ClearBookedTickets",
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

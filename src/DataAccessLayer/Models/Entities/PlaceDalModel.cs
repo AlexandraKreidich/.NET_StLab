@@ -22,7 +22,6 @@ namespace DataAccessLayer.Models.Entities
 
         public int PriceId { get; set; }
 
-        [NotNull] 
-        public string PlaceStatus { get; set; }
+        [NotNull] public string PlaceStatus { get; set; } = "Free";
     }
 }

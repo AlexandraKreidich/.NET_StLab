@@ -23,5 +23,7 @@ namespace DataAccessLayer.Contracts
         void AddServiceToTicket(int ticketId, int serviceId);
 
         void DeleteTicket(int id);
+
+        void ClearBookedTickets();
     }
 }

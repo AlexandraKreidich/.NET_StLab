@@ -132,5 +132,10 @@ namespace BusinessLayer.Services
 
             return 0;
         }
+
+        public void ClearBookedTickets()
+        {
+            _ticketsRepository.ClearBookedTickets();
+        }
     }
 }

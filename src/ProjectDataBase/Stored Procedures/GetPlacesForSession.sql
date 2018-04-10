@@ -22,7 +22,15 @@ AS
         INNER JOIN Price pr
             ON p.Id = pr.PlaceId
         LEFT JOIN Ticket t
-            ON ((t.PriceId = pr.Id) AND (DATEDIFF(minute, t.CreatedAt, @DateNow) < @Interval))
+             ON ((
+                (t.PriceId = pr.Id) AND (DATEDIFF(minute, t.CreatedAt, @DateNow) < @Interval))
+                OR
+                ((
+                (t.PriceId = pr.Id)) AND (
+                    SELECT TicketStatus.Name 
+                    FROM TicketStatus 
+                    WHERE t.TicketStatusId = TicketStatus.Id
+                ) = 'Paid'))
         LEFT JOIN TicketStatus ts
             ON t.TicketStatusId = ts.Id
     WHERE HallId = @HallId AND pr.SessionId = @SessionId

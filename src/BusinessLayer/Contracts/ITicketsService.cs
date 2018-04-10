@@ -19,5 +19,7 @@ namespace BusinessLayer.Contracts
         void CreateTicket([NotNull] TicketBlModelRequest ticket);
 
         Task<int> DeleteTicket(int id);
+
+        void ClearBookedTickets();
     }
 }
