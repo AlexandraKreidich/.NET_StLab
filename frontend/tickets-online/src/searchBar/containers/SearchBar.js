@@ -40,7 +40,7 @@ class SearchBarContainer extends React.Component {
   }
 
   onCitiesSelectChange(e) {
-    if (e.target.value == 'All Cities') {
+    if (e.target.value === 'All Cities') {
       this.props.setVisibilityFilter({
         city: ''
       });
@@ -52,7 +52,7 @@ class SearchBarContainer extends React.Component {
   }
 
   onCinemasSelectChange(e) {
-    if (e.target.value == 'All Cinemas') {
+    if (e.target.value === 'All Cinemas') {
       this.props.setVisibilityFilter({
         cinema: ''
       });

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import { DATE_FORMAT_FOR_SESSION } from '../../shared/DateFormats';
 
@@ -19,7 +18,6 @@ class Session extends React.Component {
   render() {
     return (
       <a
-        href="#"
         className="film-item list-group-item list-group-item-action flex-column align-items-start"
         onClick={this.onClick}
       >

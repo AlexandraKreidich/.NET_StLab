@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using BusinessLayer.Contracts;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace WebApi.Services
 {

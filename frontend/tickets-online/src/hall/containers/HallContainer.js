@@ -7,8 +7,8 @@ import PlaceInfo from '../components/PlaceInfo';
 
 function createRows(places, scheme) {
   const rows = scheme.map(elem => {
-    let row = new Object();
-    let rowPlaces = new Array();
+    let row = {};
+    let rowPlaces = [];
     row.rowNumber = elem.rowNumber;
 
     places.forEach(element => {
@@ -60,8 +60,8 @@ class HallModelContainer extends React.Component {
       });
     } else {
       if (
-        this.state.placeInfo.rowNumber == rowNumber &&
-        this.state.placeInfo.placeNumber == placeNumber
+        this.state.placeInfo.rowNumber === rowNumber &&
+        this.state.placeInfo.placeNumber === placeNumber
       ) {
         this.setState({
           isPlaceChoosen: false,
@@ -82,7 +82,6 @@ class HallModelContainer extends React.Component {
   }
 
   render() {
-    console.log('render');
     return (
       <div className="text-center hall-container">
         {this.props.hall.hall && (

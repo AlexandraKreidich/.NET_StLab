@@ -4,6 +4,7 @@ import { SearchFilmsForm } from '../../searchFilmsForm/components/SearchFilmsFor
 
 import '../../index.css';
 import '../../bootstrap.css';
+import '../../../public/logo.svg';
 
 const Header = props => (
   <nav className="navbar navbar-light bg-light justify-content-between">

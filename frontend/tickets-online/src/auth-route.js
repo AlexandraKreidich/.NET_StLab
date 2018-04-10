@@ -4,13 +4,13 @@ import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const AuthRoute = props => {
-  const { component, token, authenticationRequired, nonAuthenticationRequired } = props;
-  
+  const { component, token, authenticationRequired } = props;
+
   let redirectTo = props.redirectTo;
 
   if (authenticationRequired && !token) {
     redirectTo = redirectTo || '/login';
-    
+
     return <Redirect to={redirectTo} push />;
   }
 

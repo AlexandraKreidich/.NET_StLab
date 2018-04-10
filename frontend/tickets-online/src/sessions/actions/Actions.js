@@ -49,4 +49,4 @@ function fetchSessionsForFilm(filmId) {
   };
 }
 
-export { fetchSessionsForFilm };
+export { fetchSessionsForFilm, fetchSessions };

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Place } from './Place';
 
 import '../../bootstrap.css';

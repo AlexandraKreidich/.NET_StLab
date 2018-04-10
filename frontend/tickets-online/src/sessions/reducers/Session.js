@@ -1,11 +1,4 @@
 import {
-  requestSessions,
-  receiveSessions,
-  requestSessionsForFilm,
-  receiveSessionsForFilm
-} from '../actions/ActionCreators';
-
-import {
   SESSIONS_REQUEST,
   SESSIONS_RESPONSE,
   SESSIONS_FOR_FILM_REQUEST,
@@ -41,8 +34,9 @@ const sessionReducer = function(state = initialState, action) {
         sessions: action.response,
         isSessionsLoading: false
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export { sessionReducer };

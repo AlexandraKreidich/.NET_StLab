@@ -1,5 +1,3 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
 import { required, email, length } from 'redux-form-validators';
 
 let validations = {

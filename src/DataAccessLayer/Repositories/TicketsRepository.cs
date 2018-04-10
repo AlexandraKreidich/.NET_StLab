@@ -70,7 +70,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<Tuple<StoredProcedureExecutionResult, int>> CreateTicket(TicketDalDtoModelRequest ticket)
+        public async Task<(StoredProcedureExecutionResult result, int id)> CreateTicket(TicketDalDtoModelRequest ticket)
         {
             try
             {
@@ -86,20 +86,12 @@ namespace DataAccessLayer.Repositories
                         },
                         commandType: CommandType.StoredProcedure);
 
-                    return new Tuple<StoredProcedureExecutionResult, int>
-                    (
-                        StoredProcedureExecutionResult.Ok,
-                        id
-                    );
+                    return (result: StoredProcedureExecutionResult.Ok, id: id);
                 }
             }
             catch (SqlException e) when (e.Number == 2627) // Unique key violation
             {
-                return new Tuple<StoredProcedureExecutionResult, int>
-                (
-                    StoredProcedureExecutionResult.UniqueKeyViolation,
-                    0
-                );
+                return (result: StoredProcedureExecutionResult.UniqueKeyViolation, id: 0);
             }
         }
 

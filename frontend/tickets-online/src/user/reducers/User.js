@@ -1,13 +1,4 @@
 import {
-  setUser,
-  registerUser,
-  failRegistration,
-  loginUser,
-  failLogin,
-  logoutUser
-} from '../actions/ActionCreators';
-
-import {
   USER_REGISTER,
   USER_FAIL_REGISTRATION,
   USER_LOGIN,
@@ -73,8 +64,9 @@ const userReducer = function(state = initialState, action) {
           }
         };
       }
+    default:
+      return state;
   }
-  return state;
 };
 
 export { userReducer };

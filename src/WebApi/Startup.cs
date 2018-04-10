@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer;
 using DataAccessLayer;
@@ -13,8 +11,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Contracts;
 //using FluentScheduler;

@@ -110,20 +110,20 @@ namespace BusinessLayer.Services
                     ticket.PriceId
                 );
 
-            Tuple<DataAccessLayer.StoredProcedureExecutionResult, int> resultTuple
+            (DataAccessLayer.StoredProcedureExecutionResult result, int id) resultTuple
                 = await _ticketsRepository.CreateTicket(ticketRequest);
 
-            if (resultTuple.Item1 == DataAccessLayer.StoredProcedureExecutionResult.Ok)
+            if (resultTuple.result == DataAccessLayer.StoredProcedureExecutionResult.Ok)
             {
                 if (ticket.Services != null)
                 {
                     foreach (int service in ticket.Services)
                     {
-                        _ticketsRepository.AddServiceToTicket(resultTuple.Item2, service);
+                        _ticketsRepository.AddServiceToTicket(resultTuple.id, service);
                     }
                 }
                 
-                return await GetTicketById(resultTuple.Item2);
+                return await GetTicketById(resultTuple.id);
             }
             else
             {
