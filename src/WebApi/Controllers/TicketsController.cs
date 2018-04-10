@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using BusinessLayer;
 using BusinessLayer.Contracts;
 using BusinessLayer.Models;
 using JetBrains.Annotations;
@@ -81,7 +80,7 @@ namespace WebApi.Controllers
             else
             {
                 return Ok(
-                    Mapper.Map<TicketApiModelResponse>(ticket)
+                    Mapper.Map<TicketApiModelResponse>(ticketResponse)
                 );
             }
         }
