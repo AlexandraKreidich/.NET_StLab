@@ -70,7 +70,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<(StoredProcedureExecutionResult result, int id)> CreateTicket(TicketDalDtoModelRequest ticket)
+        public async Task<CreateTicketResponseDalDtoModel> CreateTicket(TicketDalDtoModelRequest ticket)
         {
             try
             {
@@ -86,12 +86,12 @@ namespace DataAccessLayer.Repositories
                         },
                         commandType: CommandType.StoredProcedure);
 
-                    return (result: StoredProcedureExecutionResult.Ok, id: id);
+                    return new CreateTicketResponseDalDtoModel(StoredProcedureExecutionResult.Ok, id);
                 }
             }
             catch (SqlException e) when (e.Number == 2627) // Unique key violation
             {
-                return (result: StoredProcedureExecutionResult.UniqueKeyViolation, id: 0);
+                return new CreateTicketResponseDalDtoModel(StoredProcedureExecutionResult.UniqueKeyViolation, 0);
             }
         }
 

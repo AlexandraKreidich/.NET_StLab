@@ -19,7 +19,7 @@ namespace DataAccessLayer.Contracts
 
         void PayForTicket(int ticketId);
 
-        Task<(StoredProcedureExecutionResult result, int id)> CreateTicket([NotNull] TicketDalDtoModelRequest ticket);
+        Task<CreateTicketResponseDalDtoModel> CreateTicket([NotNull] TicketDalDtoModelRequest ticket);
 
         void AddServiceToTicket(int ticketId, int serviceId);
 
