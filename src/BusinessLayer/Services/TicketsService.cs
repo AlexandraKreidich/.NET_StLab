@@ -122,13 +122,7 @@ namespace BusinessLayer.Services
                         _ticketsRepository.AddServiceToTicket(resultTuple.id, service);
                     }
                 }
-<<<<<<< HEAD
-                
                 return await GetTicketById(resultTuple.id);
-=======
-
-                return await GetTicketById(resultTuple.Item2);
->>>>>>> FluentSheduler added & job for clearing booked tickets
             }
             else
             {
