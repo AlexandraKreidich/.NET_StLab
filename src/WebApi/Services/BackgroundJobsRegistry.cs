@@ -21,9 +21,9 @@ namespace WebApi.Services
     }
 
     [UsedImplicitly]
-    public class BackgroundJobsService : Registry
+    public class BackgroundJobsRegistry : Registry
     {
-        public BackgroundJobsService(ITicketsService ticketsService)
+        public BackgroundJobsRegistry(ITicketsService ticketsService)
         {
             Schedule(() => new ClearBookedTicketsJob(ticketsService)).ToRunNow().AndEvery(1).Days().At(00, 00);
         }

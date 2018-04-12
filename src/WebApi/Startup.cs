@@ -84,13 +84,13 @@ namespace WebApi
 
             services.AddMvc();
 
-            services.AddSingleton<BackgroundJobsService>();
+            services.AddSingleton<BackgroundJobsRegistry>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
-            BackgroundJobsService registry = serviceProvider.GetService<BackgroundJobsService>();
+            BackgroundJobsRegistry registry = serviceProvider.GetService<BackgroundJobsRegistry>();
             JobManager.Initialize(registry);
 
             if (env.IsDevelopment())

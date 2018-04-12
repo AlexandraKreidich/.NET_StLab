@@ -1,4 +1,5 @@
 import { url } from '../../config.js';
+import HttpStatus from 'http-status-codes';
 
 import {
   setUser,
@@ -24,7 +25,7 @@ function logInUser(email, password) {
 
     return fetch(url + 'api/account/login', requestOptions)
       .then(function(response) {
-        if (response.status !== 200) {
+        if (response.status !== HttpStatus.OK) {
           return dispatch(failLogin());
         }
         return response.json();
@@ -69,7 +70,7 @@ function registerNewUser(email, firstName, lastName, password) {
 
     return fetch(url + 'api/account/register', requestOptions)
       .then(function(response) {
-        if (response.status === 400) {
+        if (response.status === HttpStatus.BAD_REQUEST) {
           return dispatch(failRegistration());
         }
         return response.json();
