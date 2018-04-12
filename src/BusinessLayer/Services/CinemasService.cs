@@ -80,7 +80,9 @@ namespace BusinessLayer.Services
                             new PlaceTypeBlModel(x.TypeId, x.Type),
                             x.RowNumber,
                             x.PlaceNumber,
-                            x.Price
+                            x.Price,
+                            x.PriceId,
+                            x.PlaceStatus
                         )
                     ).ToArray();
 
@@ -92,7 +94,8 @@ namespace BusinessLayer.Services
                     results.Add(new FullHallBlModel(
                         hall.Id,
                         hall.CinemaId,
-                        hall.Name,
+                        hall.HallName,
+                        hall.CinemaName,
                         placesBlArray,
                         hallSchemeBlModels
                     ));

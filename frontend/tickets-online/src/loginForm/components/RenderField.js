@@ -1,6 +1,4 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { validate } from './FormValidation';
 
 import '../../bootstrap.css';
 import '../../index.css';

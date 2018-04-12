@@ -10,17 +10,22 @@ namespace DataAccessLayer.Models.DataTransferObjects
         public int CinemaId { get;}
 
         [NotNull]
-        public string Name { get;}
+        public string HallName { get; }
+
+        [NotNull]
+        public string CinemaName { get; }
 
         public HallDalDtoModel(
             int id,
             int cinemaId,
-            [NotNull] string name
+            [NotNull] string hallName,
+            [NotNull] string cinemaName
         )
         {
             Id = id;
             CinemaId = cinemaId;
-            Name = name;
+            HallName = hallName;
+            CinemaName = cinemaName;
         }
     }
 }

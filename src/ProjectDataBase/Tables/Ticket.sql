@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Ticket]
 (
     [Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    [PriceId] INT NOT NULL,
+    [PriceId] INT UNIQUE NOT NULL,
     [UserId] INT NOT NULL,
     [TicketStatusId] INT NOT NULL,
     [CreatedAt] DATETIMEOFFSET NOT NULL,

@@ -36,7 +36,8 @@ namespace WebApi.Controllers
             return Ok(new HallApiModel(
                 fullHallBl.Id,
                 fullHallBl.CinemaId,
-                fullHallBl.Name,
+                fullHallBl.HallName,
+                fullHallBl.CinemaName,
                 fullHallBl.PlacesBl?.Select(Mapper.Map<PlaceApiModel>).ToArray(),
                 fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<HallSchemeApiModel>).ToArray()
             ));
@@ -57,7 +58,8 @@ namespace WebApi.Controllers
             return Ok(new HallApiModel(
                 fullHallBl.Id,
                 fullHallBl.CinemaId,
-                fullHallBl.Name,
+                fullHallBl.HallName,
+                fullHallBl.CinemaName,
                 fullHallBl.PlacesBl?.Select(Mapper.Map<PlaceApiModel>).ToArray(),
                 fullHallBl.HallSchemeBlModels?.Select(Mapper.Map<HallSchemeApiModel>).ToArray()
             ));
@@ -75,7 +77,8 @@ namespace WebApi.Controllers
             FullHallBlModel fullHallBlRequest = new FullHallBlModel(
                 hallApi.Id,
                 hallApi.CinemaId,
-                hallApi.Name,
+                hallApi.HallName,
+                hallApi.CinemaName,
                 hallApi.PlacesApi?.Select(Mapper.Map<BusinessLayer.Models.PlaceBlModel>).ToArray(),
                 hallApi.HallSchemeApiModels?.Select(Mapper.Map<BusinessLayer.Models.HallSchemeBlModel>).ToArray()
             );

@@ -1,7 +1,4 @@
-import {
-  HALL_MODEL_REQUEST,
-  HALL_MODEL_RESPONSE
-} from "../actions/ActionTypes";
+import { HALL_MODEL_REQUEST, HALL_MODEL_RESPONSE } from '../actions/ActionTypes';
 
 const initialState = {
   hall: null,
@@ -21,8 +18,9 @@ const hallReducer = function(state = initialState, action) {
         hall: action.response,
         isHallLoading: false
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export { hallReducer };

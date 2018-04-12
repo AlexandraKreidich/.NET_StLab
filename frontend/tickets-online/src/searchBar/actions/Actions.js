@@ -1,5 +1,5 @@
 import { url } from '../../config.js';
-import { requestFilters, receiveFilters, resetVisibilityFilter } from './ActionCreators';
+import { requestFilters, receiveFilters } from './ActionCreators';
 
 export function fetchFilters() {
   const requestOptions = {

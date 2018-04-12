@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -69,21 +70,28 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<int> CreateTicket(TicketDalDtoModelRequest ticket)
+        public async Task<CreateTicketResponseDalDtoModel> CreateTicket(TicketDalDtoModelRequest ticket)
         {
-            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            try
             {
-                int id = await connection.ExecuteScalarAsync<int>(
-                    "AddTicket",
-                    new
+                using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+                {
+                    int id = await connection.ExecuteScalarAsync<int>(
+                        "AddTicket",
+                        new
                         {
                             UserId = ticket.UserId,
                             PriceId = ticket.PriceId,
                             TicketStatus = TicketStatus.InProcess.ToString()
                         },
-                    commandType: CommandType.StoredProcedure);
+                        commandType: CommandType.StoredProcedure);
 
-                return id;
+                    return new CreateTicketResponseDalDtoModel(StoredProcedureExecutionResult.Ok, id);
+                }
+            }
+            catch (SqlException e) when (e.Number == 2627) // Unique key violation
+            {
+                return new CreateTicketResponseDalDtoModel(StoredProcedureExecutionResult.UniqueKeyViolation, 0);
             }
         }
 
@@ -126,6 +134,16 @@ namespace DataAccessLayer.Repositories
                         {
                             Id = id
                         },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async void ClearBookedTickets()
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "ClearBookedTickets",
                     commandType: CommandType.StoredProcedure);
             }
         }

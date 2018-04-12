@@ -69,7 +69,8 @@ namespace WebApi.Controllers
                 results = halls.Select(hall => new HallApiModel(
                         hall.Id,
                         hall.CinemaId,
-                        hall.Name,
+                        hall.HallName,
+                        hall.CinemaName,
                         hall.PlacesBl.Select(Mapper.Map<PlaceApiModel>).ToArray(),
                         hall.HallSchemeBlModels.Select(Mapper.Map<HallSchemeApiModel>).ToArray())
                     ).ToList();

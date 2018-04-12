@@ -57,8 +57,9 @@ const SearchBarReducer = function(state = initialState, action) {
             : state.visibilityFilters.freePlaces
         }
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export { SearchBarReducer };

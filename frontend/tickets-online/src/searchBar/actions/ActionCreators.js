@@ -1,9 +1,4 @@
-import {
-  FILTERS_REQUEST,
-  FILTERS_RESPONSE,
-  VISIBILITY_FILTER_SET,
-  VISIBILITY_FILTER_RESET
-} from './ActionTypes';
+import { FILTERS_REQUEST, FILTERS_RESPONSE, VISIBILITY_FILTER_SET } from './ActionTypes';
 
 export function requestFilters() {
   return { type: FILTERS_REQUEST };

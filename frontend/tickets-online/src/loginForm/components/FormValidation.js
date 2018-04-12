@@ -1,10 +1,8 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { required, email } from 'redux-form-validators';
+import { required, email, length } from 'redux-form-validators';
 
 let validations = {
   email: [required(), email()],
-  password: [required()],
+  password: [required(), length({ min: 10 })],
   firstName: [required()],
   lastName: [required()]
 };

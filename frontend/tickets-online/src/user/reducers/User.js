@@ -1,13 +1,4 @@
 import {
-  setUser,
-  registerUser,
-  failRegistration,
-  loginUser,
-  failLogin,
-  logoutUser
-} from '../actions/ActionCreators';
-
-import {
   USER_REGISTER,
   USER_FAIL_REGISTRATION,
   USER_LOGIN,
@@ -16,19 +7,14 @@ import {
   USER_LOGOUT
 } from '../actions/ActionTypes';
 
+import { loadUserDataFromLocalStorage } from '../actions/Actions';
+
 const initialState = {
   isRegistrationInProgress: false,
   isRegistrationFailed: false,
   isLoginInProgress: false,
   isLoginFailed: false,
-  userData: {
-    id: 0,
-    userRole: null,
-    email: null,
-    firstName: null,
-    lastName: null,
-    token: null
-  }
+  userData: loadUserDataFromLocalStorage()
 };
 
 const userReducer = function(state = initialState, action) {
@@ -78,8 +64,9 @@ const userReducer = function(state = initialState, action) {
           }
         };
       }
+    default:
+      return state;
   }
-  return state;
 };
 
 export { userReducer };

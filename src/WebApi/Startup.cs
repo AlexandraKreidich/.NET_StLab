@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Contracts;
+using FluentScheduler;
+using WebApi.Services;
 
 namespace WebApi
 {
@@ -34,7 +36,6 @@ namespace WebApi
 
             services.AddSingleton<IDalSettings>(settings);
             services.AddSingleton<IWebApiSettings>(settings);
-
 
             DalModule.Register(services);
             BlModule.Register(services);
@@ -82,11 +83,15 @@ namespace WebApi
                 });
 
             services.AddMvc();
+
+            services.AddSingleton<BackgroundJobsRegistry>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+            BackgroundJobsRegistry registry = serviceProvider.GetService<BackgroundJobsRegistry>();
+            JobManager.Initialize(registry);
 
             if (env.IsDevelopment())
             {

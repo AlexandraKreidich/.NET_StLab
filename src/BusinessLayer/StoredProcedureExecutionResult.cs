@@ -3,6 +3,7 @@
     public enum StoredProcedureExecutionResult
     {
         Ok,
-        ForeignKeyViolation
+        ForeignKeyViolation,
+        UniqueKeyViolation
     }
 }

@@ -60,7 +60,7 @@ namespace WebApi.Controllers
         // PUT /tickets
 
         [HttpPut]
-        public IActionResult Put([NotNull] [FromBody] TicketApiModelRequest ticket)
+        public async Task<IActionResult> Put([NotNull] [FromBody] TicketApiModelRequest ticket)
         {
             TicketBlModelRequest ticketRequest = new TicketBlModelRequest
             (
@@ -70,9 +70,18 @@ namespace WebApi.Controllers
 
             );
 
-            _ticketsService.CreateTicket(ticketRequest);
+            TicketBlModelResponse ticketResponse = await _ticketsService.CreateTicket(ticketRequest);
 
-            return Ok();
+            if (ticketResponse == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(
+                    Mapper.Map<TicketApiModelResponse>(ticketResponse)
+                );
+            }
         }
 
         // POST /tickets/{id}/pay

@@ -55,5 +55,31 @@ body {
 }
 
 .margin-top-indent {
+  margin-top: 40px;
+}
+
+.place-info {
+  margin-top: 20px;
+}
+
+.order-ticket-btn {
+  margin-top: 10px;
+  width: 100px;
+  background-color: #dc3545;
+  border: #710d17;
+}
+
+.hall-container {
   margin-top: 50px;
+}
+
+.alert-secondary__hall-scheme {
+  background-color: #f8f9fa;
+  padding-top: 15px;
+  color: green;
+}
+
+.ticket-info__paragraph {
+  margin: 0;
+  padding: 0;
 }

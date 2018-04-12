@@ -4,7 +4,7 @@
     @TicketStatus NVARCHAR(50)
 AS
     DECLARE @CreatedAt DATETIMEOFFSET
-    SET @CreatedAt = CONVERT(date, SYSDATETIMEOFFSET());
+    SET @CreatedAt = CONVERT(datetimeoffset, SYSDATETIMEOFFSET());
     INSERT INTO [dbo].Ticket (PriceId, UserId, TicketStatusId, CreatedAt)
     VALUES
     (

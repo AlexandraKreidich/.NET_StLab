@@ -9,7 +9,10 @@ namespace BusinessLayer.Models
         public int CinemaId { get; }
 
         [NotNull]
-        public string Name { get; }
+        public string HallName { get; }
+
+        [NotNull]
+        public string CinemaName { get; }
 
         [CanBeNull]
         public PlaceBlModel[] PlacesBl { get; }
@@ -20,14 +23,16 @@ namespace BusinessLayer.Models
         public FullHallBlModel(
             int id,
             int cinemaId,
-            [NotNull] string name,
+            [NotNull] string hallName,
+            [NotNull] string cinemaName,
             [CanBeNull] PlaceBlModel[] placesBl,
             [CanBeNull] HallSchemeBlModel[] hallSchemeBlModel
         )
         {
             Id = id;
             CinemaId = cinemaId;
-            Name = name;
+            HallName = hallName;
+            CinemaName = cinemaName;
             PlacesBl = placesBl;
             HallSchemeBlModels = hallSchemeBlModel;
         }

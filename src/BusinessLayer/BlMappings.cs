@@ -39,6 +39,11 @@ namespace BusinessLayer
             configuration.CreateMap<FilmFilterBlModel, DalFilmFilterModel>();
 
             configuration.CreateMap<DataAccessLayer.StoredProcedureExecutionResult, StoredProcedureExecutionResult>();
+
+            configuration.CreateMap<CreateTicketResponseDalDtoModel, CreateTicketResponseBlModel>().ConstructUsing
+            (
+                x => new CreateTicketResponseBlModel(Mapper.Map<StoredProcedureExecutionResult>(x.Result), x.TicketId)
+            );
         }
     }
 }

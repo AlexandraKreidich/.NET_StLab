@@ -18,8 +18,9 @@ const filmReducer = function(state = initialState, action) {
         films: action.response,
         isFilmsLoading: false
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export { filmReducer };

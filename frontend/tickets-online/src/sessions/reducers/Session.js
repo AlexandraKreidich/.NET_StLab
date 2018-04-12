@@ -1,19 +1,8 @@
 import {
-  requestSessions,
-  receiveSessions,
-  requestSessionsForFilm,
-  receiveSessionsForFilm,
-  requestServicesForSession,
-  receiveServicesForSession
-} from '../actions/ActionCreators';
-
-import {
   SESSIONS_REQUEST,
   SESSIONS_RESPONSE,
   SESSIONS_FOR_FILM_REQUEST,
-  SESSIONS_FOR_FILM_RESPONSE,
-  SERVICES_FOR_SESSION_REQUEST,
-  SERVICES_FOR_SESSION_RESPONSE
+  SESSIONS_FOR_FILM_RESPONSE
 } from '../actions/ActionTypes';
 
 const initialState = {
@@ -45,9 +34,9 @@ const sessionReducer = function(state = initialState, action) {
         sessions: action.response,
         isSessionsLoading: false
       };
-    case SERVICES_FOR_SESSION_REQUEST:
+    default:
+      return state;
   }
-  return state;
 };
 
 export { sessionReducer };

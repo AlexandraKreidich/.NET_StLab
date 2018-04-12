@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { store } from '../../App';
 import { SessionsList } from '../components/SessionList';
 import { fetchSessionsForFilm } from '../actions/Actions';
 import loadImg from '../../load-img.gif';
@@ -28,7 +27,7 @@ class SessionsContainer extends React.Component {
       <div className="top-indent">
         {this.props.isLoading && (
           <div className="text-center div-load-img">
-            <img className="img-responsive" width="50px" height="50px" src={loadImg} />
+            <img className="img-responsive" width="50px" height="50px" alt="" src={loadImg} />
           </div>
         )}
         {this.props.sessions && (
