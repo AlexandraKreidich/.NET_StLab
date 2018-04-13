@@ -60,7 +60,7 @@ namespace WebApi.Controllers
         [Route("{sessionId}/services")]
         public async Task<IActionResult> GetServices(int sessionId)
         {
-            IEnumerable<ServiceBlModel> services = await _sessionService.GetServices(sessionId);
+            IEnumerable<ServiceBlModelResponseForTicket> services = await _sessionService.GetServices(sessionId);
 
             if (services == null)
             {
@@ -68,7 +68,7 @@ namespace WebApi.Controllers
             }
 
             return Ok(
-                services.Select(Mapper.Map<ServiceApiModel>)
+                services.Select(Mapper.Map<ServiceApiModelResponseForTicket>)
             );
         }
 

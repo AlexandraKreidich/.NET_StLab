@@ -432,7 +432,7 @@ BEGIN TRY
     INSERT INTO dbo.Ticket(PriceId, UserId, TicketStatusId, CreatedAt)
     VALUES
         (1, 1, 1, convert(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
-        (2, 1, 2, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
+        (2, 1, 2, CONVERT(datetimeoffset, SYSDATETIMEOFFSET())),
         (3, 2, 1, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
         (4, 2, 1, CONVERT(datetimeoffset, '20180409 12:15:00.0000000 +03:00')),
         (5, 3, 2, CONVERT(datetimeoffset, '20180409 19:10:00.0000000 +03:00')),
@@ -441,7 +441,7 @@ BEGIN TRY
         (8, 4, 2, CONVERT(datetimeoffset, '20180410 12:15:00.0000000 +03:00')),
         (9, 5, 1, CONVERT(datetimeoffset, '20180410 12:15:00.0000000 +03:00')),
 
-        (10, 5, 2, CONVERT(datetimeoffset, '20180409 19:15:00.0000000 +03:00'))
+        (10, 5, 2, CONVERT(datetimeoffset, SYSDATETIMEOFFSET()))
 
     PRINT 'Inserting seed data for TicketService table'
 
