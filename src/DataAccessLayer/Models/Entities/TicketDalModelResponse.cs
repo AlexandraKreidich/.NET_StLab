@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.Entities
 {
+    [UsedImplicitly]
     internal class TicketDalModelResponse
     {
         public int TicketId { get; set; }

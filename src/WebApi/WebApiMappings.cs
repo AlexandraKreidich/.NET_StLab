@@ -29,6 +29,8 @@ namespace WebApi
             configuration.CreateMap<HallSchemeBlModel, HallSchemeApiModel>();
             configuration.CreateMap<FullHallBlModel, HallApiModel>();
             configuration.CreateMap<ServiceBlModel, ServiceApiModel>();
+            configuration.CreateMap<ServiceBlModelResponseForTicket, ServiceApiModelResponseForTicket>();
+            configuration.CreateMap<ServiceApiModelRequestForTicket, ServiceBlModelRequestForTicket>();
             configuration.CreateMap<ServiceApiModel, ServiceBlModel>();
             configuration.CreateMap<FilmModel, BlFilmModel>()
                 .ConstructUsing
@@ -59,11 +61,11 @@ namespace WebApi
                         x.FilmName,
                         x.PlaceNumber,
                         x.RowNumber,
-                        (Mapper.Map<PlaceTypeBlModel, PlaceTypeApiModel>(x.PlaceType)),
+                        Mapper.Map<PlaceTypeBlModel, PlaceTypeApiModel>(x.PlaceType),
                         x.HallName,
                         x.CinemaName,
                         x.SessionPrice,
-                        Mapper.Map<ServiceBlModel[], ServiceApiModel[]>(x.Services),
+                        Mapper.Map<ServiceBlModelResponseForTicket[], ServiceApiModelResponseForTicket[]>(x.Services),
                         x.TicketStatus,
                         x.CreatedAt
                         )

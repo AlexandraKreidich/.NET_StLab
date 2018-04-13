@@ -16,6 +16,7 @@ namespace DataAccessLayer
             configuration.CreateMap<PlaceDalModel, PlaceDalDtoModel>();
             configuration.CreateMap<HallSchemeDalModel, HallSchemeDalDtoModel>();
             configuration.CreateMap<ServiceDalModel, ServiceDalDtoModel>();
+            configuration.CreateMap<ServiceDalModelResponseForTicket, ServiceDalDtoModelResponseForTicket>();
             configuration.CreateMap<ServiceDalDtoModel, ServiceDalModel>();
             configuration.CreateMap<Film, FilmModel>().ConstructUsing
             (

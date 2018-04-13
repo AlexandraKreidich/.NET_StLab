@@ -1,5 +1,4 @@
-﻿using System;
-using BusinessLayer.Contracts;
+﻿using BusinessLayer.Contracts;
 using FluentScheduler;
 using JetBrains.Annotations;
 

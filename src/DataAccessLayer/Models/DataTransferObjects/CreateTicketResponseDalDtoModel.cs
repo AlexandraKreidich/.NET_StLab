@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DataAccessLayer.Models.DataTransferObjects
+﻿namespace DataAccessLayer.Models.DataTransferObjects
 {
     public class CreateTicketResponseDalDtoModel
     {

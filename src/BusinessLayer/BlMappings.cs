@@ -24,6 +24,8 @@ namespace BusinessLayer
 
             configuration.CreateMap<ServiceBlModel, ServiceDalDtoModel>();
 
+            configuration.CreateMap<ServiceDalDtoModelResponseForTicket, ServiceBlModelResponseForTicket>();
+
             configuration.CreateMap<DalFilmModel, FilmModel>().ConstructUsing
             (
                 x=> new FilmModel(x.Id, x.Name, x.Description, x.StartRentDate, x.EndRentDate)

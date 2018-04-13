@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using WebApi.Models.Service;
 
 namespace WebApi.Models.Ticket
 {
@@ -7,12 +8,12 @@ namespace WebApi.Models.Ticket
         public int PriceId { get; }
 
         [CanBeNull]
-        public int[] Services { get; }
+        public ServiceApiModelRequestForTicket[] Services { get; }
 
         public TicketApiModelRequest
         (
             int priceId,
-            [CanBeNull] int[] services
+            [CanBeNull] ServiceApiModelRequestForTicket[] services
         )
         {
             PriceId = priceId;

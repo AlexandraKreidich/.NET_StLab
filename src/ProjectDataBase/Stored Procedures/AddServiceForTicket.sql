@@ -1,10 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[AddServiceForTicket]
     @TicketId int,
-    @ServiceId int
+    @ServiceId INT,
+    @Amount int
 AS
-    INSERT INTO [dbo].TicketService (TicketId, ServiceId)
+    INSERT INTO [dbo].TicketService (TicketId, ServiceId, Amount)
     VALUES
     (
         @TicketId,
-        @ServiceId
+        @ServiceId,
+        @Amount
     )

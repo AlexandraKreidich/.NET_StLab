@@ -445,15 +445,15 @@ BEGIN TRY
 
     PRINT 'Inserting seed data for TicketService table'
 
-    INSERT INTO dbo.TicketService(TicketId, ServiceId)
+    INSERT INTO dbo.TicketService(TicketId, ServiceId, Amount)
     VALUES
-        (1, 1),
-        (1, 2),
-        (2, 2),
-        (3, 3),
-        (4, 1),
-        (5, 2),
-        (6, 3)
+        (1, 1, 2),
+        (1, 2, 2),
+        (2, 2, 3),
+        (3, 3, 1),
+        (4, 1, 1),
+        (5, 2, 3),
+        (6, 3, 2)
 
     PRINT 'Inserting seed data for SessionService table'
 

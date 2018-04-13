@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Ticket;
 using WebApi.Extensions;
+using WebApi.Models.Service;
 
 namespace WebApi.Controllers
 {
@@ -66,15 +67,14 @@ namespace WebApi.Controllers
             (
                 HttpContext.User.GetUserId(),
                 ticket.PriceId,
-                ticket.Services
-
+                Mapper.Map<ServiceApiModelRequestForTicket[], ServiceBlModelRequestForTicket[]>(ticket.Services)
             );
 
             TicketBlModelResponse ticketResponse = await _ticketsService.CreateTicket(ticketRequest);
 
             if (ticketResponse == null)
             {
-                return BadRequest();
+                return BadRequest("This ticket already exists");
             }
             else
             {
