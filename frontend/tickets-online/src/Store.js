@@ -7,6 +7,7 @@ import { reducer as formReducer } from 'redux-form';
 import ReduxThunk from 'redux-thunk';
 import { SearchBarReducer } from './searchBar/reducers/SearchBar';
 import { serviceReducer } from './services/reducers/Service';
+import { ticketsReducer } from './ticket/reducers/Ticket';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   form: formReducer,
   searchBar: SearchBarReducer,
   hall: hallReducer,
-  service: serviceReducer
+  service: serviceReducer,
+  ticket: ticketsReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

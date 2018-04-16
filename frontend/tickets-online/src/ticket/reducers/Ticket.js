@@ -1,10 +1,18 @@
-import { NEW_TICKET_REQUEST, NEW_TICKET_RESPONSE, USER_TICKETS_REQUEST, USER_TICKETS_RESPONSE } from '../actions/ActionTypes';
+import {
+  NEW_TICKET_REQUEST,
+  NEW_TICKET_RESPONSE,
+  NEW_TICKET_REQUEST_FAIL,
+  USER_TICKETS_REQUEST,
+  USER_TICKETS_RESPONSE
+} from '../actions/ActionTypes';
 
 const initialState = {
-  newTicket: [],
-  isBookingTicketInProcess: false
-  userTickets: [],
-  inUserTicketsLoading: false
+  tickets: null,
+  isRequestLoading: false,
+  isTicketsLoadingFailed: false,
+  isTicketsLoadingSuccess: false,
+  isBookingTicketFailed: false,
+  isBookingTicketSuccess: false
 };
 
 const ticketsReducer = function(state = initialState, action) {
@@ -12,25 +20,37 @@ const ticketsReducer = function(state = initialState, action) {
     case NEW_TICKET_REQUEST:
       return {
         ...state,
-        isBookingTicketInProcess: true
+        isBookingTicketFailed: false,
+        isBookingTicketSuccess: false,
+        isRequestLoading: true
+      };
+    case NEW_TICKET_REQUEST_FAIL:
+      return {
+        ...state,
+        isRequestLoading: false,
+        isBookingTicketFailed: true
       };
     case NEW_TICKET_RESPONSE:
       return {
         ...state,
-        newTicket: action.response,
-        isBookingTicketInProcess: false
+        tickets: new Array(action.response),
+        isRequestLoading: false,
+        isBookingTicketSuccess: true
       };
     case USER_TICKETS_REQUEST:
       return {
         ...state,
-        inUserTicketsLoading: true
-      }
+        isRequestLoading: true,
+        isTicketsLoadingFailed: false,
+        isTicketsLoadingSuccess: false
+      };
     case USER_TICKETS_RESPONSE:
       return {
-        ..state,
-        userTickets: action.response,
-        inUserTicketsLoading: false
-      }
+        ...state,
+        tickets: action.response,
+        isRequestLoading: false,
+        isTicketsLoadingSuccess: true
+      };
     default:
       return state;
   }

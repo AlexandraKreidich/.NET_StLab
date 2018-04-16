@@ -6,6 +6,7 @@ import { Hall } from '../components/Hall';
 import PlaceInfo from '../components/PlaceInfo';
 import { ServicesList } from '../../services/components/servicesList';
 import { fetchServicesForSessions } from '../../services/actions/Actions';
+import { fetchCreateNewTicket } from '../../ticket/actions/Actions';
 
 function createRows(places, scheme) {
   const rows = scheme.map(elem => {
@@ -137,10 +138,12 @@ class HallModelContainer extends React.Component {
       }
     });
     let newTicket = {
-      priceId: this.state.placeInfo.placePrice,
+      priceId: this.state.placeInfo.placePriceId,
       services: servicesArr.length !== 0 ? servicesArr : null
     };
-    console.log(newTicket);
+    console.log(newTicket, this.props.user.userData.token);
+    this.props.fetchCreateNewTicket(newTicket, this.props.user.userData.token);
+    this.props.history.push('/newTicketInfo');
   }
 
   render() {
@@ -170,13 +173,16 @@ class HallModelContainer extends React.Component {
 const mapStateToProps = function(store) {
   return {
     hall: store.hall,
-    services: store.service
+    services: store.service,
+    user: store.user,
+    ticket: store.ticket
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchHallModel: (hallId, sessionId) => dispatch(fetchHallModel(hallId, sessionId)),
-  fetchServicesForSessions: sessionId => dispatch(fetchServicesForSessions(sessionId))
+  fetchServicesForSessions: sessionId => dispatch(fetchServicesForSessions(sessionId)),
+  fetchCreateNewTicket: (newTicket, userData) => dispatch(fetchCreateNewTicket(newTicket, userData))
 });
 
 const HallContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(HallModelContainer));
