@@ -97,7 +97,7 @@
     <Build Include="Stored Procedures\GetSessionById.sql" />
     <Build Include="Stored Procedures\AddOrUpdatePriceForSessionAndPlace.sql" />
     <Build Include="Stored Procedures\GetTicketById.sql" />
-    <Build Include="Stored Procedures\AddTicket.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateTicket.sql" />
     <Build Include="Stored Procedures\AddServiceForTicket.sql" />
     <Build Include="Stored Procedures\PayForTicket.sql" />
     <Build Include="Stored Procedures\DeleteTicket.sql" />

@@ -76,7 +76,7 @@ namespace DataAccessLayer.Repositories
                 using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
                 {
                     int id = await connection.ExecuteScalarAsync<int>(
-                        "AddTicket",
+                        "AddOrUpdateTicket",
                         new
                         {
                             UserId = ticket.UserId,

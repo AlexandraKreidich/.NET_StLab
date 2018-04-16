@@ -1,12 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[AddServiceForTicket]
-    @TicketId int,
+    @TicketId INT,
     @ServiceId INT,
-    @Amount int
+    @Amount INT
 AS
-    INSERT INTO [dbo].TicketService (TicketId, ServiceId, Amount)
-    VALUES
-    (
-        @TicketId,
-        @ServiceId,
-        @Amount
+    IF(
+        (SELECT TicketId
+        FROM TicketService
+        WHERE TicketId = @TicketId) IS NOT NULL
     )
+        DELETE FROM TicketService WHERE TicketId = @TicketId
+
+        INSERT INTO [dbo].TicketService (TicketId, ServiceId, Amount)
+        VALUES
+        (
+            @TicketId,
+            @ServiceId,
+            @Amount
+        )
