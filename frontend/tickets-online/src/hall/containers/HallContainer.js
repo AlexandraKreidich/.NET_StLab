@@ -141,9 +141,9 @@ class HallModelContainer extends React.Component {
       priceId: this.state.placeInfo.placePriceId,
       services: servicesArr.length !== 0 ? servicesArr : null
     };
-    console.log(newTicket, this.props.user.userData.token);
+    console.log(newTicket);
     this.props.fetchCreateNewTicket(newTicket, this.props.user.userData.token);
-    this.props.history.push('/newTicketInfo');
+    this.props.history.push('/tickets');
   }
 
   render() {
