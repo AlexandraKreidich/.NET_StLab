@@ -3,12 +3,25 @@
     @PriceId INT,
     @TicketStatus NVARCHAR(50)
 AS
-    DECLARE @CreatedAt DATETIMEOFFSET
+    DECLARE
+        @CreatedAt DATETIMEOFFSET,
+        @DateNow datetimeoffset,
+        @Interval int = 15
     SET @CreatedAt = CONVERT(datetimeoffset, SYSDATETIMEOFFSET());
+    SET @DateNow = CONVERT(datetimeoffset, SYSDATETIMEOFFSET());
     IF(
-        (SELECT Id
-        FROM Ticket
-        WHERE Ticket.PriceId = @PriceId) IS NULL
+        (
+            (SELECT Id
+            FROM Ticket
+            WHERE Ticket.PriceId = @PriceId)
+        IS NULL) OR
+        (
+            DATEDIFF(minute,(
+                SELECT CreatedAt
+                FROM Ticket
+                WHERE Ticket.PriceId = @PriceId),
+            @DateNow)
+        < @Interval)
     )
         INSERT INTO [dbo].Ticket (PriceId, UserId, TicketStatusId, CreatedAt)
             VALUES
@@ -23,6 +36,17 @@ AS
                 @CreatedAt
             )
     ELSE
+        BEGIN
+
+        DELETE FROM
+            TicketService
+        WHERE
+            TicketId = (
+                SELECT Id
+                FROM Ticket
+                WHERE Ticket.PriceId = @PriceId
+            )
+
         UPDATE Ticket
         SET
             UserId = @UserId,
@@ -34,6 +58,8 @@ AS
                     WHERE TicketStatus.Name = @TicketStatus
                 )
         WHERE PriceId = @PriceId
+
+        END;
     SELECT Id
     FROM Ticket
     WHERE Ticket.PriceId = @PriceId
