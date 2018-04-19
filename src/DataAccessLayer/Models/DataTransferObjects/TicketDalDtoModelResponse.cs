@@ -4,9 +4,9 @@ using JetBrains.Annotations;
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
+    [UsedImplicitly]
     public class TicketDalDtoModelResponse
     {
-
         public int TicketId { get; }
 
         [NotNull]

@@ -9,13 +9,13 @@ namespace BusinessLayer.Models
         public int PriceId { get; }
 
         [CanBeNull]
-        public int[] Services { get; }
+        public ServiceBlModelRequestForTicket[] Services { get; }
 
         public TicketBlModelRequest
         (
             int userId,
             int priceId,
-            [CanBeNull] int[] services
+            [CanBeNull] ServiceBlModelRequestForTicket[] services
         )
         {
             UserId = userId;

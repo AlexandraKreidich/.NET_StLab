@@ -2,7 +2,7 @@ import { required, email, length } from 'redux-form-validators';
 
 let validations = {
   email: [required(), email()],
-  password: [required(), length({ min: 10 })],
+  password: [required(), length({ min: 7 })],
   firstName: [required()],
   lastName: [required()]
 };

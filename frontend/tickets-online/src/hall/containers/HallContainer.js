@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { fetchHallModel } from '../actions/Actions';
 import { Hall } from '../components/Hall';
 import PlaceInfo from '../components/PlaceInfo';
+import { ServicesList } from '../../services/components/servicesList';
+import { fetchServicesForSessions } from '../../services/actions/Actions';
+import { fetchCreateNewTicket } from '../../ticket/actions/Actions';
 
 function createRows(places, scheme) {
   const rows = scheme.map(elem => {
@@ -35,10 +38,13 @@ class HallModelContainer extends React.Component {
     super(props);
     this.onPlaceClick = this.onPlaceClick.bind(this);
     this.onBookBtnClick = this.onBookBtnClick.bind(this);
+    this.onServicesClick = this.onServicesClick.bind(this);
     this.state = {
       rows: [],
       isPlaceChoosen: false,
-      placeInfo: null
+      placeInfo: null,
+      services: [],
+      servicesResultPrice: 0
     };
   }
 
@@ -50,6 +56,11 @@ class HallModelContainer extends React.Component {
           rows: createRows(this.props.hall.hall.placesApi, this.props.hall.hall.hallSchemeApiModels)
         });
       });
+    this.props.fetchServicesForSessions(this.props.match.params.sessionId).then(() => {
+      this.setState({
+        services: this.props.services.services
+      });
+    });
   }
 
   onPlaceClick(rowNumber, placeNumber) {
@@ -76,19 +87,78 @@ class HallModelContainer extends React.Component {
     }
   }
 
+  onServicesClick(operation, serviceId) {
+    let newServices = [];
+    let t = this;
+    switch (operation) {
+      case 'plus':
+        newServices = this.state.services.map(function(elem) {
+          if (elem.id === serviceId) {
+            elem.amount += 1;
+            t.setState({
+              servicesResultPrice: t.state.servicesResultPrice + elem.price
+            });
+            return elem;
+          }
+          return elem;
+        });
+        break;
+      case 'minus':
+        newServices = this.state.services.map(function(elem) {
+          if (elem.id === serviceId) {
+            if (elem.amount >= 1) {
+              elem.amount -= 1;
+              t.setState({
+                servicesResultPrice: t.state.servicesResultPrice - elem.price
+              });
+            } else {
+              elem.amount = 0;
+            }
+            return elem;
+          }
+          return elem;
+        });
+        break;
+      default:
+        break;
+    }
+    this.setState({
+      services: newServices
+    });
+  }
+
   onBookBtnClick() {
-    // placePriceId -> setTicket and go to the ticketComponent
-    console.log(this.state.placeInfo.placePriceId);
+    let servicesArr = [];
+    this.state.services.forEach(function(elem) {
+      if (elem.amount !== 0) {
+        servicesArr.push({
+          id: elem.id,
+          amount: elem.amount
+        });
+      }
+    });
+    let newTicket = {
+      priceId: this.state.placeInfo.placePriceId,
+      services: servicesArr.length !== 0 ? servicesArr : null
+    };
+    this.props.fetchCreateNewTicket(newTicket, this.props.user.userData.token);
+    this.props.history.push('/tickets');
   }
 
   render() {
     return (
       <div className="text-center hall-container">
         {this.props.hall.hall && (
-          <h3>
-            <strong> Cinema: </strong> {this.props.hall.hall.cinemaName} <strong> Hall: </strong>{' '}
+          <h3 className="hall-model__header">
+            <strong> Cinema: </strong> {this.props.hall.hall.cinemaName} <strong> Hall: </strong>
             {this.props.hall.hall.hallName}
           </h3>
+        )}
+        {this.props.services.services.length !== 0 && (
+          <ServicesList onClick={this.onServicesClick} services={this.state.services} />
+        )}
+        {this.props.services.services.length !== 0 && (
+          <p className="services-price-text">Result price: {this.state.servicesResultPrice}</p>
         )}
         {this.props.hall.hall && <Hall onPlaceClick={this.onPlaceClick} rows={this.state.rows} />}
         {this.state.isPlaceChoosen && (
@@ -101,12 +171,17 @@ class HallModelContainer extends React.Component {
 
 const mapStateToProps = function(store) {
   return {
-    hall: store.hall
+    hall: store.hall,
+    services: store.service,
+    user: store.user,
+    ticket: store.ticket
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchHallModel: (hallId, sessionId) => dispatch(fetchHallModel(hallId, sessionId))
+  fetchHallModel: (hallId, sessionId) => dispatch(fetchHallModel(hallId, sessionId)),
+  fetchServicesForSessions: sessionId => dispatch(fetchServicesForSessions(sessionId)),
+  fetchCreateNewTicket: (newTicket, userData) => dispatch(fetchCreateNewTicket(newTicket, userData))
 });
 
 const HallContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(HallModelContainer));

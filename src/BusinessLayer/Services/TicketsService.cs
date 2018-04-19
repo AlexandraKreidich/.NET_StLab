@@ -29,10 +29,10 @@ namespace BusinessLayer.Services
 
             foreach (TicketDalDtoModelResponse ticket in tickets)
             {
-                IEnumerable<ServiceDalDtoModel> services =
+                IEnumerable<ServiceDalDtoModelResponseForTicket> services =
                     await _ticketsRepository.GetServicesForTicket(ticket.TicketId);
 
-                ServiceBlModel[] servicesArray = services.Select(Mapper.Map<ServiceBlModel>).ToArray();
+                ServiceBlModelResponseForTicket[] servicesArray = services.Select(Mapper.Map<ServiceBlModelResponseForTicket>).ToArray();
 
                 ticketsBlResponse.Add
                 (
@@ -66,10 +66,10 @@ namespace BusinessLayer.Services
 
             if (ticket != null)
             {
-                IEnumerable<ServiceDalDtoModel> services =
+                IEnumerable<ServiceDalDtoModelResponseForTicket> services =
                     await _ticketsRepository.GetServicesForTicket(ticket.TicketId);
 
-                ServiceBlModel[] servicesArray = services.Select(Mapper.Map<ServiceBlModel>).ToArray();
+                ServiceBlModelResponseForTicket[] servicesArray = services.Select(Mapper.Map<ServiceBlModelResponseForTicket>).ToArray();
 
                 return new TicketBlModelResponse
                 (
@@ -116,9 +116,9 @@ namespace BusinessLayer.Services
             {
                 if (ticket.Services != null)
                 {
-                    foreach (int service in ticket.Services)
+                    foreach (ServiceBlModelRequestForTicket service in ticket.Services)
                     {
-                        _ticketsRepository.AddServiceToTicket(response.TicketId, service);
+                        _ticketsRepository.AddServiceToTicket(new ServiceDalDtoModelRequestForTicket(response.TicketId, service.Id, service.Amount));
                     }
                 }
                 return await GetTicketById(response.TicketId);

@@ -28,7 +28,7 @@ namespace BusinessLayer.Models
         public decimal SessionPrice { get; }
 
         [CanBeNull]
-        public ServiceBlModel[] Services { get; }
+        public ServiceBlModelResponseForTicket[] Services { get; }
 
         public TicketStatus TicketStatus { get; }
 
@@ -44,7 +44,7 @@ namespace BusinessLayer.Models
             [NotNull] string hallName,
             [NotNull] string cinemaName,
             decimal sessionPrice,
-            [CanBeNull] ServiceBlModel[] services,
+            [CanBeNull] ServiceBlModelResponseForTicket[] services,
             TicketStatus ticketStatus,
             DateTimeOffset createdAt
         )

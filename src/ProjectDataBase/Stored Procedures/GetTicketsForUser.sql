@@ -1,27 +1,37 @@
 ﻿CREATE PROCEDURE [dbo].[GetTicketsForUser]
     @UserId int
 AS
+    DECLARE
+        @DateNow datetimeoffset,
+        @Interval int
+    SET @DateNow = CONVERT(datetimeoffset, SYSDATETIMEOFFSET())
+    SET @Interval = 15
     SELECT
-        Ticket.Id as TicketId,
-        Film.Name as FilmName,
-        Place.PlaceNumber,
-        Place.RowNumber,
-        PlaceType.Name as PlaceType,
-        PlaceType.Id AS PlaceTypeId,
-        Hall.Name as HallName,
-        Cinema.Name AS CinemaName,
-        TicketStatus.Name AS TicketStatus,
-        Ticket.CreatedAt,
-        Price.Price as SessionPrice
+        t.Id as TicketId,
+        f.Name as FilmName,
+        pl.PlaceNumber,
+        pl.RowNumber,
+        plt.Name as PlaceType,
+        plt.Id AS PlaceTypeId,
+        h.Name as HallName,
+        c.Name AS CinemaName,
+        ts.Name AS TicketStatus,
+        t.CreatedAt,
+        pr.Price as SessionPrice
     FROM
-        Ticket
-            JOIN Price ON Price.Id = Ticket.PriceId
-            JOIN Session ON Session.Id = Price.SessionId
-            JOIN Film ON Film.Id = Session.FilmId
-            JOIN Place ON Place.Id = Price.PlaceId
-            JOIN PlaceType ON PlaceType.Id = Place.PlaceTypeId
-            JOIN Hall ON Session.HallId = Hall.Id
-            JOIN Cinema ON Cinema.Id = Hall.CinemaId
-            JOIN TicketStatus ON Ticket.TicketStatusId = TicketStatus.Id
+        Ticket t
+            JOIN Price pr ON pr.Id = t.PriceId
+            JOIN Session s ON s.Id = pr.SessionId
+            JOIN Film f ON f.Id = s.FilmId
+            JOIN Place pl ON pl.Id = pr.PlaceId
+            JOIN PlaceType plt ON plt.Id = pl.PlaceTypeId
+            JOIN Hall h ON s.HallId = h.Id
+            JOIN Cinema c ON c.Id = h.CinemaId
+            JOIN TicketStatus ts ON t.TicketStatusId = ts.Id
     WHERE
-        Ticket.UserId = @UserId
+        (t.UserId = @UserId) AND ((DATEDIFF(minute, t.CreatedAt, @DateNow) < @Interval) OR
+                ((
+                    SELECT TicketStatus.Name
+                    FROM TicketStatus
+                    WHERE t.TicketStatusId = TicketStatus.Id
+                ) = 'Paid'))

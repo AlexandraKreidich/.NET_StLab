@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -54,11 +53,11 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<ServiceDalDtoModel>> GetServicesForTicket(int ticketId)
+        public async Task<IEnumerable<ServiceDalDtoModelResponseForTicket>> GetServicesForTicket(int ticketId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<ServiceDalModel> services = await connection.QueryAsync<ServiceDalModel>(
+                IEnumerable<ServiceDalModelResponseForTicket> services = await connection.QueryAsync<ServiceDalModelResponseForTicket>(
                     "GetServicesForTicketId",
                     new
                         {
@@ -66,7 +65,7 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return services.Select(Mapper.Map<ServiceDalDtoModel>);
+                return services.Select(Mapper.Map<ServiceDalDtoModelResponseForTicket>);
             }
         }
 
@@ -77,7 +76,7 @@ namespace DataAccessLayer.Repositories
                 using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
                 {
                     int id = await connection.ExecuteScalarAsync<int>(
-                        "AddTicket",
+                        "AddOrUpdateTicket",
                         new
                         {
                             UserId = ticket.UserId,
@@ -95,7 +94,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async void AddServiceToTicket(int ticketId, int serviceId)
+        public async void AddServiceToTicket([NotNull] ServiceDalDtoModelRequestForTicket service)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -103,8 +102,9 @@ namespace DataAccessLayer.Repositories
                     "AddServiceForTicket",
                     new
                         {
-                            TicketId = ticketId,
-                            ServiceId = serviceId
+                            TicketId = service.TicketId,
+                            ServiceId = service.ServiceId,
+                            Amount = service.Amount
                         },
                     commandType: CommandType.StoredProcedure);
             }

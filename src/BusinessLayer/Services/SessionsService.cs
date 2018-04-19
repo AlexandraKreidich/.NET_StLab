@@ -27,7 +27,7 @@ namespace BusinessLayer.Services
             _sessionRepository = sessionsRepository;
         }
 
-        public async Task<IEnumerable<ServiceBlModel>> GetServices(int sessionId)
+        public async Task<IEnumerable<ServiceBlModelResponseForTicket>> GetServices(int sessionId)
         {
             DalSessionModelResponse session = await _sessionRepository.GetSessionById(sessionId);
 
@@ -36,9 +36,9 @@ namespace BusinessLayer.Services
                 return null;
             }
 
-            IEnumerable<ServiceDalDtoModel> services = await _sessionRepository.GetServices(sessionId);
+            IEnumerable<ServiceDalDtoModelResponseForTicket> services = await _sessionRepository.GetServices(sessionId);
 
-            return services.Select(Mapper.Map<ServiceBlModel>);
+            return services.Select(Mapper.Map<ServiceBlModelResponseForTicket>);
         }
 
         public async Task<IEnumerable<SessionModelResponse>> GetSessions()

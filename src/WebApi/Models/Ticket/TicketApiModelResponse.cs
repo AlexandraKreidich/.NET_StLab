@@ -30,7 +30,7 @@ namespace WebApi.Models.Ticket
         public decimal SessionPrice { get; }
 
         [CanBeNull]
-        public ServiceApiModel[] Services { get; }
+        public ServiceApiModelResponseForTicket[] Services { get; }
 
         public TicketStatus TicketStatus { get; }
 
@@ -46,7 +46,7 @@ namespace WebApi.Models.Ticket
             [NotNull] string hallName,
             [NotNull] string cinemaName,
             decimal sessionPrice,
-            [CanBeNull] ServiceApiModel[] services,
+            [CanBeNull] ServiceApiModelResponseForTicket[] services,
             TicketStatus ticketStatus,
             DateTimeOffset createdAt
         )

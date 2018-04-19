@@ -83,3 +83,24 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.hall-model__header {
+  margin-bottom: 30px;
+}
+
+.services-price-text {
+  margin-top: 20px;
+}
+
+.badge-for-service {
+  background-color: #71c485;
+}
+
+.ticket-info-alert {
+  margin-top: 30px;
+  background-color: #d4edda5e;
+}
+
+.ticket-info-btn {
+  margin-right: 10px;
+}

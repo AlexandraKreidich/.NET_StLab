@@ -24,11 +24,11 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<ServiceDalDtoModel>> GetServices(int sessionId)
+        public async Task<IEnumerable<ServiceDalDtoModelResponseForTicket>> GetServices(int sessionId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
-                IEnumerable<ServiceDalModel> services = await connection.QueryAsync<ServiceDalModel>(
+                IEnumerable<ServiceDalModelResponseForTicket> services = await connection.QueryAsync<ServiceDalModelResponseForTicket>(
                     "GetServicesForSession",
                     new
                         {
@@ -36,7 +36,7 @@ namespace DataAccessLayer.Repositories
                         },
                     commandType: CommandType.StoredProcedure);
 
-                return services.Select(Mapper.Map<ServiceDalDtoModel>);
+                return services.Select(Mapper.Map<ServiceDalDtoModelResponseForTicket>);
             }
         }
 

@@ -1,5 +1,3 @@
-import { requestServicesForSession, receiveServicesForSession } from '../actions/ActionCreators';
-
 import {
   SERVICES_FOR_SESSION_REQUEST,
   SERVICES_FOR_SESSION_RESPONSE

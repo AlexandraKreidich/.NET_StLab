@@ -49,9 +49,11 @@ class HeaderContainer extends React.Component {
                 <Link to="/login">Login</Link>
               </button>
             ) : (
-              <button onClick={this.logout} type="button" className="btn btn-link">
-                Log out
-              </button>
+              <div className="btn-group" role="group">
+                <button onClick={this.logout} type="button" className="btn btn-link">
+                  Log out
+                </button>
+              </div>
             )}
 
             <button type="button" className="btn btn-link">

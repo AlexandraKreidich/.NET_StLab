@@ -2,7 +2,7 @@
     @HallId int,
     @SessionId int
 AS
-    DECLARE 
+    DECLARE
         @DateNow datetimeoffset,
         @Interval int = 15
     SET @DateNow = CONVERT(datetimeoffset, SYSDATETIMEOFFSET())
@@ -27,8 +27,8 @@ AS
                 OR
                 ((
                 (t.PriceId = pr.Id)) AND (
-                    SELECT TicketStatus.Name 
-                    FROM TicketStatus 
+                    SELECT TicketStatus.Name
+                    FROM TicketStatus
                     WHERE t.TicketStatusId = TicketStatus.Id
                 ) = 'Paid'))
         LEFT JOIN TicketStatus ts
