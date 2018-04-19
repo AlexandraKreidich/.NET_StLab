@@ -11,7 +11,7 @@ const TicketsListComponent = ({
   onCancelBtnClick
 }) => {
   return (
-    <div className="d-flex justify-content-center">
+    <div>
       {tickets.map((ticket, index) => (
         <Ticket
           onPayLaterBtnClick={onPayLaterBtnClick}
