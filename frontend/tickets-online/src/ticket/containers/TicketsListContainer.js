@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TicketsListComponent } from '../components/TicketsListComponent';
 import { runPayForTicket, runDeleteTicket } from '../actions/Actions';
+import { ErrorMessage } from '../../errorMessage/components/ErrorMessage';
 
 import '../../bootstrap.css';
 import '../../index.css';
@@ -39,9 +40,9 @@ class TicketsList extends React.Component {
 
   render() {
     if (this.props.ticket.isPayForTicketFailed) {
-      return <div>Paying failed!</div>;
+      return <ErrorMessage errorMessage={'Paying failed!'} />;
     } else if (this.props.ticket.isDeleteTicketFailed) {
-      return <div>Deleting failed!</div>;
+      return <ErrorMessage errorMessage={'Deleting failed!'} />;
     } else if (this.props.ticket.isDeleteTicketSuccess) {
       return <div>Deleted!</div>;
     } else {
