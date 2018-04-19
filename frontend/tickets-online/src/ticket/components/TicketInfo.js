@@ -20,7 +20,6 @@ class TicketInfo extends React.Component {
   }
 
   onPayNowBtnClick() {
-    console.log(this.props.ticket);
     this.props.onPayNowBtnClick(this.props.ticket.ticketId);
   }
 
@@ -33,18 +32,16 @@ class TicketInfo extends React.Component {
       <div className="text-center col-md-6">
         <h3> Ticket Info: </h3>
         <p>
-          {' '}
-          Cinema: {this.props.ticket.cinemaName} Hall: {this.props.ticket.hallName}{' '}
+          Cinema: {this.props.ticket.cinemaName} Hall: {this.props.ticket.hallName}
         </p>
         <p> Film: {this.props.ticket.filmName} </p>
         <p>
-          {' '}
-          Row: {this.props.ticket.rowNumber} Place: {this.props.ticket.placeNumber} Place type:{' '}
+          Row: {this.props.ticket.rowNumber} Place: {this.props.ticket.placeNumber} Place type:
           {this.props.ticket.placeType.name}
         </p>
         <p> Price: {countPriceForTicket(this.props.ticket)} </p>
         <p>
-          Status:{' '}
+          Status:
           {this.props.ticket.ticketStatus === TicketStatus.InProcess ? 'In process' : 'Paid'}
         </p>
         <div className="d-flex justify-content-center">

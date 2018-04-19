@@ -141,7 +141,6 @@ class HallModelContainer extends React.Component {
       priceId: this.state.placeInfo.placePriceId,
       services: servicesArr.length !== 0 ? servicesArr : null
     };
-    console.log(newTicket);
     this.props.fetchCreateNewTicket(newTicket, this.props.user.userData.token);
     this.props.history.push('/tickets');
   }
@@ -151,7 +150,7 @@ class HallModelContainer extends React.Component {
       <div className="text-center hall-container">
         {this.props.hall.hall && (
           <h3 className="hall-model__header">
-            <strong> Cinema: </strong> {this.props.hall.hall.cinemaName} <strong> Hall: </strong>{' '}
+            <strong> Cinema: </strong> {this.props.hall.hall.cinemaName} <strong> Hall: </strong>
             {this.props.hall.hall.hallName}
           </h3>
         )}
