@@ -29,6 +29,10 @@ class HeaderContainer extends React.Component {
     this.props.logout();
   };
 
+  showUserTickets = () => {
+    console.log('showTickets');
+  };
+
   render() {
     return (
       <div>
@@ -50,6 +54,9 @@ class HeaderContainer extends React.Component {
               </button>
             ) : (
               <div className="btn-group" role="group">
+                <button onClick={this.showUserTickets} type="button" className="btn btn-secondary">
+                  My Tickets
+                </button>
                 <button onClick={this.logout} type="button" className="btn btn-link">
                   Log out
                 </button>
