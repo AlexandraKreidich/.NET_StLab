@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { logout } from '../../user/actions/Actions';
 import { setVisibilityFilter } from '../../searchBar/actions/ActionCreators';
 import { fetchFilteredFilms } from '../../films/actions/Actions';
+import { fetchUserTickets } from '../../ticket/actions/Actions';
 
 class HeaderContainer extends React.Component {
   constructor(props) {
@@ -30,7 +31,8 @@ class HeaderContainer extends React.Component {
   };
 
   showUserTickets = () => {
-    console.log('showTickets');
+    this.props.fetchUserTickets(this.props.user.userData.token);
+    this.props.history.push('/tickets');
   };
 
   render() {
@@ -88,7 +90,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   setVisibilityFilter: filters => dispatch(setVisibilityFilter(filters)),
-  fetchFilteredFilms: filters => dispatch(fetchFilteredFilms(filters))
+  fetchFilteredFilms: filters => dispatch(fetchFilteredFilms(filters)),
+  fetchUserTickets: token => dispatch(fetchUserTickets(token))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderContainer));

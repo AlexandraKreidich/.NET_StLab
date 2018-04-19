@@ -7,10 +7,12 @@ import {
   receivePayedTicket,
   deleteTicket,
   failDeleteTicket,
-  finishDeleteTicket
+  finishDeleteTicket,
+  requestUserTickets,
+  receiveUserTickets,
+  failRequestUserTickets
 } from './ActionCreators';
 import { url } from '../../config';
-import { store } from '../../Store';
 import HttpStatus from 'http-status-codes';
 
 function fetchCreateNewTicket(newTicket, token) {
@@ -93,4 +95,31 @@ function runDeleteTicket(ticketId, token) {
   };
 }
 
-export { fetchCreateNewTicket, runPayForTicket, runDeleteTicket };
+function fetchUserTickets(token) {
+  let authHeader = 'Bearer ' + token;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      Authorization: authHeader
+    }
+  };
+  return function(dispatch) {
+    dispatch(requestUserTickets());
+
+    return fetch(url + 'api/tickets/', requestOptions)
+      .then(function(response) {
+        if (response.status !== HttpStatus.OK) {
+          dispatch(failRequestUserTickets());
+        } else {
+          return response.json();
+        }
+      })
+      .then(response => {
+        dispatch(receiveUserTickets(response));
+      });
+  };
+}
+
+export { fetchCreateNewTicket, runPayForTicket, runDeleteTicket, fetchUserTickets };

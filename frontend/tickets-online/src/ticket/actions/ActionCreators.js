@@ -9,7 +9,8 @@ import {
   TICKET_DELETE_RESPONSE,
   TICKET_DELETE_REQUEST_FAIL,
   USER_TICKETS_REQUEST,
-  USER_TICKETS_RESPONSE
+  USER_TICKETS_RESPONSE,
+  USER_TICKETS_REQUEST_FAIL
 } from './ActionTypes';
 
 export function createNewTicket() {
@@ -54,4 +55,8 @@ export function requestUserTickets() {
 
 export function receiveUserTickets(response) {
   return { type: USER_TICKETS_RESPONSE, response: response };
+}
+
+export function failRequestUserTickets() {
+  return { type: USER_TICKETS_REQUEST_FAIL };
 }
