@@ -22,6 +22,7 @@ export function failCreateNewTicket() {
 }
 
 export function receiveNewTicket(response) {
+  console.log(response);
   return { type: NEW_TICKET_RESPONSE, response: response };
 }
 

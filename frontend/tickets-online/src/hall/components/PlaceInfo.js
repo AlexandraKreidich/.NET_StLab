@@ -23,7 +23,7 @@ class PlaceInfo extends React.Component {
           </p>
           <p className="ticket-info__paragraph"> Type: {this.props.placeType} </p>
           <p className="ticket-info__paragraph"> Price: {this.props.placePrice} </p>
-          <button type="button" onClick={this.onClick} className="btn btn-primary order-ticket-btn">
+          <button type="button" onClick={this.onClick} className="btn btn-success order-ticket-btn">
             Book it
           </button>
         </div>

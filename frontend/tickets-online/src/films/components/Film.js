@@ -19,24 +19,28 @@ class Film extends React.Component {
 
   render() {
     return (
-      <a
-        onClick={this.onFilm}
-        className="film-item list-group-item list-group-item-action flex-column align-items-start"
-      >
-        <div className="d-flex w-100 justify-content-between">
-          <h5 className="mb-1">
+      <div className="card" onClick={this.onFilm}>
+        <div className="card-body">
+          <h5 className="card-title">
             <strong>{this.props.name}</strong>
           </h5>
-          <small>
-            Start rent date: {moment(this.props.startRentDate).format(DATE_FORMAT_FOR_FILM)}
-          </small>
+          <h6 className="card-subtitle mb-2 text-muted">
+            <small>
+              Start rent date: {moment(this.props.startRentDate).format(DATE_FORMAT_FOR_FILM)}
+            </small>
+          </h6>
+          <p className="card-text">
+            {' '}
+            DESCRIPTION: Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+            risus varius blandit.
+          </p>
+          <p className="card-text">
+            <small>
+              End rent date: {moment(this.props.endRentDate).format(DATE_FORMAT_FOR_FILM)}
+            </small>
+          </p>
         </div>
-        <p className="mb-1">
-          DESCRIPTION: Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
-          risus varius blandit.
-        </p>
-        <small>End rent date: {moment(this.props.endRentDate).format(DATE_FORMAT_FOR_FILM)}</small>
-      </a>
+      </div>
     );
   }
 }

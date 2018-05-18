@@ -18,13 +18,13 @@ class Place extends React.Component {
   render() {
     if (this.props.placeStatus === PlaceStatus.Free) {
       return (
-        <button onClick={this.onClick} type="button" className="btn btn-outline-success">
+        <button onClick={this.onClick} type="button" className="btn btn-outline-dark">
           {this.props.placeNumber}
         </button>
       );
     } else {
       return (
-        <button onClick={this.onClick} type="button" disabled className="btn btn-success">
+        <button onClick={this.onClick} type="button" disabled className="btn btn-dark">
           {this.props.placeNumber}
         </button>
       );

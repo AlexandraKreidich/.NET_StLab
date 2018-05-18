@@ -5,11 +5,11 @@ import '../../bootstrap.css';
 import '../../index.css';
 
 const SessionsList = ({ sessions, onSessionClick }) => (
-  <ul>
+  <div className="top-indent row justify-content-center">
     {sessions.map((session, index) => (
       <Session onSessionClick={onSessionClick} key={index} {...session} />
     ))}
-  </ul>
+  </div>
 );
 
 export { SessionsList };

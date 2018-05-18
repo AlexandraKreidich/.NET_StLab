@@ -32,15 +32,13 @@ BEGIN TRY
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'A'), /*(1)*/
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'A'), /*(2)*/
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'A'), /*(3)*/
-        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'A') /*(4)*/
-        /*
+        ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'A'), /*(4)*/
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'B'),
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Silver Screen'), 'C'),
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Red star'), 'B'),
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'B'),
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='Belarus'), 'C'),
         ((SELECT Id FROM dbo.Cinema WHERE Cinema.name='October'), 'B')
-        */
 
     PRINT 'Inserting seed data for HallScheme table'
 
@@ -57,8 +55,7 @@ BEGIN TRY
         (3,3,3),
         (1,2,4),
         (2,4,4),
-        (3,3,4)
-        /*
+        (3,3,4),
         (1,2,5),
         (2,4,5),
         (3,3,5),
@@ -77,7 +74,6 @@ BEGIN TRY
         (1,2,10),
         (2,4,10),
         (3,3,10)
-        */
 
     PRINT 'Inserting seed data for Film table'
 
@@ -109,8 +105,7 @@ BEGIN TRY
         (9, 3, convert(datetimeoffset, '20171006 14:15:00')),
         (10, 4, CONVERT(datetimeoffset, '20171008 11:15:00')),
         (1, 4, convert(datetimeoffset, '20171007 11:15:00')),
-        (2, 4, convert(datetimeoffset, '20171006 11:15:00'))
-        /*
+        (2, 4, convert(datetimeoffset, '20171006 11:15:00')),
         (3, 5, convert(datetimeoffset, '20171008 17:15:00')),
         (4, 5, convert(datetimeoffset, '20171007 17:15:00')),
         (5, 5, convert(datetimeoffset, '20171006 17:15:00')),
@@ -129,7 +124,6 @@ BEGIN TRY
         (8, 10, convert(datetimeoffset, '20171008 12:15:00')),
         (9, 10, convert(datetimeoffset, '20171007 12:15:00')),
         (10, 10, convert(datetimeoffset, '20171006 12:15:00'))
-        */
 
     PRINT 'Inserting seed data for PlaceType table'
 
@@ -181,8 +175,8 @@ BEGIN TRY
         (4, 1, 2, 4),
         (4, 1, 3, 1),
         (4, 1, 3, 2),
-        (4, 1, 3, 3)
-        /*
+        (4, 1, 3, 3),
+
         (5, 1, 1, 1),
         (5, 1, 1, 2),
         (5, 1, 2, 1),
@@ -242,7 +236,6 @@ BEGIN TRY
         (10, 1, 3, 1),
         (10, 1, 3, 2),
         (10, 1, 3, 3)
-        */
 
     PRINT 'Inserting seed data for Price table'
 

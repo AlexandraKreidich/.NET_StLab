@@ -45,6 +45,10 @@ class TicketsList extends React.Component {
       return <ErrorMessage errorMessage={'Deleting failed!'} />;
     } else if (this.props.ticket.isDeleteTicketSuccess) {
       return <div>Deleted!</div>;
+    } else if (this.props.ticket.isPayForTicketSuccess) {
+      return <div>Payed!</div>;
+    } else if (this.props.ticket.failCreateNewTicket) {
+      return <ErrorMessage errorMessage={'Ooops! Somebody booked this ticket'} />;
     } else {
       return (
         <div>

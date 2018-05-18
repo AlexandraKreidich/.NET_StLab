@@ -37,11 +37,10 @@ class HeaderContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-light bg-light justify-content-between">
+      <React.Fragment>
+        <nav className="navbar navbar-inverse bg-dark justify-content-between">
           <Link to="/films" className="navbar-brand">
-            <img className="logo-img" src="logo.svg" width="30" height="30" alt="" />
-            TicketsOnline
+            Tickets Online
           </Link>
           <div className="col-xs-3">
             <SearchFilmsForm
@@ -51,33 +50,46 @@ class HeaderContainer extends React.Component {
           </div>
           <div className="btn-group" role="group">
             {!this.props.user.userData.token ? (
-              <button type="button" className="btn btn-link">
-                <Link to="/login">Login</Link>
+              <button type="button" className="btn my-tickets-btn btn-link">
+                <Link to="/login" className="nav-link">
+                  Login
+                </Link>
               </button>
             ) : (
-              <div className="btn-group" role="group">
-                <button onClick={this.showUserTickets} type="button" className="btn btn-secondary">
-                  My Tickets
-                </button>
-                <button onClick={this.logout} type="button" className="btn btn-link">
-                  Log out
-                </button>
-              </div>
+              <React.Fragment>
+                <div>
+                  <p className="user-name-nav text-center">
+                    Hello, {this.props.user.userData.firstName}
+                  </p>
+                </div>
+                <div className="btn-group" role="group">
+                  <button
+                    onClick={this.showUserTickets}
+                    type="button"
+                    className="btn btn-link my-tickets-btn"
+                  >
+                    My Tickets
+                  </button>
+                  <button
+                    onClick={this.logout}
+                    type="button"
+                    className="btn my-tickets-btn btn-link"
+                  >
+                    Log out
+                  </button>
+                </div>
+              </React.Fragment>
             )}
-
-            <button type="button" className="btn btn-link">
-              <Link to="/register">Register</Link>
-            </button>
+            {!this.props.user.userData.token && (
+              <button type="button" className="btn my-tickets-btn btn-link">
+                <Link to="/register" className="nav-link">
+                  Register
+                </Link>
+              </button>
+            )}
           </div>
         </nav>
-        {this.props.user.userData.token ? (
-          <div className="alert alert-success text-center">
-            <strong>Hello,</strong> {this.props.user.userData.firstName}
-          </div>
-        ) : (
-          <div />
-        )}
-      </div>
+      </React.Fragment>
     );
   }
 }

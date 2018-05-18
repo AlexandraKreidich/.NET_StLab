@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
 }
 
 .logo-img {
@@ -18,6 +19,7 @@ body {
 
 .film-item {
   margin-bottom: 10px;
+  max-width: 800px;
 }
 
 .navbar-container {
@@ -65,8 +67,6 @@ body {
 .order-ticket-btn {
   margin-top: 10px;
   width: 100px;
-  background-color: #dc3545;
-  border: #710d17;
 }
 
 .hall-container {
@@ -76,7 +76,7 @@ body {
 .alert-secondary__hall-scheme {
   background-color: #f8f9fa;
   padding-top: 15px;
-  color: green;
+  color: black;
 }
 
 .ticket-info__paragraph {
@@ -98,9 +98,76 @@ body {
 
 .ticket-info-alert {
   margin-top: 30px;
-  background-color: #d4edda5e;
+  background-color: whitesmoke !important;
 }
 
 .ticket-info-btn {
   margin-right: 10px;
+}
+
+.navbar {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.navbar-brand:hover {
+  color: white;
+  text-decoration-line: underline;
+}
+
+.my-tickets-btn {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.my-tickets-btn:hover {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+}
+
+.my-tickets-btn a {
+  color: white;
+}
+
+.user-name-nav {
+  margin-right: 10px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: 14px;
+  margin-right: 40px;
+}
+
+.user {
+  font-size: 18px;
+}
+
+.filters-row {
+  padding: 10px;
+}
+
+.card {
+  width: 20rem;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.card:hover {
+  background-color: whitesmoke;
+}
+
+.alert-secondary__hall-scheme {
+  background: transparent;
+}
+
+.alert-light {
+  color: black;
+  background: transparent;
 }

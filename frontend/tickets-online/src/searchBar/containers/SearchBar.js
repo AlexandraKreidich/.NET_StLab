@@ -90,7 +90,7 @@ class SearchBarContainer extends React.Component {
         {this.props.isFiltersLoading ? (
           <p>Loading...</p>
         ) : (
-          <div className="row justify-content-md-center">
+          <div className="row filters-row justify-content-md-center">
             <Select
               onChange={this.onCitiesSelectChange}
               name={'All Cities'}
@@ -115,7 +115,7 @@ class SearchBarContainer extends React.Component {
             <button
               type="button"
               onClick={this.onResetDateClick}
-              className="btn btn-outline-info reset-btn"
+              className="btn btn-dark reset-btn"
             >
               Reset date
             </button>

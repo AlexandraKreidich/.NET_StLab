@@ -17,22 +17,24 @@ class Session extends React.Component {
 
   render() {
     return (
-      <a
-        className="film-item list-group-item list-group-item-action flex-column align-items-start"
-        onClick={this.onClick}
-      >
-        <div className="d-flex w-100 justify-content-between">
-          <h5 className="mb-1">
+      <div className="card" onClick={this.onClick}>
+        <div className="card-body">
+          <h5 className="card-title">
             <strong>{this.props.filmName} </strong>
-            <br />
-            {moment(this.props.sessionDate).format(DATE_FORMAT_FOR_SESSION)}
           </h5>
-          <small>Hall {this.props.hallName}</small>
+          <h6 className="card-subtitle mb-2 text-muted">
+            {moment(this.props.sessionDate).format(DATE_FORMAT_FOR_SESSION)}
+          </h6>
+          <p className="card-text">
+            <small>Hall {this.props.hallName}</small>
+          </p>
+          <p className="card-text">
+            <small>
+              Cinema: {this.props.cinemaName}, City: {this.props.cinemaCity}
+            </small>
+          </p>
         </div>
-        <p className="mb-1">
-          Cinema: {this.props.cinemaName}, City: {this.props.cinemaCity}
-        </p>
-      </a>
+      </div>
     );
   }
 }

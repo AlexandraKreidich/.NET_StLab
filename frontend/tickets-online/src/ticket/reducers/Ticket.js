@@ -29,11 +29,14 @@ const initialState = {
 const ticketsReducer = function(state = initialState, action) {
   switch (action.type) {
     case USER_TICKETS_REQUEST:
+      console.log('userTicketsreq');
       return {
         ...state,
         isRequestLoading: true,
         isTicketsLoadingFailed: false,
-        isTicketsLoadingSuccess: false
+        isTicketsLoadingSuccess: false,
+        isPayForTicketSuccess: false,
+        isDeleteTicketSuccess: false
       };
     case USER_TICKETS_RESPONSE:
       console.log({

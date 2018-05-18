@@ -7,13 +7,13 @@ import './bootstrap.css';
 import './index.css';
 
 const Application = () => (
-  <div className="container-fluid navbar-container">
+  <React.Fragment>
     <HeaderContainer />
     <SearchBar />
     <div className="container">
       <Routes />
     </div>
-  </div>
+  </React.Fragment>
 );
 
 export default Application;

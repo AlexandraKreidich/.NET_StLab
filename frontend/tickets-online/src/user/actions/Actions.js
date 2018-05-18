@@ -40,14 +40,13 @@ function logInUser(email, password) {
             lastName: responseJson.lastName,
             token: responseJson.token
           };
+
+          localStorage.setItem('userData', JSON.stringify(userData));
           dispatch(setUser(userData));
 
           return userData;
         }
         return null;
-      })
-      .then(function(userData) {
-        localStorage.setItem('userData', JSON.stringify(userData));
       })
       .catch(function(error) {
         console.log(error);
@@ -89,6 +88,7 @@ function registerNewUser(email, firstName, lastName, password) {
 function logout() {
   return function(dispatch) {
     localStorage.removeItem('userData');
+    console.log('logout');
     dispatch(logoutUser());
   };
 }

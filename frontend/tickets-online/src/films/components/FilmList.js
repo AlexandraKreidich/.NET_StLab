@@ -6,7 +6,9 @@ import '../../bootstrap.css';
 import '../../index.css';
 
 const FilmList = ({ films, onFilmClick }) => (
-  <ul>{films.map((film, index) => <Film key={index} {...film} onFilmClick={onFilmClick} />)}</ul>
+  <React.Fragment>
+    {films.map((film, index) => <Film key={index} {...film} onFilmClick={onFilmClick} />)}
+  </React.Fragment>
 );
 
 const propsForFilmsArray = {

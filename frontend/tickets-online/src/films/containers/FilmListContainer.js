@@ -18,7 +18,7 @@ class FilmContainer extends React.Component {
 
   render() {
     return (
-      <div className="top-indent justify-content-md-center">
+      <div className="top-indent row justify-content-center">
         {this.props.isLoading && (
           <div className="text-center div-load-img">
             <img className="img-responsive" alt="" width="50px" height="50px" src={loadImg} />

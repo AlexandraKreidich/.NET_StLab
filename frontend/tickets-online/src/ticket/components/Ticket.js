@@ -9,7 +9,7 @@ class Ticket extends React.Component {
   render() {
     return (
       <div className="d-flex justify-content-center">
-        <div className="alert alert-success ticket-info-alert col-md-8">
+        <div className="alert alert-light ticket-info-alert col-md-8">
           <div className="row">
             <TicketInfo
               onPayLaterBtnClick={this.props.onPayLaterBtnClick}

@@ -23,7 +23,7 @@ class SearchFilmsForm extends React.Component {
         <button
           onClick={this.props.onSearchClick}
           type="button"
-          className="btn btn-outline-success my-2 my-sm-0"
+          className="btn btn-success my-2 my-sm-0"
         >
           Search
         </button>
