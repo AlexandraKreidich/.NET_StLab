@@ -7,7 +7,7 @@
     @d datetime = null
 AS
     SET @d = CONVERT(DATETIME, @Date, 120);
-    SELECT
+    SELECT DISTINCT
         Film.Id,
         Film.Name,
         Film.Description,
