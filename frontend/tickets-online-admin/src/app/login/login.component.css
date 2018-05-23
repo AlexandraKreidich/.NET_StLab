@@ -1,0 +1,29 @@
+form {
+  border: 1px solid #dbe4e5;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #dbe4e5;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 10em;
+  text-align: center;
+}
+
+label {
+  float: left;
+  font-weight: bold;
+}
+
+input.ng-touched.ng-invalid {
+  border-color: red;
+}
+
+.error-msg {
+  color: red !important;
+  float: left;
+  position: absolute;
+}
+
+.form-group {
+  margin-top: 20px;
+}

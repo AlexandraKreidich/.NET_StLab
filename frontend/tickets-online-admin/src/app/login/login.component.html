@@ -1,0 +1,14 @@
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+  <h2>Log In</h2>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email">
+    <small class="form-text text-muted error-msg" *ngIf="isControlInvalid('email')">Required</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" class="form-control" placeholder="Password" formControlName="password">
+    <small class="form-text text-muted error-msg" *ngIf="isControlInvalid('password')">Required</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
