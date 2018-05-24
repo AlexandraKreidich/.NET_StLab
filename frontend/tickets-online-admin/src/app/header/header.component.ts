@@ -1,4 +1,9 @@
+import { LoginComponent } from './../login/login.component';
+import { User } from './../models/User';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  user: Subscription;
+
+  constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
+    this.user = this.loginComponent.user$.subscribe();
+    this.user = JSON.parse(localStorage.getItem("user"));
+  }
+
+  logOut() {
+    localStorage.removeItem("user");
+    this.router.navigate(['']);
   }
 
 }
