@@ -1,7 +1,7 @@
 import { User } from './../models/User';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Options } from 'selenium-webdriver/firefox';
 
 @Injectable({
@@ -9,24 +9,46 @@ import { Options } from 'selenium-webdriver/firefox';
 })
 export class LoginService {
 
-  user$: BehaviorSubject<User>;
+  public $isAuthorized = new Subject<boolean>();
 
-  logIn(url: string, userEmail: string, userPassword: string): Observable<User> {
+  url = 'http://localhost:65436/api/account/login';
+
+  logIn(userEmail: string, userPassword: string) {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Access-Control-Allow-Origin', '*');
 
     const body = { email: userEmail, password: userPassword };
 
-    return this.httpClient.post<User>(url, body, { headers: headers });
+    this.httpClient.post<User>(this.url, body, { headers: headers }).subscribe(value => {
+      if (value.token) {
+        this.setUserToLocalStorage(value);
+        this.setIsAuthorizedValue(true);
+      }
+    }, error => {
+      console.error(error);
+    });
   }
 
-  setUser(user: User) {
-    this.user$.next(user);
+  setIsAuthorizedValue(value: boolean) {
+    this.$isAuthorized.next(value);
   }
 
   setUserToLocalStorage(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getUserState(): User {
+    let user = JSON.parse(localStorage.getItem("user"));
+    if (user && !this.$isAuthorized) {
+      this.setIsAuthorizedValue(true);
+    }
+    return user;
+  }
+
+  removeUserFromLocalStorage() {
+    localStorage.removeItem("user");
+    this.setIsAuthorizedValue(false);
   }
 
   constructor(private httpClient: HttpClient) { }

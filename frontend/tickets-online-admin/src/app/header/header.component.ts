@@ -1,6 +1,6 @@
 import { LoginComponent } from './../login/login.component';
 import { User } from './../models/User';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { Subscription } from 'rxjs';
@@ -12,18 +12,33 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  user: Subscription;
+  private isAuthorizedSubscription: Subscription;
+
+  @Input() user: User;
 
   constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
-    this.user = this.loginComponent.user$.subscribe();
-    this.user = JSON.parse(localStorage.getItem("user"));
+    this.isAuthorizedSubscription = this.loginService.$isAuthorized.subscribe((value) => {
+      console.log('header', value);
+      if (value) {
+        this.user = this.loginService.getUserState();
+      } else {
+        this.user = null;
+      }
+    });
+    this.user = this.loginService.getUserState();
   }
 
   logOut() {
-    localStorage.removeItem("user");
+    this.loginService.removeUserFromLocalStorage();
     this.router.navigate(['']);
+  }
+
+  ngOnDestroy() {
+    if (this.isAuthorizedSubscription) {
+      this.isAuthorizedSubscription.unsubscribe();
+    }
   }
 
 }

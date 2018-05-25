@@ -1,14 +1,15 @@
-import { User } from './../models/User';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { User } from '../models/User';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-main-menu',
-  templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.css']
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.css']
 })
-export class MainMenuComponent implements OnInit {
+export class AccountComponent implements OnInit {
+
   user: User;
 
   constructor(private loginService: LoginService, private router: Router) { }

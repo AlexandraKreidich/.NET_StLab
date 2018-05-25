@@ -6,14 +6,14 @@
     </span>
   </div>
   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link">Menu</a>
+    <li class="nav-item" *ngIf="user">
+      <a class="nav-link" routerLink="/menu">Menu</a>
+    </li>
+    <li class="nav-item" *ngIf="user">
+      <a class="nav-link" routerLink="/account">Account</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Account</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" *ngIf="!user">Log in</a>
+      <a class="nav-link" *ngIf="!user" routerLink="/">Log in</a>
       <a class="nav-link" *ngIf="user" (click)="logOut()">Log out</a>
     </li>
   </ul>

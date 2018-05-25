@@ -3,7 +3,7 @@ import { LoginService } from './../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +12,27 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  user: Subscription;
+  private isAuthorizedSubscription: Subscription;
+
+  user: User;
 
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("user"));
-
-    if (this.user$ !== null) {
+    this.isAuthorizedSubscription = this.loginService.$isAuthorized.subscribe((value) => {
+      if (value) {
+        this.user = this.loginService.getUserState();
+        this.gotoMaimMenu();
+      } else {
+        this.user = null;
+      }
+    });
+    this.user = this.loginService.getUserState();
+    if (this.user) {
       this.gotoMaimMenu();
-    } else {
-      console.log(this.user$);
     }
-
     this.initForm();
   }
 
@@ -58,21 +64,16 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loginService.logIn('http://localhost:65436/api/account/login', this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe(value => {
-        this.setUser(value);
-        this.loginService.setUserToLocalStorage(value)
-      },
-        error => {
-          console.error(error);
-        });
+    this.loginService.logIn(this.loginForm.value.email, this.loginForm.value.password);
   }
 
   gotoMaimMenu() {
     this.router.navigate(['/menu']);
   }
 
-  loginUser(email: string, password: string) {
-
+  ngOnDestroy() {
+    if (this.isAuthorizedSubscription) {
+      this.isAuthorizedSubscription.unsubscribe();
+    }
   }
 }

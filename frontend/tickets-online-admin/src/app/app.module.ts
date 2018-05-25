@@ -9,13 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { AccountComponent } from './account/account.component';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
